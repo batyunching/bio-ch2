@@ -4170,7 +4170,15 @@ function mmExport(scope,L,S,nodeBox){
    雲端同步：Firebase Realtime Database（匿名登入）
    單機示範：同一台電腦的多個分頁（BroadcastChannel），不需 Firebase
    ========================================================= */
-const FIREBASE_CONFIG=null; /*FIREBASE-CONFIG*/
+const FIREBASE_CONFIG={ /*FIREBASE-CONFIG*/
+  apiKey:"AIzaSyDJqzPBj9Byeda1GOj79sHWXZiDpqQnygs",
+  authDomain:"bio-ch2-bingo.firebaseapp.com",
+  databaseURL:"https://bio-ch2-bingo-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"bio-ch2-bingo",
+  storageBucket:"bio-ch2-bingo.firebasestorage.app",
+  messagingSenderId:"180821849719",
+  appId:"1:180821849719:web:3d4cbd0e5aea36aa617872"
+};
 const SITE_URL='https://batyunching.github.io/bio-ch2/';
 const BL=(()=>{const L=[];for(let r=0;r<5;r++)L.push([0,1,2,3,4].map(c=>r*5+c));for(let c=0;c<5;c++)L.push([0,1,2,3,4].map(r=>r*5+c));L.push([0,6,12,18,24],[4,8,12,16,20]);return L})();
 const CLASSES=Array.from({length:30},(_,i)=>String(701+i));
