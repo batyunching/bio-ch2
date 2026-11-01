@@ -4254,7 +4254,7 @@ function lineIdx(card,marks){return BL.map((l,i)=>l.every(j=>marks&&marks[card[j
 function bPool(scope,level){let p=QB.filter(q=>q.bingo&&(scope==='all'||q.unit===scope));const f=level==='all'?p:p.filter(q=>q.level===level);return f.length>=25?f:p}
 function bQ(q,big){return `<div class="bq ${big?'big':''}"><div class="q-tags"><span class="q-tag">${TYPE_NAME[q.type]}</span><span class="q-tag lv-${q.level}">${esc(q.level==='會考'&&q.year?'會考｜'+q.year:q.level)}</span><span class="q-tag">${q.unit}</span></div><div class="bq-stem">${esc(q.stem)}</div></div>`}
 function setBingoTheme(){document.body.dataset.theme='bingo';setScene('bingo')}
-function joinURL(code,demo){return `${location.protocol.startsWith('http')?location.href.split('#')[0]:SITE_URL}#/bingo/join/${code}${demo?'/demo':''}`}
+function joinURL(code,demo){return `${location.protocol.startsWith('http')?location.origin+location.pathname:SITE_URL}#/bingo/join/${code}${demo?'/demo':''}`}
 
 /* ---------- 入口 ---------- */
 function renderBingo(sub,code,demo){
