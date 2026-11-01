@@ -112,6 +112,17 @@ svg.ill{width:100%;height:auto;display:block;background:#fffdf5}
 .portal.locked{cursor:default;filter:saturate(.35)}
 .portal.locked .lock{position:absolute;top:10px;right:10px;font-family:var(--px);font-size:13px;background:var(--ink);color:#fff;padding:3px 8px}
 .howto{margin-top:34px;padding:18px 22px}
+.howto-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:860px){.howto-grid{grid-template-columns:1fr}}
+.tut h3{margin-top:0}.tut-v{position:relative;aspect-ratio:16/9;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);background:#1a1036;overflow:hidden}
+.tut-v button{all:unset;cursor:pointer;position:absolute;inset:0;display:block}
+.tut-v img{width:100%;height:100%;object-fit:cover;display:block}
+.tut-v .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#d6336c;color:#fff;border:4px solid #fff;box-shadow:0 0 0 4px var(--ink),5px 5px 0 4px var(--ink);font:400 20px var(--px);padding:12px 22px;white-space:nowrap}
+.tut-v button:hover .play,.tut-v button:focus-visible .play{background:#e0a91f;color:var(--ink)}
+.tut-v iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.tut p{margin:8px 0 0;font-size:15px}
+.tut-btn{display:inline-block;margin-top:12px;background:#d6336c;color:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:6px 16px;font-weight:900;text-decoration:none;cursor:pointer;font-size:16px}
+.tut-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 .howto h3{font-family:var(--px);font-weight:400;margin:0 0 8px;font-size:20px}
 .howto ul{margin:0;padding-left:1.3em}
 @media (max-width:980px){.map{grid-template-columns:repeat(2,1fr)}.portal:nth-child(even){margin-bottom:0}.map::before{display:none}}
@@ -847,6 +858,7 @@ function lockedThumb(kind,open){const bg=kind==='mind'?['#3b3b6b','#4a4a80','#5a
   ${open?'':spr(SP.lock,140,48,5)}</svg>`}
 
 function mmPct(){try{const sc=['2-2','2-3','2-4','all'];const n=sc.filter(k=>{const v=localStorage.getItem('bio2_mm_'+k);return v&&JSON.parse(v).cleared}).length;return `完成 ${n} / 4 張`}catch(e){return ''}}
+const TUT_ID='yiggDlS9Ho0';
 function renderHome(){
   document.body.dataset.theme='home';setScene('home');
   const portal=u=>{const U=UNITS[u],n=U.cards.length,got=unitCoins(u);
@@ -863,13 +875,20 @@ function renderHome(){
     <p>選一個關卡進入，打開概念卡、收集金幣！</p>
     <div class="squad">${spriteSvg('enzyme',5)}${spriteSvg('leafkid',5)}${spriteSvg('foodball',5)}</div>
     <p class="px blink" style="margin-top:10px;color:var(--gold-d)">▶ SELECT STAGE</p>
+    <button class="tut-btn" id="toTut">🎬 第一次來？先看使用教學（2 分半）</button>
   </section>
   <nav class="map" aria-label="關卡地圖">
     ${portal('2-2')}${portal('2-3')}${portal('2-4')}
     <a class="portal" href="#/mindmap" style="--c:#6b4fbf"><div class="pbox plate">${lockedThumb('mind',true)}<div class="info"><span class="num" style="background:#6b4fbf">MAP</span><h2>心智圖神殿</h2><div class="sub">用線索拼出完整概念</div><div class="sub px" style="margin-top:4px">${mmPct()}</div></div></div></a>
     <a class="portal" href="#/bingo" style="--c:#d6336c"><div class="pbox plate">${lockedThumb('bingo',true)}<div class="info"><span class="num" style="background:#d6336c">BINGO</span><h2>賓果競技場</h2><div class="sub">全班大屏賓果對戰</div><div class="sub px" style="margin-top:4px">老師開房／學生加入</div></div></div></a>
   </nav>
-  <section class="pbox howto">
+  <section class="pbox howto" id="howto"><div class="howto-grid">
+    <div class="tut">
+      <h3>▶ 使用教學影片</h3>
+      <div class="tut-v" id="tutV"><button aria-label="播放使用教學影片"><img src="https://i.ytimg.com/vi/${TUT_ID}/hqdefault.jpg" alt="" loading="lazy"><span class="play">▶ PLAY</span></button></div>
+      <p>跟著影片走一遍：選關卡 → 重點概念 → 互動動畫 → 即時練習 → 小結，最後挑戰心智圖與賓果。</p>
+    </div>
+    <div>
     <h3>▶ 遊戲說明</h3>
     <ul>
       <li><b>學生模式</b>：點開概念卡閱讀，回答「想一想」小提問；看懂後按「我看懂了」收集金幣。進度會存在這台平板（或電腦）上。</li>
@@ -879,7 +898,10 @@ function renderHome(){
       <li><b>心智圖神殿</b>：把詞卡拖到正確的空格，卡住時可打開三層線索；完成後可匯出 PNG。</li>
       <li><b>賓果競技場</b>：老師在大屏開房，學生用平板掃 QR Code 加入；抽到號碼球要答對題目才能畫 X，連成一條線就得一顆糖果！</li>
     </ul>
-  </section>`;
+    </div>
+  </div></section>`;
+  const tv=document.getElementById('tutV');tv.querySelector('button').onclick=()=>{SFX.tap();tv.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${TUT_ID}?autoplay=1&rel=0&playsinline=1" title="生物體的營養大冒險：學生使用說明" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`};
+  document.getElementById('toTut').onclick=()=>{SFX.tap();document.getElementById('howto').scrollIntoView({behavior:'smooth',block:'start'})};
   app.querySelectorAll('.portal').forEach(p=>p.addEventListener('click',e=>{if(p.dataset.locked){e.preventDefault();SFX.lock();toast(`這個關卡在${p.dataset.locked}開放喔！`)}else SFX.tap()}));
   app.querySelectorAll('.portal.locked').forEach(p=>p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();p.click()}}));
 }
