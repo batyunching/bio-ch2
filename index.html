@@ -389,6 +389,83 @@ body.teacher .q-exp,body.teacher .q-ans{font-size:clamp(18px,1.4vw,26px)}body.te
 .mm-pop .h2{margin-top:6px;font-weight:900;color:#6b4fbf}.mm-pop .pop-btn,.mm-pop .lw{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .mm-bank{padding:12px;position:sticky;top:80px}.mm-bank small{display:block;color:var(--ink2);margin:4px 0 8px}
 .mm-chips{display:flex;flex-wrap:wrap;gap:8px}.mm-chip{font-size:15px}
+
+/* ===== 第 4 期：賓果 ===== */
+body[data-theme="bingo"]{--accent:#d6336c;--accent-d:#8e1d48;--accent-l:#ffd0dc}
+body[data-theme="bingo"] main{max-width:1880px}
+.bg-honor .hn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bg-honor .hn small{font-size:.75em;color:var(--ink2)}.bg-honor .candy{white-space:nowrap}
+.cell .xx{opacity:.7}.cell.x{color:var(--ink)}
+.fw{position:fixed;inset:0;z-index:300;pointer-events:none}
+.bg-gate,.bg-setup,.bg-join{max-width:820px;margin:20px auto;padding:22px 26px;text-align:center}
+.bg-logo{font-family:"Press Start 2P",var(--px);font-size:34px;line-height:1.3;color:#ffd65a;text-shadow:4px 4px 0 #d6336c,8px 8px 0 #2a1a12}
+.bg-gate h1,.bg-setup h1,.bg-join h1{font-size:34px;color:var(--accent-d);margin:10px 0}
+.bg-gbtn{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.bg-gbtn select{min-height:52px;border:4px solid var(--ink);font:inherit;padding:0 8px}
+.bg-warn{background:#fff3b0;border:3px dashed var(--ink);padding:8px 12px;font-weight:700}
+.bg-note{font-size:15px;color:var(--ink2)}
+.bg-form,.bg-join{display:grid;gap:12px;text-align:left}
+.bg-form label,.bg-join label{display:flex;flex-direction:column;gap:4px;font-weight:900}
+.bg-form label.ck{flex-direction:row;align-items:center;gap:8px;font-weight:700}
+.bg-form select,.bg-join input,.bg-join select{min-height:52px;font:inherit;font-size:20px;border:4px solid var(--ink);padding:4px 10px;background:#fff}
+.bg-form input[type=checkbox]{width:26px;height:26px}
+.bg-host{max-width:1880px;margin:0 auto}
+.bg-hbar,.bg-sbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 14px;margin-bottom:12px}
+.bg-hbar .sp,.bg-sbar .sp{flex:1}.bg-code{font-size:22px}.bg-code b{color:var(--accent);font-size:30px}
+.bg-vol{display:flex;align-items:center;gap:6px;font-weight:700}
+.bg-lobby{display:grid;grid-template-columns:auto 1fr;gap:28px;padding:22px;align-items:start}
+@media (max-width:900px){.bg-lobby{grid-template-columns:1fr}}
+#qrBox{background:#fff;padding:12px;border:4px solid var(--ink);display:inline-block;min-width:324px;min-height:324px}
+.bg-url{word-break:break-all;font-size:15px;max-width:340px;margin-top:8px}
+.bg-bigcode{font-family:"Press Start 2P",var(--px);font-size:72px;color:var(--accent);text-shadow:5px 5px 0 var(--ink);margin:10px 0}
+.bg-cnt{font-size:24px}.bg-cnt b{font-size:36px;color:var(--accent-d)}
+.bg-plist{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;max-height:40vh;overflow:auto}
+.bg-plist li{background:#fff;border:3px solid var(--ink);padding:4px 10px;font-weight:700;animation:pop .2s steps(3)}.bg-plist li.off{opacity:.4}
+.bg-start{font-size:24px;min-height:66px;padding:10px 30px;margin-top:10px}
+.bg-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px 340px;gap:14px;align-items:start}
+@media (max-width:1300px){.bg-grid{grid-template-columns:minmax(0,1fr) 300px}.bg-honor{grid-column:1/-1}}
+@media (max-width:800px){.bg-grid{grid-template-columns:1fr}}
+.bg-center{padding:18px 22px;min-height:60vh}
+.bg-turn{font-size:clamp(24px,2vw,40px);font-weight:900;text-align:center;margin:8px 0}.bg-turn b{color:var(--accent-d)}.bg-turn.small{font-size:clamp(20px,1.5vw,30px);margin:0;flex:1;text-align:left}
+.bm-wrap{display:flex;justify-content:center}.bm{width:min(380px,70%);height:auto}
+.bmb{animation:bob 1.2s steps(3) infinite;animation-delay:var(--d)}
+.bm.spin .bm-balls{transform-origin:110px 100px;animation:spin .35s steps(6) infinite}
+.bg-draw{font-size:26px;min-height:70px;padding:10px 34px}
+.bg-qhead{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.bg-ball{flex:none;width:clamp(70px,6vw,110px);height:clamp(70px,6vw,110px);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 18%,#ffd23f 19% 100%);border:5px solid var(--ink);display:grid;place-items:center;font-family:"Press Start 2P",var(--px);font-size:clamp(26px,2.4vw,44px);animation:pop .3s steps(3)}
+.bg-timer,.bg-stimer{font-size:clamp(32px,3vw,60px);min-width:2.2em;text-align:center;background:var(--ink);color:#fff;padding:4px 12px}
+.bg-timer.hurry,.bg-stimer.hurry{background:#d6336c;animation:blink .5s steps(2) infinite}
+.bq{background:#fff;border:4px solid var(--ink);padding:12px 16px;margin-bottom:12px}
+.bq-stem{font-size:clamp(20px,1.6vw,34px);font-weight:900;line-height:1.55}.bq.big .bq-stem{font-size:clamp(24px,2vw,42px)}
+.bg-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bg-opts.stu{grid-template-columns:1fr}
+.bg-opt{display:flex;gap:12px;align-items:center;background:var(--paper);border:3px solid var(--ink);padding:10px 14px;font-size:clamp(20px,1.5vw,32px);font-weight:700}
+.bg-opt.right{background:#c9eda0}.bg-opt.wrong{background:#ffc9d4}
+.q-opt.pick{background:var(--gold-l)}
+.bg-res{font-size:clamp(30px,2.6vw,54px)}.bg-res.ok{color:#1f6f34}.bg-res.no{color:#b0244f}
+.bg-exp{margin-top:12px;background:#fffbe0;border:3px dashed var(--ink);padding:10px 14px;font-size:clamp(18px,1.3vw,26px)}
+.bg-after{margin-top:10px;font-size:clamp(20px,1.5vw,30px);font-weight:900;text-align:center}
+.bg-big{font-size:clamp(34px,3vw,64px);color:var(--accent);text-align:center;margin:20px 0}
+.bg-board{padding:12px}.obs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}
+.ob{aspect-ratio:1;display:grid;place-items:center;border:3px solid var(--ink);background:#fff;font-family:"Press Start 2P",var(--px);font-size:clamp(14px,1.2vw,22px);color:#b8a890}
+.ob.on{background:#ffd23f;color:var(--ink)}.ob.cur{background:#d6336c;color:#fff;animation:blink .6s steps(2) infinite}
+.bg-online{margin-top:8px;font-weight:700}
+.bg-honor{padding:12px}.bg-ht{font-size:20px;margin-bottom:8px}.bg-honor ol{margin:0;padding-left:1.6em}
+.bg-honor li{display:flex;justify-content:space-between;gap:6px;padding:6px 4px;border-bottom:2px dashed #d8c8a8;font-size:clamp(16px,1.2vw,24px);font-weight:700}
+.bg-honor li.champ{background:#fff3b0}.bg-honor li.empty{color:#9a8a7a;display:list-item}.candy b{color:var(--accent-d)}
+.bg-cele{position:fixed;inset:0;z-index:250;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(20,10,40,.55);pointer-events:none;text-align:center}
+.bg-bingo{font-family:"Press Start 2P",var(--px);font-size:clamp(48px,9vw,160px);color:#ffd65a;text-shadow:6px 6px 0 #d6336c,12px 12px 0 #2a1a12;animation:bgjump .6s steps(4) infinite}
+.bg-cele.gold .bg-bingo{color:#fff3b0;text-shadow:6px 6px 0 #e0a91f,12px 12px 0 #2a1a12}
+.bg-cname{font-size:clamp(40px,6vw,110px);font-weight:900;color:#fff;text-shadow:5px 5px 0 #2a1a12;animation:bgjump .8s steps(4) infinite}
+.bg-csub{font-size:clamp(24px,3vw,52px);color:#fff;font-weight:900;text-shadow:3px 3px 0 #2a1a12}
+@keyframes bgjump{50%{transform:translateY(-14px) scale(1.06)}}
+.bg-stu{max-width:760px;margin:0 auto}
+.bg-turnbox{padding:14px 16px;margin-bottom:12px}
+.bg-cardbox{padding:14px}
+.bg-card{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cell{position:relative;aspect-ratio:1;border:4px solid var(--ink);background:#f1ece2;font-family:"Press Start 2P",var(--px);font-size:clamp(18px,5vw,30px);color:#b8a890;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.cell.open{background:#ffd23f;color:var(--ink);animation:pop .3s steps(3)}
+.cell.x{background:#fff}.cell .xx{position:absolute;inset:0;display:grid;place-items:center;color:#e83f3f;font-size:clamp(34px,9vw,58px);font-family:var(--tx);font-weight:900}
+.cell.line{background:#ffe0ea;box-shadow:0 0 0 4px #ffd65a,0 4px 0 var(--ink);animation:blink 1s steps(2) 3}
+.bg-me{font-size:20px}.bg-mine{font-size:18px;font-weight:700}.bg-mine b{color:var(--accent-d);font-size:24px}
 </style>
 </head>
 <body data-theme="home">
@@ -404,7 +481,7 @@ body.teacher .q-exp,body.teacher .q-ans{font-size:clamp(18px,1.4vw,26px)}body.te
   </div>
 </header>
 <main id="app"></main>
-<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.70–91｜第 3 期：練習題＋心智圖</footer>
+<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.70–91｜第 4 期：賓果競技場</footer>
 <div id="viewer" role="dialog" aria-modal="true" aria-label="概念卡"></div>
 <div id="intro" aria-live="polite"></div>
 
@@ -789,7 +866,7 @@ function renderHome(){
   <nav class="map" aria-label="關卡地圖">
     ${portal('2-2')}${portal('2-3')}${portal('2-4')}
     <a class="portal" href="#/mindmap" style="--c:#6b4fbf"><div class="pbox plate">${lockedThumb('mind',true)}<div class="info"><span class="num" style="background:#6b4fbf">MAP</span><h2>心智圖神殿</h2><div class="sub">用線索拼出完整概念</div><div class="sub px" style="margin-top:4px">${mmPct()}</div></div></div></a>
-    ${locked('bingo','賓果競技場','全班大屏賓果對戰','第 4 期')}
+    <a class="portal" href="#/bingo" style="--c:#d6336c"><div class="pbox plate">${lockedThumb('bingo',true)}<div class="info"><span class="num" style="background:#d6336c">BINGO</span><h2>賓果競技場</h2><div class="sub">全班大屏賓果對戰</div><div class="sub px" style="margin-top:4px">老師開房／學生加入</div></div></div></a>
   </nav>
   <section class="pbox howto">
     <h3>▶ 遊戲說明</h3>
@@ -799,7 +876,7 @@ function renderHome(){
       <li><b>互動動畫</b>：每段都有播放、暫停、上一步、下一步、重播與速度控制，最後一步「換你試試」可以自己動手操作。</li>
       <li><b>即時練習</b>：每單元隨機 10 題、三單元綜合挑戰 20 題，答錯的題目會自動收進錯題本。</li>
       <li><b>心智圖神殿</b>：把詞卡拖到正確的空格，卡住時可打開三層線索；完成後可匯出 PNG。</li>
-      <li>賓果競技場會在第 4 期開放。</li>
+      <li><b>賓果競技場</b>：老師在大屏開房，學生用平板掃 QR Code 加入；抽到號碼球要答對題目才能畫 X，連成一條線就得一顆糖果！</li>
     </ul>
   </section>`;
   app.querySelectorAll('.portal').forEach(p=>p.addEventListener('click',e=>{if(p.dataset.locked){e.preventDefault();SFX.lock();toast(`這個關卡在${p.dataset.locked}開放喔！`)}else SFX.tap()}));
@@ -943,9 +1020,12 @@ document.getElementById('hudCoin2').innerHTML=spriteSvg('coin',3,'style="width:2
 /* ---- 路由（#/、#/unit/2-2/concept；GitHub Pages 可直接使用） ---- */
 function parseRoute(){const m=location.hash.match(/^#\/unit\/(2-[234])(?:\/(\w+))?(?:\/(\w+))?/);return m?{u:m[1],tab:m[2]||'concept',sub:m[3]}:{}}
 let lastUnit=null;
-function rerender(){if(viewer.classList.contains('open'))drawViewer();if(/^#\/mindmap/.test(location.hash))return;const r=parseRoute();if(r.u){if(r.tab==='concept')renderUnit(r.u,r.tab)}else renderHome()}
+function rerender(){if(viewer.classList.contains('open'))drawViewer();if(/^#\/(mindmap|bingo)/.test(location.hash))return;const r=parseRoute();if(r.u){if(r.tab==='concept')renderUnit(r.u,r.tab)}else renderHome()}
 function route(){if(viewer.classList.contains('open')){viewer.classList.remove('open');document.body.style.overflow=''}
   const r=parseRoute();
+  if(typeof bgClear==='function')bgClear();
+  const bm=location.hash.match(/^#\/bingo(?:\/(host|join))?(?:\/(\d{4}))?(?:\/(demo))?/);
+  if(bm){lastUnit=null;renderBingo(bm[1],bm[2],bm[3]);window.scrollTo(0,0);return}
   const mm=location.hash.match(/^#\/mindmap(?:\/([\w-]+))?/);
   if(mm){lastUnit=null;renderMindmap(mm[1]);window.scrollTo(0,0);return}
   if(r.u){if(r.u!==lastUnit)showIntro(r.u);lastUnit=r.u;renderUnit(r.u,r.tab,r.sub)}else{lastUnit=null;renderHome()}
@@ -2201,6 +2281,614 @@ window.addEventListener('DOMContentLoaded',route);
   "link": "card:2-4:1",
   "bingo": true,
   "year": "112 會考"
+ },
+ {
+  "id": "q2225",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "酵素又稱為「酶」。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素又稱為酶，能促進代謝反應的進行。",
+  "link": "card:2-2:3",
+  "bingo": true
+ },
+ {
+  "id": "q2226",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "澱粉被分解成小分子醣類，屬於合成作用。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "大分子轉變成小分子是分解作用。",
+  "link": "card:2-2:2",
+  "bingo": true
+ },
+ {
+  "id": "q2227",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "酵素的活性會影響代謝反應速率的快慢。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素活性越好，代謝反應速率越快。",
+  "link": "card:2-2:6",
+  "bingo": true
+ },
+ {
+  "id": "q2228",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "胃內的酵素在鹼性環境中活性較佳。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "胃內的酵素在酸性環境中活性較佳；小腸內的酵素才適合鹼性環境。",
+  "link": "card:2-2:7",
+  "bingo": true
+ },
+ {
+  "id": "q2229",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "進階",
+  "stem": "酸鹼值超過酵素能忍受的範圍，酵素可能會活性降低或失去活性。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素活性受所在環境的酸鹼值影響。",
+  "link": "anim:2-2:C",
+  "bingo": true
+ },
+ {
+  "id": "q2230",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一項是「合成作用」的例子？",
+  "options": [
+   "澱粉分解成小分子醣類",
+   "蛋白質分解成胺基酸",
+   "小分子結合成大分子",
+   "脂質分解成甘油和脂肪酸"
+  ],
+  "answer": 2,
+  "explain": "小分子結合成大分子是合成作用，其他都是分解作用。",
+  "link": "anim:2-2:B",
+  "bingo": true
+ },
+ {
+  "id": "q2231",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "唾液中的哪一種酵素能和澱粉結合，促進澱粉的分解？",
+  "options": [
+   "澱粉酶",
+   "纖維素",
+   "本氏液",
+   "葡萄糖"
+  ],
+  "answer": 0,
+  "explain": "唾液中的澱粉酶能和澱粉結合，促進澱粉分解。",
+  "link": "card:2-2:4",
+  "bingo": true
+ },
+ {
+  "id": "q2232",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-2 中，加入唾液的 B 管加本氏液隔水加熱後出現橙紅色，表示什麼？",
+  "options": [
+   "B 管中仍只有澱粉",
+   "B 管中的澱粉被分解，產生小分子醣類",
+   "B 管中產生了蛋白質",
+   "本氏液失去作用"
+  ],
+  "answer": 1,
+  "explain": "本氏液遇小分子醣類加熱會變色，表示唾液把澱粉分解成小分子醣類。",
+  "link": "anim:2-2:D",
+  "bingo": true
+ },
+ {
+  "id": "q2233",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "為什麼凡是能影響蛋白質特性的因素，都可能改變酵素的活性？",
+  "options": [
+   "因為酵素會分解蛋白質",
+   "因為大部分酵素的主要成分是蛋白質",
+   "因為蛋白質是酵素的受質",
+   "因為酵素會合成蛋白質"
+  ],
+  "answer": 1,
+  "explain": "大部分種類的酵素主要成分是蛋白質。",
+  "link": "card:2-2:3",
+  "bingo": true
+ },
+ {
+  "id": "q2234",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "唾液中的酵素在 37℃ 時活性很好。若把它放在 10℃ 的低溫中，最可能發生什麼事？",
+  "options": [
+   "酵素構造被破壞，永久失去活性",
+   "活性降低，分解澱粉變慢",
+   "活性變得更好",
+   "酵素變成澱粉"
+  ],
+  "answer": 1,
+  "explain": "低溫使酵素活性降低，代謝反應變慢。",
+  "link": "anim:2-2:C",
+  "bingo": true
+ },
+ {
+  "id": "q2322",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葉是大多數植物製造養分的主要器官。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "葉是大多數植物製造養分的主要器官，其中葉肉是主要部位。",
+  "link": "card:2-3:1",
+  "bingo": true
+ },
+ {
+  "id": "q2323",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "表皮細胞含有大量的葉綠體，是進行光合作用的主要場所。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "表皮細胞透明無色；含大量葉綠體、行光合作用的是葉肉細胞。",
+  "link": "card:2-3:5",
+  "bingo": true
+ },
+ {
+  "id": "q2324",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "保衛細胞內含有葉綠體。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "半月形的保衛細胞內含葉綠體。",
+  "link": "card:2-3:4",
+  "bingo": true
+ },
+ {
+  "id": "q2325",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "光合作用的產物有氧氣、葡萄糖和水。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "水＋二氧化碳 →（光、葉綠體）→ 氧氣＋葡萄糖＋水。",
+  "link": "card:2-3:7",
+  "bingo": true
+ },
+ {
+  "id": "q2326",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "沒有光照時，植物仍然可以進行光合作用。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "照光是光合作用的必要條件之一。",
+  "link": "anim:2-3:C",
+  "bingo": true
+ },
+ {
+  "id": "q2327",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "碘液遇到澱粉會呈現藍黑色。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "碘液可與澱粉反應，呈現藍黑色或紫紅色。",
+  "link": "card:2-3:10",
+  "bingo": true
+ },
+ {
+  "id": "q2328",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "進階",
+  "stem": "透過光合作用，植物將光能儲存在葡萄糖中。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "植物將光能儲存在葡萄糖，葡萄糖是植物的主要養分來源。",
+  "link": "card:2-3:7",
+  "bingo": true
+ },
+ {
+  "id": "q2329",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉綠體中，能吸收光能的綠色色素是什麼？",
+  "options": [
+   "葉綠素",
+   "葡萄糖",
+   "澱粉",
+   "角質層"
+  ],
+  "answer": 0,
+  "explain": "葉綠素是葉綠體中的綠色色素，能吸收光能。",
+  "link": "card:2-3:9",
+  "bingo": true
+ },
+ {
+  "id": "q2330",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "光合作用主要在葉片的哪一種細胞中進行？",
+  "options": [
+   "表皮細胞",
+   "葉肉細胞",
+   "葉脈",
+   "角質層"
+  ],
+  "answer": 1,
+  "explain": "葉肉細胞具有大量葉綠體，是光合作用的主要場所。",
+  "link": "card:2-3:5",
+  "bingo": true
+ },
+ {
+  "id": "q2331",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "陸生雙子葉植物的氣孔，大多分布在哪裡？",
+  "options": [
+   "上表皮",
+   "下表皮",
+   "葉脈中",
+   "葉肉中"
+  ],
+  "answer": 1,
+  "explain": "陸生雙子葉植物大多是下表皮的氣孔比較多。",
+  "link": "card:2-3:4",
+  "bingo": true
+ },
+ {
+  "id": "q2332",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "光合作用產生的氧氣，主要經由哪個構造釋放到空氣中？",
+  "options": [
+   "葉脈",
+   "氣孔",
+   "角質層",
+   "葉綠體"
+  ],
+  "answer": 1,
+  "explain": "氧氣經由氣孔釋放，氣孔是氣體進出的主要通道。",
+  "link": "anim:2-3:B",
+  "bingo": true
+ },
+ {
+  "id": "q2333",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-3 中，酒精隔水加熱後，酒精變成綠色的原因是什麼？",
+  "options": [
+   "酒精和澱粉反應",
+   "葉綠素被酒精溶出",
+   "碘液混入酒精",
+   "葉片產生了葡萄糖"
+  ],
+  "answer": 1,
+  "explain": "葉綠素可以被酒精溶出，所以酒精變綠。",
+  "link": "anim:2-3:D",
+  "bingo": true
+ },
+ {
+  "id": "q2334",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-3 中，滴碘液前先把葉片放入熱水中加熱，目的是什麼？",
+  "options": [
+   "軟化葉片",
+   "產生澱粉",
+   "讓葉片變綠",
+   "殺死碘液"
+  ],
+  "answer": 0,
+  "explain": "先用熱水加熱，以軟化葉片。",
+  "link": "anim:2-3:D",
+  "bingo": true
+ },
+ {
+  "id": "q2335",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "光合作用產生的葡萄糖，「不」包括下列哪一種去向？",
+  "options": [
+   "供細胞直接利用",
+   "形成纖維素",
+   "轉換成澱粉儲存",
+   "全部變成氧氣"
+  ],
+  "answer": 3,
+  "explain": "葡萄糖可供細胞利用、形成纖維素或轉換成澱粉等儲存，不會全部變成氧氣。",
+  "link": "card:2-3:8",
+  "bingo": true
+ },
+ {
+  "id": "q2422",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "唾液中的酵素能促進澱粉的初步分解。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "口腔中，唾液中的酵素能促進澱粉的初步分解。",
+  "link": "card:2-4:4",
+  "bingo": true
+ },
+ {
+  "id": "q2423",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "胃呈囊袋狀，可以暫時貯存食物。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "胃呈囊袋狀，可暫時貯存食物。",
+  "link": "card:2-4:6",
+  "bingo": true
+ },
+ {
+  "id": "q2424",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "膽汁含有分解脂質的酵素。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "膽汁不含酵素，它能乳化脂質。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2425",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "大腸比小腸細長。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "大腸較小腸粗短。",
+  "link": "card:2-4:9",
+  "bingo": true
+ },
+ {
+  "id": "q2426",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "被吸收的小分子養分，能藉由血液運送至全身細胞。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "小分子養分經血液運送至全身細胞利用或儲存。",
+  "link": "card:2-4:8",
+  "bingo": true
+ },
+ {
+  "id": "q2427",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "胰液、腸液和膽汁都是鹼性的。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "三種消化液為鹼性，能中和胃液酸性。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2428",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "進階",
+  "stem": "排遺是指把糞便經由肛門排出體外，它不屬於排泄。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "排遺不是排泄。",
+  "link": "card:2-4:9",
+  "bingo": true
+ },
+ {
+  "id": "q2429",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "脂質被分解後的小分子是什麼？",
+  "options": [
+   "葡萄糖",
+   "胺基酸",
+   "甘油和脂肪酸",
+   "麥芽糖"
+  ],
+  "answer": 2,
+  "explain": "部分脂質分解為甘油與脂肪酸。",
+  "link": "card:2-4:1",
+  "bingo": true
+ },
+ {
+  "id": "q2430",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一個是消化腺？",
+  "options": [
+   "食道",
+   "胰臟",
+   "大腸",
+   "肛門"
+  ],
+  "answer": 1,
+  "explain": "消化腺包括唾腺、胃腺、肝臟、胰臟、腸腺。",
+  "link": "card:2-4:3",
+  "bingo": true
+ },
+ {
+  "id": "q2431",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "膽汁由哪一個器官分泌？",
+  "options": [
+   "膽囊",
+   "肝臟",
+   "胰臟",
+   "胃"
+  ],
+  "answer": 1,
+  "explain": "膽汁由肝臟分泌，儲存在膽囊。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2432",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "食物中大分子養分在人體內分解為小分子養分的過程，稱為什麼？",
+  "options": [
+   "吸收作用",
+   "消化作用",
+   "光合作用",
+   "排遺"
+  ],
+  "answer": 1,
+  "explain": "大分子分解為小分子的過程稱為消化作用。",
+  "link": "card:2-4:1",
+  "bingo": true
+ },
+ {
+  "id": "q2433",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "胃液包括下列哪兩種成分？",
+  "options": [
+   "酵素和鹽酸",
+   "膽汁和酵素",
+   "鹽酸和葡萄糖",
+   "胰液和腸液"
+  ],
+  "answer": 0,
+  "explain": "胃液包括酵素和鹽酸。",
+  "link": "card:2-4:6",
+  "bingo": true
+ },
+ {
+  "id": "q2434",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "能分解醣類、蛋白質和脂質三種養分的消化液是哪一種？",
+  "options": [
+   "唾液",
+   "胃液",
+   "膽汁",
+   "胰液"
+  ],
+  "answer": 3,
+  "explain": "胰液能分解醣類、蛋白質和脂質。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2435",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "消化道器官的管壁具有肌肉，收縮時能協助食物的推送與消化，這種現象稱為什麼？",
+  "options": [
+   "蠕動",
+   "乳化",
+   "吸收",
+   "排遺"
+  ],
+  "answer": 0,
+  "explain": "食道、胃與小腸都有蠕動現象。",
+  "link": "card:2-4:2",
+  "bingo": true
  }
 ]
 </script>
@@ -3476,6 +4164,332 @@ function mmExport(scope,L,S,nodeBox){
   cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`心智圖_${scope==='all'?'全章':scope}.png`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)});
   SFX.coin();toast('已匯出 PNG');
 }
+
+/* =========================================================
+   第 4 期：賓果競技場（企劃書第八節）
+   雲端同步：Firebase Realtime Database（匿名登入）
+   單機示範：同一台電腦的多個分頁（BroadcastChannel），不需 Firebase
+   ========================================================= */
+const FIREBASE_CONFIG=null; /*FIREBASE-CONFIG*/
+const SITE_URL='https://batyunching.github.io/bio-ch2/';
+const BL=(()=>{const L=[];for(let r=0;r<5;r++)L.push([0,1,2,3,4].map(c=>r*5+c));for(let c=0;c<5;c++)L.push([0,1,2,3,4].map(r=>r*5+c));L.push([0,6,12,18,24],[4,8,12,16,20]);return L})();
+const CLASSES=Array.from({length:30},(_,i)=>String(701+i));
+function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector(`script[src="${src}"]`)){res();return}const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=()=>rej(new Error('load '+src));document.head.appendChild(s)})}
+const pathGet=(o,p)=>p.split('/').filter(Boolean).reduce((a,k)=>a==null?undefined:a[k],o);
+function pathSet(o,p,v){const ks=p.split('/').filter(Boolean);let a=o;ks.slice(0,-1).forEach(k=>{if(a[k]==null||typeof a[k]!=='object')a[k]={};a=a[k]});if(v===null||v===undefined)delete a[ks[ks.length-1]];else a[ks[ks.length-1]]=JSON.parse(JSON.stringify(v))}
+
+/* ---------- 資料層：雲端／單機 ---------- */
+const DB={mode:null,
+  async init(demo){
+    if(this.mode===(demo?'local':'cloud'))return;
+    if(demo){this.mode='local';this._L.boot();return}
+    if(!FIREBASE_CONFIG)throw new Error('尚未設定 Firebase');
+    const V='10.12.2',base=`https://www.gstatic.com/firebasejs/${V}/`;
+    await loadScript(base+'firebase-app-compat.js');await loadScript(base+'firebase-auth-compat.js');await loadScript(base+'firebase-database-compat.js');
+    if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);
+    await firebase.auth().signInAnonymously();
+    this.fb=firebase.database();this.offset=0;this.fb.ref('.info/serverTimeOffset').on('value',s=>this.offset=s.val()||0);
+    this.mode='cloud'},
+  set(p,v){return this.mode==='cloud'?this.fb.ref(p).set(v):this._L.write({[p]:v})},
+  update(p,obj){if(this.mode==='cloud')return this.fb.ref(p).update(obj);const o={};for(const k in obj)o[p+'/'+k]=obj[k];return this._L.write(o)},
+  push(p,v){if(this.mode==='cloud')return this.fb.ref(p).push(v);const k='k'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);return this._L.write({[p+'/'+k]:v})},
+  async get(p){if(this.mode==='cloud')return (await this.fb.ref(p).get()).val();return pathGet(this._L.tree(),p)??null},
+  on(p,cb){if(this.mode==='cloud'){const r=this.fb.ref(p),h=s=>cb(s.val());r.on('value',h);return()=>r.off('value',h)}return this._L.on(p,cb)},
+  ts(){return this.mode==='cloud'?firebase.database.ServerValue.TIMESTAMP:Date.now()},
+  now(){return Date.now()+(this.mode==='cloud'?this.offset:0)},
+  onDisconnect(p,v){if(this.mode==='cloud')this.fb.ref(p).onDisconnect().set(v)},
+  _L:{key:'bio2_bingo_local',subs:[],
+    boot(){if(this.ch)return;this.ch=new BroadcastChannel('bio2_bingo');this.ch.onmessage=()=>this.fire()},
+    tree(){try{return JSON.parse(localStorage.getItem(this.key)||'{}')}catch(e){return {}}},
+    write(map){const t=this.tree();for(const p in map){const v=map[p];pathSet(t,p,v&&v.__ts?Date.now():v)}localStorage.setItem(this.key,JSON.stringify(t));this.ch.postMessage(1);setTimeout(()=>this.fire(),0);return Promise.resolve()},
+    on(p,cb){const s={p,cb,last:undefined};this.subs.push(s);setTimeout(()=>this.fire(),0);return()=>{this.subs=this.subs.filter(x=>x!==s)}},
+    fire(){const t=this.tree();this.subs.forEach(s=>{const v=pathGet(t,s.p)??null,j=JSON.stringify(v);if(j!==s.last){s.last=j;s.cb(v==null?null:JSON.parse(j))}})}}
+};
+
+/* ---------- 音效、語音、煙火 ---------- */
+const BAU={vol:store.get('bingoVol',0.8),mute:false,
+  ac(){AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC},
+  noise(t0,dur,freq,gain){const a=this.ac(),n=a.createBufferSource(),b=a.createBuffer(1,a.sampleRate*dur,a.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+    n.buffer=b;const f=a.createBiquadFilter();f.type='bandpass';f.frequency.value=freq;const g=a.createGain();g.gain.setValueAtTime(gain*this.vol,t0);g.gain.exponentialRampToValueAtTime(.001,t0+dur);n.connect(f);f.connect(g);g.connect(a.destination);n.start(t0);n.stop(t0+dur)},
+  tone(t0,f,dur,type='square',gain=.08){const a=this.ac(),o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(gain*this.vol,t0);g.gain.exponentialRampToValueAtTime(.001,t0+dur);o.connect(g);g.connect(a.destination);o.start(t0);o.stop(t0+dur)},
+  drum(){if(this.mute)return;try{const a=this.ac(),t=a.currentTime;for(let i=0;i<24;i++)this.noise(t+i*.045,.06,180,.5)}catch(e){}},
+  clap(){if(this.mute)return;try{const a=this.ac(),t=a.currentTime;for(let i=0;i<26;i++)this.noise(t+i*.09+Math.random()*.04,.07,1600,.55)}catch(e){}},
+  cheer(){if(this.mute)return;try{const a=this.ac(),t=a.currentTime;this.noise(t,1.6,900,.25);[523,659,784,1047,784,1047].forEach((f,i)=>this.tone(t+i*.12,f,.22))}catch(e){}},
+  spin(){if(this.mute)return;try{const a=this.ac(),t=a.currentTime;for(let i=0;i<16;i++)this.tone(t+i*.08,300+i*25,.05,'triangle',.06)}catch(e){}},
+  ok(){if(this.mute)return;try{const t=this.ac().currentTime;[784,988,1319].forEach((f,i)=>this.tone(t+i*.09,f,.16))}catch(e){}},
+  bad(){if(this.mute)return;try{const t=this.ac().currentTime;[330,247].forEach((f,i)=>this.tone(t+i*.16,f,.25,'triangle',.1))}catch(e){}},
+  say(text){if(this.mute||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='zh-TW';u.rate=1.15;u.pitch=1.35;u.volume=this.vol;
+    const v=speechSynthesis.getVoices().find(v=>/zh[-_]TW/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^zh/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}},
+  unlock(){try{this.ac();if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}}catch(e){}}
+};
+const PRAISE=['哇！{n}太厲害了！完成連線！','恭喜{n}，你是營養小博士！','{n}連線成功，掌聲鼓勵！','{n}好棒！又一條線！','太強了！{n}的酵素活性全開！','{n}光合作用全速運轉，連線成功！','掌聲送給{n}！賓果！','{n}消化吸收滿分，連線啦！','{n}超神的！大家給他掌聲！'];
+const PRAISE_CHAMP=['冠軍出爐！恭喜{n}第一個完成連線！','賓果冠軍是{n}！太厲害了！'];
+const PRAISE_MORE=['{n}已經完成{k}條線了！糖果拿不完！','不得了！{n}連到第{k}條線！'];
+function fireworks(gold,ms=6000){
+  const cv=document.createElement('canvas');cv.className='fw';document.body.appendChild(cv);const g=cv.getContext('2d');
+  const fit=()=>{cv.width=innerWidth;cv.height=innerHeight};fit();
+  const cols=gold?['#ffd65a','#ffb000','#fff3b0','#ffe08a','#ff8f1f']:['#ff5f8f','#ffd23f','#5cbf3a','#5aa9e6','#b48cff','#ff8a3d'];
+  let P=[];const burst=()=>{const x=innerWidth*(.15+Math.random()*.7),y=innerHeight*(.15+Math.random()*.45);for(let i=0;i<70;i++){const a=Math.random()*Math.PI*2,s=2+Math.random()*6;P.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:60+Math.random()*40,c:cols[i%cols.length],sz:3+Math.random()*4})}};
+  const conf=()=>{for(let i=0;i<14;i++)P.push({x:Math.random()*innerWidth,y:-10,vx:Math.random()*2-1,vy:2+Math.random()*3,l:220,c:cols[i%cols.length],sz:6+Math.random()*6,rect:1})};
+  const t0=performance.now();let last=0;
+  const step=t=>{if(t-t0>ms&&!P.length){cv.remove();return}
+    if(t-t0<ms){if(t-last>380){burst();last=t}conf()}
+    g.clearRect(0,0,cv.width,cv.height);P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=p.rect?.02:.08;p.l--;g.fillStyle=p.c;g.globalAlpha=Math.max(0,Math.min(1,p.l/40));g.fillRect(p.x,p.y,p.sz,p.rect?p.sz*.6:p.sz)});g.globalAlpha=1;P=P.filter(p=>p.l>0&&p.y<innerHeight+20);
+    requestAnimationFrame(step)};requestAnimationFrame(step)}
+
+/* ---------- 共用 ---------- */
+const BG={unsub:[],timer:null};
+function bgClear(){BG.unsub.forEach(f=>f());BG.unsub=[];clearInterval(BG.timer);BG.timer=null;clearTimeout(BG.next)}
+function qById(id){return QB.find(q=>q.id===id)}
+function linesOf(card,marks){return BL.filter(l=>l.every(i=>marks&&marks[card[i]])).length}
+function lineIdx(card,marks){return BL.map((l,i)=>l.every(j=>marks&&marks[card[j]])?i:-1).filter(i=>i>=0)}
+function bPool(scope,level){let p=QB.filter(q=>q.bingo&&(scope==='all'||q.unit===scope));const f=level==='all'?p:p.filter(q=>q.level===level);return f.length>=25?f:p}
+function bQ(q,big){return `<div class="bq ${big?'big':''}"><div class="q-tags"><span class="q-tag">${TYPE_NAME[q.type]}</span><span class="q-tag lv-${q.level}">${esc(q.level==='會考'&&q.year?'會考｜'+q.year:q.level)}</span><span class="q-tag">${q.unit}</span></div><div class="bq-stem">${esc(q.stem)}</div></div>`}
+function setBingoTheme(){document.body.dataset.theme='bingo';setScene('bingo')}
+function joinURL(code,demo){return `${location.protocol.startsWith('http')?location.href.split('#')[0]:SITE_URL}#/bingo/join/${code}${demo?'/demo':''}`}
+
+/* ---------- 入口 ---------- */
+function renderBingo(sub,code,demo){
+  bgClear();setBingoTheme();
+  if(sub==='host')return bingoHost();
+  if(sub==='join')return bingoJoin(code,demo==='demo');
+  app.innerHTML=`<section class="pbox bg-gate"><div class="px bg-logo">BINGO<br>ARENA</div><h1 class="ptitle">賓果競技場</h1>
+    <p>老師用教室大屏開房間，學生用平板掃 QR Code 加入。每抽一顆號碼球就要回答一題，答對全班都能把那個號碼畫 X！</p>
+    <div class="bg-gbtn"><a class="pbtn" href="#/bingo/host">👩‍🏫 老師開房（大屏）</a><a class="pbtn gold" href="#/bingo/join">🧑‍🎓 學生加入（平板）</a></div>
+    ${FIREBASE_CONFIG?'':'<p class="bg-warn">尚未設定 Firebase：目前只能使用「單機示範模式」（同一台電腦開兩個分頁：一個當老師、一個當學生）。</p>'}
+    <a class="pbtn ghost" href="#/">⬅ 世界地圖</a></section>`;
+}
+
+/* ======================= 老師大屏 ======================= */
+const H={};
+async function bingoHost(){
+  const saved=store.get('bingoHost',null);
+  app.innerHTML=`<section class="pbox bg-setup"><h1 class="ptitle">賓果競技場：老師開房</h1>
+    <div class="bg-form">
+      <label>題目範圍<select id="bgScope"><option value="all">全章（2-2、2-3、2-4）</option><option value="2-2">2-2 酵素</option><option value="2-3">2-3 植物如何製造養分</option><option value="2-4">2-4 人體如何獲得養分</option></select></label>
+      <label>難度<select id="bgLevel"><option value="all">全部</option><option value="基礎">基礎</option><option value="進階">進階</option><option value="會考">會考</option></select></label>
+      <label>作答秒數<select id="bgTime">${[20,30,45,60,90].map(s=>`<option ${s===30?'selected':''}>${s}</option>`).join('')}</select></label>
+      <label>輪流方式<select id="bgOrder"><option value="seat">依班級座號輪流</option><option value="random">隨機點名</option></select></label>
+      <label class="ck"><input type="checkbox" id="bgAuto"> 答對後自動幫全班畫 X</label>
+      <label class="ck"><input type="checkbox" id="bgDemo" ${FIREBASE_CONFIG?'':'checked disabled'}> 單機示範模式（不用 Firebase，同一台電腦開分頁測試）</label>
+    </div>
+    <div class="bg-gbtn"><button class="pbtn" id="bgCreate">建立房間</button>${saved?`<button class="pbtn gold" id="bgResume">繼續上一局（房號 ${saved.code}）</button>`:''}<a class="pbtn ghost" href="#/bingo">返回</a></div>
+    <p class="bg-note" id="bgMsg"></p></section>`;
+  const msg=t=>document.getElementById('bgMsg').textContent=t;
+  document.getElementById('bgCreate').onclick=async()=>{SFX.tap();const demo=document.getElementById('bgDemo').checked;msg('連線中……');
+    try{await DB.init(demo)}catch(e){msg('無法連上 Firebase：'+e.message+'（可改用單機示範模式）');return}
+    let code;for(let i=0;i<20;i++){code=String(1000+Math.floor(Math.random()*9000));if(!(await DB.get(`bingo/rooms/${code}/info`)))break}
+    const info={created:DB.ts(),status:'lobby',scope:val('bgScope'),level:val('bgLevel'),timer:+val('bgTime'),order:val('bgOrder'),autoX:document.getElementById('bgAuto').checked};
+    await DB.set(`bingo/rooms/${code}`,{info});store.set('bingoHost',{code,demo});hostRoom(code,demo)};
+  const r=document.getElementById('bgResume');if(r)r.onclick=async()=>{try{await DB.init(saved.demo);const info=await DB.get(`bingo/rooms/${saved.code}/info`);if(!info){msg('找不到上一局的房間');store.set('bingoHost',null);return}hostRoom(saved.code,saved.demo)}catch(e){msg('無法連線：'+e.message)}};
+  function val(id){return document.getElementById(id).value}
+}
+function hostRoom(code,demo){
+  bgClear();const R=`bingo/rooms/${code}`;Object.assign(H,{code,demo,R,room:{},seen:{},queue:[],playing:false,seq:0});
+  app.innerHTML=`<div class="bg-host">
+    <section class="pbox bg-hbar"><span class="px bg-code">房號 <b>${code}</b></span><span class="bg-status"></span><span class="sp"></span>
+      <label class="bg-vol">音量 <input type="range" min="0" max="1" step="0.1" value="${BAU.vol}" id="bgVol"></label><button class="mini" id="bgMute">🔊 音效開</button>
+      <button class="mini" id="bgCsv">⬇ 匯出 CSV</button><button class="mini" id="bgEnd">結束遊戲</button></section>
+    <div class="bg-stage"></div></div>`;
+  document.getElementById('bgVol').oninput=e=>{BAU.vol=+e.target.value;store.set('bingoVol',BAU.vol)};
+  document.getElementById('bgMute').onclick=e=>{BAU.mute=!BAU.mute;e.target.textContent=BAU.mute?'🔇 靜音':'🔊 音效開'};
+  document.getElementById('bgCsv').onclick=()=>exportCSV();
+  document.getElementById('bgEnd').onclick=e=>{if(e.target.dataset.c!=='1'){e.target.dataset.c='1';e.target.textContent='再按一次確定結束';setTimeout(()=>{e.target.dataset.c='';e.target.textContent='結束遊戲'},2500);return}endGame()};
+  BG.unsub.push(DB.on(R,v=>{H.room=v||{};hostRender()}));
+  BG.timer=setInterval(hostTick,250);
+}
+function players(){return Object.entries(H.room.players||{}).map(([id,p])=>({id,...p}))}
+function sortedPlayers(){return players().sort((a,b)=>(a.cls+String(a.seat).padStart(2,'0')).localeCompare(b.cls+String(b.seat).padStart(2,'0')))}
+function hostRender(){
+  const st=H.room.info||{},stage=document.querySelector('.bg-stage');if(!stage)return;
+  document.querySelector('.bg-status').textContent={lobby:'等待學生加入',playing:'遊戲進行中',ended:'遊戲結束'}[st.status]||'';
+  if(st.status==='lobby')return hostLobby(stage);
+  hostGame(stage);hostEvents();
+}
+function hostLobby(stage){
+  const ps=sortedPlayers(),url=joinURL(H.code,H.demo);
+  if(!stage.querySelector('.bg-lobby')){
+    stage.innerHTML=`<section class="pbox bg-lobby"><div class="bg-qr"><div id="qrBox"></div><div class="bg-url">${esc(url)}</div>${H.demo?'<p class="bg-warn">單機示範模式：請在<b>同一台電腦</b>另開分頁貼上這個網址。</p>':''}</div>
+      <div class="bg-wait"><div class="px">掃描 QR Code 加入</div><div class="px bg-bigcode">${H.code}</div><div class="bg-cnt"></div><ul class="bg-plist"></ul>
+      <button class="pbtn bg-start" id="bgStart">▶ 開始遊戲</button><p class="bg-note">按下「開始遊戲」同時會啟用大屏的音效與語音（iPad 規定要先點一次畫面）。</p></div></section>`;
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js').then(()=>{const b=document.getElementById('qrBox');if(b&&window.QRCode){b.innerHTML='';new QRCode(b,{text:url,width:300,height:300,correctLevel:QRCode.CorrectLevel.M})}}).catch(()=>{const b=document.getElementById('qrBox');if(b)b.innerHTML='<p class="bg-warn">QR Code 載入失敗，請讓學生輸入下方網址或房號。</p>'});
+    document.getElementById('bgStart').onclick=startGame;
+  }
+  stage.querySelector('.bg-cnt').innerHTML=`已加入 <b>${ps.length}</b> 人`;
+  stage.querySelector('.bg-plist').innerHTML=ps.map(p=>`<li class="${p.online===false?'off':''}">${esc(p.cls)}-${p.seat} ${esc(p.name)}</li>`).join('');
+}
+async function startGame(){
+  BAU.unlock();SFX.stage();const st=H.room.info,pool=shuffle(bPool(st.scope,st.level));
+  if(pool.length<25){toast('題目不足 25 題');return}
+  const qmap={};for(let n=1;n<=25;n++)qmap[n]=pool[n-1].id;
+  await DB.update(H.R,{'info/status':'playing','info/started':DB.ts(),qmap,spare:pool.slice(25).map(q=>q.id),opened:null,turn:{seq:0,state:'idle'}});
+  H.room.info={...H.room.info,status:'playing'};H.room.opened={};H.room.turn={seq:0,state:'idle'};H.room.qmap=qmap;
+  nextTurn();
+}
+function nextTurn(pidForce){
+  const st=H.room.info;if(!st||st.status!=='playing')return;
+  const opened=Object.keys(H.room.opened||{}).length;if(opened>=25){endGame();return}
+  let ps=sortedPlayers().filter(p=>p.online!==false);if(!ps.length)ps=sortedPlayers();
+  if(!ps.length){DB.update(H.R,{turn:{seq:(H.room.turn?.seq||0)+1,state:'nobody'}});return}
+  let p;
+  if(pidForce)p=ps.find(x=>x.id===pidForce)||sortedPlayers().find(x=>x.id===pidForce);
+  else if(st.order==='random'){const recent=(H.room.turn&&H.room.turn.pid)||'';const c=ps.filter(x=>x.id!==recent);p=(c.length?c:ps)[Math.floor(Math.random()*(c.length||ps.length))]}
+  else{const cur=H.room.turn&&H.room.turn.pid;const all=sortedPlayers();let i=all.findIndex(x=>x.id===cur);for(let k=1;k<=all.length;k++){const c=all[(i+k+all.length)%all.length];if(c.online!==false){p=c;break}}p=p||all[0]}
+  DB.update(H.R,{turn:{seq:(H.room.turn?.seq||0)+1,state:'wait',pid:p.id,name:p.name,cls:p.cls}});
+}
+async function drawBall(){
+  const t=H.room.turn;if(!t||t.state!=='wait')return;
+  const left=[];for(let n=1;n<=25;n++)if(!(H.room.opened||{})[n])left.push(n);
+  const n=left[Math.floor(Math.random()*left.length)];
+  await DB.update(H.R,{'turn/state':'spin','turn/n':n});
+  BAU.spin();
+  BG.next=setTimeout(()=>{const T=(H.room.info.timer||30)*1000;DB.update(H.R,{'turn/state':'question','turn/qid':H.room.qmap[n],'turn/deadline':DB.now()+T})},1800);
+}
+async function judge(choice){
+  const t=H.room.turn;if(!t||t.state!=='question'||H.judging===t.seq)return;H.judging=t.seq;
+  const q=qById(t.qid),ok=choice!=null&&choice===q.answer;
+  const up={'turn/state':'result','turn/choice':choice==null?-1:choice,'turn/ok':ok};
+  if(ok)up['opened/'+t.n]=DB.ts();
+  else{const sp=(H.room.spare||[]).slice(),u=q.unit,i=sp.findIndex(id=>(qById(id)||{}).unit===u);const j=i>=0?i:0;if(sp.length){up['qmap/'+t.n]=sp[j];sp.splice(j,1);sp.push(t.qid);up.spare=sp}}
+  await DB.update(H.R,up);
+  DB.push(H.R+'/log',{pid:t.pid,name:t.name,cls:t.cls||'',n:t.n,qid:t.qid,ok,ts:DB.ts()});
+  ok?BAU.ok():BAU.bad();
+  BG.next=setTimeout(()=>nextTurn(),ok?5000:5500);
+}
+function hostTick(){
+  const t=H.room.turn,st=H.room.info;if(!t||!st||st.status!=='playing')return;
+  if(t.state==='wait'&&H.room.drawReq&&H.room.drawReq.seq===t.seq&&H.room.drawReq.pid===t.pid&&H.drawn!==t.seq){H.drawn=t.seq;drawBall()}
+  if(t.state==='question'){const a=H.room.ans;if(a&&a.seq===t.seq&&a.pid===t.pid)judge(a.choice);else if(DB.now()>t.deadline)judge(null);
+    const left=Math.max(0,Math.ceil((t.deadline-DB.now())/1000));const el=document.querySelector('.bg-timer');if(el){el.textContent=left;el.classList.toggle('hurry',left<=5)}}
+}
+function ballMachine(spinning,n){
+  const cols=['#ff5f8f','#ffd23f','#5cbf3a','#5aa9e6','#b48cff','#ff8a3d'];
+  const left=[];for(let i=1;i<=25;i++)if(!(H.room.opened||{})[i]&&i!==n)left.push(i);
+  return `<svg viewBox="0 0 220 230" class="bm ${spinning?'spin':''}"><rect x="96" y="176" width="28" height="36" fill="#7a4a1a" stroke="#2a1a12" stroke-width="3"/><rect x="60" y="208" width="100" height="16" fill="#8e5cc8" stroke="#2a1a12" stroke-width="3"/>
+    <circle cx="110" cy="96" r="86" fill="#dff4ff" fill-opacity=".55" stroke="#2a1a12" stroke-width="4"/>
+    <g class="bm-balls">${left.map((x,i)=>{const a=i*2.39996,r=66*Math.sqrt((i+.5)/left.length),cx=(110+Math.cos(a)*r).toFixed(1),cy=(100+Math.sin(a)*r).toFixed(1);return `<g class="bmb" style="--d:${(i%7)*.1}s"><circle cx="${cx}" cy="${cy}" r="11" fill="${cols[x%6]}" stroke="#2a1a12" stroke-width="2"/><text x="${cx}" y="${(+cy+4).toFixed(1)}" font-size="10" text-anchor="middle" font-weight="900">${x}</text></g>`}).join('')}</g>
+    <path d="M40 60 Q110 0 180 60" fill="none" stroke="#fff" stroke-width="6" opacity=".6"/></svg>`;
+}
+function hostGame(stage){
+  const st=H.room.info,t=H.room.turn||{},opened=H.room.opened||{},ps=sortedPlayers();
+  const q=t.qid?qById(t.qid):null;
+  let center='';
+  if(st.status==='ended')center=`<div class="px bg-big">GAME OVER</div><p>共開出 ${Object.keys(opened).length} 顆號碼球。可以按上方「匯出 CSV」下載成績。</p>`;
+  else if(t.state==='nobody')center=`<div class="bg-turn">還沒有學生在線上</div>`;
+  else if(t.state==='wait')center=`<div class="bg-turn">輪到 <b>${esc(t.cls||'')} ${esc(t.name||'')}</b> 抽球！</div><div class="bm-wrap">${ballMachine(false)}</div>
+      <div class="bg-gbtn"><button class="pbtn gold bg-draw" id="hDraw">🎱 抽球</button><button class="pbtn ghost" id="hSkip">跳過（不在）</button>
+      <select id="hPick"><option value="">指定學生…</option>${ps.map(p=>`<option value="${p.id}">${esc(p.cls)}-${p.seat} ${esc(p.name)}</option>`).join('')}</select></div>`;
+  else if(t.state==='spin')center=`<div class="bg-turn"><b>${esc(t.name)}</b> 抽球中……</div><div class="bm-wrap">${ballMachine(true,t.n)}</div>`;
+  else if(t.state==='question'&&q)center=`<div class="bg-qhead"><div class="bg-ball">${t.n}</div><div class="bg-turn small"><b>${esc(t.cls||'')} ${esc(t.name)}</b> 作答中</div><div class="bg-timer px">${Math.max(0,Math.ceil((t.deadline-DB.now())/1000))}</div></div>
+      ${bQ(q,true)}<div class="bg-opts">${q.options.map((o,i)=>`<div class="bg-opt"><span class="q-l">${q.type==='tf'?(i?'✕':'○'):'ABCD'[i]}</span>${esc(o)}</div>`).join('')}</div>`;
+  else if(t.state==='result'&&q)center=`<div class="bg-qhead"><div class="bg-ball">${t.n}</div><div class="bg-res ${t.ok?'ok':'no'} px">${t.ok?'答對了！':t.choice<0?'時間到！':'答錯了'}</div></div>${bQ(q,true)}
+      <div class="bg-opts">${q.options.map((o,i)=>`<div class="bg-opt ${i===q.answer?'right':''} ${i===t.choice&&!t.ok?'wrong':''}"><span class="q-l">${q.type==='tf'?(i?'✕':'○'):'ABCD'[i]}</span>${esc(o)}</div>`).join('')}</div>
+      <div class="bg-exp">💡 ${esc(q.explain)}</div><div class="bg-after">${t.ok?`${t.n} 號開出！全班可以把 <b>${t.n}</b> 畫 X`:`號碼球 ${t.n} 放回搖獎機，換下一位同學`}</div><div class="bg-gbtn"><button class="pbtn" id="hNext">下一位 ▶</button></div>`;
+  else center=`<div class="bg-turn">準備中……</div>`;
+  const board=Array.from({length:25},(_,i)=>`<div class="ob ${opened[i+1]?'on':''} ${t.n===i+1&&(t.state==='question'||t.state==='spin')?'cur':''}">${i+1}</div>`).join('');
+  const champs=honor();
+  stage.innerHTML=`<div class="bg-grid">
+    <section class="pbox bg-center">${center}</section>
+    <section class="pbox bg-board"><div class="px">已開出 ${Object.keys(opened).length} / 25</div><div class="obs">${board}</div><div class="bg-online">線上 ${ps.filter(p=>p.online!==false).length} 人／共 ${ps.length} 人</div></section>
+    <section class="pbox bg-honor"><div class="px bg-ht">🏆 BINGO 榮譽榜</div><ol>${champs.map(p=>`<li class="${p.champ?'champ':''}"><span class="hn">${p.champ?'👑 ':''}<small>${esc(p.cls)}</small> ${esc(p.name)}</span><span class="candy">🍬×<b>${p.lines}</b></span></li>`).join('')||'<li class="empty">還沒有人連線</li>'}</ol></section></div>`;
+  const $=id=>document.getElementById(id);
+  if($('hDraw'))$('hDraw').onclick=()=>{BAU.unlock();drawBall()};
+  if($('hSkip'))$('hSkip').onclick=()=>nextTurn();
+  if($('hPick'))$('hPick').onchange=e=>{if(e.target.value)nextTurn(e.target.value)};
+  if($('hNext'))$('hNext').onclick=()=>{clearTimeout(BG.next);nextTurn()};
+}
+function honor(){const ps=players().filter(p=>p.lines>0&&p.firstLine);ps.sort((a,b)=>a.firstLine-b.firstLine);const first=ps.length?ps[0].firstLine:0;return ps.map(p=>({...p,champ:p.firstLine===first}))}
+function hostEvents(){
+  const ev=H.room.events||{};const champT=(honor()[0]||{}).firstLine;
+  Object.entries(ev).sort((a,b)=>(a[1].ts||0)-(b[1].ts||0)).forEach(([k,e])=>{if(H.seen[k])return;H.seen[k]=1;if(H.initDone)H.queue.push(e)});
+  H.initDone=true;playQueue();
+}
+function playQueue(){
+  if(H.playing||!H.queue.length)return;H.playing=true;const e=H.queue.shift();
+  const isChamp=e.lines-(e.gain||1)===0&&honor()[0]&&honor()[0].id===e.pid;
+  const ov=document.createElement('div');ov.className='bg-cele'+(isChamp?' gold':'');
+  ov.innerHTML=`<div class="px bg-bingo">BINGO!</div><div class="bg-cname">${esc(e.cls||'')} ${esc(e.name)}</div><div class="bg-csub">${isChamp?'🏆 冠軍！第一個完成連線':(e.gain>1?`一次連成 ${e.gain} 條線！`:'')+`累計 ${e.lines} 條線　🍬 ×${e.lines}`}</div>`;
+  document.body.appendChild(ov);fireworks(isChamp,isChamp?7000:5000);BAU.drum();setTimeout(()=>{BAU.cheer();BAU.clap()},900);
+  const pool=isChamp?PRAISE_CHAMP:e.lines>=2?PRAISE_MORE.concat(PRAISE):PRAISE;setTimeout(()=>BAU.say(pool[Math.floor(Math.random()*pool.length)].replace(/\{n\}/g,e.name).replace(/\{k\}/g,e.lines)),1200);
+  setTimeout(()=>{ov.remove();H.playing=false;playQueue()},Math.max(3000,isChamp?6000:4200));
+}
+async function endGame(){clearTimeout(BG.next);await DB.update(H.R,{'info/status':'ended','turn/state':'ended'});SFX.stage();store.set('bingoHost',null);toast('遊戲結束！可以匯出 CSV')}
+function exportCSV(){
+  const ps=sortedPlayers(),log=Object.values(H.room.log||{}).sort((a,b)=>a.ts-b.ts);
+  const rows=[['班級','座號','姓名','連線數','糖果數','答題紀錄']].concat(ps.map(p=>[p.cls,p.seat,p.name,p.lines||0,p.lines||0,log.filter(l=>l.pid===p.id).map(l=>`${l.n}號:${l.ok?'對':'錯'}`).join('；')]));
+  const csv='﻿'+rows.map(r=>r.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`賓果成績_${H.code}_${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}
+
+/* ======================= 學生平板 ======================= */
+const S4={};
+function bingoJoin(code,demo){
+  const me=store.get('bingoMe',{});
+  app.innerHTML=`<section class="pbox bg-join"><h1 class="ptitle">加入賓果</h1>
+    <label>房號<input id="jCode" inputmode="numeric" maxlength="4" value="${esc(code||me.code||'')}" placeholder="4 位數房號"></label>
+    <label>班級<select id="jCls">${CLASSES.map(c=>`<option ${c===me.cls?'selected':''}>${c}</option>`).join('')}</select></label>
+    <label>座號<select id="jSeat">${Array.from({length:40},(_,i)=>`<option ${i+1===+me.seat?'selected':''}>${i+1}</option>`).join('')}</select></label>
+    <label>姓名<input id="jName" maxlength="8" value="${esc(me.name||'')}" placeholder="你的名字"></label>
+    ${demo||!FIREBASE_CONFIG?'<p class="bg-warn">單機示範模式</p>':''}
+    <button class="pbtn gold" id="jGo">加入</button><p class="bg-note" id="jMsg"></p></section>`;
+  const msg=t=>document.getElementById('jMsg').textContent=t;
+  document.getElementById('jGo').onclick=async()=>{SFX.tap();BAU.unlock();
+    const c=document.getElementById('jCode').value.trim(),cls=document.getElementById('jCls').value,seat=+document.getElementById('jSeat').value,name=document.getElementById('jName').value.trim();
+    if(!/^\d{4}$/.test(c)){msg('請輸入 4 位數房號');return}if(!name){msg('請輸入姓名');return}
+    msg('連線中……');try{await DB.init(demo||!FIREBASE_CONFIG)}catch(e){msg('無法連線：'+e.message);return}
+    const info=await DB.get(`bingo/rooms/${c}/info`);if(!info){msg('找不到這個房號，請再確認一次');return}
+    const pid=`${cls}-${seat}`,R=`bingo/rooms/${c}`,old=await DB.get(`${R}/players/${pid}`);
+    if(old&&old.name!==name&&document.getElementById('jGo').dataset.force!=='1'){msg(`這個座號已經有人使用（${old.name}）。如果是你本人換名字，再按一次「加入」。`);document.getElementById('jGo').dataset.force='1';return}
+    const all=await DB.get(`${R}/players`)||{};const dup=Object.entries(all).find(([id,p])=>id!==pid&&p.name===name&&p.cls===cls);
+    if(dup&&document.getElementById('jGo').dataset.dup!=='1'){msg(`班上已經有同名的同學（座號 ${dup[1].seat}），確定沒錯的話再按一次「加入」。`);document.getElementById('jGo').dataset.dup='1';return}
+    if(old)await DB.update(`${R}/players/${pid}`,{name,online:true});
+    else await DB.set(`${R}/players/${pid}`,{cls,seat,name,joined:DB.ts(),card:shuffle(Array.from({length:25},(_,i)=>i+1)),lines:0,online:true});
+    DB.onDisconnect(`${R}/players/${pid}/online`,false);
+    store.set('bingoMe',{code:c,cls,seat,name});studentRoom(c,pid)};
+}
+function studentRoom(code,pid){
+  bgClear();Object.assign(S4,{code,pid,R:`bingo/rooms/${code}`,room:{},lines:0,shown:{}});
+  app.innerHTML=`<div class="bg-stu"><section class="pbox bg-sbar"><span class="px">房號 ${code}</span><b class="bg-me"></b><span class="sp"></span><span class="bg-mine"></span></section>
+    <section class="pbox bg-turnbox"></section><section class="pbox bg-cardbox"><div class="bg-card"></div><p class="bg-note">開出的號碼會發亮，點一下畫 X；連成一條線就能拿一顆糖果！</p></section></div>`;
+  BG.unsub.push(DB.on(S4.R,v=>{S4.room=v||{};studentRender()}));
+  BG.timer=setInterval(()=>{const t=S4.room.turn;const el=document.querySelector('.bg-stimer');if(t&&t.state==='question'&&el){const left=Math.max(0,Math.ceil((t.deadline-DB.now())/1000));el.textContent=left;el.classList.toggle('hurry',left<=5)}},250);
+}
+function studentRender(){
+  const r=S4.room,me=(r.players||{})[S4.pid];if(!me)return;
+  const st=r.info||{},t=r.turn||{},opened=r.opened||{},marks=me.marks||{};
+  if(st.autoX)Object.keys(opened).forEach(n=>{if(!marks[n]){marks[n]=true;DB.set(`${S4.R}/players/${S4.pid}/marks/${n}`,true)}});
+  document.querySelector('.bg-me').textContent=`${me.cls}-${me.seat} ${me.name}`;
+  const L=linesOf(me.card,marks);document.querySelector('.bg-mine').innerHTML=`連線 <b>${L}</b>　${'🍬'.repeat(L)}`;
+  const box=document.querySelector('.bg-turnbox'),q=t.qid?qById(t.qid):null,mine=t.pid===S4.pid;
+  if(st.status==='lobby')box.innerHTML=`<div class="bg-turn">已加入！等待老師開始遊戲……</div>`;
+  else if(st.status==='ended')box.innerHTML=`<div class="px bg-big">GAME OVER</div><p>你完成了 <b>${L}</b> 條線，獲得 ${L} 顆糖果！</p>`;
+  else if(t.state==='wait')box.innerHTML=mine?`<div class="bg-turn">輪到你抽球了！</div><button class="pbtn gold bg-draw" id="sDraw">🎱 抽球</button>`:`<div class="bg-turn">輪到 <b>${esc(t.name)}</b> 抽球</div>`;
+  else if(t.state==='spin')box.innerHTML=`<div class="bg-turn">搖獎機轉動中……</div>`;
+  else if(t.state==='question'&&q){
+    if(box.dataset.seq!==String(t.seq)||box.dataset.mode!=='q'){box.dataset.seq=t.seq;box.dataset.mode='q';
+      box.innerHTML=`<div class="bg-qhead"><div class="bg-ball">${t.n}</div><div class="bg-turn small">${mine?'<b>你</b>作答中':`<b>${esc(t.name)}</b> 作答中`}</div><div class="bg-stimer px"></div></div>${bQ(q)}
+        <div class="bg-opts stu">${q.options.map((o,i)=>`<button class="q-opt" data-i="${i}" ${mine?'':'disabled'}><span class="q-l">${q.type==='tf'?(i?'✕':'○'):'ABCD'[i]}</span>${esc(o)}</button>`).join('')}</div>`;
+      if(mine)box.querySelectorAll('.q-opt').forEach(b=>b.onclick=()=>{box.querySelectorAll('.q-opt').forEach(x=>x.disabled=true);b.classList.add('pick');DB.set(`${S4.R}/ans`,{seq:t.seq,pid:S4.pid,choice:+b.dataset.i});SFX.tap()})}}
+  else if(t.state==='result'&&q){if(box.dataset.mode!=='r'+t.seq){box.dataset.mode='r'+t.seq;
+      box.innerHTML=`<div class="bg-qhead"><div class="bg-ball">${t.n}</div><div class="bg-res ${t.ok?'ok':'no'} px">${t.ok?'答對了！':t.choice<0?'時間到！':'答錯了'}</div></div><div class="bg-exp">正確答案：${esc(q.options[q.answer])}<br>${esc(q.explain)}</div>
+        <div class="bg-after">${t.ok?`${t.n} 號開出，快把它畫 X！`:'號碼球放回，換下一位同學'}</div>`;if(mine)t.ok?BAU.ok():BAU.bad()}}
+  else box.innerHTML=`<div class="bg-turn">準備中……</div>`;
+  const sd=document.getElementById('sDraw');if(sd)sd.onclick=()=>{sd.disabled=true;BAU.unlock();DB.set(`${S4.R}/drawReq`,{seq:t.seq,pid:S4.pid});SFX.tap()};
+  // 賓果卡
+  const lit=lineIdx(me.card,marks).flatMap(i=>BL[i]);
+  document.querySelector('.bg-card').innerHTML=me.card.map((n,i)=>`<button class="cell ${opened[n]?'open':''} ${marks[n]?'x':''} ${lit.includes(i)?'line':''}" data-n="${n}">${n}${marks[n]?'<span class="xx">✕</span>':''}</button>`).join('');
+  document.querySelectorAll('.bg-card .cell').forEach(c=>c.onclick=()=>{const n=+c.dataset.n;if(marks[n])return;if(!opened[n]){toast('這個號碼還沒開出喔');SFX.lock&&SFX.lock();return}
+    SFX.coin();DB.set(`${S4.R}/players/${S4.pid}/marks/${n}`,true)});
+  // 連線檢查
+  const prevL=Math.max(me.lines||0,S4.reported||0);
+  if(L>prevL){S4.reported=L;const up={lines:L};if(!me.firstLine)up.firstLine=DB.ts();DB.update(`${S4.R}/players/${S4.pid}`,up);
+    DB.push(`${S4.R}/events`,{type:'line',pid:S4.pid,name:me.name,cls:me.cls,lines:L,gain:L-prevL,ts:DB.ts()});
+    fireworks(false,4000);BAU.cheer();if(navigator.vibrate)navigator.vibrate([200,100,200,100,400]);toast(`BINGO！完成第 ${L} 條線 🍬`)}
+}
+SCENES.bingo=()=>bands(['#1a1036','#221446','#2b1a56','#352066','#3f2676','#4a2c86'])+
+  Array.from({length:40},(_,i)=>`<rect x="${(i*53)%320}" y="${(i*37)%120}" width="${i%3?2:3}" height="${i%3?2:3}" fill="#fff" opacity="${.4+(i%5)*.12}"/>`).join('')+
+  `<g class="drift">${spr(SP.coin,40,30,3)}</g><g class="drift2">${spr(SP.coin,200,50,2)}</g>`+
+  `<rect x="0" y="150" width="320" height="30" fill="#2a1a12"/>`+Array.from({length:20},(_,i)=>`<rect x="${i*16}" y="150" width="15" height="6" fill="${['#ff5f8f','#ffd23f','#5cbf3a','#5aa9e6'][i%4]}"/>`).join('');
 
 /*ANIM-END*/
 </script>
