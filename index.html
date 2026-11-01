@@ -408,6 +408,7 @@ body[data-theme="bingo"] main{max-width:1880px}
 .bg-form label.ck{flex-direction:row;align-items:center;gap:8px;font-weight:700}
 .bg-form select,.bg-join input,.bg-join select{min-height:52px;font:inherit;font-size:20px;border:4px solid var(--ink);padding:4px 10px;background:#fff}
 .bg-form input[type=checkbox]{width:26px;height:26px}
+.bg-scope{border:4px solid var(--ink);background:#fff;padding:6px 14px 10px;display:grid;gap:6px;margin:0}.bg-scope legend{font-weight:900;padding:0 6px}.bg-scope label.ck{min-height:44px;font-size:19px}.bg-scnt{font-size:15px;color:#7a5a3a;font-weight:700}
 .bg-host{max-width:1880px;margin:0 auto}
 .bg-hbar,.bg-sbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 14px;margin-bottom:12px}
 .bg-hbar .sp,.bg-sbar .sp{flex:1}.bg-code{font-size:22px}.bg-code b{color:var(--accent);font-size:30px}
@@ -4251,7 +4252,12 @@ function bgClear(){BG.unsub.forEach(f=>f());BG.unsub=[];clearInterval(BG.timer);
 function qById(id){return QB.find(q=>q.id===id)}
 function linesOf(card,marks){return BL.filter(l=>l.every(i=>marks&&marks[card[i]])).length}
 function lineIdx(card,marks){return BL.map((l,i)=>l.every(j=>marks&&marks[card[j]])?i:-1).filter(i=>i>=0)}
-function bPool(scope,level){let p=QB.filter(q=>q.bingo&&(scope==='all'||q.unit===scope));const f=level==='all'?p:p.filter(q=>q.level===level);return f.length>=25?f:p}
+const BG_UNITS=[['2-2','2-2 酵素'],['2-3','2-3 植物如何製造養分'],['2-4','2-4 人體如何獲得養分']];
+function scopeUnits(scope){return !scope||scope==='all'?BG_UNITS.map(u=>u[0]):String(scope).split('+')}
+function scopeName(scope){const u=scopeUnits(scope);return u.length===3?'全章（2-2、2-3、2-4）':u.join('＋')}
+function bPool(scope,level){const us=scopeUnits(scope);let p=QB.filter(q=>q.bingo&&us.includes(q.unit));const f=level==='all'?p:p.filter(q=>q.level===level);p=f.length>=25?f:p;
+  // 各單元輪流排列，讓 25 格的題目平均分配到勾選的單元
+  const g=us.map(u=>shuffle(p.filter(q=>q.unit===u))),out=[];for(let i=0;g.some(a=>a.length);i++){const a=g[i%g.length];if(a.length)out.push(a.shift())}return out}
 function bQ(q,big){return `<div class="bq ${big?'big':''}"><div class="q-tags"><span class="q-tag">${TYPE_NAME[q.type]}</span><span class="q-tag lv-${q.level}">${esc(q.level==='會考'&&q.year?'會考｜'+q.year:q.level)}</span><span class="q-tag">${q.unit}</span></div><div class="bq-stem">${esc(q.stem)}</div></div>`}
 function setBingoTheme(){document.body.dataset.theme='bingo';setScene('bingo')}
 function joinURL(code,demo){return `${location.protocol.startsWith('http')?location.origin+location.pathname:SITE_URL}#/bingo/join/${code}${demo?'/demo':''}`}
@@ -4274,7 +4280,7 @@ async function bingoHost(){
   const saved=store.get('bingoHost',null);
   app.innerHTML=`<section class="pbox bg-setup"><h1 class="ptitle">賓果競技場：老師開房</h1>
     <div class="bg-form">
-      <label>題目範圍<select id="bgScope"><option value="all">全章（2-2、2-3、2-4）</option><option value="2-2">2-2 酵素</option><option value="2-3">2-3 植物如何製造養分</option><option value="2-4">2-4 人體如何獲得養分</option></select></label>
+      <fieldset class="bg-scope"><legend>題目範圍（可複選）</legend>${BG_UNITS.map(([u,n])=>`<label class="ck"><input type="checkbox" name="bgU" value="${u}" checked> ${n}</label>`).join('')}<span class="bg-scnt" id="bgScnt"></span></fieldset>
       <label>難度<select id="bgLevel"><option value="all">全部</option><option value="基礎">基礎</option><option value="進階">進階</option><option value="會考">會考</option></select></label>
       <label>作答秒數<select id="bgTime">${[20,30,45,60,90].map(s=>`<option ${s===30?'selected':''}>${s}</option>`).join('')}</select></label>
       <label>輪流方式<select id="bgOrder"><option value="seat">依班級座號輪流</option><option value="random">隨機點名</option></select></label>
@@ -4284,10 +4290,12 @@ async function bingoHost(){
     <div class="bg-gbtn"><button class="pbtn" id="bgCreate">建立房間</button>${saved?`<button class="pbtn gold" id="bgResume">繼續上一局（房號 ${saved.code}）</button>`:''}<a class="pbtn ghost" href="#/bingo">返回</a></div>
     <p class="bg-note" id="bgMsg"></p></section>`;
   const msg=t=>document.getElementById('bgMsg').textContent=t;
-  document.getElementById('bgCreate').onclick=async()=>{SFX.tap();const demo=document.getElementById('bgDemo').checked;msg('連線中……');
+  const cnt=()=>{const us=[...document.querySelectorAll('input[name=bgU]:checked')].map(i=>i.value);const lv=val('bgLevel');document.getElementById('bgScnt').textContent=us.length?`題庫 ${bPool(us.join('+'),lv).length} 題`:'⚠ 請至少勾選一個單元'};
+  document.querySelectorAll('input[name=bgU],#bgLevel').forEach(e=>e.addEventListener('change',()=>{SFX.tap();cnt()}));cnt();
+  document.getElementById('bgCreate').onclick=async()=>{SFX.tap();const demo=document.getElementById('bgDemo').checked;const us=[...document.querySelectorAll('input[name=bgU]:checked')].map(i=>i.value);if(!us.length){msg('請至少勾選一個單元');return}const scope=us.length===3?'all':us.join('+');msg('連線中……');
     try{await DB.init(demo)}catch(e){msg('無法連上 Firebase：'+e.message+'（可改用單機示範模式）');return}
     let code;for(let i=0;i<20;i++){code=String(1000+Math.floor(Math.random()*9000));if(!(await DB.get(`bingo/rooms/${code}/info`)))break}
-    const info={created:DB.ts(),status:'lobby',scope:val('bgScope'),level:val('bgLevel'),timer:+val('bgTime'),order:val('bgOrder'),autoX:document.getElementById('bgAuto').checked};
+    const info={created:DB.ts(),status:'lobby',scope,level:val('bgLevel'),timer:+val('bgTime'),order:val('bgOrder'),autoX:document.getElementById('bgAuto').checked};
     await DB.set(`bingo/rooms/${code}`,{info});store.set('bingoHost',{code,demo});hostRoom(code,demo)};
   const r=document.getElementById('bgResume');if(r)r.onclick=async()=>{try{await DB.init(saved.demo);const info=await DB.get(`bingo/rooms/${saved.code}/info`);if(!info){msg('找不到上一局的房間');store.set('bingoHost',null);return}hostRoom(saved.code,saved.demo)}catch(e){msg('無法連線：'+e.message)}};
   function val(id){return document.getElementById(id).value}
@@ -4310,7 +4318,7 @@ function players(){return Object.entries(H.room.players||{}).map(([id,p])=>({id,
 function sortedPlayers(){return players().sort((a,b)=>(a.cls+String(a.seat).padStart(2,'0')).localeCompare(b.cls+String(b.seat).padStart(2,'0')))}
 function hostRender(){
   const st=H.room.info||{},stage=document.querySelector('.bg-stage');if(!stage)return;
-  document.querySelector('.bg-status').textContent={lobby:'等待學生加入',playing:'遊戲進行中',ended:'遊戲結束'}[st.status]||'';
+  document.querySelector('.bg-status').textContent={lobby:'等待學生加入',playing:'遊戲進行中',ended:'遊戲結束'}[st.status]||'';document.querySelector('.bg-status').title='';document.querySelector('.bg-status').textContent+=`｜範圍：${scopeName(st.scope)}`;
   if(st.status==='lobby')return hostLobby(stage);
   hostGame(stage);hostEvents();
 }
@@ -4327,9 +4335,9 @@ function hostLobby(stage){
   stage.querySelector('.bg-plist').innerHTML=ps.map(p=>`<li class="${p.online===false?'off':''}">${esc(p.cls)}-${p.seat} ${esc(p.name)}</li>`).join('');
 }
 async function startGame(){
-  BAU.unlock();SFX.stage();const st=H.room.info,pool=shuffle(bPool(st.scope,st.level));
+  BAU.unlock();SFX.stage();const st=H.room.info,pool=bPool(st.scope,st.level);
   if(pool.length<25){toast('題目不足 25 題');return}
-  const qmap={};for(let n=1;n<=25;n++)qmap[n]=pool[n-1].id;
+  const pick=shuffle(pool.slice(0,25)),qmap={};for(let n=1;n<=25;n++)qmap[n]=pick[n-1].id;
   await DB.update(H.R,{'info/status':'playing','info/started':DB.ts(),qmap,spare:pool.slice(25).map(q=>q.id),opened:null,turn:{seq:0,state:'idle'}});
   H.room.info={...H.room.info,status:'playing'};H.room.opened={};H.room.turn={seq:0,state:'idle'};H.room.qmap=qmap;
   nextTurn();
