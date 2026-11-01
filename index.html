@@ -285,6 +285,13 @@ footer.foot{position:relative;z-index:1;text-align:center;font-size:14px;color:#
 .chip{display:inline-block;padding:1px 6px;color:#fff;font-weight:900;font-size:13px;border:2px solid var(--ink)}
 .chip.mol{background:#e83f3f}.chip.vol{background:#2b7fd0}.chip.push{background:#777}.chip.water{background:#3a8fb7}.chip.out{background:#8a5a2b}
 .ap.free .ap-stage{box-shadow:0 0 0 4px var(--gold-l)}
+.dsg{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0 10px}
+.dsg th,.dsg td{border:2px solid var(--ink);padding:4px 6px;text-align:left;vertical-align:top}
+.dsg th{background:var(--accent);color:#fff}
+.dsg td:first-child{font-family:var(--px);font-size:17px;text-align:center}
+.dsg tr.on td{background:var(--accent-l)}
+.dsg-v{font-size:15px;margin:4px 0}
+body.teacher .dsg,body.teacher .dsg-v{font-size:clamp(15px,1.1vw,20px)}
 body.teacher .ap-tx{font-size:clamp(22px,1.7vw,32px)}
 body.teacher .ap-st{font-size:clamp(24px,1.8vw,34px)}
 @media (max-width:640px){.ap-tx{font-size:16px}.ap-spd{margin-left:0}.ap-info{max-width:92%;font-size:14px}.ap-sum{width:96%;top:96px}.mini{font-size:13px;min-height:36px;padding:2px 6px}}
@@ -1142,8 +1149,10 @@ const ENZ_LAB={
 function defC22(){
   const BK={x:30,y:40,w:250,h:200};
   const me={title:'動畫 C：活性實驗室',side:true,
-  state:()=>({T:37,pH:7,enz:'saliva',dead:false,parts:[],enzs:[],act:0,result:''}),
-  fresh(c){const s=c.state;s.dead=false;s.result='';
+  state:()=>({T:37,pH:7,enz:'saliva',dead:false,phDead:false,parts:[],enzs:[],act:0,result:''}),
+  far(s){return Math.abs(s.pH-ENZ_LAB[s.enz].opt)},
+  act(s){return s.phDead?0:this.tAct(s)*this.pAct(s)},
+  fresh(c){const s=c.state;s.dead=false;s.phDead=false;s.result='';
     s.parts=Array.from({length:12},(_,i)=>({x:BK.x+30+Math.random()*(BK.w-60),y:BK.y+40+Math.random()*(BK.h-70),vx:Math.random()*2-1,vy:Math.random()*2-1,p:0}));
     s.enzs=Array.from({length:3},()=>({x:BK.x+40+Math.random()*(BK.w-80),y:BK.y+50+Math.random()*(BK.h-90),vx:Math.random()*2-1,vy:Math.random()*2-1}));
     this.drawParts(c)},
@@ -1154,8 +1163,9 @@ function defC22(){
       const piece=(dx,col)=>sub==='starch'?`<rect x="${dx-5}" y="-5" width="10" height="10" fill="${col}" stroke="${C.k}" stroke-width="1.5"/>`:`<circle cx="${dx}" r="5.5" fill="${col}" stroke="${C.k}" stroke-width="1.5" shape-rendering="auto"/>`;
       const col=sub==='starch'?C.g:C.p;
       return `<g data-i="${i}" transform="translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})">${done?piece(-9,col)+piece(9,col):piece(-12,col)+piece(0,col)+piece(12,col)+`<rect x="-8" y="-1" width="16" height="2" fill="${C.k}"/>`}</g>`}).join('')+
-      s.enzs.map(e=>`<g transform="translate(${e.x.toFixed(1)} ${e.y.toFixed(1)}) ${s.dead?'rotate(28) skewX(25) scale(.3 .26)':'scale(.3)'}">${enzShape(s.enz==='stomach'?'cir':'sq',s.dead?'#b9a0a8':'#ff8fa3')}</g>`).join('')},
-  updUI(c){const s=c.state;const a=this.tAct(s)*this.pAct(s);s.act=a;
+      s.enzs.map(e=>{const f=this.far(s);const tf=s.dead?'rotate(28) skewX(25) scale(.3 .26)':s.phDead?'rotate(-22) skewY(-28) scale(.36 .2)':f>1.6?`rotate(${-(f-1.6)*9}) scale(.3 ${(.3-(f-1.6)*.03).toFixed(3)})`:'scale(.3)';
+      const col=s.dead?'#b9a0a8':s.phDead?'#c9b48a':f>1.6?'#f2a0ae':'#ff8fa3';return `<g transform="translate(${e.x.toFixed(1)} ${e.y.toFixed(1)}) ${tf}">${enzShape(s.enz==='stomach'?'cir':'sq',col)}</g>`}).join('')},
+  updUI(c){const s=c.state;const a=this.act(s);s.act=a;
     const th=c.$('thermo');if(th){const h=Math.max(2,Math.min(100,s.T))*1.4;th.setAttribute('y',224-h);th.setAttribute('height',h)}
     c.text('tval',`${Math.round(s.T)}℃`);c.text('pval',`pH ${s.pH.toFixed(1)}`);
     const tm=c.$('tmark');if(tm)tm.setAttribute('transform',`translate(${312+Math.min(100,s.T)*1.5} 0)`);
@@ -1163,14 +1173,15 @@ function defC22(){
     const rb=c.$('rate');if(rb)rb.setAttribute('width',Math.round(a*130));
     const side=c.side;if(side){const ts=side.querySelector('#labT'),ps=side.querySelector('#labP');if(ts&&document.activeElement!==ts)ts.value=s.T;if(ps&&document.activeElement!==ps)ps.value=s.pH;
       const tl=side.querySelector('#labTv');if(tl)tl.textContent=Math.round(s.T)+'℃';const pl=side.querySelector('#labPv');if(pl)pl.textContent=s.pH.toFixed(1);
-      const st=side.querySelector('#labState');if(st)st.innerHTML=s.dead?'<b style="color:#d6336c">✖ 酵素已永久失去活性</b>':(a<.2?'<b style="color:#b8561a">▼ 活性很低</b>':(a>.75?'<b style="color:#2f9e44">▲ 活性很好</b>':'<b>● 活性普通</b>'));
+      const st=side.querySelector('#labState');if(st)st.innerHTML=s.dead?'<b style="color:#d6336c">✖ 溫度過高：酵素已永久失去活性</b>':s.phDead?'<b style="color:#d6336c">✖ 酸鹼值超過能忍受的範圍：酵素構造改變，失去活性</b><br><small>按「重新裝一批」換新的酵素</small>':this.far(s)>1.6?'<b style="color:#b8561a">▼ 酸鹼值不適合：酵素開始變形，活性降低</b>':(a<.2?'<b style="color:#b8561a">▼ 活性很低</b>':(a>.75?'<b style="color:#2f9e44">▲ 活性很好</b>':'<b>● 活性普通</b>'));
       side.querySelectorAll('[data-lab]').forEach(b=>b.classList.toggle('on',b.dataset.lab===s.enz));
       side.querySelectorAll('input,button').forEach(i=>{if(!i.dataset.always)i.disabled=!c.isFree()})}},
   tick(c,dt){const s=c.state;if(!s.parts.length)return;const sp=0.25+Math.max(0,Math.min(100,s.T))/45;
     const mv=o=>{o.x+=o.vx*sp*dt*40;o.y+=o.vy*sp*dt*40;if(o.x<BK.x+16||o.x>BK.x+BK.w-16)o.vx*=-1;if(o.y<BK.y+30||o.y>BK.y+BK.h-14)o.vy*=-1;o.x=Math.max(BK.x+16,Math.min(BK.x+BK.w-16,o.x));o.y=Math.max(BK.y+30,Math.min(BK.y+BK.h-14,o.y))};
     s.parts.forEach(mv);s.enzs.forEach(mv);
     if(s.T>62&&!s.dead){s.dead=true;c.msg('溫度過高：酵素構造被破壞，永久失去活性！','no')}
-    const a=this.tAct(s)*this.pAct(s);s.parts.forEach((p,i)=>{if(p.p<1)p.p+=a*dt*(0.16+0.06*(i%4))});
+    if(this.far(s)>2.8&&!s.phDead&&!s.dead){s.phDead=true;c.msg('酸鹼值超過酵素能忍受的範圍：酵素構造改變，失去活性！','no')}
+    const a=this.act(s);s.parts.forEach((p,i)=>{if(p.p<1)p.p+=a*dt*(0.16+0.06*(i%4))});
     this.drawParts(c);this.updUI(c)},
   setup(c,k){const s=c.state;s.T=37;s.pH=7;s.enz='saliva';
     const chart=(y0,lab)=>`<path d="M310 ${y0} V${y0+90} H466" fill="none" stroke="${C.k}" stroke-width="2"/>${TT(388,y0+108,lab,12)}${TT(300,y0+45,'活',11)}${TT(300,y0+58,'性',11)}`;
@@ -1217,19 +1228,19 @@ function defC22(){
    {t:'回到 37℃',say:'溫度回到 37℃，酵素活性恢復，反應又變快了。',run:async c=>{await c.val(c.state,'T',37,1500,()=>me.updUI(c));await c.wait(2500)}},
    {t:'溫度過高',say:'溫度升到 80℃：溫度過高會破壞酵素構造（變形），酵素失去活性。',run:async c=>{me.fresh(c);await c.val(c.state,'T',80,1800,()=>me.updUI(c));c.state.dead=true;me.drawParts(c);me.updUI(c);await c.wait(2200)}},
    {t:'再降回 37℃',say:'再把溫度降回 37℃，酵素構造已被破壞，活性不會恢復——永久失去活性。',run:async c=>{c.state.dead=true;await c.val(c.state,'T',37,1600,()=>me.updUI(c));me.drawParts(c);await c.wait(2500)}},
-   {t:'酸鹼值的影響',say:'換一批新的唾液中的酵素，把環境調成酸性（pH 2，像胃裡）：活性大幅降低。',run:async c=>{c.state.T=37;me.fresh(c);await c.val(c.state,'pH',2,1600,()=>me.updUI(c));await c.wait(2500)}},
-   {t:'胃中的酵素',say:'改成胃中的酵素：它在酸性環境中活性較佳。小腸中的酵素則適合在鹼性環境中作用。',run:async c=>{c.state.T=37;c.state.pH=2;c.state.enz='stomach';me.fresh(c);me.updUI(c);await c.wait(3500)}},
-   {t:'換你試試',free:true,fresh:true,say:'右邊控制台可以自由調整溫度、酸鹼值，換酵素，再用本氏液或碘液檢測試管！',run:async c=>{me.updUI(c)}}
+   {t:'酸鹼值的影響',say:'換一批新的唾液中的酵素，把環境調成酸性（pH 2，像胃裡）：超過唾液中的酵素能忍受的範圍，酵素構造改變（變形），失去活性。',run:async c=>{c.state.T=37;me.fresh(c);await c.val(c.state,'pH',2,2000,()=>me.updUI(c));c.state.phDead=true;me.drawParts(c);me.updUI(c);await c.wait(2500)}},
+   {t:'胃中的酵素',say:'改成胃中的酵素：它在酸性環境中活性較佳。小腸中的酵素則適合在鹼性環境中作用。每種酵素都有自己能忍受的酸鹼範圍。',run:async c=>{c.state.T=37;c.state.pH=2;c.state.enz='stomach';me.fresh(c);me.updUI(c);await c.wait(3500)}},
+   {t:'換你試試',free:true,fresh:true,say:'右邊控制台可以自由調整溫度、酸鹼值，換酵素，再用本氏液或碘液檢測試管！試試看把酸鹼值調到很酸或很鹼。',run:async c=>{me.updUI(c)}}
   ]};return me;
 }
 
 /* ---------- 動畫 D：虛擬實驗 2-2 ---------- */
 function defD22(){
-  const tube=(k,lab,x,y)=>G(k,x,y,`<rect x="-11" y="-46" width="22" height="88" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="${k}_l" x="-9" y="6" width="18" height="34" fill="#ffffff" opacity="0"/>`+TT(0,-54,lab,15));
+  const tube=(k,lab,x,y)=>G(k,x,y,`<rect x="-11" y="-46" width="22" height="88" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="${k}_l" x="-9" y="6" width="18" height="34" fill="#ffffff" opacity="0"/><text data-k="${k}_t" x="0" y="-34" font-size="8" text-anchor="middle" font-weight="900" class="svt"></text>`+TT(0,-54,lab,15));
   const bottle=(k,lab,x,col)=>G(k,x,34,`<rect x="-20" y="-14" width="40" height="34" fill="${col}" stroke="${C.k}" stroke-width="2.5"/><rect x="-6" y="-24" width="12" height="10" fill="${C.E}" stroke="${C.k}" stroke-width="2"/>`+TT(0,36,lab,12));
   const POS={甲:[300,200],乙:[340,200],A:[390,200],B:[430,200]};
   const BATH={x:120,y:184};
-  const me={title:'動畫 D：虛擬實驗 2-2 酵素的作用',
+  const me={title:'動畫 D：虛擬實驗 2-2 酵素的作用',side:true,
   setup(c){
     c.draw(`<rect x="0" y="246" width="480" height="24" fill="#c8a06a"/>
       ${G('bath',BATH.x,BATH.y,`<rect x="-92" y="-56" width="184" height="104" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="water" x="-89" y="-24" width="178" height="69" fill="#bfe6ff"/>`+TT(0,76,'250 mL 燒杯（37℃ 溫水）',13)+`<rect x="-30" y="48" width="60" height="10" fill="${C.E}" stroke="${C.k}" stroke-width="2"/>`)}
@@ -1240,7 +1251,19 @@ function defD22(){
       <text data-k="ctext" x="40" y="104" font-size="13" text-anchor="middle" font-weight="900" class="svt"></text>
       ${G('drop',250,60,`<rect x="-4" y="-10" width="8" height="20" fill="${C.E}" stroke="${C.k}" stroke-width="2"/><rect x="-3" y="10" width="6" height="6" fill="${C.b}"/>`,'data-o="0"')}`);
     c.hudHTML('');
+    c.sideHTML(`<h4 class="px">實驗設計</h4>
+      <p class="lab-tip">假說：人體的唾液能讓澱粉產生出具有甜味的小分子醣類。</p>
+      <table class="dsg"><tr><th>試管</th><th>加入的物質</th><th>說明</th></tr>
+      <tr data-r="甲"><td>甲</td><td>澱粉液 1 mL</td><td>之後倒入 A</td></tr>
+      <tr data-r="乙"><td>乙</td><td>澱粉液 1 mL</td><td>之後倒入 B</td></tr>
+      <tr data-r="A"><td>A</td><td>水 1 mL<br>＋甲的澱粉液</td><td>對照組</td></tr>
+      <tr data-r="B"><td>B</td><td>唾液 1 mL<br>＋乙的澱粉液</td><td>實驗組</td></tr></table>
+      <div class="dsg-v"><b>操作變因</b>：有無添加唾液</div>
+      <div class="dsg-v"><b>控制變因</b>：澱粉液體積、溫度（37℃）、反應時間</div>
+      <div class="dsg-v"><b>檢測方法</b>：A、B 各加 1 mL 本氏液，隔水加熱，觀察顏色</div>`);
   },
+  lab(c,k,txt){const el=c.$('t'+k+'_t');if(el)el.innerHTML=[...txt].map((ch,i)=>`<tspan x="0" dy="${i?8.4:0}">${ch}</tspan>`).join('')},
+  hl(c,rows){if(!c.side)return;c.side.querySelectorAll('[data-r]').forEach(r=>r.classList.toggle('on',rows.includes(r.dataset.r)))},
   async drip(c,from,to,col,label){const [bx]=[c.get(from).x],t=c.get(to);c.set('drop',{x:bx,y:60,o:1});await c.tw('drop',{x:t.x,y:t.y-62},500);
     const l=c.$(to+'_l');l.setAttribute('opacity','1');await c.color(l,col,300);if(label)c.msg(label);await c.hide('drop',150)},
   async timelapse(c,txt){c.text('ctext',txt);const h=c.$('clock');let o={a:0};await c.val(o,'a',720,1600,()=>c.$('hand').setAttribute('transform',`rotate(${o.a})`));c.text('ctext','10 分鐘後')},
@@ -1248,16 +1271,17 @@ function defD22(){
   steps:[
    {t:'準備',say:'燒杯裝約半杯溫水加熱備用，保持 37℃（和人體體溫相近）。另外準備澱粉液、水、唾液和本氏液。點燒杯開始！',run:async c=>{c.hot('bath')}},
    {t:'加入溶液',say:'試管甲、乙各加 1 mL 澱粉液；試管 A 加 1 mL 水，試管 B 加 1 mL 唾液。',run:async c=>{
-     await me.drip(c,'bS','t甲','#f4f4f4');await me.drip(c,'bS','t乙','#f4f4f4');await me.drip(c,'bW','tA','#d6f0ff','A：加水');await me.drip(c,'bV','tB','#fffbe0','B：加唾液')}},
+     me.hl(c,['甲','乙','A','B']);
+     await me.drip(c,'bS','t甲','#f4f4f4');me.lab(c,'甲','澱粉液');await me.drip(c,'bS','t乙','#f4f4f4');me.lab(c,'乙','澱粉液');await me.drip(c,'bW','tA','#d6f0ff','A：加水');me.lab(c,'A','水');await me.drip(c,'bV','tB','#fffbe0','B：加唾液');me.lab(c,'B','唾液')}},
    {t:'放入 37℃ 溫水',say:'四支試管一起放入 37℃ 溫水中。',run:async c=>{await me.intoBath(c,['甲','乙','A','B'])}},
    {t:'倒入澱粉液',say:'把甲、乙中的澱粉液分別倒入 A、B，用玻棒攪拌均勻。',run:async c=>{
      await c.all([c.tw('t甲',{x:POS.A[0]-28,y:110,r:60},700),c.tw('t乙',{x:POS.B[0]-28,y:110,r:60},700),c.tw('tA',{x:POS.A[0],y:POS.A[1],r:0},700),c.tw('tB',{x:POS.B[0],y:POS.B[1],r:0},700)]);
      await c.all([c.color('t甲_l','#ffffff',400),c.color('t乙_l','#ffffff',400),c.color('tA_l','#eef6ff',400),c.color('tB_l','#fdfbee',400)]);
-     c.$('t甲_l').setAttribute('opacity','0');c.$('t乙_l').setAttribute('opacity','0');
+     c.$('t甲_l').setAttribute('opacity','0');c.$('t乙_l').setAttribute('opacity','0');me.lab(c,'甲','');me.lab(c,'乙','');me.lab(c,'A','水＋澱粉液');me.lab(c,'B','唾液＋澱粉液');me.hl(c,['A','B']);
      await c.all([c.tw('t甲',{x:POS['甲'][0],y:POS['甲'][1],r:0,o:0},500),c.tw('t乙',{x:POS['乙'][0],y:POS['乙'][1],r:0,o:0},500)])}},
    {t:'靜置 10 分鐘',say:'A、B 放回 37℃ 溫水中等待 10 分鐘，讓酵素作用。',run:async c=>{await me.intoBath(c,['A','B']);await me.timelapse(c,'等待 10 分鐘')}},
    {t:'加入本氏液',say:'取出 A、B，各加入 1 mL 本氏液（藍色）。',run:async c=>{await c.all([c.tw('tA',{x:POS.A[0],y:POS.A[1]},500),c.tw('tB',{x:POS.B[0],y:POS.B[1]},500)]);
-     await me.drip(c,'bB','tA','#5aa9e6');await me.drip(c,'bB','tB','#5aa9e6')}},
+     await me.drip(c,'bB','tA','#5aa9e6');me.lab(c,'A','水＋澱粉液＋本氏液');await me.drip(c,'bB','tB','#5aa9e6');me.lab(c,'B','唾液＋澱粉液＋本氏液')}},
    {t:'隔水加熱',say:'把 A、B 放入燒杯中隔水加熱，觀察顏色變化。',run:async c=>{await me.intoBath(c,['A','B']);await c.show('bub',200);
      await c.all([c.color('tB_l','#5cbf3a',900),c.wait(900)]);await c.color('tB_l','#ffd23f',700);await c.color('tB_l','#e2622b',700);await c.hide('bub',200)}},
    {t:'比較結果',say:'A（加水）仍是藍色；B（加唾液）出現橙紅色，表示 B 中的澱粉被唾液分解，產生了小分子醣類。',run:async c=>{
@@ -1273,7 +1297,7 @@ function defD22(){
 ANIMS['2-2']=[{id:'A',name:'酵素分解作用',def:mkA22},{id:'B',name:'酵素合成作用',def:defB22},{id:'C',name:'活性實驗室',def:defC22},{id:'D',name:'虛擬實驗 2-2',def:defD22}];
 
 /* =========================================================
-   2-3 植物如何製造養分：動畫 A–D（不涉及光反應、碳反應）
+   2-3 植物如何製造養分：動畫 A–D
    ========================================================= */
 const LEAF_PATH='M40 220 C70 120 190 40 440 34 C420 140 300 236 40 220 Z';
 
