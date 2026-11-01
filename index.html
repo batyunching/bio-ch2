@@ -295,6 +295,100 @@ body.teacher .dsg,body.teacher .dsg-v{font-size:clamp(15px,1.1vw,20px)}
 body.teacher .ap-tx{font-size:clamp(22px,1.7vw,32px)}
 body.teacher .ap-st{font-size:clamp(24px,1.8vw,34px)}
 @media (max-width:640px){.ap-tx{font-size:16px}.ap-spd{margin-left:0}.ap-info{max-width:92%;font-size:14px}.ap-sum{width:96%;top:96px}.mini{font-size:13px;min-height:36px;padding:2px 6px}}
+
+/* ===== 第 3 期：練習題 ===== */
+.pr-home{padding:16px 18px}
+.pr-stat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.pr-stat>div{background:#fff;border:3px solid var(--ink);padding:8px 12px}
+.pr-stat .big{font-size:28px;color:var(--accent-d)}
+.stars{font-size:26px;letter-spacing:2px}.stars.big{font-size:52px}
+.star{color:#d8cfc0;text-shadow:2px 2px 0 var(--ink)}.star.on{color:var(--gold-l)}
+.pr-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pr-mode{display:flex;flex-direction:column;gap:6px;padding:16px;cursor:pointer;text-align:left;font:inherit}
+.pr-mode span{font-size:22px;color:var(--accent-d)}.pr-mode small{font-size:15px;color:var(--ink2)}
+.pr-mode:hover:not([disabled]){transform:translateY(-4px)}.pr-mode[disabled]{opacity:.5;cursor:not-allowed}
+@media (max-width:760px){.pr-modes,.pr-stat{grid-template-columns:1fr}}
+.pr-run{padding:12px 16px 18px}
+.pr-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.pr-prog{flex:1;min-width:120px;height:16px;border:3px solid var(--ink);background:#fff;position:relative}
+.pr-prog i{position:absolute;inset:0 auto 0 0;background:repeating-linear-gradient(90deg,var(--accent) 0 8px,var(--accent-l) 8px 12px)}
+.q-card{background:#fff;border:4px solid var(--ink);padding:16px 18px}
+.q-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.q-tag{font-size:13px;font-weight:900;padding:2px 8px;border:2px solid var(--ink);background:var(--paper2)}
+.q-tag.lv-會考{background:#e83f3f;color:#fff}.q-tag.lv-進階{background:#ffd23f}.q-tag.lv-基礎{background:#c9eda0}
+.q-stem{font-size:20px;font-weight:700;line-height:1.7;margin-bottom:12px}
+.q-stem select{font:inherit;font-size:18px;padding:2px 6px;border:3px solid var(--ink);background:var(--accent-l);margin:0 4px;min-height:40px}
+.q-stem select.right{background:#c9eda0}.q-stem select.wrong{background:#ffc9d4}
+.q-opts{display:grid;gap:10px}.q-opts.tf{grid-template-columns:1fr 1fr}
+.q-opt{display:flex;align-items:center;gap:12px;text-align:left;min-height:56px;padding:8px 14px;border:3px solid var(--ink);background:var(--paper);font:inherit;font-size:18px;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.q-opt:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.q-l{font-family:var(--px);flex:none;width:34px;height:34px;display:grid;place-items:center;background:var(--ink);color:#fff}
+.q-opt.right{background:#c9eda0}.q-opt.wrong{background:#ffc9d4}.q-opt.lock{cursor:default}
+.q-tip{font-size:15px;color:var(--ink2);margin:0 0 8px}
+.q-act{margin-top:12px}
+.q-fb{margin-top:14px;padding:12px 14px;border:4px solid var(--ink)}
+.q-fb.ok{background:#e4f7da}.q-fb.no{background:#ffe6ec}
+.q-res{font-family:var(--px);font-size:24px}.q-fb.ok .q-res{color:#1f6f34}.q-fb.no .q-res{color:#b0244f}
+.q-ans,.q-exp{margin-top:6px;font-size:17px}
+.q-links{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.q-link{font-size:14px;min-height:44px}
+.q-next{margin-top:10px;text-align:right}
+.m-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.m-wrap{grid-template-columns:1fr}}
+.m-row{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.m-key{font-weight:900;font-size:18px}
+.m-slot{min-height:52px;border:3px dashed var(--ink);background:#fff;font:inherit;font-size:16px;text-align:left;padding:6px 10px;cursor:pointer;color:#9a8a7a}
+.m-slot.full{border-style:solid;color:var(--ink);background:#fff3b0}
+.m-slot.right{background:#c9eda0}.m-slot.wrong{background:#ffc9d4}
+.m-right{display:flex;flex-direction:column;gap:8px}
+.m-chip,.mm-chip{min-height:48px;border:3px solid var(--ink);background:var(--paper);font:inherit;font-size:16px;font-weight:700;padding:6px 10px;cursor:grab;box-shadow:0 3px 0 var(--ink);text-align:left;touch-action:none}
+.m-chip.used{opacity:.35}.m-chip.pick,.mm-chip.pick{background:var(--gold-l);outline:3px solid var(--accent)}
+.m-ghost{position:fixed;z-index:200;pointer-events:none;opacity:.9;transform:rotate(-3deg);max-width:260px}
+svg.hs{width:100%;max-width:560px;display:block;margin:0 auto;border:3px solid var(--ink);background:#fffdf5;cursor:crosshair}
+.pr-result{padding:22px;text-align:center}
+.pr-clear{font-size:32px;color:var(--accent-d);text-shadow:3px 3px 0 rgba(0,0,0,.15)}
+.pr-wl{text-align:left;max-width:760px;margin:12px auto;background:#fff;border:3px solid var(--ink);padding:10px 14px}
+.pr-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.sum-box,.sum-quiz{padding:16px 18px;margin-bottom:18px}
+.sum-box h2,.sum-quiz h2{font-weight:400;margin:0 0 10px;color:var(--accent-d);font-size:24px}
+details{border:3px solid var(--ink);background:#fff;margin:8px 0}
+summary{cursor:pointer;padding:10px 14px;font-size:19px;background:var(--accent-l);list-style:none}
+summary::before{content:'▶ ';}details[open] summary::before{content:'▼ '}
+.sum-in{padding:10px 14px;font-size:17px}
+table.sum{border-collapse:collapse;width:100%}
+table.sum th,table.sum td{border:2px solid var(--ink);padding:5px 8px;text-align:left}
+table.sum th{background:var(--paper2)}
+table.sum td.m{background:#ffd0d0}table.sum td.v{background:#cfe3ff}table.sum td.p{background:#e6e6e6}
+.eq{font-weight:900;background:#fffbe0;border:2px dashed var(--ink);padding:6px 10px;display:inline-block}
+.sum-ctl{display:flex;gap:10px;margin-top:10px}
+body.teacher .q-stem{font-size:clamp(22px,1.8vw,34px)}body.teacher .q-opt{font-size:clamp(20px,1.6vw,30px)}
+body.teacher .q-exp,body.teacher .q-ans{font-size:clamp(18px,1.4vw,26px)}body.teacher .sum-in{font-size:clamp(18px,1.4vw,26px)}
+/* ===== 第 3 期：心智圖 ===== */
+.mm-bar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:10px 14px;margin-bottom:14px}
+.mm-prog{display:flex;align-items:center;gap:8px;min-width:240px;flex:1}.mm-prog .meter{flex:1;margin:0}
+.mm-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.mm-advt{display:inline-flex;gap:6px;flex-wrap:wrap}.mm-advt[hidden],.mm-req .lh[hidden]{display:none}
+.mm-in,.mm-lw{min-height:40px;border:3px solid var(--ink);padding:2px 8px;font:inherit;font-size:15px;width:140px}
+.mm-req{padding:10px 16px;margin-bottom:14px}.mm-req ul{list-style:none;padding:0;margin:6px 0}.mm-req li{margin:4px 0;font-weight:700}.mm-req li.ok{color:#1f6f34}
+.mm-req .lh{display:block;font-weight:400;color:var(--ink2);margin-left:24px}
+.mm-main{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:14px;align-items:start}
+@media (max-width:900px){.mm-main{grid-template-columns:1fr}.mm-bank{order:-1}}
+.mm-scroll{overflow:auto;max-height:78vh;padding:0;background:#fffdf5;background-image:radial-gradient(#e7dcc4 1.2px,transparent 1.2px);background-size:16px 16px}
+.mm-canvas{position:relative}
+.mm-lines{position:absolute;left:0;top:0}
+.mm-node{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;border:3px solid var(--ink);background:#fff3d6;font-weight:900;font-size:15px;line-height:1.25;padding:2px 26px 2px 8px;box-shadow:3px 3px 0 var(--ink);user-select:none}
+.mm-node.lv-root,.mm-node.lv-top{background:var(--c);color:#fff;font-family:var(--px);font-weight:400;font-size:18px;padding:2px 8px;text-shadow:2px 2px 0 rgba(0,0,0,.3)}
+.mm-node.lv-b{padding:2px 8px}
+.mm-node.blank{background:#fff;border-style:dashed;color:#b8a890;cursor:pointer}
+.mm-node.blank.done{background:#c9eda0;border-style:solid;color:var(--ink);cursor:default}
+.mm-node.lv-c{background:#e6dcff;cursor:move;padding:2px 26px 2px 8px}
+.mm-hint,.mm-del{position:absolute;right:2px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:16px;cursor:pointer;padding:4px}
+.mm-node.pickA{outline:4px solid #6b4fbf;outline-offset:2px}
+.mm-canvas.linking .mm-node{cursor:crosshair}
+.mm-node.pop{animation:mmpop .4s steps(4)}@keyframes mmpop{50%{transform:scale(1.12)}}
+.shake{animation:shk .45s steps(6)}@keyframes shk{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.mm-pop{position:absolute;z-index:20;width:250px;background:#fff;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:10px 12px;font-size:15px}
+.mm-pop .h2{margin-top:6px;font-weight:900;color:#6b4fbf}.mm-pop .pop-btn,.mm-pop .lw{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.mm-bank{padding:12px;position:sticky;top:80px}.mm-bank small{display:block;color:var(--ink2);margin:4px 0 8px}
+.mm-chips{display:flex;flex-wrap:wrap;gap:8px}.mm-chip{font-size:15px}
 </style>
 </head>
 <body data-theme="home">
@@ -310,7 +404,7 @@ body.teacher .ap-st{font-size:clamp(24px,1.8vw,34px)}
   </div>
 </header>
 <main id="app"></main>
-<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.70–91｜第 2 期：互動動畫</footer>
+<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.70–91｜第 3 期：練習題＋心智圖</footer>
 <div id="viewer" role="dialog" aria-modal="true" aria-label="概念卡"></div>
 <div id="intro" aria-live="polite"></div>
 
@@ -668,12 +762,13 @@ function refreshHud(){document.getElementById('coinCount').textContent=totalCoin
 
 function portalThumb(u){const scene=SCENES[u]();const g=UNITS[u].guide;
   return `<svg class="thumb" viewBox="0 0 320 150" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges" aria-hidden="true"><g transform="translate(0 -30)">${scene}</g><g class="bob">${spr(SP[g],136,58,6)}</g></svg>`}
-function lockedThumb(kind){const bg=kind==='mind'?['#3b3b6b','#4a4a80','#5a5a96']:['#2b4a3b','#335a47','#3c6b54'];
+function lockedThumb(kind,open){const bg=kind==='mind'?['#3b3b6b','#4a4a80','#5a5a96']:['#2b4a3b','#335a47','#3c6b54'];
   return `<svg class="thumb" viewBox="0 0 320 150" shape-rendering="crispEdges" aria-hidden="true">${bg.map((c,i)=>`<rect y="${i*50}" width="320" height="51" fill="${c}"/>`).join('')}
   ${kind==='mind'?`<g stroke="#ffd65a" stroke-width="4"><line x1="160" y1="75" x2="70" y2="35"/><line x1="160" y1="75" x2="250" y2="35"/><line x1="160" y1="75" x2="80" y2="120"/><line x1="160" y1="75" x2="240" y2="120"/></g>`+[[160,75,'#ffd65a'],[70,35,'#ffd2a6'],[250,35,'#c9eda0'],[80,120,'#ffd0dc'],[240,120,'#fff']].map(([x,y,c])=>`<rect x="${x-18}" y="${y-12}" width="36" height="24" fill="${c}" stroke="#2a1a12" stroke-width="3"/>`).join('')
   :Array.from({length:25},(_,i)=>`<rect x="${85+(i%5)*30}" y="${8+Math.floor(i/5)*27}" width="26" height="23" fill="${[3,7,12,18,21].includes(i)?'#e45f84':'#fff8e6'}" stroke="#2a1a12" stroke-width="2"/>`).join('')}
-  ${spr(SP.lock,140,48,5)}</svg>`}
+  ${open?'':spr(SP.lock,140,48,5)}</svg>`}
 
+function mmPct(){try{const sc=['2-2','2-3','2-4','all'];const n=sc.filter(k=>{const v=localStorage.getItem('bio2_mm_'+k);return v&&JSON.parse(v).cleared}).length;return `完成 ${n} / 4 張`}catch(e){return ''}}
 function renderHome(){
   document.body.dataset.theme='home';setScene('home');
   const portal=u=>{const U=UNITS[u],n=U.cards.length,got=unitCoins(u);
@@ -693,7 +788,7 @@ function renderHome(){
   </section>
   <nav class="map" aria-label="關卡地圖">
     ${portal('2-2')}${portal('2-3')}${portal('2-4')}
-    ${locked('mind','心智圖神殿','用線索拼出完整概念','第 3 期')}
+    <a class="portal" href="#/mindmap" style="--c:#6b4fbf"><div class="pbox plate">${lockedThumb('mind',true)}<div class="info"><span class="num" style="background:#6b4fbf">MAP</span><h2>心智圖神殿</h2><div class="sub">用線索拼出完整概念</div><div class="sub px" style="margin-top:4px">${mmPct()}</div></div></div></a>
     ${locked('bingo','賓果競技場','全班大屏賓果對戰','第 4 期')}
   </nav>
   <section class="pbox howto">
@@ -702,14 +797,16 @@ function renderHome(){
       <li><b>學生模式</b>：點開概念卡閱讀，回答「想一想」小提問；看懂後按「我看懂了」收集金幣。進度會存在這台平板（或電腦）上。</li>
       <li><b>老師模式</b>：大字投影、重點逐點顯示、解答預設隱藏。可用鍵盤 <span class="keys"><kbd>→</kbd>／<kbd>空白鍵</kbd> 下一點、<kbd>←</kbd> 上一點、<kbd>PgDn</kbd>／<kbd>PgUp</kbd> 換卡、<kbd>Esc</kbd> 關閉</span>。</li>
       <li><b>互動動畫</b>：每段都有播放、暫停、上一步、下一步、重播與速度控制，最後一步「換你試試」可以自己動手操作。</li>
-      <li>即時練習、心智圖與賓果，會在第 3～4 期陸續開放。</li>
+      <li><b>即時練習</b>：每單元隨機 10 題、三單元綜合挑戰 20 題，答錯的題目會自動收進錯題本。</li>
+      <li><b>心智圖神殿</b>：把詞卡拖到正確的空格，卡住時可打開三層線索；完成後可匯出 PNG。</li>
+      <li>賓果競技場會在第 4 期開放。</li>
     </ul>
   </section>`;
   app.querySelectorAll('.portal').forEach(p=>p.addEventListener('click',e=>{if(p.dataset.locked){e.preventDefault();SFX.lock();toast(`這個關卡在${p.dataset.locked}開放喔！`)}else SFX.tap()}));
   app.querySelectorAll('.portal.locked').forEach(p=>p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();p.click()}}));
 }
 
-const LEVELS=[['concept','重點概念',''],['anim','互動動畫',''],['practice','即時練習','第 3 期'],['summary','小結','第 3 期']];
+const LEVELS=[['concept','重點概念',''],['anim','互動動畫',''],['practice','即時練習',''],['summary','小結','']];
 const COMING={
  '2-2':{anim:['動畫 A：酵素分解作用——拖曳澱粉、纖維素、蛋白質到澱粉酶上，體驗專一性與可重複使用','動畫 B：酵素合成作用——把小分子拖到酵素上結合成大分子','動畫 C：活性實驗室——溫度與酸鹼值滑桿，觀察酵素活性變化','動畫 D：虛擬實驗 2-2——依課本步驟操作，判斷是否支持假說'],
         summary:['可收合的整理表：代謝類型、酵素特性、溫度、酸鹼','三題快問快答']},
@@ -730,6 +827,10 @@ function renderUnit(u,tab,sub){
     body=`<div class="grid">${U.cards.map((c,i)=>`<button class="pbox card" data-i="${i}" aria-label="第 ${i+1} 張：${esc(c.t)}">
       <div class="top"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="st sonly ${coins[c.id]?'got':''}">${coins[c.id]?'★ 已收集':'未開啟'}</span><span class="st tonly">${c.pg}</span></div>
       ${c.svg()}<div class="body"><h3>${esc(c.t)}</h3><p>${esc(c.cap)}</p></div></button>`).join('')}</div>`;
+  }else if(tab==='practice'){
+    body=`<div id="prTab"></div>`;
+  }else if(tab==='summary'){
+    body=`<div id="sumTab"></div>`;
   }else if(tab==='anim'){
     body=`<div id="animTab"></div>`;
   }else{
@@ -753,6 +854,9 @@ function renderUnit(u,tab,sub){
   app.querySelectorAll('.lv').forEach(b=>b.addEventListener('click',()=>{SFX.tap();location.hash=`#/unit/${u}/${b.dataset.tab}`}));
   app.querySelectorAll('.card').forEach(b=>b.addEventListener('click',()=>openViewer(u,+b.dataset.i)));
   const at=document.getElementById('animTab');if(at)renderAnimTab(u,at,sub);
+  const pt=document.getElementById('prTab');if(pt)renderPractice(u,pt);
+  const sm=document.getElementById('sumTab');if(sm)renderSummary(u,sm);
+  if(tab==='concept'&&sub&&/^\d+$/.test(sub)&&U.cards[+sub-1])setTimeout(()=>openViewer(u,+sub-1),50);
 }
 
 /* ---- 概念卡檢視器 ---- */
@@ -839,14 +943,1266 @@ document.getElementById('hudCoin2').innerHTML=spriteSvg('coin',3,'style="width:2
 /* ---- 路由（#/、#/unit/2-2/concept；GitHub Pages 可直接使用） ---- */
 function parseRoute(){const m=location.hash.match(/^#\/unit\/(2-[234])(?:\/(\w+))?(?:\/(\w+))?/);return m?{u:m[1],tab:m[2]||'concept',sub:m[3]}:{}}
 let lastUnit=null;
-function rerender(){if(viewer.classList.contains('open'))drawViewer();const r=parseRoute();if(r.u){if(r.tab!=='anim')renderUnit(r.u,r.tab,r.sub)}else renderHome()}
+function rerender(){if(viewer.classList.contains('open'))drawViewer();if(/^#\/mindmap/.test(location.hash))return;const r=parseRoute();if(r.u){if(r.tab==='concept')renderUnit(r.u,r.tab)}else renderHome()}
 function route(){if(viewer.classList.contains('open')){viewer.classList.remove('open');document.body.style.overflow=''}
   const r=parseRoute();
+  const mm=location.hash.match(/^#\/mindmap(?:\/([\w-]+))?/);
+  if(mm){lastUnit=null;renderMindmap(mm[1]);window.scrollTo(0,0);return}
   if(r.u){if(r.u!==lastUnit)showIntro(r.u);lastUnit=r.u;renderUnit(r.u,r.tab,r.sub)}else{lastUnit=null;renderHome()}
   window.scrollTo(0,0)}
 window.addEventListener('hashchange',route);
 applyMode();drawSound();refreshHud();
 window.addEventListener('DOMContentLoaded',route);
+</script>
+<script type="application/json" id="qbank">
+[
+ {
+  "id": "q2201",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "酵素的主要成分是什麼？",
+  "options": [
+   "澱粉",
+   "蛋白質",
+   "脂肪酸",
+   "葡萄糖"
+  ],
+  "answer": 1,
+  "explain": "大部分種類的酵素，主要成分是蛋白質。",
+  "link": "card:2-2:3",
+  "bingo": true
+ },
+ {
+  "id": "q2202",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "養分在生物體內經過不同的化學反應，可產生能量或其他物質，這些反應統稱為什麼？",
+  "options": [
+   "消化作用",
+   "代謝作用",
+   "光合作用",
+   "吸收作用"
+  ],
+  "answer": 1,
+  "explain": "這些化學反應統稱為代謝作用。",
+  "link": "card:2-2:1",
+  "bingo": true
+ },
+ {
+  "id": "q2203",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "將小分子結合成大分子的作用，稱為分解作用。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "小分子結合成大分子是「合成作用」；大分子轉變成小分子才是「分解作用」。",
+  "link": "card:2-2:2",
+  "bingo": true
+ },
+ {
+  "id": "q2204",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "在代謝反應過程中，和酵素結合而作用的物質稱為什麼？",
+  "options": [
+   "產物",
+   "受質",
+   "酶",
+   "養分"
+  ],
+  "answer": 1,
+  "explain": "和酵素結合而作用的物質稱為受質。",
+  "link": "card:2-2:4",
+  "bingo": true
+ },
+ {
+  "id": "q2205",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "唾液中的澱粉酶可以分解纖維素。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "酵素和受質的結合具有專一性，澱粉酶不能和纖維素結合，所以無法分解纖維素。",
+  "link": "anim:2-2:A",
+  "bingo": true
+ },
+ {
+  "id": "q2206",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "一般而言，若環境條件沒有改變，酵素在反應結束後仍可與新的受質作用。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素可以重複使用。",
+  "link": "card:2-2:5",
+  "bingo": true
+ },
+ {
+  "id": "q2207",
+  "unit": "2-2",
+  "type": "match",
+  "level": "基礎",
+  "stem": "請把左邊的名詞和右邊正確的說明配對。",
+  "options": {
+   "left": [
+    "分解作用",
+    "合成作用",
+    "酵素",
+    "受質"
+   ],
+   "right": [
+    "大分子轉變成小分子",
+    "小分子結合成大分子",
+    "又稱為酶，能促進代謝反應",
+    "和酵素結合而作用的物質"
+   ]
+  },
+  "answer": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "explain": "分解：大→小；合成：小→大；酵素又稱酶；和酵素結合而作用的物質是受質。",
+  "link": "card:2-2:2",
+  "bingo": false
+ },
+ {
+  "id": "q2208",
+  "unit": "2-2",
+  "type": "fill",
+  "level": "基礎",
+  "stem": "胃內的酵素在{0}環境中活性較佳，小腸內的酵素適合在{1}環境中作用。",
+  "options": [
+   [
+    "酸性",
+    "中性",
+    "鹼性"
+   ],
+   [
+    "酸性",
+    "中性",
+    "鹼性"
+   ]
+  ],
+  "answer": [
+   0,
+   2
+  ],
+  "explain": "胃內的酵素偏好酸性，小腸內的酵素適合鹼性環境。",
+  "link": "card:2-2:7",
+  "bingo": false
+ },
+ {
+  "id": "q2209",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-2 中，用來檢測試管裡是否產生小分子醣類的試劑是哪一種？",
+  "options": [
+   "碘液",
+   "本氏液",
+   "酒精",
+   "唾液"
+  ],
+  "answer": 1,
+  "explain": "本氏液遇小分子醣類加熱後，會呈綠、黃、橙或紅色。",
+  "link": "anim:2-2:D",
+  "bingo": true
+ },
+ {
+  "id": "q2210",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "唾液中的澱粉酶隨食物吞入，到了胃中的酸性環境，還能有效分解澱粉嗎？",
+  "options": [
+   "能，因為胃的溫度較高",
+   "不能，因為胃為酸性環境，酵素活性降低甚至失去活性",
+   "能，因為酵素可以重複使用",
+   "不能，因為胃中沒有澱粉"
+  ],
+  "answer": 1,
+  "explain": "酸鹼值超過酵素能忍受的範圍，酵素活性會降低或失去活性。",
+  "link": "anim:2-2:C",
+  "bingo": true
+ },
+ {
+  "id": "q2211",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "酵素經高溫煮沸後，再降回 37℃，活性會恢復嗎？",
+  "options": [
+   "會完全恢復",
+   "會恢復一半",
+   "不會，高溫破壞酵素構造，使酵素永久失去活性",
+   "不會，因為酵素被分解成葡萄糖"
+  ],
+  "answer": 2,
+  "explain": "溫度過高會破壞酵素構造，酵素會永久失去活性。",
+  "link": "anim:2-2:C",
+  "bingo": true
+ },
+ {
+  "id": "q2212",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-2 中，為什麼要把試管放在 37℃ 的溫水中？",
+  "options": [
+   "讓本氏液變色",
+   "溫度和人體體溫相近，適合唾液中的酵素作用",
+   "殺死唾液中的細菌",
+   "讓澱粉液變濃"
+  ],
+  "answer": 1,
+  "explain": "37℃ 和人體體溫相近，是唾液中酵素適合作用的溫度。",
+  "link": "anim:2-2:D",
+  "bingo": true
+ },
+ {
+  "id": "q2213",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-2 中，試管 A 加水、試管 B 加唾液。試管 A 在實驗中的角色是什麼？",
+  "options": [
+   "實驗組",
+   "對照組",
+   "控制變因",
+   "檢測試劑"
+  ],
+  "answer": 1,
+  "explain": "A 管只加水，用來和加唾液的 B 管比較，是對照組。",
+  "link": "anim:2-2:D",
+  "bingo": true
+ },
+ {
+  "id": "q2214",
+  "unit": "2-2",
+  "type": "single",
+  "level": "進階",
+  "stem": "同一種食物分別放在室溫和冰箱中低溫存放，哪裡較不易腐敗？",
+  "options": [
+   "室溫，因為酵素活性較低",
+   "冰箱，因為低溫使酵素活性降低",
+   "冰箱，因為低溫使酵素永久失去活性",
+   "兩者一樣"
+  ],
+  "answer": 1,
+  "explain": "低溫會使酵素活性降低，代謝反應變慢，食物較不易腐敗；但持續冷藏也不代表永遠不會腐敗。",
+  "link": "card:2-2:6",
+  "bingo": true
+ },
+ {
+  "id": "q2215",
+  "unit": "2-2",
+  "type": "fill",
+  "level": "進階",
+  "stem": "在一定溫度範圍內，酵素的活性會隨溫度升高而{0}；但若溫度過高，酵素活性會{1}。",
+  "options": [
+   [
+    "增加",
+    "降低",
+    "不變"
+   ],
+   [
+    "增加",
+    "不變",
+    "降低，甚至失去活性"
+   ]
+  ],
+  "answer": [
+   0,
+   2
+  ],
+  "explain": "適當範圍內溫度升高活性增加；溫度過高活性降低，甚至失去活性。",
+  "link": "card:2-2:6",
+  "bingo": false
+ },
+ {
+  "id": "q2216",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "將人體唾液和胃液的 pH 值都調整為 6～7，再分別和澱粉液或葡萄糖液混合：甲＝唾液＋澱粉液、乙＝胃液＋澱粉液、丙＝唾液＋葡萄糖液、丁＝胃液＋葡萄糖液。在適宜溫度下放置一小時後，滴入本氏液隔水加熱，哪一支試管不會產生顏色變化？",
+  "options": [
+   "甲",
+   "乙",
+   "丙",
+   "丁"
+  ],
+  "answer": 1,
+  "explain": "胃液中的酵素只能初步分解蛋白質，乙管的澱粉無法被分解成葡萄糖，所以本氏液不變色；丙、丁本來就含葡萄糖。",
+  "link": "card:2-2:8",
+  "bingo": true,
+  "year": "103 會考（改寫）"
+ },
+ {
+  "id": "q2217",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "唾液中的甲物質可催化澱粉的分解，胃液中的乙物質則可催化蛋白質的分解。推測甲、乙兩物質本身的主要成分，下列何者最合理？",
+  "options": [
+   "甲、乙成分皆為澱粉",
+   "甲、乙成分皆為蛋白質",
+   "甲成分為澱粉，乙成分為蛋白質",
+   "甲成分為葡萄糖，乙成分為胺基酸"
+  ],
+  "answer": 1,
+  "explain": "甲、乙都是酵素，酵素的主要成分是蛋白質。",
+  "link": "card:2-2:3",
+  "bingo": true,
+  "year": "104 會考"
+ },
+ {
+  "id": "q2218",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "甲、乙、丙三支試管各裝等量的溶液 X，再分別加入葡萄糖液、澱粉液、水，反應後以碘液檢測，三管都呈黃褐色。溶液 X 中最可能含有什麼成分？",
+  "options": [
+   "澱粉",
+   "葡萄糖",
+   "分解澱粉的酵素",
+   "分解葡萄糖的酵素"
+  ],
+  "answer": 2,
+  "explain": "丙管（X＋水）呈黃褐色，表示 X 不是澱粉；乙管加了澱粉卻呈黃褐色，表示澱粉被 X 分解了，所以 X 含有分解澱粉的酵素。",
+  "link": "card:2-2:4",
+  "bingo": true,
+  "year": "105 會考"
+ },
+ {
+  "id": "q2219",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "將酵素甲和澱粉溶液在試管中混合，定時測量發現澱粉濃度逐漸下降。下列關於甲的敘述，何者正確？",
+  "options": [
+   "甲主要由葡萄糖組成",
+   "甲與澱粉反應後，會被分解成胺基酸",
+   "若降低甲的活性，會使澱粉的合成速率變快",
+   "若提高甲的活性，會使澱粉的分解速率變快"
+  ],
+  "answer": 3,
+  "explain": "甲是分解澱粉的酵素，主要成分是蛋白質；活性越高，分解澱粉越快。",
+  "link": "card:2-2:6",
+  "bingo": true,
+  "year": "107 會考"
+ },
+ {
+  "id": "q2220",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "製作麵包時可添加澱粉酶、脂肪酶和蛋白酶等酵素。關於這三種酵素的主要成分，下列何者最合理？",
+  "options": [
+   "依序為澱粉、脂肪、蛋白質",
+   "依序為醣類、脂肪酸、胺基酸",
+   "三者皆為澱粉",
+   "三者皆為蛋白質"
+  ],
+  "answer": 3,
+  "explain": "不論分解哪一種養分，酵素的主要成分都是蛋白質。",
+  "link": "card:2-2:3",
+  "bingo": true,
+  "year": "109 會考（改寫）"
+ },
+ {
+  "id": "q2221",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "蜂蜜中含有分解澱粉的酵素。甲、乙兩試管都裝等量澱粉液，其中一支加蜂蜜、另一支加水。反應後以碘液檢測：甲呈藍黑色，乙呈黃褐色。哪一支加了蜂蜜？理由是什麼？",
+  "options": [
+   "甲，因未檢測出澱粉",
+   "甲，因有檢測出澱粉",
+   "乙，因未檢測出澱粉",
+   "乙，因有檢測出澱粉"
+  ],
+  "answer": 2,
+  "explain": "碘液遇澱粉呈藍黑色。乙呈黃褐色表示澱粉已被蜂蜜中的酵素分解。",
+  "link": "anim:2-2:C",
+  "bingo": true,
+  "year": "111 會考"
+ },
+ {
+  "id": "q2222",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "甲、乙、丙三杯澱粉液分別加入經不同處理的澱粉酶，反應後檢測：甲（碘液變色、本氏液不變色）、乙（碘液不變色、本氏液變色）、丙（兩者都變色）。哪杯的澱粉酶應已完全失去作用？",
+  "options": [
+   "僅甲",
+   "僅乙",
+   "甲和丙",
+   "乙和丙"
+  ],
+  "answer": 0,
+  "explain": "完全失去作用時，澱粉不會被分解（碘液變色），也不會產生醣類（本氏液不變色），只有甲符合。",
+  "link": "anim:2-2:C",
+  "bingo": true,
+  "year": "114 會考"
+ },
+ {
+  "id": "q2223",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "某種酵素最適合在 37℃、pH＝8 的環境中作用，且在 pH＜5 的環境下會被完全破壞。若某人吃下這種酵素，它在口腔、胃、小腸中的活性，下列何者最合理？",
+  "options": [
+   "口腔、胃、小腸中都有活性",
+   "口腔中無活性，胃中活性最高",
+   "口腔中有活性，進入胃後被破壞，到小腸也沒有活性",
+   "只有在小腸中才有活性"
+  ],
+  "answer": 2,
+  "explain": "胃為強酸性（pH 約 2），這種酵素在胃中會被破壞而永久失去活性，所以到了小腸也沒有活性。",
+  "link": "anim:2-2:C",
+  "bingo": true,
+  "year": "110 會考（改寫）"
+ },
+ {
+  "id": "q2224",
+  "unit": "2-2",
+  "type": "single",
+  "level": "會考",
+  "stem": "部分白蟻巢穴中的雞肉絲菇會分泌酵素，把木材等物質分解成養分。雞肉絲菇分泌的酵素，主要成分最可能是什麼？",
+  "options": [
+   "纖維素",
+   "蛋白質",
+   "脂肪酸",
+   "礦物質"
+  ],
+  "answer": 1,
+  "explain": "酵素的主要成分是蛋白質。",
+  "link": "card:2-2:3",
+  "bingo": true,
+  "year": "111 會考補考"
+ },
+ {
+  "id": "q2301",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "光合作用的原料是什麼？",
+  "options": [
+   "氧氣和葡萄糖",
+   "水和二氧化碳",
+   "水和氧氣",
+   "二氧化碳和葡萄糖"
+  ],
+  "answer": 1,
+  "explain": "水和二氧化碳是原料，產物是氧氣、葡萄糖和水。",
+  "link": "card:2-3:7",
+  "bingo": true
+ },
+ {
+  "id": "q2302",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉片中，製造養分的主要部位是哪裡？",
+  "options": [
+   "角質層",
+   "表皮",
+   "葉肉",
+   "葉脈"
+  ],
+  "answer": 2,
+  "explain": "葉是製造養分的主要器官，其中葉肉是製造養分的主要部位。",
+  "link": "card:2-3:1",
+  "bingo": true
+ },
+ {
+  "id": "q2303",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "二氧化碳主要由葉片的哪個構造進入？",
+  "options": [
+   "葉脈",
+   "氣孔",
+   "角質層",
+   "葉肉細胞"
+  ],
+  "answer": 1,
+  "explain": "氣孔是氣體進出植物的主要通道。",
+  "link": "card:2-3:4",
+  "bingo": true
+ },
+ {
+  "id": "q2304",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "角質層位於表皮外側，可避免水分過度散失。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "角質層能避免水分過度散失。",
+  "link": "card:2-3:2",
+  "bingo": true
+ },
+ {
+  "id": "q2305",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉脈的功能是什麼？",
+  "options": [
+   "避免水分散失",
+   "運輸水分和養分",
+   "讓氣體進出",
+   "吸收光能"
+  ],
+  "answer": 1,
+  "explain": "葉脈是葉內的輸導組織，能運輸水分和養分。",
+  "link": "card:2-3:6",
+  "bingo": true
+ },
+ {
+  "id": "q2306",
+  "unit": "2-3",
+  "type": "match",
+  "level": "基礎",
+  "stem": "請把葉片的構造和它的功能配對。",
+  "options": {
+   "left": [
+    "角質層",
+    "表皮",
+    "保衛細胞",
+    "葉肉細胞"
+   ],
+   "right": [
+    "避免水分過度散失",
+    "透明無色、排列緊密，具保護功能",
+    "半月形、兩兩成對，中間形成氣孔",
+    "具有大量葉綠體，是光合作用的主要場所"
+   ]
+  },
+  "answer": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "explain": "角質層防止水分散失、表皮保護、保衛細胞形成氣孔、葉肉細胞行光合作用。",
+  "link": "anim:2-3:A",
+  "bingo": false
+ },
+ {
+  "id": "q2307",
+  "unit": "2-3",
+  "type": "fill",
+  "level": "基礎",
+  "stem": "光合作用：水＋{0} →（光、{1}）→ 氧氣＋{2}＋水",
+  "options": [
+   [
+    "氧氣",
+    "二氧化碳",
+    "葡萄糖"
+   ],
+   [
+    "葉脈",
+    "氣孔",
+    "葉綠體"
+   ],
+   [
+    "二氧化碳",
+    "葡萄糖",
+    "澱粉"
+   ]
+  ],
+  "answer": [
+   1,
+   2,
+   1
+  ],
+  "explain": "水＋二氧化碳 →（光、葉綠體）→ 氧氣＋葡萄糖＋水。",
+  "link": "anim:2-3:B",
+  "bingo": false
+ },
+ {
+  "id": "q2308",
+  "unit": "2-3",
+  "type": "hotspot",
+  "level": "基礎",
+  "stem": "請在葉片橫切面圖上，點出「保衛細胞」（兩兩成對，中間形成氣孔）。",
+  "options": {
+   "figure": "leaf",
+   "choices": [
+    "角質層",
+    "上表皮",
+    "下表皮",
+    "葉肉",
+    "葉脈",
+    "保衛細胞"
+   ]
+  },
+  "answer": "保衛細胞",
+  "explain": "保衛細胞散布在表皮上（陸生雙子葉植物多在下表皮），兩兩成對，中間是氣孔。",
+  "link": "card:2-3:4",
+  "bingo": false
+ },
+ {
+  "id": "q2309",
+  "unit": "2-3",
+  "type": "hotspot",
+  "level": "基礎",
+  "stem": "請在葉片橫切面圖上，點出「葉肉」。",
+  "options": {
+   "figure": "leaf",
+   "choices": [
+    "角質層",
+    "上表皮",
+    "下表皮",
+    "葉肉",
+    "葉脈",
+    "保衛細胞"
+   ]
+  },
+  "answer": "葉肉",
+  "explain": "葉肉位於上、下表皮之間，是製造養分的主要部位。",
+  "link": "card:2-3:5",
+  "bingo": false
+ },
+ {
+  "id": "q2310",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葉綠素是存在葉綠體中的綠色色素。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "葉綠體是胞器，葉綠素是其中的綠色色素。",
+  "link": "card:2-3:9",
+  "bingo": true
+ },
+ {
+  "id": "q2311",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-3 中，為什麼要把葉片放入酒精中隔水加熱？",
+  "options": [
+   "殺死葉片細胞",
+   "溶出葉綠素，方便觀察碘液的顏色變化",
+   "讓葉片產生澱粉",
+   "讓碘液變色"
+  ],
+  "answer": 1,
+  "explain": "葉綠素可以被酒精溶出，去除綠色後才容易看出碘液的顏色。",
+  "link": "anim:2-3:D",
+  "bingo": true
+ },
+ {
+  "id": "q2312",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-3 滴加碘液後，包鋁箔（遮光）的部位呈黃褐色，表示該部位如何？",
+  "options": [
+   "有澱粉",
+   "沒有澱粉",
+   "有葉綠素",
+   "有氧氣"
+  ],
+  "answer": 1,
+  "explain": "碘液遇澱粉呈藍黑色，黃褐色表示沒有澱粉。",
+  "link": "anim:2-3:D",
+  "bingo": true
+ },
+ {
+  "id": "q2313",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-3 要在實驗前 3～5 天（而不是 3～5 小時）包鋁箔，原因最可能是什麼？",
+  "options": [
+   "讓遮光部位有足夠時間，把之前光合作用的產物消耗完",
+   "讓鋁箔黏得更牢",
+   "讓葉片長得更大",
+   "讓葉片吸收更多水分"
+  ],
+  "answer": 0,
+  "explain": "遮光部位需要足夠時間，把之前光合作用產生的養分消耗完。",
+  "link": "anim:2-3:D",
+  "bingo": true
+ },
+ {
+  "id": "q2314",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "植物進行光合作用，主要的目的是什麼？",
+  "options": [
+   "提供動物呼吸所需的氧氣",
+   "維持植物自身的生存",
+   "讓大氣成分保持穩定",
+   "提供動物食物"
+  ],
+  "answer": 1,
+  "explain": "光合作用是為了植物自身生存；氧氣和成為動物的食物來源是「附加價值」。",
+  "link": "card:2-3:8",
+  "bingo": true
+ },
+ {
+  "id": "q2315",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "想驗證「二氧化碳的吸收會影響植物製造養分」。對照組為未經處理的葉片，下列哪一種處理最適合做為實驗組？（油脂能隔絕氣體進出葉子）",
+  "options": [
+   "僅以鋁箔包住整個葉片",
+   "僅以油脂塗抹整個葉片表面",
+   "先以鋁箔包住部分葉片，再將油脂塗抹在鋁箔表面",
+   "先用油脂塗抹部分葉片，再以鋁箔包住塗抹油脂的部分"
+  ],
+  "answer": 1,
+  "explain": "只用油脂隔絕氣體、不遮光，才能只改變「二氧化碳」這一個變因。",
+  "link": "anim:2-3:C",
+  "bingo": true
+ },
+ {
+  "id": "q2316",
+  "unit": "2-3",
+  "type": "single",
+  "level": "進階",
+  "stem": "用有綠色和非綠色部分的彩葉草葉片做實驗 2-3，只有綠色部分呈藍黑色。這表示光合作用還需要什麼？",
+  "options": [
+   "葉脈",
+   "葉綠體",
+   "角質層",
+   "鋁箔"
+  ],
+  "answer": 1,
+  "explain": "綠色部分具有葉綠體，葉綠體也是光合作用的必要條件。",
+  "link": "anim:2-3:D",
+  "bingo": true
+ },
+ {
+  "id": "q2317",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "進階",
+  "stem": "光合作用產生的葡萄糖，可供細胞直接利用，也可以轉換成澱粉儲存。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "葡萄糖可供細胞直接利用、形成纖維素，或轉換成澱粉等儲存。",
+  "link": "card:2-3:8",
+  "bingo": true
+ },
+ {
+  "id": "q2318",
+  "unit": "2-3",
+  "type": "single",
+  "level": "會考",
+  "stem": "葉片吸收水和二氧化碳、利用光能製造養分並放出氧氣，這種生理作用最可能是下列何者？",
+  "options": [
+   "呼吸作用",
+   "蒸散作用",
+   "光合作用",
+   "觸發運動"
+  ],
+  "answer": 2,
+  "explain": "把水和二氧化碳轉變成養分和氧氣的是光合作用。",
+  "link": "card:2-3:7",
+  "bingo": true,
+  "year": "104 會考（改寫）"
+ },
+ {
+  "id": "q2319",
+  "unit": "2-3",
+  "type": "single",
+  "level": "會考",
+  "stem": "某種具有葉綠體的原生生物會分解養分產生能量。推測牠能否進行光合作用或呼吸作用？",
+  "options": [
+   "僅可進行光合作用",
+   "僅可進行呼吸作用",
+   "此兩種作用皆可進行",
+   "此兩種作用皆無法進行"
+  ],
+  "answer": 2,
+  "explain": "有葉綠體就能進行光合作用；分解養分產生能量是所有生物都會進行的。",
+  "link": "card:2-3:9",
+  "bingo": true,
+  "year": "105 會考"
+ },
+ {
+  "id": "q2320",
+  "unit": "2-3",
+  "type": "single",
+  "level": "會考",
+  "stem": "想知道某植株在不同環境條件下光合作用速率的快慢，應依據下列哪一項資料推測最合理？",
+  "options": [
+   "單位時間內產生氧氣的量",
+   "單位時間內消耗葉綠素的量",
+   "單位時間內消耗葡萄糖的量",
+   "單位時間內產生二氧化碳的量"
+  ],
+  "answer": 0,
+  "explain": "光合作用越快，單位時間內產生的氧氣（和葡萄糖）就越多。",
+  "link": "anim:2-3:C",
+  "bingo": true,
+  "year": "108 會考"
+ },
+ {
+  "id": "q2321",
+  "unit": "2-3",
+  "type": "single",
+  "level": "會考",
+  "stem": "某植物的代謝作用反應式為：「甲＋二氧化碳 → 氧氣＋乙＋水」。甲、乙分別最可能是什麼？",
+  "options": [
+   "水、葡萄糖",
+   "葡萄糖、水",
+   "氧氣、葡萄糖",
+   "水、澱粉"
+  ],
+  "answer": 0,
+  "explain": "產物有氧氣，可知是光合作用：水＋二氧化碳 → 氧氣＋葡萄糖＋水。",
+  "link": "anim:2-3:B",
+  "bingo": true,
+  "year": "112 會考（改寫）"
+ },
+ {
+  "id": "q2401",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "蛋白質最後被分解成什麼小分子？",
+  "options": [
+   "葡萄糖",
+   "胺基酸",
+   "甘油",
+   "脂肪酸"
+  ],
+  "answer": 1,
+  "explain": "蛋白質分解為胺基酸。",
+  "link": "card:2-4:1",
+  "bingo": true
+ },
+ {
+  "id": "q2402",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "膽汁不含酵素，它的功能是什麼？",
+  "options": [
+   "分解澱粉",
+   "分解蛋白質",
+   "乳化脂質",
+   "殺死細菌"
+  ],
+  "answer": 2,
+  "explain": "膽汁能乳化脂質，促進脂質分解的速率。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2403",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "胰液主要在哪裡作用？",
+  "options": [
+   "胰臟",
+   "胃",
+   "小腸",
+   "肝臟"
+  ],
+  "answer": 2,
+  "explain": "胰液經由管道注入小腸，在小腸中作用。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2404",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "食道可以分泌消化液，幫助分解食物。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "食道不分泌消化液，靠管壁肌肉收縮把食物推送到胃。",
+  "link": "card:2-4:5",
+  "bingo": true
+ },
+ {
+  "id": "q2405",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "人體吸收養分的主要部位是哪裡？",
+  "options": [
+   "胃",
+   "小腸",
+   "大腸",
+   "肝臟"
+  ],
+  "answer": 1,
+  "explain": "小腸是吸收水分和養分的主要部位。",
+  "link": "card:2-4:8",
+  "bingo": true
+ },
+ {
+  "id": "q2406",
+  "unit": "2-4",
+  "type": "fill",
+  "level": "基礎",
+  "stem": "食物經過消化道的順序：口腔 → {0} → 食道 → {1} → 小腸 → {2} → 肛門",
+  "options": [
+   [
+    "咽",
+    "胃",
+    "大腸"
+   ],
+   [
+    "大腸",
+    "胃",
+    "咽"
+   ],
+   [
+    "胃",
+    "咽",
+    "大腸"
+   ]
+  ],
+  "answer": [
+   0,
+   1,
+   2
+  ],
+  "explain": "消化道依序是口腔、咽、食道、胃、小腸、大腸、肛門。",
+  "link": "card:2-4:2",
+  "bingo": false
+ },
+ {
+  "id": "q2407",
+  "unit": "2-4",
+  "type": "match",
+  "level": "基礎",
+  "stem": "請把消化腺和它分泌的消化液配對。",
+  "options": {
+   "left": [
+    "唾腺",
+    "胃腺",
+    "肝臟",
+    "胰臟"
+   ],
+   "right": [
+    "唾液",
+    "胃液",
+    "膽汁",
+    "胰液"
+   ]
+  },
+  "answer": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "explain": "唾腺→唾液、胃腺→胃液、肝臟→膽汁、胰臟→胰液（腸腺→腸液）。",
+  "link": "card:2-4:3",
+  "bingo": false
+ },
+ {
+  "id": "q2408",
+  "unit": "2-4",
+  "type": "hotspot",
+  "level": "基礎",
+  "stem": "請在人體消化系統圖上，點出「胃」。",
+  "options": {
+   "figure": "body",
+   "choices": [
+    "口腔",
+    "食道",
+    "胃",
+    "肝臟",
+    "胰臟",
+    "小腸",
+    "大腸"
+   ]
+  },
+  "answer": "胃",
+  "explain": "胃呈囊袋狀，位於食道和小腸之間。",
+  "link": "card:2-4:6",
+  "bingo": false
+ },
+ {
+  "id": "q2409",
+  "unit": "2-4",
+  "type": "hotspot",
+  "level": "基礎",
+  "stem": "請在人體消化系統圖上，點出「胰臟」。",
+  "options": {
+   "figure": "body",
+   "choices": [
+    "口腔",
+    "食道",
+    "胃",
+    "肝臟",
+    "胰臟",
+    "小腸",
+    "大腸"
+   ]
+  },
+  "answer": "胰臟",
+  "explain": "胰臟分泌的胰液經由管道注入小腸。",
+  "link": "card:2-4:7",
+  "bingo": false
+ },
+ {
+  "id": "q2410",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "未被消化的食物殘渣形成糞便，由肛門排出的過程稱為排泄。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "糞便由肛門排出稱為「排遺」，排遺不是排泄。",
+  "link": "card:2-4:9",
+  "bingo": true
+ },
+ {
+  "id": "q2411",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "小腸內壁的絨毛有什麼功能？",
+  "options": [
+   "分泌膽汁",
+   "增加吸收的表面積",
+   "暫時貯存食物",
+   "殺死細菌"
+  ],
+  "answer": 1,
+  "explain": "絨毛是指狀的小突起，能增加吸收的表面積。",
+  "link": "anim:2-4:A",
+  "bingo": true
+ },
+ {
+  "id": "q2412",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "胃液中的鹽酸有什麼功能？",
+  "options": [
+   "乳化脂質",
+   "殺死部分細菌，並促進胃中酵素的分解作用",
+   "分解澱粉",
+   "吸收水分"
+  ],
+  "answer": 1,
+  "explain": "鹽酸能殺死部分細菌，並可促進胃中酵素的分解作用。",
+  "link": "card:2-4:6",
+  "bingo": true
+ },
+ {
+  "id": "q2413",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "膽汁、胰液和腸液都是鹼性的，這有什麼作用？",
+  "options": [
+   "中和胃液的酸性，並促進小腸中酵素的活性",
+   "殺死腸道中的細菌",
+   "分解纖維素",
+   "增加吸收的表面積"
+  ],
+  "answer": 0,
+  "explain": "三種消化液為鹼性，能中和胃液酸性，並促進小腸中酵素的活性。",
+  "link": "card:2-4:7",
+  "bingo": true
+ },
+ {
+  "id": "q2414",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "以蛋白質為例，食物在哪一個器官中「只被磨碎、體積變小，分子沒有被分解」？",
+  "options": [
+   "口腔",
+   "胃",
+   "小腸",
+   "以上都有分子改變"
+  ],
+  "answer": 0,
+  "explain": "蛋白質在口腔只被牙齒磨碎；到胃才被胃液初步分解，到小腸被分解成胺基酸。",
+  "link": "anim:2-4:A",
+  "bingo": true
+ },
+ {
+  "id": "q2415",
+  "unit": "2-4",
+  "type": "single",
+  "level": "進階",
+  "stem": "大腸能繼續吸收什麼？",
+  "options": [
+   "胺基酸",
+   "水分與礦物質",
+   "脂肪酸",
+   "葡萄糖"
+  ],
+  "answer": 1,
+  "explain": "大腸能繼續吸收水分與礦物質。",
+  "link": "card:2-4:9",
+  "bingo": true
+ },
+ {
+  "id": "q2416",
+  "unit": "2-4",
+  "type": "match",
+  "level": "進階",
+  "stem": "請把器官和它在消化中的主要作用配對。",
+  "options": {
+   "left": [
+    "口腔",
+    "胃",
+    "小腸",
+    "大腸"
+   ],
+   "right": [
+    "牙齒切斷磨碎，唾液初步分解澱粉",
+    "胃液初步分解蛋白質",
+    "消化與吸收養分的主要部位",
+    "吸收水分與礦物質"
+   ]
+  },
+  "answer": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "explain": "口腔初步分解澱粉、胃初步分解蛋白質、小腸是消化吸收主要部位、大腸吸收水分。",
+  "link": "anim:2-4:A",
+  "bingo": false
+ },
+ {
+  "id": "q2417",
+  "unit": "2-4",
+  "type": "single",
+  "level": "會考",
+  "stem": "若將膽囊中的膽汁運送到小腸的管道發生阻塞，下列哪一種情形最可能發生？",
+  "options": [
+   "胰液無法排至小腸內",
+   "胃液無法分解蛋白質",
+   "消化脂質的功能下降",
+   "吸收葡萄糖的功能下降"
+  ],
+  "answer": 2,
+  "explain": "膽汁能乳化脂質，膽汁送不到小腸，消化脂質的功能就會下降。",
+  "link": "card:2-4:7",
+  "bingo": true,
+  "year": "106 會考（改寫）"
+ },
+ {
+  "id": "q2418",
+  "unit": "2-4",
+  "type": "single",
+  "level": "會考",
+  "stem": "澱粉在人體內經某種生理作用後，可產生多個小分子 X。此生理作用及小分子 X 的名稱，下列何者最合理？",
+  "options": [
+   "消化作用，葡萄糖",
+   "消化作用，胺基酸",
+   "呼吸作用，葡萄糖",
+   "呼吸作用，胺基酸"
+  ],
+  "answer": 0,
+  "explain": "大分子澱粉經消化作用分解成許多小分子葡萄糖。",
+  "link": "card:2-4:1",
+  "bingo": true,
+  "year": "109 會考"
+ },
+ {
+  "id": "q2419",
+  "unit": "2-4",
+  "type": "single",
+  "level": "會考",
+  "stem": "蛋白質食物在人體消化道中，經 X 物質分解為小分子後，再被吸收進入血液。X 和小分子的名稱，下列何者正確？",
+  "options": [
+   "X：激素，小分子：胺基酸",
+   "X：酵素，小分子：胺基酸",
+   "X：激素，小分子：脂肪酸",
+   "X：酵素，小分子：脂肪酸"
+  ],
+  "answer": 1,
+  "explain": "消化道中分解養分的是酵素；蛋白質分解成的小分子是胺基酸。",
+  "link": "card:2-4:1",
+  "bingo": true,
+  "year": "109 會考補考"
+ },
+ {
+  "id": "q2420",
+  "unit": "2-4",
+  "type": "single",
+  "level": "會考",
+  "stem": "人體的胃液及胰液中都有消化酵素。這兩種消化液在體內主要作用的場所，下列配對何者正確？",
+  "options": [
+   "胃液：胃，胰液：胰臟",
+   "胃液：胃，胰液：小腸",
+   "胃液：小腸，胰液：小腸",
+   "胃液：小腸，胰液：胰臟"
+  ],
+  "answer": 1,
+  "explain": "食物不會經過胰臟，胰液經由管道注入小腸，在小腸中作用。",
+  "link": "anim:2-4:A",
+  "bingo": true,
+  "year": "109 會考補考"
+ },
+ {
+  "id": "q2421",
+  "unit": "2-4",
+  "type": "single",
+  "level": "會考",
+  "stem": "每 100 mL 中，X 牌燕麥奶含蛋白質 1.3 g、糖 8.1 g；Y 牌牛奶含蛋白質 3 g、糖 4.5 g。壯壯想多攝取胺基酸，安安想少攝取糖。攝取相同容量時，兩人的選擇何者最合理？",
+  "options": [
+   "兩人皆宜選擇牛奶",
+   "兩人皆宜選擇燕麥奶",
+   "壯壯選擇牛奶，安安選擇燕麥奶",
+   "壯壯選擇燕麥奶，安安選擇牛奶"
+  ],
+  "answer": 0,
+  "explain": "胺基酸來自蛋白質，牛奶蛋白質較多；牛奶的糖也較少，所以兩人都適合選牛奶。",
+  "link": "card:2-4:1",
+  "bingo": true,
+  "year": "112 會考"
+ }
+]
 </script>
 <script>
 /*ANIM-START*/
@@ -1754,6 +3110,352 @@ function defSim24(){
 }
 
 ANIMS['2-4']=[{id:'A',name:'消化之旅模擬器',def:defSim24}];
+
+/* =========================================================
+   第 3 期：即時練習（題庫 questions.json）＋ 小結
+   ========================================================= */
+let QB=[];
+try{QB=JSON.parse(document.getElementById('qbank').textContent)}catch(e){QB=[]}
+// 線上（GitHub Pages）時優先讀取獨立的 questions.json，老師修改題庫後即可生效
+if(location.protocol.startsWith('http')){fetch('questions.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(Array.isArray(d)&&d.length)QB=d}).catch(()=>{})}
+
+const QS={get:()=>store.get('qstats',{}),set:v=>store.set('qstats',v)};
+const WRONG={get:()=>store.get('wrong',[]),set:v=>store.set('wrong',v)};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function stars(acc){return acc>=.9?3:acc>=.7?2:acc>=.5?1:0}
+function starHTML(n){return [0,1,2].map(i=>`<span class="star ${i<n?'on':''}">★</span>`).join('')}
+const TYPE_NAME={single:'單選題',tf:'是非題',match:'配對題',fill:'填空題',hotspot:'圖片點選'};
+
+/* 連結：card:2-2:4 → 開啟概念卡；anim:2-2:A → 開新分頁到動畫 */
+function linkBtn(link){if(!link)return '';const [k,u,x]=link.split(':');
+  if(k==='card'){const c=UNITS[u]&&UNITS[u].cards[+x-1];return c?`<button class="pbtn ghost q-link" data-card="${u}:${+x-1}">📖 看概念卡：${esc(c.t)}</button>`:''}
+  const a=(ANIMS[u]||[]).find(a=>a.id===x);return a?`<a class="pbtn ghost q-link" href="#/unit/${u}/anim/${x}" target="_blank" rel="noopener">🎬 看動畫：${esc(a.name)}</a>`:''}
+function bindLinks(root){root.querySelectorAll('[data-card]').forEach(b=>b.onclick=()=>{const [u,i]=b.dataset.card.split(':');openViewer(u,+i)})}
+
+/* ---- 圖片點選用的圖 ---- */
+const HOT={
+  leaf:{vb:'14 16 172 84',svg:()=>leafSection([]),regions:()=>{const r={};Object.entries(PARTS).forEach(([n,p])=>r[n]=p.rects);return r},order:['保衛細胞','葉脈','角質層','上表皮','下表皮','葉肉']},
+  body:{vb:'62 0 76 125',svg:()=>torso([],[]),regions:()=>({口腔:[[94,19,12,8]],食道:[[96,32,9,16]],胃:[[101,47,23,18]],肝臟:[[72,44,32,12]],胰臟:[[98,65,26,7]],小腸:[[86,72,28,30]],大腸:[[76,70,8,38],[76,70,48,7],[116,70,8,36]]}),order:['口腔','食道','胰臟','胃','肝臟','小腸','大腸']}
+};
+
+/* ---- 單題呈現：render(q, host, done(correct)) ---- */
+function renderQ(q,host,done){
+  const lv=q.level==='會考'&&q.year?`會考｜${q.year}`:q.level;
+  let body='',ready=()=>true,check=null,reveal=null;
+  host.innerHTML=`<div class="q-card"><div class="q-tags"><span class="q-tag t-${q.type}">${TYPE_NAME[q.type]}</span><span class="q-tag lv-${q.level}">${esc(lv)}</span></div>
+    <div class="q-stem">${q.type==='fill'?esc(q.stem).replace(/\{(\d)\}/g,(m,i)=>`<select data-b="${i}" aria-label="第 ${+i+1} 格"><option value="">（選擇）</option>${q.options[+i].map((o,j)=>`<option value="${j}">${esc(o)}</option>`).join('')}</select>`):esc(q.stem)}</div>
+    <div class="q-body"></div><div class="q-act"></div><div class="q-fb" hidden></div></div>`;
+  const B=host.querySelector('.q-body'),A=host.querySelector('.q-act'),FB=host.querySelector('.q-fb');
+  let answered=false;
+  const finish=(ok,ansText)=>{if(answered)return;answered=true;ok?SFX.coin():SFX.lock();
+    host.querySelectorAll('button.q-opt,select,.m-chip,.m-slot').forEach(e=>{e.disabled=true;e.classList.add('lock')});
+    A.innerHTML='';FB.hidden=false;FB.className='q-fb '+(ok?'ok':'no');
+    FB.innerHTML=`<div class="q-res">${ok?'✔ 答對了！':'✖ 答錯了'}</div>${ok?'':`<div class="q-ans"><b>正確答案：</b>${ansText}</div>`}<div class="q-exp">${esc(q.explain)}</div><div class="q-links">${linkBtn(q.link)}</div><div class="q-next"></div>`;
+    bindLinks(FB);done&&done(ok,FB.querySelector('.q-next'))};
+  if(q.type==='single'||q.type==='tf'){
+    B.innerHTML=`<div class="q-opts ${q.type}">${q.options.map((o,i)=>`<button class="q-opt" data-i="${i}"><span class="q-l">${q.type==='tf'?(i?'✕':'○'):'ABCD'[i]}</span>${esc(o)}</button>`).join('')}</div>`;
+    B.querySelectorAll('.q-opt').forEach(b=>b.onclick=()=>{if(answered)return;const i=+b.dataset.i,ok=i===q.answer;
+      b.classList.add(ok?'right':'wrong');B.querySelector(`[data-i="${q.answer}"]`).classList.add('right');
+      finish(ok,`${q.type==='tf'?'':'ABCD'[q.answer]+'. '}${esc(q.options[q.answer])}`)});
+  }else if(q.type==='fill'){
+    A.innerHTML=`<button class="pbtn" data-go>確定答案</button>`;
+    A.querySelector('[data-go]').onclick=()=>{const sel=[...host.querySelectorAll('select[data-b]')];
+      if(sel.some(s=>s.value==='')){toast('還有空格沒有選喔！');return}
+      let ok=true;sel.forEach(s=>{const b=+s.dataset.b,r=+s.value===q.answer[b];s.classList.add(r?'right':'wrong');if(!r)ok=false});
+      finish(ok,esc(q.stem).replace(/\{(\d)\}/g,(m,i)=>`<u>${esc(q.options[+i][q.answer[+i]])}</u>`))};
+  }else if(q.type==='match'){
+    const L=q.options.left,R=q.options.right,order=shuffle(R.map((_,i)=>i)),put={};let pick=null;
+    B.innerHTML=`<p class="q-tip">把右邊的說明拖到左邊對應的格子（也可以先點說明、再點格子）。</p><div class="m-wrap"><div class="m-left">${L.map((l,i)=>`<div class="m-row"><span class="m-key">${esc(l)}</span><button class="m-slot" data-s="${i}">放這裡</button></div>`).join('')}</div>
+      <div class="m-right">${order.map(j=>`<button class="m-chip" data-c="${j}">${esc(R[j])}</button>`).join('')}</div></div>`;
+    const draw=()=>{B.querySelectorAll('.m-slot').forEach(s=>{const j=put[s.dataset.s];s.textContent=j==null?'放這裡':R[j];s.classList.toggle('full',j!=null)});
+      B.querySelectorAll('.m-chip').forEach(c=>{c.classList.toggle('used',Object.values(put).includes(+c.dataset.c));c.classList.toggle('pick',pick===+c.dataset.c)})};
+    const place=(slot,j)=>{for(const k in put)if(put[k]===j)delete put[k];put[slot]=j;pick=null;SFX.tap();draw()};
+    B.querySelectorAll('.m-chip').forEach(c=>{c.onclick=()=>{if(answered)return;pick=+c.dataset.c;draw()};
+      c.addEventListener('pointerdown',e=>{if(answered)return;const j=+c.dataset.c;const g=c.cloneNode(true);g.classList.add('m-ghost');document.body.appendChild(g);
+        const mv=ev=>{g.style.left=ev.clientX-40+'px';g.style.top=ev.clientY-20+'px'};mv(e);let moved=false;
+        const m2=ev=>{moved=true;mv(ev)};
+        const up=ev=>{document.removeEventListener('pointermove',m2);document.removeEventListener('pointerup',up);g.remove();
+          if(!moved)return;const el=document.elementFromPoint(ev.clientX,ev.clientY);const s=el&&el.closest('.m-slot');if(s&&B.contains(s))place(s.dataset.s,j)};
+        document.addEventListener('pointermove',m2);document.addEventListener('pointerup',up)})});
+    B.querySelectorAll('.m-slot').forEach(s=>s.onclick=()=>{if(answered)return;if(pick!=null)place(s.dataset.s,pick);else if(put[s.dataset.s]!=null){delete put[s.dataset.s];draw()}});
+    A.innerHTML=`<button class="pbtn" data-go>確定答案</button>`;
+    A.querySelector('[data-go]').onclick=()=>{if(Object.keys(put).length<L.length){toast('還有格子沒有放喔！');return}
+      let ok=true;B.querySelectorAll('.m-slot').forEach(s=>{const r=put[s.dataset.s]===q.answer[+s.dataset.s];s.classList.add(r?'right':'wrong');if(!r)ok=false});
+      finish(ok,L.map((l,i)=>`${esc(l)} → ${esc(R[q.answer[i]])}`).join('；'))};
+  }else if(q.type==='hotspot'){
+    const H=HOT[q.options.figure],regs=H.regions();
+    B.innerHTML=`<p class="q-tip">直接在圖上點一下。</p><svg class="hs" viewBox="${H.vb}" shape-rendering="crispEdges">${H.svg()}<g class="hs-mark"></g></svg>`;
+    const svg=B.querySelector('svg'),mark=B.querySelector('.hs-mark');
+    const hl=(n,col)=>regs[n].map(([x,y,w,h])=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${col}" fill-opacity=".35" stroke="${col}" stroke-width="1.5" stroke-dasharray="3 2"/>`).join('');
+    svg.addEventListener('click',e=>{if(answered)return;const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());
+      const hit=H.order.find(n=>regs[n].some(([x,y,w,h])=>p.x>=x-1.5&&p.x<=x+w+1.5&&p.y>=y-1.5&&p.y<=y+h+1.5));
+      if(!hit){toast('請點在圖中的構造上');return}
+      const ok=hit===q.answer;mark.innerHTML=(ok?'':hl(hit,'#d6336c'))+hl(q.answer,'#2f9e44')+`<circle cx="${p.x}" cy="${p.y}" r="2.2" fill="#2a1a12"/>`;
+      finish(ok,`${esc(q.answer)}（綠框處）${ok?'':`；你點的是「${esc(hit)}」`}`)});
+  }
+}
+
+/* ---- 練習分頁 ---- */
+const PR={};
+function renderPractice(u,box){
+  const st=QS.get(),best=(st.best||{})[u],wrongAll=WRONG.get(),wrongU=wrongAll.filter(id=>id.startsWith('q'+u.replace('-',''))),n=QB.filter(q=>q.unit===u).length;
+  box.innerHTML=`<section class="pbox pr-home">
+    <div class="pr-stat"><div><b class="px">本單元最佳</b><div class="stars">${starHTML(best?best.stars:0)}</div><div>${best?`正確率 ${Math.round(best.acc*100)}%`:'還沒有紀錄'}</div></div>
+      <div><b class="px">累計作答</b><div class="big px">${st.answered||0}</div><div>答對 ${st.correct||0} 題</div></div>
+      <div><b class="px">錯題本</b><div class="big px">${wrongAll.length}</div><div>本單元 ${wrongU.length} 題</div></div></div>
+    <div class="pr-modes">
+      <button class="pbox pr-mode" data-m="unit"><span class="px">單元練習</span><small>${esc(UNITS[u].name)}：隨機 10 題（題庫 ${n} 題）</small></button>
+      <button class="pbox pr-mode" data-m="mix"><span class="px">綜合挑戰</span><small>2-2、2-3、2-4 混合 20 題</small></button>
+      <button class="pbox pr-mode" data-m="wrong" ${wrongAll.length?'':'disabled'}><span class="px">錯題重練</span><small>${wrongAll.length?`重練錯題本中的 ${Math.min(10,wrongAll.length)} 題，答對就移出`:'目前沒有錯題'}</small></button>
+    </div></section><div class="pr-play"></div>`;
+  box.querySelectorAll('.pr-mode').forEach(b=>b.onclick=()=>{SFX.open();startPractice(u,b.dataset.m,box)});
+}
+function startPractice(u,mode,box){
+  let list;
+  if(mode==='unit')list=shuffle(QB.filter(q=>q.unit===u)).slice(0,10);
+  else if(mode==='mix'){const per=[7,7,6];list=shuffle(ORDER.flatMap((x,i)=>shuffle(QB.filter(q=>q.unit===x)).slice(0,per[i])))}
+  else{const w=WRONG.get();list=shuffle(QB.filter(q=>w.includes(q.id))).slice(0,10)}
+  if(!list.length){toast('沒有題目可以練習');return}
+  const S={u,mode,list,i:0,ok:0,wrong:[]};
+  box.innerHTML=`<section class="pbox pr-run"><div class="pr-bar"><span class="px pr-no"></span><div class="pr-prog"><i></i></div><span class="px pr-coin">${spriteSvg('coin',2,'style="width:16px;height:16px;vertical-align:-2px"')} × <b>0</b></span><button class="pbtn ghost pr-quit">結束</button></div><div class="pr-q"></div></section>`;
+  box.querySelector('.pr-quit').onclick=()=>{SFX.tap();renderPractice(u,box)};
+  const show=()=>{const q=S.list[S.i];box.querySelector('.pr-no').textContent=`第 ${S.i+1}／${S.list.length} 題`;box.querySelector('.pr-prog i').style.width=(S.i/S.list.length*100)+'%';
+    renderQ(q,box.querySelector('.pr-q'),(ok,next)=>{
+      const st=QS.get();st.answered=(st.answered||0)+1;if(ok)st.correct=(st.correct||0)+1;QS.set(st);
+      let w=WRONG.get();if(ok){if(S.mode==='wrong')w=w.filter(x=>x!==q.id)}else{if(!w.includes(q.id))w.push(q.id);S.wrong.push(q)}WRONG.set(w);
+      if(ok){S.ok++;box.querySelector('.pr-coin b').textContent=S.ok}
+      next.innerHTML=`<button class="pbtn">${S.i<S.list.length-1?'下一題 ▶':'看結果 ▶'}</button>`;
+      next.querySelector('button').onclick=()=>{SFX.next();S.i++;if(S.i<S.list.length){show();box.scrollIntoView({block:'start'})}else result()};
+    })};
+  const result=()=>{const acc=S.ok/S.list.length,s=stars(acc);
+    if(S.mode==='unit'){const st=QS.get();st.best=st.best||{};const b=st.best[u];if(!b||acc>b.acc)st.best[u]={acc,stars:s};QS.set(st)}
+    if(S.mode==='mix'){const st=QS.get();if(!st.mix||acc>st.mix.acc)st.mix={acc,stars:s};QS.set(st)}
+    if(s>=2)SFX.stage();
+    box.innerHTML=`<section class="pbox pr-result"><div class="px pr-clear">${s===3?'PERFECT!':s?'STAGE CLEAR!':'再接再厲！'}</div><div class="stars big">${starHTML(s)}</div>
+      <p>答對 <b>${S.ok}</b> ／ ${S.list.length} 題，正確率 <b>${Math.round(acc*100)}%</b></p>
+      ${S.wrong.length?`<div class="pr-wl"><b>這次答錯的題目（已收進錯題本）：</b><ol>${S.wrong.map(q=>`<li>${esc(q.stem.replace(/\{\d\}/g,'＿＿'))}</li>`).join('')}</ol></div>`:''}
+      <div class="pr-btns"><button class="pbtn" data-a="again">再玩一次</button>${WRONG.get().length?'<button class="pbtn gold" data-a="wrong">錯題重練</button>':''}<button class="pbtn ghost" data-a="home">回練習首頁</button></div></section>`;
+    box.querySelector('[data-a="again"]').onclick=()=>startPractice(u,S.mode,box);
+    const wb=box.querySelector('[data-a="wrong"]');if(wb)wb.onclick=()=>startPractice(u,'wrong',box);
+    box.querySelector('[data-a="home"]').onclick=()=>renderPractice(u,box);
+    box.scrollIntoView({block:'start'})};
+  show();
+}
+
+/* ---- 小結分頁（企劃書 3.3） ---- */
+const SUMMARY={
+ '2-2':[['代謝作用的類型',`<table class="sum"><tr><th>類型</th><th>說明</th></tr><tr><td>分解作用</td><td>大分子轉變成小分子</td></tr><tr><td>合成作用</td><td>小分子結合成大分子</td></tr></table>`],
+   ['酵素的特性',`<ul><li>酵素又稱為<b>酶</b>，能促進代謝反應的進行。</li><li>大部分種類的酵素，主要成分是<b>蛋白質</b>。</li><li>和酵素結合而作用的物質稱為<b>受質</b>；結合具有<b>專一性</b>（澱粉酶能分解澱粉，不能分解纖維素）。</li><li>環境條件不變時，反應結束後仍可與新的受質作用（<b>可重複使用</b>）。</li></ul>`],
+   ['溫度的影響',`<ul><li>一定溫度範圍內，活性隨溫度升高而增加。</li><li>溫度過高，破壞酵素構造，酵素會<b>永久失去活性</b>。</li></ul>`],
+   ['酸鹼值的影響',`<table class="sum"><tr><th>酵素</th><th>適合的環境</th></tr><tr><td>胃中的酵素</td><td>酸性</td></tr><tr><td>唾液中的酵素</td><td>中性</td></tr><tr><td>小腸中的酵素</td><td>鹼性</td></tr></table><p>酸鹼值超過酵素能忍受的範圍，酵素活性可能降低或失去活性。</p>`]],
+ '2-3':[['葉的構造與功能',`<table class="sum"><tr><th>構造</th><th>功能</th></tr><tr><td>角質層</td><td>位於表皮外側，避免水分過度散失</td></tr><tr><td>上、下表皮</td><td>透明無色、排列緊密，具保護功能</td></tr><tr><td>保衛細胞、氣孔</td><td>保衛細胞兩兩成對形成氣孔，是氣體進出的主要通道</td></tr><tr><td>葉肉</td><td>具大量葉綠體，是光合作用的主要場所</td></tr><tr><td>葉脈</td><td>輸導組織，運輸水分和養分</td></tr></table>`],
+   ['光合作用',`<table class="sum"><tr><th>原料</th><td>水、二氧化碳</td></tr><tr><th>條件</th><td>光、葉綠體（葉綠素吸收光能，配合酵素作用）</td></tr><tr><th>場所</th><td>葉綠體（主要在葉肉細胞）</td></tr><tr><th>產物</th><td>氧氣、葡萄糖、水</td></tr></table><p class="eq">水＋二氧化碳 →（光、葉綠體）→ 氧氣＋葡萄糖＋水</p>`],
+   ['產物的去向',`<ul><li>葡萄糖：供細胞直接利用、形成纖維素，或轉換成澱粉等儲存。</li><li>植物行光合作用是為了自身生存；氧氣和動物的食物來源是「附加價值」。</li></ul>`],
+   ['實驗 2-3 重點',`<ul><li>遮光 3～5 天 → 熱水軟化 → 酒精隔水加熱溶出葉綠素 → 熱水漂洗 → 滴碘液。</li><li>照光處呈藍黑色（有澱粉），遮光處呈黃褐色 → 照光是光合作用的必要條件之一。</li></ul>`]],
+ '2-4':[['消化腺與消化液',`<table class="sum"><tr><th>消化腺</th><th>消化液</th><th>酸鹼性</th><th>作用</th></tr><tr><td>唾腺</td><td>唾液</td><td>中性</td><td>分解澱粉</td></tr><tr><td>胃腺</td><td>胃液</td><td>酸性</td><td>分解蛋白質</td></tr><tr><td>肝臟</td><td>膽汁</td><td>鹼性</td><td>乳化脂質（不含酵素）</td></tr><tr><td>胰臟</td><td>胰液</td><td>鹼性</td><td>分解醣類、蛋白質、脂質</td></tr><tr><td>腸腺</td><td>腸液</td><td>鹼性</td><td>分解醣類、蛋白質</td></tr></table>`],
+   ['各器官的變化',`<table class="sum"><tr><th>器官</th><th>醣類（澱粉）</th><th>蛋白質</th><th>脂質</th></tr><tr><td>口腔</td><td class="m">分子改變</td><td class="v">體積改變</td><td class="v">體積改變</td></tr><tr><td>咽、食道</td><td class="p">只推送</td><td class="p">只推送</td><td class="p">只推送</td></tr><tr><td>胃</td><td class="v">體積改變</td><td class="m">分子改變</td><td class="v">體積改變</td></tr><tr><td>小腸</td><td class="m">→ 葡萄糖</td><td class="m">→ 胺基酸</td><td class="m">乳化 → 甘油＋脂肪酸</td></tr><tr><td>大腸</td><td colspan="3">吸收水分與礦物質</td></tr><tr><td>肛門</td><td colspan="3">排遺（不是排泄）</td></tr></table>`],
+   ['吸收',`<ul><li>小腸內壁皺褶上有許多<b>絨毛</b>，增加吸收的表面積。</li><li>小分子養分經血液運送至全身細胞利用或儲存。</li><li>大腸繼續吸收水分與礦物質。</li></ul>`]]
+};
+function renderSummary(u,box){
+  box.innerHTML=`<section class="pbox sum-box"><h2 class="px">${esc(UNITS[u].name)}：重點整理</h2>
+    ${SUMMARY[u].map(([t,h],i)=>`<details ${i===0?'open':''}><summary class="px">${esc(t)}</summary><div class="sum-in">${h}</div></details>`).join('')}
+    <div class="sum-ctl"><button class="pbtn ghost" data-x="open">全部展開</button><button class="pbtn ghost" data-x="close">全部收合</button></div></section>
+    <section class="pbox sum-quiz"><h2 class="px">快問快答（3 題）</h2><div class="sq"></div></section>`;
+  box.querySelector('[data-x="open"]').onclick=()=>box.querySelectorAll('details').forEach(d=>d.open=true);
+  box.querySelector('[data-x="close"]').onclick=()=>box.querySelectorAll('details').forEach(d=>d.open=false);
+  const pool=shuffle(QB.filter(q=>q.unit===u&&q.level==='基礎'&&(q.type==='single'||q.type==='tf'))).slice(0,3);
+  let i=0,ok=0;const host=box.querySelector('.sq');
+  const go=()=>{if(i>=pool.length){host.innerHTML=`<div class="px pr-clear">答對 ${ok}／${pool.length}</div><button class="pbtn" id="sqAgain">再來 3 題</button>`;host.querySelector('#sqAgain').onclick=()=>renderSummary(u,box);return}
+    renderQ(pool[i],host,(r,next)=>{if(r)ok++;next.innerHTML=`<button class="pbtn">${i<pool.length-1?'下一題 ▶':'看結果 ▶'}</button>`;next.querySelector('button').onclick=()=>{i++;go()}})};
+  go();
+}
+
+/* =========================================================
+   第 3 期：心智圖線索建構（企劃書第七節）
+   ========================================================= */
+const B_=(a,h1,h2,link)=>({a,h:[h1,h2],link});
+const MMDATA={
+ '2-2':{root:'酵素',col:'#f07f24',branches:[
+   {t:'代謝作用',kids:[B_('分解作用（大→小）','大分子轉變成小分子，叫做什麼作用？','分＿＿＿（大→小）','card:2-2:2'),B_('合成作用（小→大）','小分子結合成大分子，叫做什麼作用？','合＿＿＿（小→大）','card:2-2:2')]},
+   {t:'酵素特性',kids:[B_('主要成分是蛋白質','大部分種類的酵素，主要成分是什麼？','主要成分是蛋＿＿','card:2-2:3'),B_('受質','和酵素結合而作用的物質叫什麼？','受＿','card:2-2:4'),
+     B_('專一性','為什麼澱粉酶不能分解纖維素？','專＿＿','card:2-2:4'),B_('可重複使用','反應結束後，酵素還能和新的受質作用嗎？','可＿＿使用','card:2-2:5')]},
+   {t:'影響活性',kids:[B_('溫度過高永久失去活性','溫度太高時，酵素會怎麼樣？','溫度過高＿＿失去活性','card:2-2:6'),B_('酸鹼值（胃偏酸、小腸偏鹼）','胃和小腸的酵素，各適合什麼酸鹼環境？','酸鹼值（胃偏＿、小腸偏＿）','card:2-2:7')]}],
+   distract:['主要成分是澱粉','只能使用一次','溫度越高活性一定越高']},
+ '2-3':{root:'植物製造養分',col:'#3f9f45',branches:[
+   {t:'葉的構造',kids:[B_('角質層','哪個構造位於表皮外側，可避免水分過度散失？','角＿＿','card:2-3:2'),B_('表皮','透明無色、排列緊密、具保護功能的是？','表＿','card:2-3:3'),
+     B_('保衛細胞','半月形、內含葉綠體、兩兩成對的細胞是？','保＿＿＿','card:2-3:4'),B_('氣孔','氣體進出植物的主要通道是？','氣＿','card:2-3:4'),
+     B_('葉肉','葉片中製造養分的主要部位是？','葉＿（有大量葉綠體）','card:2-3:5'),B_('葉脈','能運輸水分和養分的輸導組織是？','葉＿（輸導組織）','card:2-3:6')]},
+   {t:'光合作用',kids:[B_('原料：水、二氧化碳','光合作用需要哪兩種原料？','原料：水、二＿＿＿','card:2-3:7'),B_('條件：光、葉綠體','光合作用需要什麼條件、在哪裡進行？','條件：光、葉＿＿','card:2-3:7'),
+     B_('產物：葡萄糖、氧氣、水','光合作用最後產生哪些物質？','產物：葡＿＿、氧＿、水','card:2-3:7')]},
+   {t:'驗證實驗',kids:[B_('遮光 3～5 天','實驗 2-3 第一步，要對葉片做什麼處理？','遮＿ 3～5 天','card:2-3:10'),B_('酒精溶出葉綠素','酒精隔水加熱的目的是什麼？','酒精溶出葉＿＿','card:2-3:10'),
+     B_('照光處碘液呈藍黑色','滴碘液後，照光的部分是什麼顏色？','照光處碘液呈藍＿色','card:2-3:10')]}],
+   distract:['原料：氧氣、葡萄糖','條件：黑暗','酒精溶出澱粉']},
+ '2-4':{root:'人體獲得養分',col:'#e45f84',branches:[
+   {t:'消化道',kids:['口腔','咽','食道','胃','小腸','大腸','肛門'].map((o,i)=>B_(o,`食物經過消化道的第 ${i+1} 站是哪裡？`,`${o[0]}${'＿'.repeat(o.length-1)}`,'card:2-4:2'))},
+   {t:'消化腺',kids:[B_('唾腺','分泌唾液的消化腺是？','唾＿','card:2-4:3'),B_('胃腺','胃壁上分泌胃液的是？','胃＿','card:2-4:3'),B_('肝臟（膽汁）','分泌膽汁的器官是？','肝＿（膽汁）','card:2-4:7'),
+     B_('胰臟','分泌胰液的器官是？','胰＿','card:2-4:7'),B_('腸腺','小腸壁上分泌腸液的是？','腸＿','card:2-4:3')]},
+   {t:'消化作用',kids:[B_('澱粉→葡萄糖','澱粉最後被分解成什麼？','澱粉→葡＿＿','card:2-4:1'),B_('蛋白質→胺基酸','蛋白質最後被分解成什麼？','蛋白質→胺＿＿','card:2-4:1'),B_('脂質→甘油＋脂肪酸','部分脂質被分解成什麼？','脂質→甘＿＋脂＿＿','card:2-4:1')]},
+   {t:'吸收',kids:[B_('小腸絨毛→微血管','小腸吸收養分靠什麼構造？養分進入哪裡？','小腸絨＿→微＿＿','card:2-4:8'),B_('大腸吸收水分','大腸還能吸收什麼？','大腸吸收＿＿','card:2-4:9')]}],
+   distract:['胰臟分解脂質','膽汁含有酵素','食道分泌消化液']}
+};
+const MM_LINKS=[
+ {a:'2-2',b:'2-4:b2',w:'參與',txt:'酵素 ↔ 消化作用',hint:'消化作用需要誰幫忙分解養分？'},
+ {a:'2-3:b1:k2',b:'2-4:b2:k0',w:'都有葡萄糖',txt:'光合作用的產物 ↔ 消化的產物（葡萄糖）',hint:'植物製造的、人體消化後得到的，有哪一種相同的小分子？'},
+ {a:'2-2:b0:k0',b:'2-4:b2',w:'屬於',txt:'分解作用 ↔ 消化作用',hint:'消化作用是把大分子變成小分子，屬於哪一種代謝作用？'}
+];
+const LINK_WORDS=['參與','促進','產生','屬於','都有葡萄糖','在…作用','檢測'];
+const NW={root:150,b:150,k:220},NH=46,GAP=10;
+
+function mmLayout(scope){
+  const units=scope==='all'?ORDER:[scope],N=[],E=[];
+  const X=scope==='all'?{top:16,root:186,b:356,k:528}:{root:16,b:190,k:364};
+  let y=16;
+  units.forEach(u=>{const D=MMDATA[u],y0=y;const bys=[];
+    D.branches.forEach((br,bi)=>{const ky0=y;
+      br.kids.forEach((k,ki)=>{N.push({id:`${u}:b${bi}:k${ki}`,u,lv:'k',t:k.a,blank:true,data:k,x:X.k,y,w:NW.k,h:NH,col:D.col});y+=NH+GAP});
+      const by=(ky0+y-GAP-NH)/2;N.push({id:`${u}:b${bi}`,u,lv:'b',t:br.t,x:X.b,y:by,w:NW.b,h:NH,col:D.col});bys.push(by);
+      br.kids.forEach((k,ki)=>E.push([`${u}:b${bi}`,`${u}:b${bi}:k${ki}`]));y+=GAP*1.6});
+    const ry=(bys[0]+bys[bys.length-1])/2;N.push({id:u,u,lv:'root',t:D.root,x:X.root,y:ry-4,w:NW.root,h:NH+8,col:D.col});
+    D.branches.forEach((_,bi)=>E.push([u,`${u}:b${bi}`]));y+=GAP*2});
+  if(scope==='all'){const rs=N.filter(n=>n.lv==='root');N.push({id:'all',lv:'top',t:'生物體的營養',x:X.top,y:(rs[0].y+rs[2].y)/2-6,w:150,h:NH+20,col:'#e0a91f'});rs.forEach(r=>E.push(['all',r.id]))}
+  const W=Math.max(...N.map(n=>n.x+n.w))+24,H=y+10;
+  return {N,E,W,H}
+}
+const MMS={scope:'2-2',sel:null,linkMode:false,adv:false,linkA:null};
+function mmState(scope){return store.get('mm_'+scope,{filled:[],hints:{},wrong:0,custom:[],links:[]})}
+function mmSave(scope,s){store.set('mm_'+scope,s)}
+
+function renderMindmap(scope){
+  scope=['2-2','2-3','2-4','all'].includes(scope)?scope:'2-2';MMS.scope=scope;MMS.sel=null;MMS.linkA=null;
+  document.body.dataset.theme='home';setScene('home');
+  const L=mmLayout(scope),S=mmState(scope);
+  const blanks=L.N.filter(n=>n.blank);
+  const units=scope==='all'?ORDER:[scope];
+  const bank=shuffle([...blanks.map(n=>n.t),...units.flatMap(u=>MMDATA[u].distract.slice(0,scope==='all'?1:3))]);
+  app.innerHTML=`
+  <section class="pbox stagebar mm-head">${spriteSvg('chest',6,'class="guide bob"')}
+    <div><span class="wtag" style="background:#6b4fbf">MIND MAP</span><h1 class="ptitle" style="color:#5a3fa8">心智圖神殿</h1><div class="pg">骨架已給、節點待填：把詞卡拖到正確的空格，卡住時打開 💡 線索。</div></div>
+    <div class="talk">放對會變綠並固定；放錯會彈回。${scope==='all'?'全章整合還要用「連線」完成 3 條跨單元連結！':'完成後可以匯出 PNG 當複習筆記。'}</div></section>
+  <div class="levels" role="tablist">${[['2-2','2-2 酵素'],['2-3','2-3 植物製造養分'],['2-4','2-4 人體獲得養分'],['all','全章整合']].map(([k,n])=>`<button class="lv" role="tab" aria-selected="${k===scope}" data-s="${k}">${n}</button>`).join('')}
+    <a class="pbtn ghost" href="#/" style="margin-left:auto">⬅ 世界地圖</a></div>
+  <section class="pbox mm-bar">
+    <div class="mm-prog"><b class="px">完成度</b><div class="meter"><i></i></div><span class="mm-pct px"></span></div>
+    <span class="mm-st">💡 線索 <b class="mm-h">0</b> 次｜放錯 <b class="mm-w">0</b> 次</span>
+    <div class="mm-tools">
+      <button class="mini ${MMS.adv?'on':''}" data-t="adv">進階模式</button>
+      <span class="mm-advt" ${MMS.adv||scope==='all'?'':'hidden'}><button class="mini ${MMS.linkMode?'on':''}" data-t="link">🔗 連線</button><input class="mm-in" maxlength="16" placeholder="新節點文字"><button class="mini" data-t="add">＋新增節點</button></span>
+      <button class="mini" data-t="png">⬇ 匯出 PNG</button><button class="mini" data-t="reset">↺ 重來</button></div>
+  </section>
+  ${scope==='all'?`<section class="pbox mm-req"><b class="px">跨單元連結任務</b><ul>${MM_LINKS.map((l,i)=>`<li data-r="${i}"><span class="ck">□</span> ${esc(l.txt)} <button class="mini" data-lh="${i}">💡</button><span class="lh" hidden>${esc(l.hint)}</span></li>`).join('')}</ul><small>開啟「🔗 連線」，依序點兩個節點，再選連結詞。</small></section>`:''}
+  <div class="mm-main">
+    <div class="pbox mm-scroll"><div class="mm-canvas" style="width:${L.W}px;height:${Math.max(L.H,300)}px"><svg class="mm-lines" width="${L.W}" height="${Math.max(L.H,300)}"></svg>
+      ${L.N.map(n=>`<div class="mm-node lv-${n.lv} ${n.blank?'blank':''}" data-id="${n.id}" style="left:${n.x}px;top:${n.y}px;width:${n.w}px;height:${n.h}px;--c:${n.col}">${n.blank?`<span class="mm-t"></span><button class="mm-hint" aria-label="線索">💡</button>`:`<span class="mm-t">${esc(n.t)}</span>`}</div>`).join('')}
+      <div class="mm-custom"></div><div class="mm-pop" hidden></div></div></div>
+    <aside class="pbox mm-bank"><b class="px">詞卡庫</b><small>拖曳詞卡到空格，或先點詞卡再點空格。小心干擾卡！</small><div class="mm-chips">${bank.map((t,i)=>`<button class="mm-chip" data-t="${esc(t)}" data-i="${i}">${esc(t)}</button>`).join('')}</div></aside>
+  </div>`;
+  app.querySelectorAll('.lv[data-s]').forEach(b=>b.onclick=()=>{SFX.tap();location.hash='#/mindmap/'+b.dataset.s});
+  const canvas=app.querySelector('.mm-canvas'),svg=app.querySelector('.mm-lines'),pop=app.querySelector('.mm-pop');
+  const nodeEl=id=>canvas.querySelector(`[data-id="${CSS.escape(id)}"]`);
+  const nodeBox=id=>{const n=L.N.find(n=>n.id===id)||S.custom.find(c=>c.id===id);if(!n)return null;return {x:n.x,y:n.y,w:n.w||150,h:n.h||NH}};
+  const filledText=id=>{const n=L.N.find(n=>n.id===id);return n?(n.blank?(S.filled.includes(id)?n.t:null):n.t):(S.custom.find(c=>c.id===id)||{}).t};
+  /* ---- 畫線 ---- */
+  function drawLines(){let h='';
+    L.E.forEach(([a,b])=>{const A=nodeBox(a),B=nodeBox(b);const x1=A.x+A.w,y1=A.y+A.h/2,x2=B.x,y2=B.y+B.h/2,mx=(x1+x2)/2;
+      h+=`<path d="M${x1} ${y1} H${mx} V${y2} H${x2}" fill="none" stroke="#2a1a12" stroke-width="3"/>`});
+    S.links.forEach((l,i)=>{const A=nodeBox(l.a),B=nodeBox(l.b);if(!A||!B)return;const p1={x:A.x+A.w/2,y:A.y+A.h/2},p2={x:B.x+B.w/2,y:B.y+B.h/2},cx=Math.min(p1.x,p2.x)-60,cy=(p1.y+p2.y)/2;
+      h+=`<path d="M${p1.x} ${p1.y} Q${cx} ${cy} ${p2.x} ${p2.y}" fill="none" stroke="#6b4fbf" stroke-width="3" stroke-dasharray="8 5"/>`;
+      const mx=(p1.x+2*cx+p2.x)/4,my=(p1.y+2*cy+p2.y)/4;h+=`<g class="mm-lk" data-l="${i}" style="cursor:pointer"><rect x="${mx-36}" y="${my-12}" width="72" height="24" fill="#fff" stroke="#6b4fbf" stroke-width="2"/><text x="${mx}" y="${my+5}" font-size="13" text-anchor="middle" font-weight="900" fill="#6b4fbf">${esc(l.w)}</text></g>`});
+    svg.innerHTML=h;
+    svg.querySelectorAll('.mm-lk').forEach(g=>g.onclick=()=>{if(!MMS.linkMode)return;S.links.splice(+g.dataset.l,1);mmSave(scope,S);SFX.tap();toast('已刪除這條連線');refresh()});
+  }
+  function drawCustom(){const c=canvas.querySelector('.mm-custom');c.innerHTML=S.custom.map(n=>`<div class="mm-node lv-c" data-id="${n.id}" style="left:${n.x}px;top:${n.y}px;width:${n.w||150}px;height:${NH}px"><span class="mm-t">${esc(n.t)}</span><button class="mm-del" aria-label="刪除">✕</button></div>`).join('');
+    c.querySelectorAll('.mm-node').forEach(el=>{const n=S.custom.find(x=>x.id===el.dataset.id);
+      el.querySelector('.mm-del').onclick=e=>{e.stopPropagation();S.custom=S.custom.filter(x=>x!==n);S.links=S.links.filter(l=>l.a!==n.id&&l.b!==n.id);mmSave(scope,S);refresh()};
+      let d=null;el.addEventListener('pointerdown',e=>{if(MMS.linkMode||e.target.closest('.mm-del'))return;d={x:e.clientX,y:e.clientY,nx:n.x,ny:n.y};el.setPointerCapture(e.pointerId)});
+      el.addEventListener('pointermove',e=>{if(!d)return;n.x=Math.max(0,d.nx+e.clientX-d.x);n.y=Math.max(0,d.ny+e.clientY-d.y);el.style.left=n.x+'px';el.style.top=n.y+'px';drawLines()});
+      el.addEventListener('pointerup',()=>{if(d){d=null;mmSave(scope,S)}});
+      el.addEventListener('click',()=>nodeClick(n.id))})}
+  function refresh(){
+    L.N.filter(n=>n.blank).forEach(n=>{const el=nodeEl(n.id),f=S.filled.includes(n.id);el.classList.toggle('done',f);el.querySelector('.mm-t').textContent=f?n.t:'？';el.querySelector('.mm-hint').hidden=f});
+    app.querySelectorAll('.mm-chip').forEach(c=>{const t=c.dataset.t;const used=L.N.filter(n=>n.blank&&n.t===t&&S.filled.includes(n.id)).length,need=L.N.filter(n=>n.blank&&n.t===t).length;c.hidden=need>0&&used>=need});
+    const reqOK=MM_LINKS.map(r=>scope==='all'&&S.links.some(l=>(l.a===r.a&&l.b===r.b)||(l.a===r.b&&l.b===r.a)));
+    app.querySelectorAll('.mm-req li').forEach((li,i)=>{li.classList.toggle('ok',reqOK[i]);li.querySelector('.ck').textContent=reqOK[i]?'✔':'□'});
+    const total=blanks.length+(scope==='all'?MM_LINKS.length:0),done=S.filled.length+reqOK.filter(Boolean).length,pct=Math.round(done/total*100);
+    app.querySelector('.mm-prog i').style.width=pct+'%';app.querySelector('.mm-pct').textContent=pct+'%';
+    app.querySelector('.mm-h').textContent=Object.values(S.hints).reduce((a,b)=>a+b,0);app.querySelector('.mm-w').textContent=S.wrong||0;
+    canvas.querySelectorAll('.mm-node').forEach(el=>el.classList.toggle('pickA',MMS.linkA===el.dataset.id));
+    drawCustom();drawLines();
+    if(pct===100&&!S.cleared){S.cleared=true;mmSave(scope,S);SFX.stage();toast('★ 心智圖完成！可以匯出 PNG 當複習筆記')}
+  }
+  /* ---- 放詞卡 ---- */
+  function tryPlace(id,text,chip){const n=L.N.find(n=>n.id===id);if(!n||!n.blank||S.filled.includes(id))return;
+    const el=nodeEl(id);
+    if(text===n.t){S.filled.push(id);mmSave(scope,S);SFX.coin();el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),400);MMS.sel=null;refresh()}
+    else{S.wrong=(S.wrong||0)+1;mmSave(scope,S);SFX.lock();el.classList.add('shake');chip&&chip.classList.add('shake');setTimeout(()=>{el.classList.remove('shake');chip&&chip.classList.remove('shake')},450);refresh()}}
+  app.querySelectorAll('.mm-chip').forEach(c=>{
+    c.addEventListener('click',()=>{MMS.sel=MMS.sel===c?null:c;app.querySelectorAll('.mm-chip').forEach(x=>x.classList.toggle('pick',x===MMS.sel));SFX.tap()});
+    c.addEventListener('pointerdown',e=>{const g=c.cloneNode(true);g.classList.add('m-ghost');let moved=false;
+      const mv=ev=>{if(!moved&&Math.hypot(ev.clientX-e.clientX,ev.clientY-e.clientY)<6)return;if(!moved){moved=true;document.body.appendChild(g)}g.style.left=ev.clientX-50+'px';g.style.top=ev.clientY-18+'px'};
+      const up=ev=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);if(!moved)return;g.remove();
+        const el=document.elementFromPoint(ev.clientX,ev.clientY),nd=el&&el.closest('.mm-node.blank');if(nd)tryPlace(nd.dataset.id,c.dataset.t,c);else{c.classList.add('shake');setTimeout(()=>c.classList.remove('shake'),450)}};
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up)})});
+  /* ---- 線索 ---- */
+  function showHint(id){const n=L.N.find(n=>n.id===id);const lv=Math.min(3,(S.hints[id]||0)+1);S.hints[id]=lv;mmSave(scope,S);SFX.tap();
+    const [u,i]=n.data.link.split(':').slice(1);const card=UNITS[u].cards[+i-1];
+    pop.hidden=false;pop.style.left=Math.min(n.x,canvas.offsetWidth-260)+'px';pop.style.top=(n.y+NH+6)+'px';
+    pop.innerHTML=`<b>💡 線索 ${lv}／3</b><div>${esc(n.data.h[0])}</div>${lv>=2?`<div class="h2">提示：${esc(n.data.h[1])}</div>`:''}${lv>=3?`<button class="mini" data-card="${u}:${+i-1}">📖 看概念卡：${esc(card.t)}</button>`:''}
+      <div class="pop-btn">${lv<3?'<button class="mini" data-more>再給一個線索</button>':''}<button class="mini" data-close>關閉</button></div>`;
+    bindLinks(pop);const m=pop.querySelector('[data-more]');if(m)m.onclick=()=>showHint(id);pop.querySelector('[data-close]').onclick=()=>pop.hidden=true;refresh()}
+  /* ---- 點節點：放詞卡／連線 ---- */
+  function nodeClick(id){
+    if(MMS.linkMode){const t=filledText(id);if(!t){toast('請先把這個空格填好，再連線');return}
+      if(!MMS.linkA){MMS.linkA=id;SFX.tap();refresh();return}
+      if(MMS.linkA===id){MMS.linkA=null;refresh();return}
+      const a=MMS.linkA,b=id,bx=nodeBox(b);MMS.linkA=null;
+      pop.hidden=false;pop.style.left=Math.min(bx.x,canvas.offsetWidth-260)+'px';pop.style.top=(bx.y+NH+6)+'px';
+      pop.innerHTML=`<b>選一個連結詞</b><div class="lw">${LINK_WORDS.map(w=>`<button class="mini" data-w="${esc(w)}">${esc(w)}</button>`).join('')}</div><div class="pop-btn"><input class="mm-lw" maxlength="8" placeholder="自訂連結詞"><button class="mini" data-ok>確定</button><button class="mini" data-close>取消</button></div>`;
+      const mk=w=>{if(!w)return;S.links.push({a,b,w});mmSave(scope,S);pop.hidden=true;SFX.coin();
+        const r=MM_LINKS.find(r=>(r.a===a&&r.b===b)||(r.a===b&&r.b===a));if(scope==='all'&&r)toast(`✔ 完成跨單元連結：${r.txt}`);refresh()};
+      pop.querySelectorAll('[data-w]').forEach(x=>x.onclick=()=>mk(x.dataset.w));pop.querySelector('[data-ok]').onclick=()=>mk(pop.querySelector('.mm-lw').value.trim());pop.querySelector('[data-close]').onclick=()=>{pop.hidden=true;refresh()};
+      refresh();return}
+    const n=L.N.find(n=>n.id===id);if(n&&n.blank&&MMS.sel)tryPlace(id,MMS.sel.dataset.t,MMS.sel)}
+  canvas.querySelectorAll('.mm-node').forEach(el=>{el.addEventListener('click',e=>{if(e.target.closest('.mm-hint')){showHint(el.dataset.id);return}nodeClick(el.dataset.id)})});
+  /* ---- 工具列 ---- */
+  const T=k=>app.querySelector(`[data-t="${k}"]`);
+  T('adv').onclick=()=>{MMS.adv=!MMS.adv;SFX.tap();renderMindmap(scope)};
+  if(T('link'))T('link').onclick=()=>{MMS.linkMode=!MMS.linkMode;MMS.linkA=null;T('link').classList.toggle('on',MMS.linkMode);canvas.classList.toggle('linking',MMS.linkMode);toast(MMS.linkMode?'連線模式：依序點兩個節點（點連結詞可刪除連線）':'已關閉連線模式');refresh()};
+  canvas.classList.toggle('linking',MMS.linkMode);
+  if(T('add'))T('add').onclick=()=>{const inp=app.querySelector('.mm-in'),t=inp.value.trim();if(!t){toast('請先輸入節點文字');return}
+    const sc=app.querySelector('.mm-scroll');S.custom.push({id:'c'+Date.now(),t,x:sc.scrollLeft+40,y:sc.scrollTop+40,w:Math.max(110,[...t].length*17+36)});inp.value='';mmSave(scope,S);SFX.coin();refresh()};
+  T('reset').onclick=()=>{if(T('reset').dataset.c!=='1'){T('reset').dataset.c='1';T('reset').textContent='再按一次確定重來';setTimeout(()=>{T('reset').dataset.c='';T('reset').textContent='↺ 重來'},2500);return}
+    mmSave(scope,{filled:[],hints:{},wrong:0,custom:[],links:[]});renderMindmap(scope)};
+  T('png').onclick=()=>mmExport(scope,L,S,nodeBox);
+  app.querySelectorAll('[data-lh]').forEach(b=>b.onclick=()=>{const s=b.nextElementSibling;s.hidden=!s.hidden});
+  refresh();
+}
+
+/* ---- 匯出 PNG（直接畫在 canvas 上） ---- */
+function mmExport(scope,L,S,nodeBox){
+  const k=2,W=L.W+20,H=Math.max(L.H,300)+70,cv=document.createElement('canvas');cv.width=W*k;cv.height=H*k;const g=cv.getContext('2d');g.scale(k,k);
+  g.fillStyle='#fff8e6';g.fillRect(0,0,W,H);
+  g.fillStyle='#2a1a12';g.font='900 20px "Cubic11","Noto Sans TC","Microsoft JhengHei",sans-serif';g.fillText(`心智圖：${scope==='all'?'第2章 生物體的營養（全章整合）':MMDATA[scope].root}`,16,30);
+  g.font='700 12px "Noto Sans TC","Microsoft JhengHei",sans-serif';const pct=g;
+  g.fillText(`線索使用 ${Object.values(S.hints).reduce((a,b)=>a+b,0)} 次｜${new Date().toLocaleDateString('zh-TW')}`,16,50);
+  g.translate(0,60);
+  g.lineWidth=3;g.strokeStyle='#2a1a12';
+  L.E.forEach(([a,b])=>{const A=nodeBox(a),B=nodeBox(b),x1=A.x+A.w,y1=A.y+A.h/2,x2=B.x,y2=B.y+B.h/2,mx=(x1+x2)/2;g.beginPath();g.moveTo(x1,y1);g.lineTo(mx,y1);g.lineTo(mx,y2);g.lineTo(x2,y2);g.stroke()});
+  const wrap=(t,x,y,w,size)=>{g.font=`900 ${size}px "Noto Sans TC","Microsoft JhengHei",sans-serif`;const ch=[...t];let lines=[''];ch.forEach(c=>{if(g.measureText(lines[lines.length-1]+c).width>w-14)lines.push('');lines[lines.length-1]+=c});
+    lines.forEach((l,i)=>g.fillText(l,x+w/2,y+(i-(lines.length-1)/2)*(size+2)))};
+  const box=(n,fill,txt)=>{g.fillStyle=fill;g.fillRect(n.x,n.y,n.w,n.h);g.lineWidth=3;g.strokeStyle='#2a1a12';g.strokeRect(n.x,n.y,n.w,n.h);g.fillStyle=fill==='#2a1a12'?'#fff':'#2a1a12';g.textAlign='center';g.textBaseline='middle';wrap(txt,n.x,n.y+n.h/2,n.w,n.lv==='root'||n.lv==='top'?17:14)};
+  L.N.forEach(n=>{if(n.blank){const f=S.filled.includes(n.id);box(n,f?'#c9eda0':'#ffffff',f?n.t:'？')}else box(n,n.lv==='b'?'#fff3d6':n.col,n.t)});
+  S.custom.forEach(n=>box({...n,w:n.w||150,h:NH},'#e6dcff',n.t));
+  g.setLineDash([8,5]);g.strokeStyle='#6b4fbf';
+  S.links.forEach(l=>{const A=nodeBox(l.a),B=nodeBox(l.b);if(!A||!B)return;const p1={x:A.x+A.w/2,y:A.y+A.h/2},p2={x:B.x+B.w/2,y:B.y+B.h/2},cx=Math.min(p1.x,p2.x)-60,cy=(p1.y+p2.y)/2;
+    g.beginPath();g.moveTo(p1.x,p1.y);g.quadraticCurveTo(cx,cy,p2.x,p2.y);g.stroke();const mx=(p1.x+2*cx+p2.x)/4,my=(p1.y+2*cy+p2.y)/4;
+    g.setLineDash([]);g.fillStyle='#fff';g.fillRect(mx-36,my-12,72,24);g.strokeRect(mx-36,my-12,72,24);g.fillStyle='#6b4fbf';g.font='900 13px "Noto Sans TC",sans-serif';g.fillText(l.w,mx,my+1);g.setLineDash([8,5])});
+  cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`心智圖_${scope==='all'?'全章':scope}.png`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)});
+  SFX.coin();toast('已匯出 PNG');
+}
 
 /*ANIM-END*/
 </script>
