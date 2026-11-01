@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>生物體的營養大冒險｜第2章互動學習</title>
+<meta name="description" content="國中自然第2章 生物體的營養：2-2 酵素、2-3 植物如何製造養分、2-4 人體如何獲得養分 互動學習網站">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+/* ===== 中文像素字型（俐方體11號，SIL OFL）；載入失敗會自動改用一般黑體 ===== */
+@font-face{
+  font-family:"Cubic11";
+  src:url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@main/fonts/web/Cubic_11.woff2") format("woff2"),
+      url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@main/fonts/Cubic_11.woff2") format("woff2"),
+      url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@main/fonts/ttf/Cubic_11.ttf") format("truetype"),
+      url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@main/fonts/Cubic_11.ttf") format("truetype");
+  font-display:swap;
+}
+:root{
+  --ink:#2a1a12; --ink2:#5a3b28; --paper:#fff8e6; --paper2:#ffefc7;
+  --gold:#e0a91f; --gold-d:#9c6f08; --gold-l:#ffd65a;
+  --u22:#f07f24; --u22d:#a4480f; --u22l:#ffd2a6;
+  --u23:#3f9f45; --u23d:#1f5f27; --u23l:#c9eda0;
+  --u24:#e45f84; --u24d:#9a2648; --u24l:#ffd0dc;
+  --accent:var(--gold); --accent-d:var(--gold-d); --accent-l:var(--gold-l);
+  --dlg:#1c2350; --ok:#2f9e44; --no:#d6336c;
+  --px:"Cubic11","Press Start 2P","Noto Sans TC","Microsoft JhengHei",monospace;
+  --tx:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+}
+body[data-theme="2-2"]{--accent:var(--u22);--accent-d:var(--u22d);--accent-l:var(--u22l)}
+body[data-theme="2-3"]{--accent:var(--u23);--accent-d:var(--u23d);--accent-l:var(--u23l)}
+body[data-theme="2-4"]{--accent:var(--u24);--accent-d:var(--u24d);--accent-l:var(--u24l)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--tx);font-size:18px;line-height:1.6;color:var(--ink);background:#7ec8f0;min-height:100vh;overflow-x:hidden}
+button{font:inherit;color:inherit}
+.px{font-family:var(--px);letter-spacing:.02em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ===== 背景場景 ===== */
+#scene{position:fixed;inset:0;z-index:0;pointer-events:none}
+#scene svg{width:100%;height:100%;display:block}
+.drift{animation:drift 70s linear infinite}
+.drift2{animation:drift 110s linear infinite}
+@keyframes drift{from{transform:translateX(-40px)}to{transform:translateX(360px)}}
+.spin{transform-box:fill-box;transform-origin:center;animation:spin 4s steps(8) infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rise{animation:rise 9s linear infinite}
+@keyframes rise{from{transform:translateY(40px);opacity:0}15%{opacity:.9}to{transform:translateY(-200px);opacity:0}}
+.belt{animation:belt 1.2s steps(4) infinite}
+@keyframes belt{to{transform:translateX(16px)}}
+.bob{animation:bob 1s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.puff{animation:puff 3s steps(6) infinite;transform-box:fill-box}
+@keyframes puff{from{transform:translateY(0);opacity:.9}to{transform:translateY(-30px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.drift,.drift2,.spin,.rise,.belt,.bob,.puff{animation:none}}
+
+/* ===== HUD ===== */
+#hud{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:8px 14px;
+  background:var(--ink);color:#fff;border-bottom:4px solid #000;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+#hud .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;min-width:0}
+#hud .logo b{font-family:var(--px);font-size:13px;color:var(--gold-l);white-space:nowrap}
+#hud .logo span{font-family:var(--px);font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#hud .sp{flex:1}
+.coinbox{display:flex;align-items:center;gap:6px;font-family:var(--px);font-size:15px;color:var(--gold-l);white-space:nowrap}
+.hbtn{min-width:48px;min-height:48px;padding:6px 12px;border:3px solid #000;background:#3b2a20;color:#fff;cursor:pointer;
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,.35),inset 0 3px 0 rgba(255,255,255,.15);font-family:var(--px);font-size:14px;white-space:nowrap}
+.hbtn:active{transform:translateY(2px)}
+.modesw{display:flex;border:3px solid #000}
+.modesw button{min-height:44px;padding:4px 12px;border:0;background:#3b2a20;color:#cbb;cursor:pointer;font-family:var(--px);font-size:14px}
+.modesw button[aria-pressed="true"]{background:var(--accent);color:#fff;box-shadow:inset 0 -4px 0 rgba(0,0,0,.3)}
+@media (max-width:640px){#hud{gap:6px;padding:6px 8px;flex-wrap:wrap;position:relative}#hud .logo span{font-size:13px}.modesw button{padding:4px 8px;font-size:13px}.hbtn{padding:4px 8px}}
+
+/* ===== 共用像素元件 ===== */
+main{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:22px 16px 140px}
+.pbox{background:var(--paper);border:4px solid var(--ink);box-shadow:inset 0 -6px 0 rgba(0,0,0,.08),inset 0 4px 0 #fff,6px 6px 0 rgba(42,26,18,.85)}
+.pbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;min-width:52px;padding:8px 18px;cursor:pointer;
+  background:var(--accent);color:#fff;border:4px solid var(--ink);font-family:var(--px);font-size:16px;text-decoration:none;
+  box-shadow:inset 0 -5px 0 rgba(0,0,0,.28),inset 0 4px 0 rgba(255,255,255,.35),0 5px 0 var(--ink);text-shadow:2px 2px 0 rgba(0,0,0,.35);transition:transform .05s}
+.pbtn:active{transform:translateY(4px);box-shadow:inset 0 -5px 0 rgba(0,0,0,.28),inset 0 4px 0 rgba(255,255,255,.35),0 1px 0 var(--ink)}
+.pbtn.ghost{background:var(--paper);color:var(--ink);text-shadow:none}
+.pbtn.gold{background:var(--gold)}
+.pbtn[disabled]{opacity:.45;cursor:not-allowed}
+.ptitle{font-family:var(--px);font-weight:400;margin:0;line-height:1.3;text-shadow:3px 3px 0 rgba(0,0,0,.25)}
+svg.ill{width:100%;height:auto;display:block;background:#fffdf5}
+.svt{font-family:var(--tx);paint-order:stroke;stroke:#fffdf5;stroke-width:2.6px;stroke-linejoin:round}
+
+/* ===== 首頁 ===== */
+.title-screen{text-align:center;padding:26px 18px 22px;margin:8px auto 28px;max-width:900px}
+.title-screen .world{font-family:"Press Start 2P",var(--px);font-size:14px;color:var(--gold-d);letter-spacing:.15em}
+.title-screen h1{font-size:clamp(30px,5.6vw,58px);color:var(--gold);-webkit-text-stroke:2px var(--ink);text-shadow:4px 4px 0 var(--ink);margin:10px 0 6px}
+.title-screen p{margin:6px 0 0;font-size:18px}
+.squad{display:flex;justify-content:center;gap:18px;margin-top:14px}
+.squad svg{width:64px;height:64px}
+.blink{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.map{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;align-items:end}
+.map::before{content:"";position:absolute;left:8%;right:8%;top:58%;border-top:8px dashed rgba(42,26,18,.55);z-index:0}
+.portal{position:relative;z-index:1;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);cursor:pointer;transition:transform .1s}
+.portal:nth-child(even){margin-bottom:46px}
+.portal:hover:not(.locked){transform:translateY(-6px)}
+.portal .plate{padding:0;overflow:hidden}
+.portal .thumb{display:block;width:100%;height:auto;border-bottom:4px solid var(--ink)}
+.portal .info{padding:10px 12px 12px}
+.portal .num{font-family:"Press Start 2P",var(--px);font-size:13px;color:#fff;background:var(--c,var(--gold));display:inline-block;padding:4px 8px;border:3px solid var(--ink)}
+.portal h2{font-family:var(--px);font-size:20px;font-weight:400;margin:8px 0 4px;line-height:1.3}
+.portal .sub{font-size:15px;color:var(--ink2)}
+.meter{height:16px;border:3px solid var(--ink);background:#fff;margin-top:8px;position:relative}
+.meter i{position:absolute;left:0;top:0;bottom:0;background:repeating-linear-gradient(90deg,var(--gold) 0 8px,var(--gold-l) 8px 12px)}
+.portal.locked{cursor:default;filter:saturate(.35)}
+.portal.locked .lock{position:absolute;top:10px;right:10px;font-family:var(--px);font-size:13px;background:var(--ink);color:#fff;padding:3px 8px}
+.howto{margin-top:34px;padding:18px 22px}
+.howto h3{font-family:var(--px);font-weight:400;margin:0 0 8px;font-size:20px}
+.howto ul{margin:0;padding-left:1.3em}
+@media (max-width:980px){.map{grid-template-columns:repeat(2,1fr)}.portal:nth-child(even){margin-bottom:0}.map::before{display:none}}
+@media (max-width:520px){.map{grid-template-columns:1fr}}
+
+/* ===== 單元頁 ===== */
+.stagebar{display:flex;gap:18px;align-items:center;padding:14px 18px;margin-bottom:16px}
+.stagebar .guide{width:84px;height:84px;flex:none}
+.stagebar .wtag{font-family:"Press Start 2P",var(--px);font-size:13px;color:#fff;background:var(--accent);border:3px solid var(--ink);padding:4px 8px;display:inline-block}
+.stagebar h1{font-size:clamp(26px,3.6vw,40px);color:var(--accent-d);margin:6px 0 2px}
+.stagebar .pg{font-size:15px;color:var(--ink2)}
+.talk{position:relative;flex:1;background:#fff;border:4px solid var(--ink);padding:10px 14px;font-size:17px;min-width:200px}
+.talk::before{content:"";position:absolute;left:-14px;top:22px;border:7px solid transparent;border-right-color:var(--ink)}
+@media (max-width:820px){.stagebar{flex-wrap:wrap}.talk{flex-basis:100%}}
+.levels{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.lv{min-height:52px;padding:6px 14px;border:4px solid var(--ink);background:var(--paper);cursor:pointer;font-family:var(--px);font-size:16px;
+  box-shadow:inset 0 -5px 0 rgba(0,0,0,.1),0 5px 0 var(--ink);display:flex;align-items:center;gap:8px}
+.lv small{font-family:"Press Start 2P",var(--px);font-size:10px;color:var(--ink2)}
+.lv[aria-selected="true"]{background:var(--accent);color:#fff}
+.lv[aria-selected="true"] small{color:#fff}
+.lv .lk{font-size:13px;background:var(--ink);color:#fff;padding:1px 6px}
+.lv:active{transform:translateY(3px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+.card{display:flex;flex-direction:column;text-align:left;padding:0;cursor:pointer;transition:transform .1s;position:relative}
+.card:hover{transform:translateY(-5px)}
+.card .top{display:flex;align-items:center;justify-content:space-between;background:var(--accent);color:#fff;padding:6px 10px;border-bottom:4px solid var(--ink)}
+.card .top .n{font-family:"Press Start 2P",var(--px);font-size:14px;text-shadow:2px 2px 0 rgba(0,0,0,.35)}
+.card .top .st{font-family:var(--px);font-size:13px;background:rgba(0,0,0,.25);padding:1px 8px}
+.card .top .st.got{background:var(--gold);color:var(--ink)}
+.card .body{padding:12px 14px 14px}
+.card h3{font-family:var(--px);font-weight:400;font-size:21px;margin:0 0 4px;line-height:1.35}
+.card p{margin:0;font-size:16px;color:var(--ink2)}
+.card svg.ill{border-bottom:4px solid var(--ink)}
+.lockpanel{padding:24px 26px}
+.lockpanel h2{font-family:var(--px);font-weight:400;font-size:26px;margin:0 0 6px;color:var(--accent-d)}
+.lockpanel ul{padding-left:1.3em;margin:10px 0 0}
+.lockpanel li{margin:4px 0}
+
+/* ===== 卡片檢視器 ===== */
+#viewer{position:fixed;inset:0;z-index:50;display:none;background:rgba(14,10,30,.78);
+  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 4px);overflow:auto;padding:16px}
+#viewer.open{display:block}
+.vpanel{max-width:1480px;margin:0 auto;padding:0}
+.vpanel.anim{animation:popin .18s steps(3)}
+@keyframes popin{from{transform:scale(.94)}to{transform:none}}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+.vhead{display:flex;align-items:center;gap:12px;background:var(--accent);color:#fff;padding:10px 14px;border-bottom:4px solid var(--ink)}
+.vhead .n{font-family:"Press Start 2P",var(--px);font-size:14px}
+.vhead h2{font-family:var(--px);font-weight:400;margin:0;font-size:clamp(22px,2.6vw,36px);flex:1;text-shadow:3px 3px 0 rgba(0,0,0,.3);line-height:1.3}
+.vbody{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:20px;padding:18px}
+.vbody .figure{border:4px solid var(--ink);align-self:start;background:#fffdf5}
+.figure .cap{font-size:14px;color:var(--ink2);padding:4px 10px;border-top:3px solid var(--ink);background:var(--paper2)}
+.points{list-style:none;margin:0;padding:0}
+.points li{position:relative;padding:10px 12px 10px 40px;margin:0 0 10px;background:#fff;border:3px solid var(--ink);font-size:19px}
+.points li::before{content:"";position:absolute;left:12px;top:19px;width:14px;height:14px;background:var(--accent);box-shadow:0 0 0 3px var(--ink)}
+.quiz{margin-top:14px;padding:12px 14px;background:var(--accent-l);border:4px dashed var(--ink)}
+.quiz .qh{font-family:var(--px);font-size:18px;margin-bottom:4px}
+.quiz .ans{margin-top:10px;padding:10px 12px;background:#fff;border:3px solid var(--ink);display:none}
+.quiz .ans.show{display:block;animation:pop .18s steps(3)}
+.vfoot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 18px 18px;border-top:4px solid var(--ink);background:var(--paper2)}
+.vfoot .mid{display:flex;gap:10px;flex-wrap:wrap}
+.collect.got{background:var(--gold);color:var(--ink);text-shadow:none}
+@media (max-width:900px){.vbody{grid-template-columns:1fr}.points li{font-size:18px}}
+
+/* ===== 老師模式：大字、逐點顯示、隱藏解答 ===== */
+body.teacher .dialog{background:var(--dlg);color:#fff;border:4px solid #fff;box-shadow:0 0 0 4px var(--ink);padding:18px 22px;min-height:200px}
+body.teacher .points li{background:transparent;border:0;border-bottom:2px dashed rgba(255,255,255,.3);color:#fff;
+  font-size:clamp(24px,2.1vw,40px);line-height:1.5;padding:12px 6px 14px 50px;margin:0}
+body.teacher .points li::before{background:var(--gold-l);box-shadow:none;width:18px;height:18px;left:10px;top:clamp(24px,1.9vw,34px)}
+body.teacher .points li.hide{display:none}
+body.teacher .points li.now{color:var(--gold-l)}
+body.teacher .quiz{font-size:clamp(22px,1.8vw,32px)}
+body.teacher .quiz .qh{font-size:clamp(22px,1.8vw,32px)}
+body.teacher .tnext{font-family:var(--px);color:var(--gold-l);text-align:right;font-size:22px;margin-top:6px}
+body.teacher .figure .cap{font-size:18px}
+body:not(.teacher) .tonly{display:none!important}
+body.teacher .sonly{display:none!important}
+body.teacher .card h3{font-size:24px}
+body.teacher .card p{font-size:18px}
+.keys{font-size:14px;color:var(--ink2)}
+.keys kbd{font-family:var(--px);background:#fff;border:2px solid var(--ink);padding:0 6px;margin:0 2px}
+
+/* 大屏 1920×1080：字級 28px 以上 */
+@media (min-width:1600px){
+  body{font-size:20px}
+  body.teacher main{max-width:1760px}
+  body.teacher .stagebar h1{font-size:48px}
+  body.teacher .talk{font-size:26px}
+  body.teacher .lv{font-size:22px}
+  body.teacher .card h3{font-size:30px}
+  body.teacher .card p{font-size:24px}
+  body.teacher .grid{grid-template-columns:repeat(auto-fill,minmax(360px,1fr))}
+  body.teacher .points li{font-size:40px}
+  body.teacher .quiz,body.teacher .quiz .qh{font-size:30px}
+}
+
+/* ===== 進場畫面與金幣特效 ===== */
+#intro{position:fixed;inset:0;z-index:80;background:#000;color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;text-align:center;padding:20px}
+#intro.show{display:flex}
+#intro .w{font-family:"Press Start 2P",var(--px);font-size:clamp(22px,4vw,44px)}
+#intro .nm{font-family:var(--px);font-size:clamp(28px,5vw,60px);color:var(--accent-l)}
+#intro .ln{font-family:"Press Start 2P",var(--px);font-size:16px;display:flex;align-items:center;gap:14px}
+#intro svg{width:96px;height:96px}
+#intro .skip{font-size:15px;color:#aaa}
+.coinfx{position:fixed;z-index:90;pointer-events:none;font-family:"Press Start 2P",var(--px);color:var(--gold-l);font-size:20px;text-shadow:3px 3px 0 #000;animation:coinup .9s steps(9) forwards}
+@keyframes coinup{to{transform:translateY(-90px);opacity:0}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:95;background:var(--ink);color:#fff;border:4px solid #000;padding:10px 18px;font-family:var(--px);font-size:16px;box-shadow:0 0 0 4px #fff}
+footer.foot{position:relative;z-index:1;text-align:center;font-size:14px;color:#fff;padding:0 16px 30px;text-shadow:1px 1px 0 #000}
+
+/* ===== 第 2 期：動畫播放器 ===== */
+.anim-pick{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+.anim-box{padding:14px}
+.ap{display:grid;grid-template-columns:1fr;gap:14px}
+.ap.has-side{grid-template-columns:minmax(0,1fr) 300px}
+@media (max-width:980px){.ap.has-side{grid-template-columns:1fr}}
+.ap-stage{position:relative;border:4px solid var(--ink);background:#fffdf5;touch-action:none;user-select:none;-webkit-user-select:none}
+.ap-svg{display:block;width:100%;height:auto;max-height:calc(100vh - 300px);min-height:200px}
+.ap-hud{position:absolute;inset:0;pointer-events:none}
+.ap-hud>*{pointer-events:auto}
+.ap-tools{position:absolute;left:8px;top:8px;right:8px;display:flex;gap:6px;flex-wrap:wrap}
+.mini{min-height:40px;padding:4px 10px;border:3px solid var(--ink);background:#fff;font-family:var(--tx);font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 3px 0 var(--ink);display:inline-flex;align-items:center;gap:6px}
+.mini.on,.mini[aria-pressed="true"]{background:var(--accent);color:#fff}
+.mini:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.mini[disabled]{opacity:.5;cursor:not-allowed}
+.mini i{display:inline-block;width:12px;height:12px;border:2px solid var(--ink)}
+.ap-msg{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);background:var(--ink);color:#fff;border:3px solid #fff;box-shadow:0 0 0 3px var(--ink);padding:6px 14px;font-weight:900;font-size:17px;max-width:92%;text-align:center;pointer-events:none}
+.ap-msg.ok{background:#1f6f34}.ap-msg.no{background:#b0244f}
+.ap-say{margin-top:10px;background:var(--dlg);color:#fff;border:4px solid #fff;box-shadow:0 0 0 4px var(--ink);padding:10px 16px;min-height:86px}
+.ap-head{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.ap-no{color:var(--gold-l);font-size:14px}
+.ap-st{font-size:20px;color:#fff}
+.ap-tx{font-size:18px;line-height:1.6;margin-top:4px}
+.ap-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.ap-ctl .pbtn{min-height:48px;padding:6px 14px;font-size:15px}
+.ap-spd{display:inline-flex;align-items:center;gap:4px;font-weight:900;margin-left:auto}
+.ap-spd button{min-width:48px;min-height:44px;border:3px solid var(--ink);background:#fff;cursor:pointer;font-family:var(--px);font-size:13px}
+.ap-spd button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.ap-dots{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.ap-dots button{width:40px;height:40px;border:3px solid var(--ink);background:#fff;font-family:var(--px);font-size:13px;cursor:pointer}
+.ap-dots button.past{background:var(--accent-l)}
+.ap-dots button.on{background:var(--accent);color:#fff}
+.ap-side{padding:14px;align-self:start}
+.ap-side h4{margin:0 0 6px;font-weight:400;font-size:20px}
+.lab-row{display:flex;flex-direction:column;gap:6px;margin:10px 0;font-weight:700}
+.lab-row input[type=range]{width:100%;height:36px;accent-color:var(--accent)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.lab-state{padding:8px 10px;border:3px dashed var(--ink);background:#fff;margin:8px 0}
+.lab-res{display:flex;gap:10px;align-items:center;min-height:20px;font-size:16px;margin:6px 0}
+.lab-tip{font-size:14px;color:var(--ink2);margin:6px 0 0}
+.ap-drag{cursor:grab}
+.ap-drag:active{cursor:grabbing}
+.ap-hot{cursor:pointer;animation:hot 1s steps(2) infinite}
+@keyframes hot{50%{filter:drop-shadow(0 0 0 #ff0) brightness(1.25)}}
+.ap-blink{animation:blink 1s steps(2) infinite}
+.ap-info{position:absolute;left:8px;bottom:8px;max-width:60%;background:#fff;border:4px solid var(--ink);padding:8px 12px;font-size:16px;box-shadow:4px 4px 0 var(--ink)}
+.ap-info b{font-family:var(--px);font-weight:400;font-size:18px;color:var(--accent-d)}
+.ap-q{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,92%);background:var(--paper);border:4px solid var(--ink);box-shadow:6px 6px 0 var(--ink);padding:14px 16px;font-size:17px}
+.ap-q.wide{top:8px;transform:translateX(-50%);max-height:calc(100% - 16px);overflow:auto;width:min(760px,96%)}
+.ap-q>div{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.ap-q .qq{display:block;margin:0 0 10px}
+.ap-q .qq>div{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.ap-q .qq .mini{justify-content:flex-start;text-align:left}
+.ap-qr{margin:8px 0 0;font-weight:700}
+.ap-load{background:#fff;border:3px solid var(--ink);padding:4px 8px;font-weight:700;font-size:15px}
+.ap-sum{position:absolute;right:8px;top:56px;bottom:8px;width:min(620px,70%);overflow:auto;background:var(--paper);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:10px 12px;font-size:14px}
+.ap-sum b{font-family:var(--px);font-weight:400;font-size:18px}
+.ap-sum table{border-collapse:collapse;width:100%;margin-top:6px}
+.ap-sum th,.ap-sum td{border:2px solid var(--ink);padding:4px 6px;text-align:left;vertical-align:top}
+.ap-sum th{background:var(--accent);color:#fff}
+.ap-sum .dim{opacity:.35}
+.chip{display:inline-block;padding:1px 6px;color:#fff;font-weight:900;font-size:13px;border:2px solid var(--ink)}
+.chip.mol{background:#e83f3f}.chip.vol{background:#2b7fd0}.chip.push{background:#777}.chip.water{background:#3a8fb7}.chip.out{background:#8a5a2b}
+.ap.free .ap-stage{box-shadow:0 0 0 4px var(--gold-l)}
+body.teacher .ap-tx{font-size:clamp(22px,1.7vw,32px)}
+body.teacher .ap-st{font-size:clamp(24px,1.8vw,34px)}
+@media (max-width:640px){.ap-tx{font-size:16px}.ap-spd{margin-left:0}.ap-info{max-width:92%;font-size:14px}.ap-sum{width:96%;top:96px}.mini{font-size:13px;min-height:36px;padding:2px 6px}}
+</style>
+</head>
+<body data-theme="home">
+<div id="scene" aria-hidden="true"></div>
+<header id="hud">
+  <a class="logo" href="#/" aria-label="回到世界地圖"><span id="hudCoinIcon"></span><b>WORLD 2</b><span>生物體的營養</span></a>
+  <div class="sp"></div>
+  <div class="coinbox" title="已收集的金幣（看懂的概念卡）"><span id="hudCoin2"></span><span>×<span id="coinCount">0</span></span></div>
+  <button class="hbtn" id="soundBtn" aria-label="音效開關">♪ ON</button>
+  <div class="modesw" role="group" aria-label="切換模式">
+    <button id="mStudent" aria-pressed="true">學生模式</button>
+    <button id="mTeacher" aria-pressed="false">老師模式</button>
+  </div>
+</header>
+<main id="app"></main>
+<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.70–91｜第 2 期：互動動畫</footer>
+<div id="viewer" role="dialog" aria-modal="true" aria-label="概念卡"></div>
+<div id="intro" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   像素繪圖工具
+   ========================================================= */
+const C={k:'#2a1a12',w:'#fffdf5',W:'#ffffff',o:'#f08a2c',O:'#b8561a',y:'#ffd23f',Y:'#d9a400',g:'#5cbf3a',G:'#2e7d32',l:'#b4e67a',
+  b:'#5aa9e6',B:'#2b5fa8',c:'#a7e6ff',p:'#ff8fa3',P:'#d94f6e',r:'#e83f3f',R:'#9e1c2c',n:'#8a5a2b',N:'#5c3a1a',s:'#ffe0b0',S:'#f2b98a',
+  e:'#c4c4c4',E:'#777777',t:'#e9c98f',v:'#8e5cc8',m:'#fff3b0',a:'#7a4a1a'};
+function spr(rows,x,y,s){let o='';rows.forEach((row,j)=>{let i=0;while(i<row.length){const ch=row[i];if(ch==='.'||ch===' '){i++;continue}
+  let n=1;while(row[i+n]===ch)n++;o+=`<rect x="${x+i*s}" y="${y+j*s}" width="${n*s}" height="${s}" fill="${C[ch]||ch}"/>`;i+=n}});return o}
+const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" font-size="${o.s||9}" text-anchor="${o.a||'middle'}" fill="${o.f||C.k}" font-weight="${o.b?900:700}" class="svt" ${o.f==='#fff'?'style="stroke:#2a1a12"':''}>${t}</text>`;
+const BX=(x,y,w,h,f,o={})=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${o.st||C.k}" stroke-width="${o.sw??2}" ${o.da?`stroke-dasharray="${o.da}"`:''}/>`;
+function TAG(cx,cy,t,f,o={}){const s=o.s||8.5,w=o.w||Math.max(24,[...t].length*s+10),h=s+7;
+  return BX(cx-w/2,cy-h/2,w,h,f)+`<text x="${cx}" y="${cy+s*0.36}" font-size="${s}" text-anchor="middle" fill="${o.tf||C.k}" font-weight="900" style="font-family:var(--tx)">${t}</text>`}
+function AR(x1,y1,x2,y2,f=C.k,w=3){const a=Math.atan2(y2-y1,x2-x1),h=7,ex=x2-Math.cos(a)*h,ey=y2-Math.sin(a)*h,
+  q=[ex+Math.sin(a)*h*.75,ey-Math.cos(a)*h*.75],r=[ex-Math.sin(a)*h*.75,ey+Math.cos(a)*h*.75];
+  return `<line x1="${x1}" y1="${y1}" x2="${ex}" y2="${ey}" stroke="${f}" stroke-width="${w}"/><polygon points="${x2},${y2} ${q} ${r}" fill="${f}"/>`}
+const CK=(x,y,s=1)=>`<path d="M${x-5*s} ${y} l${4*s} ${4*s} l${7*s} -${8*s}" stroke="${C.G}" stroke-width="${3*s}" fill="none"/>`;
+const XX=(x,y,s=1)=>`<path d="M${x-5*s} ${y-5*s} l${10*s} ${10*s} M${x+5*s} ${y-5*s} l-${10*s} ${10*s}" stroke="${C.r}" stroke-width="${3*s}"/>`;
+const CIR=(x,y,r,f)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}" stroke="${C.k}" stroke-width="1.6"/>`;
+function SV(inner,label,bg='#fffdf5'){return `<svg class="ill" viewBox="0 0 200 125" role="img" aria-label="${label}" shape-rendering="crispEdges"><rect width="200" height="125" fill="${bg}"/>${inner}</svg>`}
+/* 分子鏈：n 顆方塊相連 */
+function chain(x,y,n,f,sz=9,gap=3){let o='';for(let i=0;i<n;i++){const xx=x+i*(sz+gap);if(i)o+=`<rect x="${xx-gap}" y="${y+sz/2-1.5}" width="${gap}" height="3" fill="${C.k}"/>`;o+=BX(xx,y,sz,sz,f,{sw:1.6})}return o}
+function beads(x,y,n,f,r=4.2,gap=11){let o='';for(let i=0;i<n;i++)o+=CIR(x+i*gap,y,r,f);return o}
+function hexa(cx,cy,r,f){let p=[];for(let i=0;i<6;i++){const a=Math.PI/6+i*Math.PI/3;p.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1))}
+  return `<polygon points="${p.join(' ')}" fill="${f}" stroke="${C.k}" stroke-width="1.8"/>`}
+
+/* ---- 原創像素角色與圖示 ---- */
+const SP={
+ coin:["..kkkk..",".kyyyyk.","kyymyyYk","kyymyyYk","kyymyyYk","kyyyyyYk",".kYYYYk.","..kkkk.."],
+ enzyme:["....kkkkk....","..kkpppppkk..",".kpppppppppk.","kpppppppppppk","kkkkpppkppkpk","...kpppkppkpk","...kppppppppk","...kppPPPPppk","kkkkppppppppk","kppppppppppk.",".kppppppppk..","..kkppppkk...","....kkkk....."],
+ leafkid:[".......kkkk.",".....kkggGk.","...kkgglgGk.","..kgggglgGk.",".kgkwgkwgGk.",".kgkkgkkgGk.","kgggglggGGk.","kggPPPgGGk..","kgggggGGk...",".kggGGGk....","..kkkkk.....","..nn........","..nn........"],
+ foodball:["...kkkkk...","..ksssssk..",".kssttsssk.","kssssssstsk","kskwsskwssk","kskksskkssk","kssssssssSk","ksssPPPssSk",".kssssssSk.","..kSSSSSk..","...kkkkk..."],
+ sun:["....y.y....",".y.......y.","...yyyyy...","y.yyyyyyy.y","..yyymyyy..","..yymyyyy..","..yyyyyyy..","y.yyyyyyy.y","...yyyyy...",".y.......y.","....y.y...."],
+ drop:["...k...","..kbk..","..kbk..",".kbcbk.","kbcbbbk","kbbbbbk","kbbbbBk",".kbbBk.","..kkk.."],
+ leaf:["........kkkk","......kkggGk","....kkggglGk","...kgggglgGk","..kggglgggk.",".kgglggggk..",".kglgggkk...","kglgkkk.....","klkk........","nn.........."],
+ tooth:[".kkkkkkk.","kwwwwwwwk","kwWwwwwwk","kwWwwwwwk","kwwwwwwwk",".kwwwwwk.",".kwwkwwk.",".kwk.kwk.","..k...k.."],
+ germ:["...kkkk...","..kllllk..",".kllllllk.","kllkllkllk","klllllllk.","kllkkklllk",".kllllllk.","..kkkkkk..","k.k....k.k"],
+ chest:[".kkkkkkkkkk.","knnnnnnnnnnk","knaaaaaaaank","kkkkkyykkkkk","knnnnymnnnnk","knnnnyynnnnk","knaaaaaaaank","kkkkkkkkkkkk"],
+ lock:["..kkkk..",".k....k.",".k....k.","kkkkkkkk","kyyyyyyk","kyyykyyk","kyyykyyk","kkkkkkkk"],
+ cloud:["....kkkk......","..kkwwwwk.....",".kwwwwwwwkkk..","kwwwwwwwwwwwk.","kwwwwwwwwwwwwk",".kkkkkkkkkkkk."]
+};
+const S=(name,x,y,s)=>spr(SP[name],x,y,s);
+function spriteSvg(name,s=6,extra=''){const r=SP[name],w=r[0].length*s,h=r.length*s;return `<svg viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges" aria-hidden="true" ${extra}>${spr(r,0,0,s)}</svg>`}
+
+/* 簡化人體消化系統圖（2-4 用） */
+function torso(hl,labels){
+  const on=k=>hl.includes(k);
+  let o=`<ellipse cx="100" cy="17" rx="13" ry="14" fill="${C.s}" stroke="${C.k}" stroke-width="2"/>`+
+   `<rect x="94" y="28" width="12" height="8" fill="${C.s}" stroke="${C.k}" stroke-width="2"/>`+
+   `<path d="M70 36 h60 l6 86 h-72 z" fill="${C.s}" stroke="${C.k}" stroke-width="2"/>`;
+  const st=(k,c)=>on(k)?c:'#e8cdb8';
+  // 唾腺
+  o+=`<rect x="88" y="20" width="6" height="5" fill="${st('唾腺',C.v)}" stroke="${C.k}" stroke-width="1.2"/><rect x="106" y="20" width="6" height="5" fill="${st('唾腺',C.v)}" stroke="${C.k}" stroke-width="1.2"/>`;
+  // 口腔、咽、食道
+  o+=`<rect x="95" y="21" width="10" height="5" fill="${st('口腔',C.r)}" stroke="${C.k}" stroke-width="1.2"/>`;
+  o+=`<rect x="98" y="26" width="5" height="6" fill="${st('咽',C.r)}" stroke="${C.k}" stroke-width="1.2"/>`;
+  o+=`<rect x="98" y="32" width="5" height="17" fill="${st('食道',C.p)}" stroke="${C.k}" stroke-width="1.2"/>`;
+  // 肝臟、膽囊
+  o+=`<path d="M74 45 h30 l-4 10 h-24 z" fill="${st('肝臟',C.n)}" stroke="${C.k}" stroke-width="1.5"/>`;
+  o+=`<rect x="92" y="54" width="6" height="5" fill="${st('肝臟',C.g)}" stroke="${C.k}" stroke-width="1.2"/>`;
+  // 胃（含胃腺）
+  o+=`<path d="M101 48 h18 l3 4 v8 l-4 4 h-12 l-3 -3 h6 l3 -2 v-5 h-11 z" fill="${on('胃')?C.p:(on('胃腺')?C.v:'#f4b5c2')}" stroke="${C.k}" stroke-width="1.5"/>`;
+  // 胰臟
+  o+=`<rect x="99" y="66" width="24" height="5" fill="${st('胰臟',C.t)}" stroke="${C.k}" stroke-width="1.4"/>`;
+  // 大腸
+  const lg=st('大腸','#f6a25b');
+  o+=`<path d="M80 104 V74 H120 V104 H104 v8" fill="none" stroke="${C.k}" stroke-width="8"/><path d="M80 104 V74 H120 V104 H104 v8" fill="none" stroke="${lg}" stroke-width="5"/>`;
+  // 小腸（含腸腺）
+  const sm=on('小腸')?C.P:(on('腸腺')?C.v:'#f08aa0');
+  o+=`<path d="M108 64 v2 H88 v6 H112 v6 H88 v6 H112 v6 H88 v6 H110" fill="none" stroke="${C.k}" stroke-width="5.5"/><path d="M108 64 v2 H88 v6 H112 v6 H88 v6 H112 v6 H88 v6 H110" fill="none" stroke="${sm}" stroke-width="3"/>`;
+  // 肛門
+  o+=`<rect x="101" y="112" width="6" height="5" fill="${st('肛門',C.R)}" stroke="${C.k}" stroke-width="1.2"/>`;
+  (labels||[]).forEach(([t,lx,ly,px,py,c])=>{o+=`<line x1="${lx}" y1="${ly}" x2="${px}" y2="${py}" stroke="${C.k}" stroke-width="1.2"/>`+TAG(lx,ly,t,c||'#fff',{s:8})});
+  return o}
+
+/* 葉片橫切面（2-3 用） */
+function leafSection(hl){
+  const on=k=>hl.includes(k);
+  let o='';
+  o+=`<rect x="20" y="22" width="160" height="5" fill="${on('角質層')?C.y:'#f6e7a8'}" stroke="${C.k}" stroke-width="1.5"/>`;
+  for(let i=0;i<10;i++)o+=BX(20+i*16,27,16,10,on('表皮')?C.c:'#eefaff',{sw:1.4});
+  for(let i=0;i<20;i++)o+=BX(20+i*8,37,8,20,on('葉肉')?'#7fd36b':'#a9de95',{sw:1.2})+`<rect x="${22+i*8}" y="${41+(i%3)*4}" width="3" height="3" fill="${C.G}"/>`;
+  for(let r=0;r<2;r++)for(let i=0;i<11;i++)o+=BX(20+i*14+(r?7:0)-(r&&i==10?7:0),57+r*12,14,12,on('葉肉')?'#9be283':'#c4ebb5',{sw:1.2})+`<rect x="${25+i*14+(r?7:0)}" y="${61+r*12}" width="3" height="3" fill="${C.G}"/>`;
+  // 葉脈
+  o+=`<ellipse cx="100" cy="65" rx="16" ry="12" fill="${on('葉脈')?C.b:'#bcd9f0'}" stroke="${C.k}" stroke-width="1.6"/><ellipse cx="100" cy="69" rx="10" ry="6" fill="${on('葉脈')?'#e8833a':'#f2c8a8'}" stroke="${C.k}" stroke-width="1.2"/>`;
+  for(let i=0;i<10;i++){const gx=20+i*16;if(i===2||i===7){o+=`<rect x="${gx}" y="81" width="16" height="10" fill="#fffdf5" stroke="${C.k}" stroke-width="1.4"/><rect x="${gx+1}" y="82" width="6" height="8" fill="${on('保衛細胞')?C.g:'#bfe6a8'}"/><rect x="${gx+9}" y="82" width="6" height="8" fill="${on('保衛細胞')?C.g:'#bfe6a8'}"/>`}
+    else o+=BX(gx,81,16,10,on('表皮')?C.c:'#eefaff',{sw:1.4})}
+  o+=`<rect x="20" y="91" width="160" height="4" fill="${on('角質層')?C.y:'#f6e7a8'}" stroke="${C.k}" stroke-width="1.5"/>`;
+  return o}
+
+/* =========================================================
+   單元與概念卡資料（內容依課本 p.70–91 與企劃書 3.1、4.1、5.1）
+   ========================================================= */
+const UNITS={
+'2-2':{name:'酵素',stage:'酵素工廠',pages:'課本 p.70–75',guide:'enzyme',color:'#f07f24',
+ hello:'歡迎來到酵素工廠！我是酵素小酶。打開 8 張概念卡，看懂就能收集金幣！',
+ cards:[
+ {t:'代謝作用',pg:'p.70',cap:'養分經過化學反應，產生能量或其他物質',
+  pts:['養分在生物體內經過不同的化學反應，可產生能量或其他物質。','這些反應統稱為「代謝作用」。','代謝作用中，有「分解作用」與「合成作用」兩種類型。'],
+  q:'養分在生物體內經過化學反應後，可以產生哪兩類東西？',a:'能量或其他物質。',
+  svg:()=>SV(TAG(100,14,'養分在生物體內',C.m,{s:9})+BX(70,30,60,34,C.paper||'#fff')+chain(77,38,4,C.g)+T(100,60,'養分',{s:9,b:1})+
+    AR(130,40,158,26,C.O)+AR(130,54,158,70,C.O)+T(150,48,'化學反應',{s:8,f:C.O})+
+    BX(160,12,34,24,C.y)+T(177,28,'能量',{s:9,b:1})+BX(160,58,34,26,'#fff')+beads(169,66,3,C.l,3.4,8)+T(177,80,'其他物質',{s:7.5,b:1})+
+    BX(20,94,160,22,'#ffe2c4')+T(100,109,'這些反應統稱為「代謝作用」',{s:10,b:1}),'代謝作用示意圖')},
+ {t:'分解作用與合成作用',pg:'p.70 圖2-3',cap:'圖 2-3 代謝作用的類型',
+  pts:['能將大分子轉變成小分子的作用，稱為「分解作用」。','將小分子結合成大分子的作用，稱為「合成作用」。','記法：大 → 小＝分解；小 → 大＝合成。'],
+  q:'澱粉被分解成小分子醣類，是屬於哪一種作用？',a:'分解作用（大分子轉變成小分子）。',
+  svg:()=>SV(BX(6,6,188,54,'#fff4e6')+TAG(48,16,'分解作用',C.o,{tf:'#fff'})+chain(16,32,4,C.g,11,3)+AR(76,37,100,37,C.O)+
+    BX(110,32,11,11,C.g,{sw:1.6})+T(129,42,'+',{s:12,b:1})+BX(136,32,11,11,C.g,{sw:1.6})+T(155,42,'+',{s:12,b:1})+BX(162,32,11,11,C.g,{sw:1.6})+T(100,56,'大分子 → 小分子',{s:9,b:1})+
+    BX(6,66,188,54,'#eef8e6')+TAG(48,76,'合成作用',C.G,{tf:'#fff'})+BX(14,92,11,11,C.g,{sw:1.6})+T(33,102,'+',{s:12,b:1})+BX(40,92,11,11,C.g,{sw:1.6})+T(59,102,'+',{s:12,b:1})+BX(66,92,11,11,C.g,{sw:1.6})+
+    AR(84,97,108,97,C.G)+chain(116,92,4,C.g,11,3)+T(100,116,'小分子 → 大分子',{s:9,b:1}),'分解作用與合成作用對照圖')},
+ {t:'酵素是什麼',pg:'p.70–71',cap:'酵素能促進代謝反應的進行',
+  pts:['酵素，又稱為「酶」。','酵素能促進代謝反應的進行。','大部分種類的酵素，主要成分是蛋白質。'],
+  q:'為什麼「能影響蛋白質特性的因素」，都可能改變酵素的活性？',a:'因為大部分種類的酵素，主要成分是蛋白質。',
+  svg:()=>SV(S('enzyme',14,22,6)+T(53,116,'酵素小酶',{s:9,b:1})+
+    TAG(140,30,'又稱：酶',C.u22l||'#ffd2a6',{s:10,w:96})+TAG(140,60,'主要成分：蛋白質',C.y,{s:10,w:110})+TAG(140,90,'促進代謝反應進行',C.l,{s:10,w:110}),'酵素小酶與酵素的特徵')},
+ {t:'受質與專一性',pg:'p.70 圖2-4',cap:'圖 2-4 酵素具有專一性（以澱粉酶為例）',
+  pts:['在代謝反應過程中，和酵素結合而作用的物質，稱為「受質」。','酵素和受質的結合具有「專一性」。','例如：人體唾液中的澱粉酶能和澱粉結合，促進澱粉的分解。','但澱粉酶不能和纖維素結合，所以無法分解纖維素。'],
+  q:'唾液中的澱粉酶可以分解纖維素嗎？為什麼？',a:'不能。酵素和受質的結合具有專一性，澱粉酶不能和纖維素結合。',
+  svg:()=>SV(S('enzyme',110,34,5)+T(142,112,'澱粉酶',{s:10,b:1})+
+    TAG(40,14,'澱粉（受質）',C.l)+chain(14,26,3,C.g,10,3)+AR(56,31,104,58,C.G)+CK(84,36,1.2)+
+    TAG(40,86,'纖維素',C.e)+`<polygon points="14,98 22,92 30,98 22,104" fill="${C.e}" stroke="${C.k}" stroke-width="1.6"/><polygon points="32,98 40,92 48,98 40,104" fill="${C.e}" stroke="${C.k}" stroke-width="1.6"/>`+
+    `<path d="M54 98 L92 80" stroke="${C.E}" stroke-width="3" stroke-dasharray="4 3"/>`+XX(78,96,1.1)+T(70,120,'形狀不合，無法結合',{s:8.5,f:C.r,b:1}),'澱粉能和澱粉酶結合，纖維素不能')},
+ {t:'酵素可重複使用',pg:'p.70 圖2-4',cap:'反應結束後，酵素仍可與新的受質作用',
+  pts:['一般而言，酵素反應的環境若沒有溫度、酸鹼性或其他特殊條件的改變，','酵素在反應結束後，仍可與新的受質作用。','也就是說：酵素可以重複使用。'],
+  q:'一個澱粉酶分解完一個澱粉後，它就用完了嗎？',a:'沒有。環境條件不變時，反應結束後它仍可與新的受質作用。',
+  svg:()=>SV(`<path d="M60 92 A46 40 0 1 1 140 92" fill="none" stroke="${C.Y}" stroke-width="6" stroke-dasharray="10 5"/>`+
+    `<polygon points="134,84 148,90 136,100" fill="${C.Y}" stroke="${C.k}" stroke-width="1.5"/>`+S('enzyme',80,64,3)+T(100,116,'酵素外觀不變',{s:9,b:1})+
+    chain(18,30,3,C.g,9,3)+T(34,24,'新的受質',{s:8.5,b:1})+AR(40,46,74,70,C.G)+
+    BX(150,26,9,9,C.g,{sw:1.4})+BX(166,36,9,9,C.g,{sw:1.4})+BX(150,44,9,9,C.g,{sw:1.4})+T(168,24,'產物',{s:8.5,b:1})+AR(122,66,148,48,C.O)+
+    TAG(100,40,'重複使用！',C.y,{s:10}),'酵素可重複使用的循環')},
+ {t:'溫度的影響',pg:'p.71 圖2-5',cap:'圖 2-5 溫度與一般酵素活性之間的關係',
+  pts:['酵素的活性，會影響代謝反應速率的快慢。','在一定溫度範圍內，酵素的活性會隨溫度升高而增加，促進代謝反應的速率。','但若溫度過高，酵素活性會降低，甚至失去活性。','溫度過高會破壞酵素構造，酵素會永久失去活性。'],
+  q:'酵素經高溫煮沸後，再降回 37℃，活性會恢復嗎？',a:'不會。溫度過高會破壞酵素構造，使酵素永久失去活性。',
+  svg:()=>SV(`<path d="M30 12 V100 H186" fill="none" stroke="${C.k}" stroke-width="2.5"/><polygon points="30,6 26,14 34,14" fill="${C.k}"/><polygon points="192,100 184,96 184,104" fill="${C.k}"/>`+
+    T(16,56,'活',{s:9,b:1})+T(16,67,'性',{s:9,b:1})+T(176,114,'溫度',{s:9,b:1})+T(30,112,'0',{s:9})+
+    `<path d="M34 96 C70 94 96 80 116 40 C124 24 132 22 138 30 C146 42 150 70 156 98" fill="none" stroke="${C.r}" stroke-width="3.5" shape-rendering="auto"/>`+
+    `<line x1="132" y1="24" x2="132" y2="100" stroke="${C.k}" stroke-width="1.5" stroke-dasharray="3 3"/>`+
+    TAG(80,40,'溫度↑ 活性↑',C.l,{s:8.5})+TAG(164,54,'過高：永久',C.u22l||'#ffd2a6',{s:8,w:62})+T(164,74,'失去活性',{s:8,f:C.r,b:1}),'溫度與酵素活性關係曲線')},
+ {t:'酸鹼值的影響',pg:'p.71 圖2-6',cap:'圖 2-6 人體內不同酸鹼性環境與不同酵素活性的關係',
+  pts:['酵素的活性也受到所在環境的酸鹼值影響。','胃內的酵素在酸性環境中的活性較佳。','小腸內的酵素適合在鹼性環境中作用。','酸鹼值超過酵素能忍受的範圍，酵素可能會活性降低或失去活性。'],
+  q:'唾液中的澱粉酶隨食物吞入，到了胃中的酸性環境，還能有效分解澱粉嗎？',a:'不能有效分解。胃中是酸性環境，超過澱粉酶能忍受的範圍，活性會降低甚至失去活性。',
+  svg:()=>SV(`<path d="M22 12 V96 H190" fill="none" stroke="${C.k}" stroke-width="2.5"/>`+T(12,52,'活',{s:9,b:1})+T(12,63,'性',{s:9,b:1})+
+    `<g shape-rendering="auto" fill="none" stroke-width="3.5"><path d="M30 94 C40 94 44 26 52 26 C60 26 64 94 74 94" stroke="${C.Y}"/><path d="M92 94 C104 94 110 26 118 26 C126 26 130 94 142 94" stroke="${C.G}"/><path d="M114 94 C126 94 132 26 140 26 C148 26 152 94 166 94" stroke="${C.b}"/></g>`+
+    TAG(52,16,'胃中的酵素',C.y,{s:8})+TAG(98,40,'唾液中的酵素',C.l,{s:8})+TAG(168,16,'小腸中的酵素',C.c,{s:8})+
+    T(40,110,'酸性',{s:9,b:1})+T(110,110,'中性',{s:9,b:1})+T(178,110,'鹼性',{s:9,b:1})+T(110,122,'酸鹼值',{s:8}),'不同酸鹼環境中三種酵素的活性曲線')},
+ {t:'實驗 2-2 酵素的作用',pg:'p.72–75',cap:'本氏液加熱後：含小分子醣類會呈綠、黃、橙或紅色',
+  pts:['試管甲、乙各加入 1 mL 澱粉液；試管 A 加入 1 mL 水，試管 B 加入 1 mL 唾液，一起放入 37℃ 溫水中。','10 分鐘後，把甲、乙的澱粉液分別倒入 A、B，攪拌均勻，放回 37℃ 溫水中等待 10 分鐘。','取出 A、B，各加入 1 mL 本氏液，隔水加熱，觀察顏色變化。','B 管出現綠（或黃、橙、紅）色，表示澱粉被唾液分解而產生小分子醣類；A 管仍為藍色。'],
+  q:'為什麼要準備只加水的 A 試管？',a:'A 試管是對照組，用來和加了唾液的 B 試管比較，才能確定顏色改變是唾液造成的。',
+  svg:()=>SV(`<rect x="30" y="18" width="22" height="70" fill="#fff" stroke="${C.k}" stroke-width="2.5"/><rect x="32" y="50" width="18" height="36" fill="${C.b}"/>`+T(41,100,'A',{s:12,b:1})+T(41,114,'澱粉液＋水',{s:8})+
+    `<rect x="84" y="18" width="22" height="70" fill="#fff" stroke="${C.k}" stroke-width="2.5"/><rect x="86" y="50" width="18" height="36" fill="#e2622b"/>`+T(95,100,'B',{s:12,b:1})+T(95,114,'澱粉液＋唾液',{s:8})+
+    T(156,18,'本氏液加熱後',{s:8.5,b:1})+[['#5aa9e6','藍'],['#5cbf3a','綠'],['#ffd23f','黃'],['#f08a2c','橙'],['#d93a2b','紅']].map((c,i)=>BX(120,26+i*15,20,13,c[0],{sw:1.5})+T(151,36+i*15,c[1],{s:9,b:1})).join('')+
+    `<path d="M166 30 v66" stroke="${C.k}" stroke-width="1.5"/><polygon points="166,102 162,94 170,94" fill="${C.k}"/>`+T(184,62,'醣類',{s:8})+T(184,73,'越多',{s:8}),'實驗 2-2 試管顏色結果')}
+ ]},
+'2-3':{name:'植物如何製造養分',stage:'葉綠森林',pages:'課本 p.76–81',guide:'leafkid',color:'#3f9f45',
+ hello:'這裡是葉綠森林！我是葉綠小精靈。跟我一起探索葉子的構造，看看植物怎麼製造養分！',
+ cards:[
+ {t:'葉是製造養分的主要器官',pg:'p.76 圖2-7',cap:'圖 2-7 葉片構造（立體橫切面示意）',
+  pts:['葉是大多數植物製造養分的主要器官。','其中「葉肉」是製造養分的主要部位。','葉的其他構造，也和養分的製造或葉子的生長息息相關。'],
+  q:'葉子裡製造養分的主要部位是哪裡？',a:'葉肉。',
+  svg:()=>SV(S('leaf',4,18,5.2)+`<rect x="34" y="40" width="12" height="18" fill="none" stroke="${C.r}" stroke-width="2"/>`+AR(48,50,66,50,C.Y)+
+    `<g transform="translate(52,10) scale(.72)">${leafSection(['葉肉'])}</g>`+TAG(124,90,'葉肉：製造養分的主要部位',C.l,{s:9}),'從整片葉放大到葉片橫切面')},
+ {t:'角質層',pg:'p.77',cap:'角質層位於表皮外側',
+  pts:['葉的表皮外側，多具有「角質層」。','角質層可避免水分過度散失。'],
+  q:'葉片外如果沒有角質層，可能會發生什麼事？',a:'水分容易過度散失。',
+  svg:()=>SV(leafSection(['角質層'])+TAG(178,13,'角質層',C.y,{s:9})+`<line x1="166" y1="17" x2="160" y2="24" stroke="${C.k}" stroke-width="1.4"/>`+
+    S('drop',40,4,2)+XX(64,10,.8)+S('drop',120,4,2)+XX(144,10,.8)+TAG(100,112,'避免水分過度散失',C.y,{s:9.5}),'角質層避免水分散失')},
+ {t:'上、下表皮',pg:'p.77',cap:'表皮細胞透明無色、排列緊密',
+  pts:['葉的上、下表皮，主要由透明無色、排列緊密的表皮細胞組成。','表皮具有保護功能。'],
+  q:'葉的上、下表皮由什麼細胞組成？有什麼功能？',a:'由透明無色、排列緊密的表皮細胞組成，具有保護功能。',
+  svg:()=>SV(leafSection(['表皮'])+TAG(30,13,'上表皮',C.c,{s:9})+`<line x1="34" y1="18" x2="40" y2="28" stroke="${C.k}" stroke-width="1.4"/>`+
+    TAG(30,108,'下表皮',C.c,{s:9})+`<line x1="34" y1="102" x2="44" y2="90" stroke="${C.k}" stroke-width="1.4"/>`+TAG(128,112,'透明無色．排列緊密．保護',C.c,{s:9}),'葉的上表皮與下表皮')},
+ {t:'保衛細胞與氣孔',pg:'p.77 圖2-7B',cap:'保衛細胞兩兩成對，中間形成氣孔',
+  pts:['表皮上散布著半月形的「保衛細胞」，內含葉綠體。','保衛細胞兩兩成對，中間會形成「氣孔」。','氣孔是氣體進出植物的主要通道。','陸生雙子葉植物，大多是下表皮的氣孔比較多。'],
+  q:'二氧化碳主要由葉片的哪個構造進入？',a:'氣孔。',
+  svg:()=>SV(`<path d="M70 18 C46 26 46 98 70 106 C80 96 84 82 84 62 C84 42 80 28 70 18 Z" fill="${C.g}" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`+
+    `<path d="M130 18 C154 26 154 98 130 106 C120 96 116 82 116 62 C116 42 120 28 130 18 Z" fill="${C.g}" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`+
+    [[60,40],[66,58],[60,76],[70,90],[138,40],[134,58],[140,76],[130,90]].map(([x,y])=>`<rect x="${x}" y="${y}" width="5" height="5" fill="${C.G}"/>`).join('')+
+    `<path d="M88 30 C96 50 96 74 88 94 M112 30 C104 50 104 74 112 94" stroke="${C.k}" stroke-width="1" fill="none"/>`+
+    TAG(100,62,'氣孔',C.w,{s:10})+TAG(36,14,'保衛細胞',C.l,{s:8.5})+
+    AR(14,100,88,80,C.E,2.5)+T(26,114,'二氧化碳',{s:8.5,b:1})+AR(112,80,186,100,C.b,2.5)+T(174,114,'氧氣',{s:8.5,b:1}),'一對保衛細胞與中間的氣孔')},
+ {t:'葉肉細胞',pg:'p.77',cap:'葉肉細胞具有大量的葉綠體',
+  pts:['上、下表皮之間的葉肉，由葉肉細胞組成。','葉肉細胞具有大量的葉綠體。','葉肉細胞是進行光合作用的主要場所。'],
+  q:'為什麼光合作用主要在葉肉細胞進行？',a:'因為葉肉細胞具有大量的葉綠體。',
+  svg:()=>SV([0,1,2].map(i=>`<rect x="${18+i*44}" y="16" width="38" height="92" fill="#d9f5c8" stroke="${C.k}" stroke-width="2.5"/>`+
+    [[6,8],[20,14],[8,26],[24,32],[6,46],[22,52],[10,64],[24,72],[8,80]].map(([x,y])=>`<rect x="${18+i*44+x}" y="${16+y}" width="9" height="6" fill="${C.g}" stroke="${C.G}" stroke-width="1"/>`).join('')).join('')+
+    AR(156,40,128,48,C.k,2)+TAG(170,32,'葉綠體',C.l,{s:9})+TAG(166,86,'光合作用',C.y,{s:9})+T(166,104,'主要場所',{s:9,b:1}),'葉肉細胞內有許多葉綠體')},
+ {t:'葉脈',pg:'p.77',cap:'葉脈是葉內的輸導組織',
+  pts:['「葉脈」是葉內的輸導組織。','葉脈能運輸水分和養分，以利各種代謝作用的進行。'],
+  q:'葉片製造的養分，要靠哪個構造運送出去？',a:'葉脈。',
+  svg:()=>SV(`<path d="M24 100 C40 40 110 10 184 14 C170 70 110 110 24 100 Z" fill="${C.g}" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`+
+    `<g stroke="${C.b}" stroke-width="3" fill="none" shape-rendering="auto"><path d="M24 100 C80 70 130 40 184 14"/><path d="M60 80 L56 54 M84 66 L80 38 M110 50 L108 26 M70 76 L100 92 M96 60 L128 74 M124 42 L154 52"/></g>`+
+    AR(6,122,22,104,C.b,3)+T(30,121,'水分進入',{s:8.5,a:'start',b:1})+AR(22,92,4,74,C.O,3)+T(4,68,'養分送出',{s:8.5,a:'start',b:1})+TAG(150,96,'輸導組織',C.c,{s:10}),'葉脈運輸水分和養分')},
+ {t:'光合作用',pg:'p.78 圖2-8',cap:'圖 2-8 光合作用示意',
+  pts:['葉綠體中的葉綠素能吸收光能，','配合酵素的作用，使水和二氧化碳發生一連串的反應，','最後產生氧氣、葡萄糖和水，此一過程稱為「光合作用」。','透過光合作用，植物將光能儲存在葡萄糖中。'],
+  q:'光合作用的原料是什麼？產物是什麼？',a:'原料：水、二氧化碳。產物：氧氣、葡萄糖和水。',
+  svg:()=>SV(S('sun',4,4,3.4)+AR(40,24,70,40,C.Y,3)+
+    `<ellipse cx="100" cy="56" rx="34" ry="22" fill="#b6e38f" stroke="${C.k}" stroke-width="2.5"/>`+[[80,50],[94,46],[108,50],[88,60],[104,62],[116,58]].map(([x,y])=>`<rect x="${x}" y="${y}" width="9" height="8" fill="${C.g}" stroke="${C.G}" stroke-width="1"/>`).join('')+
+    T(100,40,'葉綠體',{s:8.5,b:1})+S('drop',14,54,2)+T(22,80,'水',{s:9,b:1})+AR(32,62,64,60,C.b,2.5)+
+    CIR(160,22,4,C.r)+CIR(168,22,4.6,C.E)+CIR(176,22,4,C.r)+T(168,36,'二氧化碳',{s:8,b:1})+AR(158,30,130,44,C.E,2.5)+
+    AR(132,64,156,64,C.G,2.5)+CIR(166,56,4,C.r)+CIR(174,56,4,C.r)+T(186,60,'氧氣',{s:8,b:1})+hexa(166,74,6,C.y)+T(186,78,'葡萄糖',{s:8,b:1})+
+    BX(4,92,192,28,'#fffbe0')+T(100,104,'水＋二氧化碳 ──光、葉綠體──→',{s:8.6,b:1})+T(100,116,'氧氣＋葡萄糖＋水',{s:8.6,b:1}),'光合作用的原料、條件與產物')},
+ {t:'光合作用產物的去向',pg:'p.78',cap:'葡萄糖是植物維持生命現象的主要養分來源',
+  pts:['葡萄糖可供細胞直接利用、形成纖維素，或轉換成澱粉及其他形式的養分。','葡萄糖是植物維持生命現象的主要養分來源。','植物行光合作用是為了維持自身的生存；釋出的氧氣、成為動物的食物來源，是光合作用的「附加價值」。'],
+  q:'植物進行光合作用，主要是為了讓動物有氧氣可以呼吸嗎？',a:'不是。主要是為了維持自身的生存；氧氣和成為動物的食物來源是「附加價值」。',
+  svg:()=>SV(hexa(36,56,16,C.y)+T(36,60,'葡萄糖',{s:8,b:1})+AR(54,46,96,22,C.O)+AR(56,56,96,56,C.O)+AR(54,66,96,92,C.O)+
+    TAG(140,20,'細胞直接利用',C.y,{s:9})+TAG(140,56,'形成纖維素',C.l,{s:9})+TAG(140,92,'轉換成澱粉儲存',C.c,{s:9})+
+    BX(4,104,192,18,'#ffeef2',{da:'4 3'})+T(100,117,'附加價值：釋出氧氣、成為動物的食物來源',{s:8.4,b:1}),'葡萄糖的三種去向')},
+ {t:'葉綠體與葉綠素',pg:'p.77–78',cap:'葉綠素存在葉綠體中，使葉綠體呈現綠色',
+  pts:['「葉綠體」是植物細胞中的一種胞器，是進行光合作用的場所。','「葉綠素」是存在葉綠體中的綠色色素，能吸收光能。','實驗中可以用酒精溶出葉綠素。'],
+  q:'實驗 2-3 中，酒精為什麼會變成綠色？',a:'因為葉片中的葉綠素被酒精溶出。',
+  svg:()=>SV(`<ellipse cx="74" cy="62" rx="58" ry="38" fill="#c9eda0" stroke="${C.k}" stroke-width="3"/>`+
+    [[34,50],[54,40],[74,48],[94,40],[44,70],[66,72],[88,66],[104,58]].map(([x,y])=>`<g>${[0,1,2,3].map(j=>`<rect x="${x}" y="${y+j*4}" width="14" height="4" fill="${j%2?C.G:C.g}"/>`).join('')}</g>`).join('')+
+    TAG(74,16,'葉綠體（胞器）',C.l,{s:9})+AR(160,58,112,58,C.k,2)+TAG(162,44,'葉綠素',C.g,{s:9,tf:'#fff'})+T(162,70,'綠色色素',{s:9,b:1})+T(162,82,'吸收光能',{s:9,b:1}),'葉綠體與其中的葉綠素')},
+ {t:'實驗 2-3 光合作用變因之探討',pg:'p.79–81',cap:'碘液遇澱粉呈藍黑色',
+  pts:['實驗前 3～5 天，用鋁箔包住一片葉片（操作變因：有、無光照）。','摘下葉片、除去鋁箔，放入熱水中加熱，以軟化葉片。','把葉片放入酒精，隔水加熱，溶出葉綠素。','用熱水漂洗，洗去葉綠素與酒精，再滴加碘液。','照光部位呈藍黑色（有澱粉）；遮光部位呈黃褐色（沒有澱粉）→ 照光是光合作用的必要條件之一。'],
+  q:'為什麼要在實驗前 3～5 天就包鋁箔，而不是 3～5 小時？',a:'遮光部位需要足夠的時間，把之前光合作用產生的養分消耗完。',
+  svg:()=>SV([['鋁箔遮光','#cfd8dc'],['熱水軟化','#a7e6ff'],['酒精隔水加熱','#d9f5c8'],['熱水漂洗','#a7e6ff'],['滴碘液','#ffe2a8']].map((s,i)=>
+    BX(4+i*39,6,35,24,s[1],{sw:1.6})+T(21.5+i*39,22,String(i+1),{s:11,b:1})+T(21.5+i*39,42,s[0],{s:6.8,b:1})).join('')+
+    `<path d="M30 110 C40 60 110 48 176 52 C164 92 110 118 30 110 Z" fill="#2c2a5a" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`+
+    `<rect x="92" y="66" width="34" height="30" fill="#d9a35a" stroke="${C.k}" stroke-width="1.6"/>`+T(109,84,'黃褐',{s:8,b:1})+
+    TAG(56,62,'藍黑色',C.c,{s:8.5})+T(150,120,'遮光處沒有澱粉',{s:8,b:1}),'實驗 2-3 步驟與碘液結果')}
+ ]},
+'2-4':{name:'人體如何獲得養分',stage:'消化道大冒險',pages:'課本 p.82–91',guide:'foodball',color:'#e45f84',
+ hello:'歡迎進入消化道！我是食物球小丸。跟著我從口腔一路走到肛門，看看養分怎麼被消化和吸收！',
+ cards:[
+ {t:'消化作用',pg:'p.82',cap:'大分子養分分解為小分子養分',
+  pts:['動物透過攝食，才能獲得生存所需的多數養分。','食物中大分子養分在人體內分解為小分子養分的過程，稱為「消化作用」。','例如：澱粉分解為葡萄糖，蛋白質分解為胺基酸，部分脂質分解為甘油與脂肪酸等。'],
+  q:'蛋白質最後被分解成什麼小分子？',a:'胺基酸。',
+  svg:()=>SV(T(36,12,'大分子',{s:9,b:1})+T(150,12,'小分子',{s:9,b:1})+
+    chain(6,20,5,C.y,9,3)+AR(70,25,98,25,C.P)+beads(110,25,5,C.y,4,11)+T(36,44,'澱粉',{s:8.5,b:1})+T(150,44,'葡萄糖',{s:8.5,b:1})+
+    chain(6,54,5,C.p,9,3)+AR(70,59,98,59,C.P)+beads(110,59,5,C.p,4,11)+T(36,78,'蛋白質',{s:8.5,b:1})+T(150,78,'胺基酸',{s:8.5,b:1})+
+    `<ellipse cx="34" cy="94" rx="24" ry="9" fill="${C.y}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>`+AR(70,94,98,94,C.P)+
+    CIR(114,94,5,C.m)+`<path d="M126 90 h24 M126 94 h24 M126 98 h24" stroke="${C.k}" stroke-width="2"/>`+T(34,116,'脂質',{s:8.5,b:1})+T(150,116,'甘油＋脂肪酸',{s:8.5,b:1}),'三種大分子養分分解成小分子')},
+ {t:'消化道',pg:'p.82 圖2-9',cap:'圖 2-9 人體消化系統（示意）',
+  pts:['人體的消化作用，主要由消化系統完成，包括消化道與消化腺。','消化道包括：口腔、咽、食道、胃、小腸、大腸與肛門。','消化道器官的管壁具有肌肉，能協助食物的推送與消化，例如食道、胃與小腸的蠕動現象。'],
+  q:'請依序說出食物經過的消化道器官。',a:'口腔 → 咽 → 食道 → 胃 → 小腸 → 大腸 → 肛門。',
+  svg:()=>SV(torso(['口腔','咽','食道','胃','小腸','大腸','肛門'],[
+    ['①口腔',150,14,105,23,C.p],['②咽',150,30,103,29,C.p],['③食道',150,46,103,42,C.p],['④胃',166,60,121,56,C.p],['⑤小腸',30,84,88,84,C.p],['⑥大腸',166,92,120,94,C.p],['⑦肛門',150,116,107,114,C.p]]),'消化道的七個器官')},
+ {t:'消化腺',pg:'p.82',cap:'消化腺是能分泌消化液的構造',
+  pts:['消化腺是能分泌消化液的構造。','包括：唾腺、胃壁的胃腺、小腸壁的腸腺，以及肝臟、胰臟等。','多數的消化液中含有酵素，可協助養分的分解。'],
+  q:'哪一種消化腺分泌的消化液不含酵素？',a:'肝臟分泌的膽汁。',
+  svg:()=>SV(torso(['唾腺','肝臟','胰臟','胃腺','腸腺'],[
+    ['唾腺',40,16,88,22,C.v],['胃腺（胃壁）',160,44,118,52,'#e6d4ff'],['肝臟',36,44,80,50,'#f0d2b0'],['胰臟',164,72,122,68,'#f6e0b8'],['腸腺（小腸壁）',40,94,90,90,'#e6d4ff']]),'五種消化腺的位置')},
+ {t:'口腔',pg:'p.82',cap:'牙齒切斷磨碎、舌頭攪拌、唾液分解澱粉',
+  pts:['口腔內的牙齒能切斷與磨碎食物。','舌頭能攪拌食物，讓食物和唾腺分泌的唾液混合。','唾液中的酵素能促進澱粉的初步分解。'],
+  q:'在口腔中，哪一種養分開始被分解？',a:'澱粉（唾液中的酵素能促進澱粉的初步分解）。',
+  svg:()=>SV(S('tooth',12,14,5)+T(34,72,'牙齒',{s:9,b:1})+T(34,84,'切斷、磨碎',{s:8})+
+    `<path d="M74 64 C74 40 112 40 112 64 Z" fill="${C.p}" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`+T(93,76,'舌頭：攪拌',{s:8.5,b:1})+
+    S('drop',136,8,2.4)+T(146,40,'唾液',{s:9,b:1})+chain(110,52,4,C.y,9,2)+AR(150,74,150,90,C.P)+beads(122,102,3,C.y,4,11)+T(160,118,'較小的醣類',{s:8,b:1}),'口腔中的牙齒、舌頭與唾液')},
+ {t:'咽與食道',pg:'p.82 圖2-10',cap:'圖 2-10 消化道的蠕動現象',
+  pts:['人體吞嚥食物時，食物會經由咽進入食道。','食道雖然無法分泌消化液，','但藉由管壁肌肉的收縮，能將食物推送至胃中進行消化分解。'],
+  q:'食道會分泌消化液嗎？它怎麼把食物送到胃？',a:'不會。食道藉由管壁肌肉的收縮（蠕動）推送食物。',
+  svg:()=>SV(`<path d="M40 6 V120 M78 6 V40 L70 56 L78 72 V120" fill="none" stroke="${C.k}" stroke-width="3"/>`+
+    `<path d="M44 6 V120 H74 V72 L66 56 L74 40 V6 Z" fill="${C.p}"/>`+`<rect x="46" y="76" width="22" height="22" fill="${C.t}" stroke="${C.k}" stroke-width="2"/>`+T(57,90,'食物',{s:8,b:1})+
+    AR(96,56,78,56,C.r,3)+AR(18,56,38,56,C.r,3)+AR(57,104,57,120,C.k,2.5)+
+    TAG(140,30,'管壁肌肉收縮',C.y,{s:9})+TAG(140,62,'把食物往下推送',C.l,{s:9})+TAG(140,94,'不分泌消化液',C.e,{s:9}),'食道的蠕動推送食物')},
+ {t:'胃',pg:'p.82–83',cap:'胃呈囊袋狀，可暫時貯存食物',
+  pts:['胃呈囊袋狀，可暫時貯存食物。','胃的蠕動能使食物和胃腺分泌的胃液充分混合。','胃液包括酵素和鹽酸：酵素能初步分解蛋白質；鹽酸能殺死部分細菌，並可促進胃中酵素的分解作用。'],
+  q:'胃液中的鹽酸有什麼功能？',a:'能殺死部分細菌，並可促進胃中酵素的分解作用。',
+  svg:()=>SV(`<g transform="translate(4 6) scale(.82)"><path d="M40 8 V30 C40 50 30 60 30 80 C30 108 70 118 104 110 C130 104 142 86 132 72 C122 60 100 70 86 70 C70 70 64 52 64 30 V8 Z" fill="${C.p}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`+
+    S('drop',56,72,2)+S('drop',84,86,2)+S('drop',106,80,2)+chain(52,52,3,C.p,8,2)+T(66,48,'蛋白質',{s:7.5,b:1})+`</g>`+
+    TAG(158,22,'胃液＝酵素＋鹽酸',C.y,{s:8,w:78})+TAG(158,50,'初步分解蛋白質',C.p,{s:8,w:78})+TAG(158,78,'殺死部分細菌',C.l,{s:8,w:78})+T(158,104,'（胃液：酸性）',{s:8.5,b:1})+T(52,120,'胃：暫時貯存食物',{s:8.5,b:1}),'胃與胃液的功能')},
+ {t:'小腸：消化的主要部位',pg:'p.84 圖2-11',cap:'圖 2-11 膽汁和胰液經由特定管道注入小腸',
+  pts:['食物進入小腸後，管壁肌肉收縮，讓食物和肝臟分泌的膽汁、胰臟分泌的胰液、腸腺分泌的腸液充分混合。','膽汁儲存於膽囊，雖然不含酵素，但能乳化脂質，促進脂質分解的速率。','胰液能分解醣類、蛋白質和脂質；腸液則和醣類與蛋白質的分解有關。','三種消化液為鹼性，能中和胃液酸性，並促進小腸中酵素的活性。'],
+  q:'胰液是在胰臟裡分解養分嗎？',a:'不是。胰液經由管道注入小腸，在小腸中作用。',
+  svg:()=>SV(`<path d="M8 10 H84 L76 42 H12 Z" fill="${C.n}" stroke="${C.k}" stroke-width="2.5"/>`+T(44,30,'肝臟',{s:9,b:1,f:'#fff'})+
+    `<rect x="60" y="42" width="14" height="14" fill="${C.g}" stroke="${C.k}" stroke-width="2"/>`+T(46,54,'膽囊',{s:8,b:1})+
+    `<path d="M67 56 V74 H96" fill="none" stroke="${C.G}" stroke-width="3"/>`+
+    `<rect x="110" y="40" width="72" height="14" fill="${C.t}" stroke="${C.k}" stroke-width="2"/>`+T(146,50,'胰臟',{s:9,b:1})+`<path d="M116 54 V74 H104" fill="none" stroke="${C.O}" stroke-width="3"/>`+
+    `<path d="M92 66 h20 v40 h-20 z" fill="${C.p}" stroke="${C.k}" stroke-width="2.5"/>`+T(102,120,'小腸',{s:9,b:1})+
+    TAG(30,70,'膽汁',C.l,{s:8.5})+T(30,84,'乳化脂質',{s:8,b:1})+T(30,95,'（不含酵素）',{s:7.5,b:1})+
+    TAG(140,70,'胰液',C.y,{s:8.5})+T(150,84,'分解醣類、蛋白質、脂質',{s:7.5,b:1})+TAG(140,98,'腸液',C.c,{s:8.5})+T(150,112,'分解醣類、蛋白質',{s:7.5,b:1})+TAG(36,114,'三者皆鹼性',C.c,{s:8}),'膽汁、胰液、腸液注入小腸')},
+ {t:'吸收：小腸絨毛',pg:'p.84 圖2-12',cap:'圖 2-12 小腸構造與絨毛',
+  pts:['小腸除了能夠分解養分，也是吸收水分和養分的主要部位。','小腸內壁皺褶上有許多指狀的小突起，稱為「絨毛」，能增加吸收的表面積。','被吸收的小分子養分，能藉由血液運送至全身細胞利用或儲存。'],
+  q:'絨毛對小腸吸收養分有什麼幫助？',a:'能增加吸收的表面積。',
+  svg:()=>SV([0,1,2,3].map(i=>{const x=20+i*42;return `<path d="M${x} 110 V36 C${x} 18 ${x+28} 18 ${x+28} 36 V110" fill="${C.p}" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`+
+    `<path d="M${x+8} 110 V38 C${x+8} 30 ${x+20} 30 ${x+20} 38 V110" fill="none" stroke="${C.r}" stroke-width="2.4" shape-rendering="auto"/>`}).join('')+
+    `<rect x="4" y="108" width="192" height="14" fill="${C.P}" stroke="${C.k}" stroke-width="2"/>`+T(100,119,'小腸內壁',{s:8.5,f:'#fff',b:1})+
+    CIR(76,24,3.4,C.y)+AR(76,30,74,46,C.k,1.6)+CIR(118,22,3.4,C.p)+AR(118,28,116,44,C.k,1.6)+
+    TAG(40,10,'絨毛',C.w,{s:9})+TAG(168,10,'微血管',C.r,{s:8.5,tf:'#fff'})+`<line x1="160" y1="16" x2="154" y2="40" stroke="${C.k}" stroke-width="1.3"/>`,'小腸絨毛與其中的微血管')},
+ {t:'大腸與排遺',pg:'p.84',cap:'糞便經由肛門排出體外，稱為排遺',
+  pts:['未被消化或吸收的食物殘渣，由小腸進入大腸。','大腸較小腸粗短，能繼續吸收水分與礦物質。','剩餘的食物殘渣與水分、部分剝落的大腸壁細胞、腸內細菌等，混合形成糞便，經由肛門排出體外，此過程稱為「排遺」。'],
+  q:'大腸還能吸收什麼？',a:'水分與礦物質。',
+  svg:()=>SV(`<path d="M40 112 V22 H160 V100 H110 V120" fill="none" stroke="${C.k}" stroke-width="20"/><path d="M40 112 V22 H160 V100 H110 V120" fill="none" stroke="#f6a25b" stroke-width="15"/>`+
+    S('drop',62,40,2)+AR(70,42,92,56,C.b,2)+S('drop',140,40,2)+AR(140,46,120,58,C.b,2)+TAG(100,68,'吸收水分與礦物質',C.c,{s:8.5})+
+    `<rect x="104" y="104" width="12" height="10" fill="${C.N}"/>`+TAG(150,116,'肛門：排遺',C.e,{s:8.5})+T(22,64,'大腸',{s:9,b:1}),'大腸吸收水分並形成糞便')},
+ {t:'實用延伸：腸胃的健康',pg:'p.85、p.90',cap:'科學漫遊：胃為什麼不會被自己腐蝕？',
+  pts:['膳食纖維不易被人體消化酵素分解，能促進糞便的形成與腸道蠕動，避免便祕。','腸道中有些菌和人體共生互利，稱為「益生菌」，能協助合成部分維生素，並避免壞菌過多。','胃會分泌黏液與鹼性物質，組成胃黏膜層保護胃壁，所以胃不會被自己分泌的鹽酸腐蝕。'],
+  q:'胃液中有強酸性的鹽酸，為什麼胃壁不會被腐蝕？',a:'胃會分泌黏液與鹼性物質組成胃黏膜層，保護胃壁並中和鹽酸。',
+  svg:()=>SV(BX(4,6,60,90,'#eef8e6')+`<path d="M14 30 h40 M14 44 h40 M14 58 h40" stroke="${C.G}" stroke-width="4" stroke-dasharray="6 3"/>`+T(34,82,'膳食纖維',{s:8.5,b:1})+
+    BX(70,6,60,90,'#f4ecff')+S('germ',84,22,3.2)+T(100,82,'益生菌',{s:8.5,b:1})+
+    BX(136,6,60,90,'#ffeef2')+`<rect x="140" y="20" width="52" height="16" fill="${C.y}"/>`+T(166,31,'胃液',{s:7.5,b:1})+`<rect x="140" y="36" width="52" height="12" fill="#ffd0dc" stroke="${C.k}" stroke-width="1"/>`+T(166,45,'胃黏膜',{s:7.5,b:1})+`<rect x="140" y="48" width="52" height="16" fill="${C.P}"/>`+T(166,59,'胃壁',{s:7.5,b:1,f:'#fff'})+T(166,82,'保護胃壁',{s:8.5,b:1})+
+    T(100,114,'讓腸胃保持健康',{s:10,b:1}),'膳食纖維、益生菌與胃黏膜')}
+ ]}
+};
+const ORDER=['2-2','2-3','2-4'];
+ORDER.forEach(u=>UNITS[u].cards.forEach((c,i)=>{c.id=u+'-'+(i+1);c.unit=u;c.idx=i}));
+
+/* =========================================================
+   狀態：模式、金幣、音效（存在 localStorage）
+   ========================================================= */
+const store={get(k,d){try{const v=localStorage.getItem('bio2_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('bio2_'+k,JSON.stringify(v))}catch(e){}}};
+let mode=store.get('mode','student'), coins=store.get('coins',{}), sound=store.get('sound',true);
+
+/* 8-bit 音效（Web Audio，原創短音） */
+let AC=null;
+function beep(seq){if(!sound)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();let t=AC.currentTime;
+  seq.forEach(([f,d,type])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type||'square';o.frequency.value=f;g.gain.setValueAtTime(.06,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d);t+=d*.9})}catch(e){}}
+const SFX={tap:()=>beep([[660,.05]]),open:()=>beep([[523,.06],[659,.06],[784,.08]]),coin:()=>beep([[988,.07],[1319,.2]]),
+  next:()=>beep([[880,.04],[1175,.05]]),stage:()=>beep([[392,.1],[523,.1],[659,.1],[784,.12],[659,.08],[784,.25]]),lock:()=>beep([[220,.12,'triangle'],[175,.16,'triangle']])};
+
+/* =========================================================
+   背景場景（每單元不同主題）
+   ========================================================= */
+function cloud(x,y,s,cls){return `<g class="${cls}">${spr(SP.cloud,x,y,s)}</g>`}
+function bands(cols,h=180){const n=cols.length,bh=Math.ceil(h/n);return cols.map((c,i)=>`<rect x="0" y="${i*bh}" width="320" height="${bh+1}" fill="${c}"/>`).join('')}
+const SCENES={
+ home:()=>bands(['#5fb4ea','#6fbdee','#80c6f1','#94d0f3','#a9daf5','#bfe4f7'])+cloud(20,20,3,'drift')+cloud(150,36,2,'drift2')+cloud(240,14,3,'drift')+
+   `<path d="M0 132 h30 v-12 h30 v-10 h40 v12 h30 v-18 h40 v14 h40 v-8 h40 v10 h40 v12 h30 V180 H0 Z" fill="#e8b93a"/>`+
+   `<path d="M0 148 h50 v-8 h60 v6 h70 v-10 h60 v8 h80 V180 H0 Z" fill="#c9951b"/>`+
+   `<rect x="0" y="164" width="320" height="16" fill="#8a5a2b"/>`+Array.from({length:20},(_,i)=>`<rect x="${i*16}" y="164" width="15" height="7" fill="#a8723a"/><rect x="${i*16+8}" y="172" width="15" height="7" fill="#a8723a"/>`).join(''),
+ '2-2':()=>bands(['#3a1f2b','#5a2a2c','#83392a','#ad5226','#d47024','#f09a3a'])+
+   `<g fill="#2a1418"><rect x="10" y="90" width="60" height="74"/><rect x="22" y="56" width="12" height="40"/><rect x="46" y="66" width="10" height="30"/><path d="M80 110 l20 -14 v14 l20 -14 v14 l20 -14 v68 h-60 z"/><rect x="190" y="80" width="80" height="84"/><rect x="206" y="44" width="14" height="40"/><rect x="240" y="58" width="12" height="26"/><rect x="280" y="104" width="40" height="60"/></g>`+
+   `<g fill="#ffcf6a">${[[18,100],[36,100],[54,100],[18,116],[54,116],[200,92],[220,92],[240,92],[200,110],[240,110],[290,114]].map(([x,y])=>`<rect x="${x}" y="${y}" width="8" height="6"/>`).join('')}</g>`+
+   `<g class="puff" style="transform-origin:28px 50px"><rect x="22" y="42" width="12" height="10" fill="#9a8a8a"/></g><g class="puff" style="animation-delay:1.5s"><rect x="207" y="30" width="12" height="10" fill="#9a8a8a"/></g>`+
+   `<g transform="translate(150 40)"><g class="spin"><path d="M0 -18 h6 v6 h8 l4 6 -6 6 2 6 h6 v6 h-6 l-2 6 6 6 -4 6 h-8 v6 h-6 v-6 h-8 l-4 -6 6 -6 -2 -6 h-6 v-6 h6 l2 -6 -6 -6 4 -6 h8 z" fill="#c76a1a" stroke="#2a1418" stroke-width="2" transform="translate(-3 12)"/><rect x="-4" y="5" width="8" height="8" fill="#2a1418"/></g></g>`+
+   `<rect x="0" y="152" width="320" height="28" fill="#4a2a1a"/><rect x="0" y="152" width="320" height="6" fill="#c76a1a"/><g class="belt">${Array.from({length:22},(_,i)=>`<rect x="${i*16-16}" y="160" width="8" height="5" fill="#8a4a1a"/>`).join('')}</g>`+
+   Array.from({length:20},(_,i)=>`<rect x="${i*16}" y="168" width="15" height="12" fill="#6b3a1e" stroke="#2a1418" stroke-width="1"/>`).join(''),
+ '2-3':()=>bands(['#58b7ef','#6ec2f1','#86cdf3','#9fd8f6','#b8e3f8','#d2eefa'])+`<g class="bob">${spr(SP.sun,250,10,4)}</g>`+cloud(30,22,3,'drift')+cloud(140,40,2,'drift2')+
+   `<path d="M0 120 h20 v-10 h30 v-8 h40 v8 h30 v10 h40 v-14 h50 v10 h40 v-6 h40 v10 h30 V180 H0 Z" fill="#8fd16b"/>`+
+   [[30,92],[110,86],[210,90],[290,96]].map(([x,y])=>`<rect x="${x+8}" y="${y+26}" width="8" height="30" fill="#7a4a1a"/><path d="M${x} ${y+30} v-16 h4 v-8 h4 v-6 h8 v6 h4 v8 h4 v16 z" fill="#2e8b3a" stroke="#1b5a24" stroke-width="2"/>`).join('')+
+   `<rect x="0" y="150" width="320" height="30" fill="#6b3a1e"/><rect x="0" y="150" width="320" height="8" fill="#5cbf3a"/>`+Array.from({length:40},(_,i)=>`<rect x="${i*8}" y="${146+(i%2)*2}" width="4" height="4" fill="#4aa52e"/>`).join('')+
+   [[60,140,'#ffd23f'],[150,142,'#ff8fa3'],[250,140,'#fff']].map(([x,y,c])=>`<rect x="${x}" y="${y}" width="6" height="6" fill="${c}" stroke="#2a1a12" stroke-width="1"/><rect x="${x+2}" y="${y+6}" width="2" height="6" fill="#2e7d32"/>`).join(''),
+ '2-4':()=>bands(['#5a1a2e','#7a2440','#9a3050','#b84462','#cf5a76','#e07a92'])+
+   `<path d="M0 0 H320 V22 h-16 v8 h-24 v-6 h-30 v10 h-26 v-8 h-30 v6 h-24 v-10 h-30 v8 h-28 v-6 h-26 v10 h-30 v-6 h-26 v-8 h-30 z" fill="#3e0f1e"/>`+
+   Array.from({length:8},(_,i)=>`<g class="rise" style="animation-delay:${i*1.1}s"><rect x="${20+i*40}" y="${150-(i%3)*10}" width="${6+(i%3)*2}" height="${6+(i%3)*2}" fill="#ffd0dc" opacity=".7" stroke="#fff" stroke-width="1"/></g>`).join('')+
+   `<rect x="0" y="146" width="320" height="34" fill="#9a2648"/>`+Array.from({length:20},(_,i)=>`<path d="M${i*16+2} 148 v-14 h4 v-4 h4 v4 h4 v14 z" fill="#e45f84" stroke="#5a1a2e" stroke-width="1.5"/>`).join('')+
+   Array.from({length:20},(_,i)=>`<rect x="${i*16+4}" y="158" width="8" height="4" fill="#c23a62"/>`).join('')
+};
+function setScene(key){document.getElementById('scene').innerHTML=`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges">${SCENES[key]()}</svg>`}
+
+/* =========================================================
+   畫面
+   ========================================================= */
+const app=document.getElementById('app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function unitCoins(u){return UNITS[u].cards.filter(c=>coins[c.id]).length}
+function totalCoins(){return Object.keys(coins).filter(k=>coins[k]).length}
+function refreshHud(){document.getElementById('coinCount').textContent=totalCoins()}
+
+function portalThumb(u){const scene=SCENES[u]();const g=UNITS[u].guide;
+  return `<svg class="thumb" viewBox="0 0 320 150" preserveAspectRatio="xMidYMax slice" shape-rendering="crispEdges" aria-hidden="true"><g transform="translate(0 -30)">${scene}</g><g class="bob">${spr(SP[g],136,58,6)}</g></svg>`}
+function lockedThumb(kind){const bg=kind==='mind'?['#3b3b6b','#4a4a80','#5a5a96']:['#2b4a3b','#335a47','#3c6b54'];
+  return `<svg class="thumb" viewBox="0 0 320 150" shape-rendering="crispEdges" aria-hidden="true">${bg.map((c,i)=>`<rect y="${i*50}" width="320" height="51" fill="${c}"/>`).join('')}
+  ${kind==='mind'?`<g stroke="#ffd65a" stroke-width="4"><line x1="160" y1="75" x2="70" y2="35"/><line x1="160" y1="75" x2="250" y2="35"/><line x1="160" y1="75" x2="80" y2="120"/><line x1="160" y1="75" x2="240" y2="120"/></g>`+[[160,75,'#ffd65a'],[70,35,'#ffd2a6'],[250,35,'#c9eda0'],[80,120,'#ffd0dc'],[240,120,'#fff']].map(([x,y,c])=>`<rect x="${x-18}" y="${y-12}" width="36" height="24" fill="${c}" stroke="#2a1a12" stroke-width="3"/>`).join('')
+  :Array.from({length:25},(_,i)=>`<rect x="${85+(i%5)*30}" y="${8+Math.floor(i/5)*27}" width="26" height="23" fill="${[3,7,12,18,21].includes(i)?'#e45f84':'#fff8e6'}" stroke="#2a1a12" stroke-width="2"/>`).join('')}
+  ${spr(SP.lock,140,48,5)}</svg>`}
+
+function renderHome(){
+  document.body.dataset.theme='home';setScene('home');
+  const portal=u=>{const U=UNITS[u],n=U.cards.length,got=unitCoins(u);
+    return `<a class="portal" href="#/unit/${u}" style="--c:${U.color}"><div class="pbox plate">${portalThumb(u)}<div class="info">
+      <span class="num">${u}</span><h2>${esc(U.stage)}</h2><div class="sub">${esc(U.name)}｜${U.pages}</div>
+      <div class="meter" aria-label="已收集 ${got}/${n}"><i style="width:${got/n*100}%"></i></div>
+      <div class="sub px" style="margin-top:4px">金幣 ${got} / ${n}</div></div></div></a>`};
+  const locked=(kind,title,sub,when)=>`<div class="portal locked" role="button" tabindex="0" data-locked="${when}"><div class="pbox plate">${lockedThumb(kind)}<span class="lock">${when}開放</span><div class="info">
+      <span class="num" style="background:#6b6b6b">${kind==='mind'?'MAP':'BINGO'}</span><h2>${title}</h2><div class="sub">${sub}</div></div></div></div>`;
+  app.innerHTML=`
+  <section class="pbox title-screen">
+    <div class="world">WORLD 2 ‧ CHAPTER 2</div>
+    <h1 class="ptitle">生物體的營養 大冒險</h1>
+    <p>選一個關卡進入，打開概念卡、收集金幣！</p>
+    <div class="squad">${spriteSvg('enzyme',5)}${spriteSvg('leafkid',5)}${spriteSvg('foodball',5)}</div>
+    <p class="px blink" style="margin-top:10px;color:var(--gold-d)">▶ SELECT STAGE</p>
+  </section>
+  <nav class="map" aria-label="關卡地圖">
+    ${portal('2-2')}${portal('2-3')}${portal('2-4')}
+    ${locked('mind','心智圖神殿','用線索拼出完整概念','第 3 期')}
+    ${locked('bingo','賓果競技場','全班大屏賓果對戰','第 4 期')}
+  </nav>
+  <section class="pbox howto">
+    <h3>▶ 遊戲說明</h3>
+    <ul>
+      <li><b>學生模式</b>：點開概念卡閱讀，回答「想一想」小提問；看懂後按「我看懂了」收集金幣。進度會存在這台平板（或電腦）上。</li>
+      <li><b>老師模式</b>：大字投影、重點逐點顯示、解答預設隱藏。可用鍵盤 <span class="keys"><kbd>→</kbd>／<kbd>空白鍵</kbd> 下一點、<kbd>←</kbd> 上一點、<kbd>PgDn</kbd>／<kbd>PgUp</kbd> 換卡、<kbd>Esc</kbd> 關閉</span>。</li>
+      <li><b>互動動畫</b>：每段都有播放、暫停、上一步、下一步、重播與速度控制，最後一步「換你試試」可以自己動手操作。</li>
+      <li>即時練習、心智圖與賓果，會在第 3～4 期陸續開放。</li>
+    </ul>
+  </section>`;
+  app.querySelectorAll('.portal').forEach(p=>p.addEventListener('click',e=>{if(p.dataset.locked){e.preventDefault();SFX.lock();toast(`這個關卡在${p.dataset.locked}開放喔！`)}else SFX.tap()}));
+  app.querySelectorAll('.portal.locked').forEach(p=>p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();p.click()}}));
+}
+
+const LEVELS=[['concept','重點概念',''],['anim','互動動畫',''],['practice','即時練習','第 3 期'],['summary','小結','第 3 期']];
+const COMING={
+ '2-2':{anim:['動畫 A：酵素分解作用——拖曳澱粉、纖維素、蛋白質到澱粉酶上，體驗專一性與可重複使用','動畫 B：酵素合成作用——把小分子拖到酵素上結合成大分子','動畫 C：活性實驗室——溫度與酸鹼值滑桿，觀察酵素活性變化','動畫 D：虛擬實驗 2-2——依課本步驟操作，判斷是否支持假說'],
+        summary:['可收合的整理表：代謝類型、酵素特性、溫度、酸鹼','三題快問快答']},
+ '2-3':{anim:['動畫 A：葉片構造探索——從整片葉放大到橫切面，點選各構造看功能；氣孔可開合','動畫 B：分子的旅程——依序把光、水、二氧化碳拖進葉綠體，觀察產生葡萄糖、氧氣與水','動畫 C：光合作用變因小實驗——調整光照、二氧化碳、水分','動畫 D：虛擬實驗 2-3——自選包鋁箔的位置，最後滴碘液「開獎」'],
+        summary:['可收合的整理表：葉的構造與功能、光合作用','三題快問快答']},
+ '2-4':{anim:['消化之旅模擬器——選醣類、蛋白質或脂質，跟著食物走完整條消化道','每一站標示「分子改變／體積改變／只推送」','吸收場景：小分子穿過絨毛進入微血管','任務模式與消化腺配對小遊戲'],
+        summary:['可收合的整理表：器官 × 醣類／蛋白質／脂質的變化','三題快問快答']}
+};
+const PRACTICE=['單選、是非、拖曳配對、下拉填空、圖片點選','作答後立刻顯示對錯、一句話解說，並連回對應的概念卡','錯題自動收進「錯題本」，可以重練','每單元顯示正確率與星等'];
+
+function renderUnit(u,tab,sub){
+  const U=UNITS[u];if(!U){location.hash='#/';return}
+  document.body.dataset.theme=u;setScene(u);
+  tab=LEVELS.some(l=>l[0]===tab)?tab:'concept';
+  const got=unitCoins(u);
+  let body='';
+  if(tab==='concept'){
+    body=`<div class="grid">${U.cards.map((c,i)=>`<button class="pbox card" data-i="${i}" aria-label="第 ${i+1} 張：${esc(c.t)}">
+      <div class="top"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="st sonly ${coins[c.id]?'got':''}">${coins[c.id]?'★ 已收集':'未開啟'}</span><span class="st tonly">${c.pg}</span></div>
+      ${c.svg()}<div class="body"><h3>${esc(c.t)}</h3><p>${esc(c.cap)}</p></div></button>`).join('')}</div>`;
+  }else if(tab==='anim'){
+    body=`<div id="animTab"></div>`;
+  }else{
+    const lv=LEVELS.find(l=>l[0]===tab);
+    const list=tab==='practice'?PRACTICE:COMING[u][tab];
+    body=`<section class="pbox lockpanel"><div style="display:flex;gap:16px;align-items:center">${spriteSvg('lock',6,'style="width:48px;height:48px;flex:none"')}
+      <div><h2>LEVEL ${LEVELS.indexOf(lv)+1}　${lv[1]}</h2><div>這一關將在 <b>${lv[2]}</b> 開放，預定內容：</div></div></div>
+      <ul>${list.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`;
+  }
+  app.innerHTML=`
+  <section class="pbox stagebar">
+    ${spriteSvg(U.guide,6,'class="guide bob"')}
+    <div><span class="wtag">WORLD ${u}</span><h1 class="ptitle">${esc(U.stage)}</h1><div class="pg">${esc(U.name)}｜${U.pages}｜<span class="sonly">金幣 ${got} / ${U.cards.length}</span><span class="tonly">${U.cards.length} 張概念卡</span></div></div>
+    <div class="talk">${esc(U.hello)}</div>
+  </section>
+  <div class="levels" role="tablist" aria-label="關卡">
+    ${LEVELS.map(([k,n,w],i)=>`<button class="lv" role="tab" aria-selected="${k===tab}" data-tab="${k}"><small>LV${i+1}</small>${n}${w?`<span class="lk">🔒${w}</span>`:''}</button>`).join('')}
+    <a class="pbtn ghost" href="#/" style="margin-left:auto">⬅ 世界地圖</a>
+  </div>
+  ${body}`;
+  app.querySelectorAll('.lv').forEach(b=>b.addEventListener('click',()=>{SFX.tap();location.hash=`#/unit/${u}/${b.dataset.tab}`}));
+  app.querySelectorAll('.card').forEach(b=>b.addEventListener('click',()=>openViewer(u,+b.dataset.i)));
+  const at=document.getElementById('animTab');if(at)renderAnimTab(u,at,sub);
+}
+
+/* ---- 概念卡檢視器 ---- */
+const V={u:null,i:0,step:0};
+const viewer=document.getElementById('viewer');
+function openViewer(u,i){V.u=u;V.i=i;V.step=1;V.anim=1;SFX.open();viewer.classList.add('open');document.body.style.overflow='hidden';drawViewer();viewer.focus()}
+function closeViewer(){viewer.classList.remove('open');document.body.style.overflow='';const r=parseRoute();if(r.u&&r.tab==='concept')renderUnit(r.u,r.tab)}
+function drawViewer(){
+  const U=UNITS[V.u],c=U.cards[V.i],n=U.cards.length,teach=mode==='teacher',total=c.pts.length;
+  if(teach)V.step=Math.max(1,Math.min(V.step,total));
+  const done=!teach||V.step>=total;
+  viewer.innerHTML=`<div class="pbox vpanel ${V.anim?'anim':''}">
+    <div class="vhead"><span class="n">${V.i+1}/${n}</span><h2>${esc(c.t)}</h2><button class="pbtn ghost" id="vClose" aria-label="關閉">✕</button></div>
+    <div class="vbody">
+      <div class="figure">${c.svg()}<div class="cap">${esc(c.cap)}｜課本 ${c.pg}</div></div>
+      <div>
+        <div class="dialog">
+          <ul class="points">${c.pts.map((p,k)=>`<li class="${teach&&k>=V.step?'hide':''} ${teach&&k===V.step-1?'now':''}">${esc(p)}</li>`).join('')}</ul>
+          <div class="tnext tonly">${done?'■ 本卡重點完畢':'▼ 下一點（→ 或 空白鍵）'}</div>
+        </div>
+        <div class="quiz" ${done?'':'hidden'}>
+          <div class="qh">❓ 想一想</div><div>${esc(c.q)}</div>
+          <button class="pbtn gold" id="vAns" style="margin-top:10px">看答案</button>
+          <div class="ans" id="vAnsBox">✔ ${esc(c.a)}</div>
+        </div>
+      </div>
+    </div>
+    <div class="vfoot">
+      <button class="pbtn ghost" id="vPrev" ${V.i===0?'disabled':''}>◀ 上一張</button>
+      <div class="mid">
+        <button class="pbtn tonly" id="vBack" ${V.step<=1?'disabled':''}>▲ 上一點</button>
+        <button class="pbtn tonly" id="vStep" ${done?'disabled':''}>下一點 ▼</button>
+        <button class="pbtn ghost tonly" id="vAll" ${done?'disabled':''}>全部顯示</button>
+        <button class="pbtn sonly collect ${coins[c.id]?'got':''}" id="vCoin">${coins[c.id]?'★ 已收集金幣':'我看懂了！收集金幣'}</button>
+      </div>
+      <button class="pbtn" id="vNext" ${V.i===n-1?'disabled':''}>下一張 ▶</button>
+    </div></div>`;
+  V.anim=0;
+  const $=id=>document.getElementById(id);
+  $('vClose').onclick=()=>{SFX.tap();closeViewer()};
+  $('vPrev').onclick=()=>go(-1);$('vNext').onclick=()=>go(1);
+  $('vAns').onclick=()=>{SFX.tap();$('vAnsBox').classList.add('show');$('vAns').hidden=true};
+  $('vStep').onclick=()=>step(1);$('vBack').onclick=()=>step(-1);
+  $('vAll').onclick=()=>{V.step=total;SFX.next();drawViewer()};
+  $('vCoin').onclick=e=>{if(coins[c.id])return;coins[c.id]=true;store.set('coins',coins);SFX.coin();coinFx(e.currentTarget);refreshHud();drawViewer();
+    if(unitCoins(V.u)===n)setTimeout(()=>{SFX.stage();toast(`★ ${U.stage} 金幣全部收集完成！`)},500)};
+}
+function go(d){const n=UNITS[V.u].cards.length,j=V.i+d;if(j<0||j>=n)return;V.i=j;V.step=1;V.anim=1;SFX.open();drawViewer()}
+function step(d){const total=UNITS[V.u].cards[V.i].pts.length,s=V.step+d;if(s<1||s>total)return;V.step=s;SFX.next();drawViewer()}
+viewer.tabIndex=-1;
+viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer()});
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('intro').classList.contains('show')){hideIntro();return}
+  if(!viewer.classList.contains('open'))return;
+  const teach=mode==='teacher',total=UNITS[V.u].cards[V.i].pts.length;
+  if(e.key==='Escape'){closeViewer()}
+  else if(e.key==='PageDown'){e.preventDefault();go(1)}
+  else if(e.key==='PageUp'){e.preventDefault();go(-1)}
+  else if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();if(teach&&V.step<total)step(1);else go(1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();if(teach&&V.step>1)step(-1);else go(-1)}
+});
+function coinFx(el){const r=el.getBoundingClientRect(),d=document.createElement('div');d.className='coinfx';d.innerHTML=spriteSvg('coin',3,'style="width:24px;height:24px;vertical-align:middle"')+' +1';
+  d.style.left=(r.left+r.width/2-30)+'px';d.style.top=(r.top-10)+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),950)}
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+
+/* ---- 進場畫面 ---- */
+let introTimer=null;
+function showIntro(u){const U=UNITS[u],el=document.getElementById('intro');document.body.dataset.theme=u;
+  el.innerHTML=`<div class="w">WORLD ${u}</div><div class="nm">${esc(U.stage)}</div><div class="ln">${spriteSvg(U.guide,7)}<span>× ${U.cards.length} CARDS</span></div><div class="skip">（點一下開始）</div>`;
+  el.classList.add('show');SFX.stage();clearTimeout(introTimer);introTimer=setTimeout(hideIntro,1600)}
+function hideIntro(){document.getElementById('intro').classList.remove('show');clearTimeout(introTimer)}
+document.getElementById('intro').addEventListener('click',hideIntro);
+
+/* ---- 模式切換、音效 ---- */
+function applyMode(){document.body.classList.toggle('teacher',mode==='teacher');
+  document.getElementById('mStudent').setAttribute('aria-pressed',mode==='student');document.getElementById('mTeacher').setAttribute('aria-pressed',mode==='teacher')}
+document.getElementById('mStudent').onclick=()=>{mode='student';store.set('mode',mode);applyMode();SFX.tap();rerender()};
+document.getElementById('mTeacher').onclick=()=>{mode='teacher';store.set('mode',mode);applyMode();SFX.tap();rerender()};
+const sb=document.getElementById('soundBtn');function drawSound(){sb.textContent=sound?'♪ ON':'♪ OFF'}
+sb.onclick=()=>{sound=!sound;store.set('sound',sound);drawSound();SFX.tap()};
+document.getElementById('hudCoinIcon').innerHTML=spriteSvg('coin',3,'style="width:24px;height:24px;display:block"');
+document.getElementById('hudCoin2').innerHTML=spriteSvg('coin',3,'style="width:24px;height:24px;display:block"');
+
+/* ---- 路由（#/、#/unit/2-2/concept；GitHub Pages 可直接使用） ---- */
+function parseRoute(){const m=location.hash.match(/^#\/unit\/(2-[234])(?:\/(\w+))?(?:\/(\w+))?/);return m?{u:m[1],tab:m[2]||'concept',sub:m[3]}:{}}
+let lastUnit=null;
+function rerender(){if(viewer.classList.contains('open'))drawViewer();const r=parseRoute();if(r.u){if(r.tab!=='anim')renderUnit(r.u,r.tab,r.sub)}else renderHome()}
+function route(){if(viewer.classList.contains('open')){viewer.classList.remove('open');document.body.style.overflow=''}
+  const r=parseRoute();
+  if(r.u){if(r.u!==lastUnit)showIntro(r.u);lastUnit=r.u;renderUnit(r.u,r.tab,r.sub)}else{lastUnit=null;renderHome()}
+  window.scrollTo(0,0)}
+window.addEventListener('hashchange',route);
+applyMode();drawSound();refreshHud();
+window.addEventListener('DOMContentLoaded',route);
+</script>
+<script>
+/*ANIM-START*/
+/* =========================================================
+   第 2 期：可操作的步驟動畫播放器
+   每段動畫：播放／暫停、上一步、下一步、重播、速度（0.5×／1×／2×）
+   ========================================================= */
+const AP_BG='#fffdf5';
+const AP={speed:1,players:new Set(),last:0};
+const G=(k,x,y,inner,extra='')=>`<g data-k="${k}" data-x="${x}" data-y="${y}" ${extra}>${inner}</g>`;
+const TT=(x,y,t,s=14,o={})=>T(x,y,t,Object.assign({s,b:1},o));
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function hex2rgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');return [0,2,4].map(i=>parseInt(h.substr(i,2),16))}
+function mixHex(a,b,t){const A=hex2rgb(a),B=hex2rgb(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')}
+
+function apTick(now){
+  const dt=Math.min(50,now-(AP.last||now));AP.last=now;
+  AP.players.forEach(P=>{
+    if(!P.host.isConnected){AP.players.delete(P);return}
+    if(P.paused)return;
+    const d=dt*AP.speed;P.vt+=d;
+    P.tw=P.tw.filter(w=>{const t=Math.min(1,(P.vt-w.t0)/w.dur);w.step(ease(t),t);if(t>=1){w.res();return false}return true});
+    P.wt=P.wt.filter(w=>{if(P.vt>=w.t){w.res();return false}return true});
+    if(P.def.tick)P.def.tick(P.ctx,d/1000);
+  });
+  requestAnimationFrame(apTick);
+}
+requestAnimationFrame(apTick);
+
+function APlayer(host,def){
+  const P={host,def,k:0,auto:false,paused:false,gen:0,vt:0,tw:[],wt:[],fast:false,done:false};
+  const n=def.steps.length;
+  host.innerHTML=`<div class="ap ${def.side?'has-side':''}">
+   <div class="ap-main">
+    <div class="ap-stage"><svg class="ap-svg" viewBox="0 0 480 270" shape-rendering="crispEdges" role="img" aria-label="${esc(def.title)}"></svg><div class="ap-hud"></div><div class="ap-msg" hidden></div></div>
+    <div class="ap-say"><div class="ap-head"><span class="ap-no px"></span><b class="ap-st"></b></div><div class="ap-tx"></div></div>
+    <div class="ap-ctl">
+      <button class="pbtn ghost" data-a="prev" aria-label="上一步">⏮ 上一步</button>
+      <button class="pbtn" data-a="play">▶ 播放</button>
+      <button class="pbtn ghost" data-a="next" aria-label="下一步">下一步 ⏭</button>
+      <button class="pbtn ghost" data-a="replay">↺ 重播</button>
+      <span class="ap-spd" role="group" aria-label="速度">速度<button data-s="0.5">0.5×</button><button data-s="1">1×</button><button data-s="2">2×</button></span>
+    </div>
+    <div class="ap-dots">${def.steps.map((s,i)=>`<button data-i="${i}" title="${esc(s.t)}" aria-label="步驟 ${i+1}：${esc(s.t)}">${i+1}</button>`).join('')}</div>
+   </div>
+   ${def.side?'<aside class="ap-side pbox"></aside>':''}
+  </div>`;
+  const svg=host.querySelector('.ap-svg'),hud=host.querySelector('.ap-hud'),side=host.querySelector('.ap-side'),msgEl=host.querySelector('.ap-msg');
+  const ST=new WeakMap();
+  const ctx={P,svg,hud,side,def,state:def.state?def.state():{}};
+  P.ctx=ctx;
+  /* ---- 元件狀態與變形 ---- */
+  function st(el){let s=ST.get(el);if(!s){s={x:+(el.dataset.x||0),y:+(el.dataset.y||0),s:+(el.dataset.s||1),r:0,o:el.dataset.o!=null?+el.dataset.o:1};ST.set(el,s)}return s}
+  function apply(el){const s=st(el);el.setAttribute('transform',`translate(${s.x.toFixed(2)} ${s.y.toFixed(2)}) rotate(${s.r.toFixed(1)}) scale(${s.s.toFixed(3)})`);el.style.opacity=s.o;el.style.display=s.o<=0.001?'none':''}
+  const $=k=>typeof k==='string'?svg.querySelector(`[data-k="${k}"]`):k;
+  ctx.$=$;ctx.$$=sel=>[...svg.querySelectorAll(sel)];
+  ctx.init=root=>{(root||svg).querySelectorAll('[data-x]').forEach(el=>{ST.delete(el);apply(el)})};
+  ctx.draw=html=>{svg.innerHTML=html;ctx.init()};
+  ctx.add=(html,parent)=>{const p=parent?$(parent):svg;const tmp=document.createElementNS('http://www.w3.org/2000/svg','g');tmp.innerHTML=html;const els=[...tmp.childNodes];els.forEach(e=>p.appendChild(e));els.forEach(e=>{if(e.dataset&&e.dataset.x!=null)apply(e);e.querySelectorAll&&e.querySelectorAll('[data-x]').forEach(apply)});return els[0]};
+  ctx.get=k=>st($(k));
+  ctx.set=(k,props)=>{const el=$(k);if(!el)return;Object.assign(st(el),props);apply(el)};
+  ctx.tw=(k,props,ms=600)=>{const el=$(k);if(!el)return Promise.resolve();const s=st(el);
+    if(P.fast||ms<=0){Object.assign(s,props);apply(el);return Promise.resolve()}
+    const from={};for(const p in props)from[p]=s[p];
+    return new Promise(res=>P.tw.push({t0:P.vt,dur:ms,res,step:e=>{for(const p in props)s[p]=from[p]+(props[p]-from[p])*e;apply(el)}}))};
+  ctx.val=(obj,key,to,ms=600,upd)=>{if(P.fast||ms<=0){obj[key]=to;upd&&upd();return Promise.resolve()}const from=obj[key];
+    return new Promise(res=>P.tw.push({t0:P.vt,dur:ms,res,step:e=>{obj[key]=from+(to-from)*e;upd&&upd()}}))};
+  ctx.color=(k,to,ms=600,attr='fill')=>{const els=typeof k==='string'?ctx.$$(`[data-k="${k}"]`):[k];
+    return Promise.all(els.map(el=>{const from=el.getAttribute(attr)||'#ffffff';if(P.fast||ms<=0){el.setAttribute(attr,to);return Promise.resolve()}
+      return new Promise(res=>P.tw.push({t0:P.vt,dur:ms,res,step:(e,t)=>{el.setAttribute(attr,mixHex(from,to,t))}}))}))};
+  ctx.wait=ms=>P.fast?Promise.resolve():new Promise(res=>P.wt.push({t:P.vt+ms,res}));
+  ctx.all=a=>Promise.all(a);
+  ctx.show=(k,ms=300)=>{ctx.set(k,{});return ctx.tw(k,{o:1},ms)};
+  ctx.hide=(k,ms=300)=>ctx.tw(k,{o:0},ms);
+  ctx.pulse=async(k,big=1.15,ms=260)=>{const s=ctx.get(k).s;await ctx.tw(k,{s:s*big},ms);await ctx.tw(k,{s},ms)};
+  ctx.shake=async(k,amp=6)=>{const x=ctx.get(k).x;for(let i=0;i<3;i++){await ctx.tw(k,{x:x-amp},60);await ctx.tw(k,{x:x+amp},60)}await ctx.tw(k,{x},60)};
+  ctx.text=(k,t)=>{const el=$(k);if(el)el.textContent=t};
+  let msgT=null;
+  ctx.msg=(t,kind='')=>{if(P.fast)return;msgEl.hidden=false;msgEl.className='ap-msg '+kind;msgEl.textContent=t;clearTimeout(msgT);msgT=setTimeout(()=>msgEl.hidden=true,2600)};
+  ctx.fast=()=>P.fast;
+  ctx.alive=g=>g===P.gen;
+  /* ---- 拖曳（手指與滑鼠） ---- */
+  function svgPt(e){const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())}
+  ctx.drag=(k,o)=>{const el=$(k);if(!el)return;el.classList.add('ap-drag');let d=null;
+    el.addEventListener('pointerdown',e=>{if(o.can&&!o.can())return;e.preventDefault();if(el.nextSibling)el.parentNode.appendChild(el);try{el.setPointerCapture(e.pointerId)}catch(_){}const p=svgPt(e),s=st(el);d={dx:s.x-p.x,dy:s.y-p.y,x0:s.x,y0:s.y};o.start&&o.start(el)});
+    el.addEventListener('pointermove',e=>{if(!d)return;const p=svgPt(e);ctx.set(el,{x:p.x+d.dx,y:p.y+d.dy});o.move&&o.move(st(el))});
+    const up=e=>{if(!d)return;const dd=d;d=null;const s=st(el);o.drop&&o.drop(s.x,s.y,dd)};
+    el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)};
+  ctx.hot=(k,fn)=>{const el=$(k);if(!el)return;el.classList.add('ap-hot');el.addEventListener('click',()=>{el.classList.remove('ap-hot');(fn||(()=>go(P.k+1,false)))()},{once:true})};
+  ctx.next=()=>go(P.k+1,false);
+  ctx.goto=k=>go(k,false);
+  ctx.stop=()=>{P.auto=false;ui()};
+  ctx.sideHTML=h=>{if(side)side.innerHTML=h};
+  const stage=host.querySelector('.ap-stage');
+  const fixPad=()=>{const t=hud.querySelector('.ap-tools');stage.style.paddingTop=t?(t.offsetHeight+14)+'px':'0px'};
+  ctx.hudHTML=h=>{hud.innerHTML=h;fixPad()};
+  new ResizeObserver(fixPad).observe(stage);
+  ctx.isFree=()=>!!def.steps[P.k].free;
+  ctx.teacher=()=>document.body.classList.contains('teacher');
+
+  /* ---- 步驟控制 ---- */
+  function ui(){const s=def.steps[P.k];
+    host.querySelector('.ap-no').textContent=`步驟 ${P.k+1}/${n}`;
+    host.querySelector('.ap-st').textContent=s.t;
+    host.querySelector('.ap-tx').textContent=typeof s.say==='function'?s.say(ctx):s.say;
+    host.querySelector('[data-a="prev"]').disabled=P.k===0;
+    host.querySelector('[data-a="next"]').disabled=P.k===n-1;
+    host.querySelector('[data-a="play"]').textContent=(P.auto&&!P.paused)?'⏸ 暫停':'▶ 播放';
+    host.querySelectorAll('.ap-dots button').forEach((b,i)=>{b.classList.toggle('on',i===P.k);b.classList.toggle('past',i<P.k)});
+    host.querySelectorAll('.ap-spd button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.s===AP.speed));
+    host.querySelector('.ap').classList.toggle('free',!!s.free);
+  }
+  async function go(k,rebuildAlways=true){
+    k=Math.max(0,Math.min(n-1,k));
+    const g=++P.gen;P.tw=[];P.wt=[];P.done=false;P.paused=false;
+    msgEl.hidden=true;hud.innerHTML='';stage.style.paddingTop='0px';
+    def.setup(ctx,k);
+    P.fast=true;
+    if(!def.steps[k].fresh)for(let i=0;i<k;i++){if(def.steps[i].free)continue;await def.steps[i].run(ctx);if(g!==P.gen)return}
+    P.fast=false;
+    run(k,g);
+  }
+  async function run(k,g){
+    P.k=k;P.done=false;ui();
+    const s=def.steps[k];
+    await s.run(ctx);
+    if(g!==P.gen)return;
+    P.done=true;
+    if(s.free){P.auto=false;ui();return}
+    if(P.auto&&k<n-1){await ctx.wait(s.hold||1400);if(g!==P.gen)return;if(P.auto&&!P.paused)run(k+1,g)}
+    else if(k>=n-1){P.auto=false;ui()}
+  }
+  host.querySelector('[data-a="prev"]').onclick=()=>{SFX.tap();P.auto=false;go(P.k-1)};
+  host.querySelector('[data-a="next"]').onclick=()=>{SFX.next();P.auto=false;go(P.k+1)};
+  host.querySelector('[data-a="replay"]').onclick=()=>{SFX.tap();def.onReplay&&def.onReplay(ctx);P.auto=true;go(0)};
+  host.querySelector('[data-a="play"]').onclick=()=>{SFX.tap();
+    if(P.auto&&!P.paused){P.paused=true;P.auto=false;ui();return}
+    P.paused=false;P.auto=true;ui();
+    if(P.done&&P.k<n-1&&!def.steps[P.k].free)run(P.k+1,P.gen);
+    else if(P.done&&def.steps[P.k].free&&P.k===n-1){def.onReplay&&def.onReplay(ctx);go(0)}};
+  host.querySelectorAll('.ap-spd button').forEach(b=>b.onclick=()=>{AP.speed=+b.dataset.s;SFX.tap();ui()});
+  host.querySelectorAll('.ap-dots button').forEach(b=>b.onclick=()=>{SFX.tap();P.auto=false;go(+b.dataset.i)});
+  P.go=go;
+  AP.players.add(P);
+  go(0);
+  return P;
+}
+
+/* ---- 單元動畫頁 ---- */
+const ANIMS={};   // '2-2':[{id,name,def}] 由各單元檔填入
+function renderAnimTab(u,box,which){
+  const list=ANIMS[u]||[];
+  const cur=list.find(a=>a.id===which)||list[0];
+  box.innerHTML=`<div class="anim-pick">${list.map(a=>`<button class="lv" role="tab" aria-selected="${a===cur}" data-id="${a.id}"><small>${a.id}</small>${esc(a.name)}</button>`).join('')}</div>
+    <section class="pbox anim-box"><div class="anim-host"></div></section>`;
+  box.querySelectorAll('.anim-pick .lv').forEach(b=>b.onclick=()=>{SFX.tap();location.hash=`#/unit/${u}/anim/${b.dataset.id}`});
+  if(cur)APlayer(box.querySelector('.anim-host'),cur.def());
+}
+
+/* =========================================================
+   2-2 酵素：動畫 A–D
+   ========================================================= */
+const KEY={
+  sq:(c)=>`<rect x="-12" y="-12" width="24" height="24" fill="${c}" stroke="${C.k}" stroke-width="2.5"/>`,
+  cir:(c)=>`<circle r="12.5" fill="${c}" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto"/>`,
+  tri:(c)=>`<polygon points="12,0 -13,-13 -13,13" fill="${c}" stroke="${C.k}" stroke-width="2.5"/>`,
+  dia:(c)=>`<polygon points="0,-14 14,0 0,14 -14,0" fill="${c}" stroke="${C.k}" stroke-width="2.5"/>`
+};
+const SUBS={
+  starch:{name:'澱粉',key:'sq',col:C.g},
+  fiber:{name:'纖維素',key:'dia',col:C.e},
+  protein:{name:'蛋白質',key:'cir',col:C.p},
+  lipid:{name:'脂質',key:'tri',col:C.y}
+};
+const ENZ={
+  amy:{name:'澱粉酶',key:'sq',sub:'starch',prod:'小分子醣類',off:-32,col:'#ff8fa3'},
+  pro:{name:'分解蛋白質的酵素',key:'cir',sub:'protein',prod:'胺基酸',off:-34,col:'#b48cff'},
+  lip:{name:'分解脂質的酵素',key:'tri',sub:'lipid',prod:'甘油＋脂肪酸',off:-31,col:'#7fd0ff'}
+};
+function enzShape(key,col,face=true){
+  const N={sq:'<rect x="-48" y="-15" width="32" height="30"/>',cir:'<circle cx="-34" cy="0" r="16" shape-rendering="auto"/>',
+    tri:'<polygon points="-52,-17 -17,0 -52,17"/>',pair:'<rect x="-48" y="-30" width="32" height="60"/>'};
+  return `<path d="M-40 -48 H40 V-44 H44 V-40 H48 V40 H44 V44 H40 V48 H-40 V44 H-44 V40 H-48 V-40 H-44 V-44 H-40Z" fill="${col}" stroke="${C.k}" stroke-width="3"/>`+
+   `<g fill="${AP_BG}" stroke="${C.k}" stroke-width="3">${N[key]}</g><rect x="-53" y="${key==='pair'?-27:-13}" width="8" height="${key==='pair'?54:26}" fill="${AP_BG}"/>`+
+   (face?`<rect x="10" y="-20" width="8" height="12" fill="${C.k}"/><rect x="28" y="-20" width="8" height="12" fill="${C.k}"/><rect x="12" y="-18" width="3" height="4" fill="#fff"/><rect x="30" y="-18" width="3" height="4" fill="#fff"/><rect x="12" y="10" width="24" height="6" fill="${C.R}"/>`:'');
+}
+function subShape(type){const S=SUBS[type];let o='<rect x="-108" y="-20" width="126" height="58" fill="#fff" fill-opacity="0.01"/>';
+  if(type==='lipid'){o+=[-10,0,10].map(y=>`<path d="M-14 ${y} l-10 -4 l-10 4 l-10 -4 l-10 4 l-10 -4" fill="none" stroke="${C.Y}" stroke-width="4"/>`).join('')}
+  else for(let i=3;i>=1;i--){const x=-i*30;o+=`<rect x="${x+10}" y="-2" width="12" height="4" fill="${C.k}"/><g transform="translate(${x} 0)">${KEY[S.key](S.col)}</g>`}
+  o+=KEY[S.key](S.col);
+  return o+T(-46,30,S.name,{s:14,b:1})}
+function prodPiece(type,j){
+  if(type==='starch')return KEY.sq(C.g).replace(/-12/g,'-9').replace(/24/g,'18');
+  if(type==='protein')return `<circle r="9" fill="${C.p}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>`;
+  return j===0?`<rect x="-10" y="-8" width="20" height="16" fill="${C.y}" stroke="${C.k}" stroke-width="2"/>`:`<path d="M-14 0 l7 -4 l7 4 l7 -4 l7 4" fill="none" stroke="${C.Y}" stroke-width="4"/>`}
+const SHELF={x:140,y:[60,114,168,220]};
+const flashHTML=`<g data-k="fx" data-x="0" data-y="0" data-o="0">${[0,45,90,135,180,225,270,315].map(a=>`<rect x="-3" y="-34" width="6" height="14" fill="${C.y}" stroke="${C.k}" stroke-width="1.5" transform="rotate(${a})"/>`).join('')}<rect x="-8" y="-8" width="16" height="16" fill="#fff" stroke="${C.y}" stroke-width="3" transform="rotate(45)"/></g>`;
+async function flash(c,x,y){c.set('fx',{x,y,o:0,s:.5});await c.tw('fx',{o:1,s:1.3},220);await c.tw('fx',{o:0,s:1.6},220)}
+
+/* ---------- 動畫 A：酵素分解作用 ---------- */
+function defA22(){
+  const ORDER=['starch','fiber','protein','lipid'];
+  return {title:'動畫 A：酵素分解作用',
+  state:()=>({enz:'amy',count:0,np:0,busy:false}),
+  onReplay:c=>{c.state.enz='amy'},
+  setup(c,k){const s=c.state;if(k<this.steps.length-1)s.enz='amy';s.count=0;s.np=0;s.busy=false;const E=ENZ[s.enz];
+    c.draw(`${TT(82,24,'受質庫',15)}<rect x="6" y="32" width="164" height="232" fill="#fff4e6" stroke="${C.k}" stroke-width="2" stroke-dasharray="6 4"/>
+     ${TT(434,24,'產物',15)}<rect x="390" y="32" width="86" height="232" fill="#eef8e6" stroke="${C.k}" stroke-width="2" stroke-dasharray="6 4"/>
+     <text data-k="plabel" x="433" y="254" font-size="12" text-anchor="middle" font-weight="900" class="svt"></text>
+     ${G('enz',280,128,enzShape(E.key,E.col))}
+     ${TT(280,206,E.name,16)}
+     <text data-k="cnt" x="280" y="232" font-size="15" text-anchor="middle" font-weight="900" class="svt" fill="${C.O}">本酵素已使用 0 次</text>
+     <g data-k="prods"></g>
+     ${ORDER.map((t,i)=>G('s_'+t,SHELF.x,SHELF.y[i],subShape(t))).join('')}
+     ${flashHTML}`);
+    c.hudHTML(`<div class="ap-tools">${Object.entries(ENZ).map(([k,e])=>`<button class="mini ${k===s.enz?'on':''}" data-e="${k}">${e.name}</button>`).join('')}</div>`);
+    c.hud.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{SFX.tap();s.enz=b.dataset.e;c.P.go(this.steps.length-1)});
+    c.text('plabel','');
+  },
+  site(c){const E=ENZ[c.state.enz];return {x:280+E.off,y:128}},
+  async bind(c,t){const p=this.site(c);await c.tw('s_'+t,{x:p.x,y:p.y},900)},
+  async breakdown(c,t){const s=c.state,E=ENZ[s.enz],p=this.site(c);
+    await flash(c,p.x,p.y);c.set('s_'+t,{o:0});
+    const pieces=t==='lipid'?4:4,made=[];
+    for(let j=0;j<pieces;j++){const id='p'+(s.np++);const sx=p.x-(t==='lipid'?(j?12:-6):j*30),sy=p.y+(t==='lipid'&&j?(j-2)*10:0);
+      c.add(G(id,sx,sy,prodPiece(t,j)),'prods');made.push(id)}
+    s.count++;c.text('cnt',`本酵素已使用 ${s.count} 次`);c.text('plabel',E.prod);
+    c.msg(`${SUBS[t].name}被分解成${E.prod}（大分子→小分子）`,'ok');
+    await c.all(made.map((id,j)=>{const i=(s.np-pieces+j)%27;return c.tw(id,{x:408+(i%3)*24,y:52+Math.floor(i/3)*22,s:.8},700+j*120)}));
+    if(s.np>=27){c.$('prods').innerHTML='';s.np=0}
+    c.set('s_'+t,{x:SHELF.x,y:SHELF.y[ORDER.indexOf(t)],o:0,s:.3});await c.tw('s_'+t,{o:1,s:1},300)},
+  async reject(c,t){const p=this.site(c);await c.tw('s_'+t,{x:p.x-34,y:p.y},700);await c.shake('s_'+t);
+    c.msg('形狀不合：酵素具有專一性','no');SFX.lock&&!c.fast()&&SFX.lock();
+    await c.tw('s_'+t,{x:SHELF.x,y:SHELF.y[ORDER.indexOf(t)]},600)},
+  steps:[
+   {t:'認識酵素',say:'這是澱粉酶。它的左側有特定形狀的凹槽，只有形狀吻合的受質才能和它結合。',run:async c=>{await c.wait(300);await c.pulse('enz',1.12);await c.pulse('enz',1.12)}},
+   {t:'受質與酵素結合',say:'澱粉（受質）的形狀剛好吻合，和澱粉酶結合。',run:async function(c){await defA22cur.bind(c,'starch')}},
+   {t:'分解作用',say:'澱粉被分解成小分子醣類——大分子轉變成小分子，就是分解作用。',run:async c=>{await defA22cur.breakdown(c,'starch')}},
+   {t:'酵素可重複使用',say:'反應結束後，酵素外觀不變，仍可與新的受質作用。再來一個澱粉！',run:async c=>{await defA22cur.bind(c,'starch');await defA22cur.breakdown(c,'starch');await defA22cur.bind(c,'starch');await defA22cur.breakdown(c,'starch')}},
+   {t:'專一性',say:'纖維素的形狀和澱粉酶不合，無法結合，所以澱粉酶無法分解纖維素。',run:async c=>{await defA22cur.reject(c,'fiber')}},
+   {t:'換你試試',free:true,fresh:true,say:c=>`把左邊的受質拖到「${ENZ[c.state.enz].name}」上試試看！也可以按上方按鈕換成其他酵素。`,run:async function(c){
+     const me=defA22cur;
+     ORDER.forEach((t,i)=>c.drag('s_'+t,{can:()=>!c.state.busy,drop:async(x,y)=>{
+       const p=me.site(c);c.state.busy=true;
+       if(Math.hypot(x-p.x,y-p.y)<70){
+         if(ENZ[c.state.enz].sub===t){await c.tw('s_'+t,{x:p.x,y:p.y},200);SFX.coin();await me.breakdown(c,t)}
+         else{SFX.lock();await c.shake('s_'+t);c.msg('形狀不合：酵素具有專一性','no');await c.tw('s_'+t,{x:SHELF.x,y:SHELF.y[i]},400)}
+       }else await c.tw('s_'+t,{x:SHELF.x,y:SHELF.y[i]},300);
+       c.state.busy=false}}));
+   }}
+  ]};
+}
+let defA22cur=null;
+function mkA22(){defA22cur=defA22();return defA22cur}
+
+/* ---------- 動畫 B：酵素合成作用 ---------- */
+function defB22(){
+  const E={x:300,y:130},S1={x:E.x-32,y:E.y-14},S2={x:E.x-32,y:E.y+14};
+  const glu=`<rect x="-12" y="-12" width="24" height="24" fill="${C.g}" stroke="${C.k}" stroke-width="2.5"/>`;
+  const me={title:'動畫 B：酵素合成作用',
+  state:()=>({n:0,fill:[],busy:false,id:0}),
+  setup(c){const s=c.state;s.n=0;s.fill=[];s.busy=false;s.id=0;
+    c.draw(`${TT(76,24,'小分子',15)}<rect x="6" y="32" width="140" height="232" fill="#eef8e6" stroke="${C.k}" stroke-width="2" stroke-dasharray="6 4"/>
+     ${TT(434,24,'大分子',15)}<rect x="390" y="32" width="86" height="232" fill="#fff4e6" stroke="${C.k}" stroke-width="2" stroke-dasharray="6 4"/>
+     ${G('enz',E.x,E.y,enzShape('pair','#ffb36b'))}${TT(E.x,E.y+76,'酵素',16)}
+     <text data-k="cnt" x="${E.x}" y="${E.y+102}" font-size="15" text-anchor="middle" font-weight="900" class="svt" fill="${C.O}">已合成 0 個大分子</text>
+     <g data-k="lay"></g>
+     ${TT(76,250,'（例如葡萄糖）',12)}${G('m1',76,100,glu)}${G('m2',76,190,glu)}
+     ${G('bond',S1.x,E.y,`<rect x="-3" y="-4" width="6" height="8" fill="${C.k}"/>`,'data-o="0"')}
+     ${G('big',240,40,`<rect x="-150" y="-16" width="300" height="32" fill="#fffbe0" stroke="${C.k}" stroke-width="2"/>`+TT(0,6,'小分子結合成為大分子＝合成作用',15),'data-o="0"')}
+     ${flashHTML}`)},
+  async join(c,a,b){const s=c.state;await flash(c,S1.x,E.y);c.set('bond',{o:1});
+    c.msg('兩個小分子結合成較大的分子','ok');s.n++;c.text('cnt',`已合成 ${s.n} 個大分子`);await c.show('big',300)},
+  async release(c,a,b){const s=c.state,i=(s.n-1)%6,tx=432,ty=60+i*36;
+    const dx=tx-S1.x;await c.all([c.tw(a,{x:S1.x+dx,y:ty-12,s:.8},800),c.tw(b,{x:S1.x+dx,y:ty+12,s:.8},800),c.tw('bond',{x:S1.x+dx,y:ty,o:0},800)])},
+  steps:[
+   {t:'認識合成作用',say:'左邊是兩個小分子（例如葡萄糖）。合成作用要把小分子結合成大分子。',run:async c=>{await c.pulse('m1');await c.pulse('m2')}},
+   {t:'第一個小分子結合',say:'第一個小分子進入酵素的凹槽。',run:async c=>{await c.tw('m1',{x:S1.x,y:S1.y},800)}},
+   {t:'第二個小分子結合',say:'第二個小分子也進入凹槽，兩者靠在一起。',run:async c=>{await c.tw('m2',{x:S2.x,y:S2.y},800)}},
+   {t:'結合成大分子',say:'在酵素的作用下，兩個小分子結合成為大分子——這就是合成作用。',run:async c=>{await me.join(c,'m1','m2')},hold:2000},
+   {t:'酵素再次釋出',say:'大分子離開後，酵素外觀不變，可以再次作用。',run:async c=>{await me.release(c,'m1','m2');await c.pulse('enz',1.1)}},
+   {t:'換你試試',free:true,say:'把左邊的兩個小分子拖進酵素的凹槽，看它們結合成大分子！',run:async c=>{
+     const s=c.state;c.$('lay').innerHTML='';
+     const spawn=(slot)=>{const id='g'+(s.id++);c.add(G(id,76,slot?190:100,glu),'lay');c.set(id,{s:.3});c.tw(id,{s:1},250);
+       c.drag(id,{can:()=>!s.busy,drop:async(x,y)=>{
+         if(Math.hypot(x-S1.x,y-E.y)<70&&s.fill.length<2){const tgt=s.fill.length?S2:S1;s.fill.push(id);await c.tw(id,{x:tgt.x,y:tgt.y},200);SFX.tap();
+           spawn(slot);
+           if(s.fill.length===2){s.busy=true;const [a,b]=s.fill;c.set('bond',{x:S1.x,y:E.y,o:0});await me.join(c,a,b);SFX.coin();await c.wait(500);await me.release(c,a,b);c.hide('big');s.fill=[];s.busy=false}}
+         else await c.tw(id,{x:76,y:slot?190:100},300)}})};
+     ['m1','m2'].forEach(k=>c.set(k,{o:0}));c.set('big',{o:0});spawn(0);spawn(1)}}
+  ]};return me;
+}
+
+/* ---------- 動畫 C：活性實驗室 ---------- */
+const ENZ_LAB={
+  stomach:{name:'胃中的酵素',opt:2,col:'#d9a400',sub:'protein'},
+  saliva:{name:'唾液中的酵素',opt:7,col:'#2e9e44',sub:'starch'},
+  intestine:{name:'小腸中的酵素',opt:8.3,col:'#2b8be0',sub:'starch'}
+};
+function defC22(){
+  const BK={x:30,y:40,w:250,h:200};
+  const me={title:'動畫 C：活性實驗室',side:true,
+  state:()=>({T:37,pH:7,enz:'saliva',dead:false,parts:[],enzs:[],act:0,result:''}),
+  fresh(c){const s=c.state;s.dead=false;s.result='';
+    s.parts=Array.from({length:12},(_,i)=>({x:BK.x+30+Math.random()*(BK.w-60),y:BK.y+40+Math.random()*(BK.h-70),vx:Math.random()*2-1,vy:Math.random()*2-1,p:0}));
+    s.enzs=Array.from({length:3},()=>({x:BK.x+40+Math.random()*(BK.w-80),y:BK.y+50+Math.random()*(BK.h-90),vx:Math.random()*2-1,vy:Math.random()*2-1}));
+    this.drawParts(c)},
+  tAct(s){if(s.dead)return 0;const T=s.T;if(T<=37)return 0.08+0.92*Math.pow(Math.max(0,T)/37,1.6);return Math.max(0,1-Math.pow((T-37)/24,2))},
+  pAct(s){const o=ENZ_LAB[s.enz].opt;return Math.exp(-Math.pow((s.pH-o)/1.35,2))},
+  drawParts(c){const s=c.state,sub=ENZ_LAB[s.enz].sub,g=c.$('parts');if(!g)return;
+    g.innerHTML=s.parts.map((p,i)=>{const done=p.p>=1;
+      const piece=(dx,col)=>sub==='starch'?`<rect x="${dx-5}" y="-5" width="10" height="10" fill="${col}" stroke="${C.k}" stroke-width="1.5"/>`:`<circle cx="${dx}" r="5.5" fill="${col}" stroke="${C.k}" stroke-width="1.5" shape-rendering="auto"/>`;
+      const col=sub==='starch'?C.g:C.p;
+      return `<g data-i="${i}" transform="translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})">${done?piece(-9,col)+piece(9,col):piece(-12,col)+piece(0,col)+piece(12,col)+`<rect x="-8" y="-1" width="16" height="2" fill="${C.k}"/>`}</g>`}).join('')+
+      s.enzs.map(e=>`<g transform="translate(${e.x.toFixed(1)} ${e.y.toFixed(1)}) ${s.dead?'rotate(28) skewX(25) scale(.3 .26)':'scale(.3)'}">${enzShape(s.enz==='stomach'?'cir':'sq',s.dead?'#b9a0a8':'#ff8fa3')}</g>`).join('')},
+  updUI(c){const s=c.state;const a=this.tAct(s)*this.pAct(s);s.act=a;
+    const th=c.$('thermo');if(th){const h=Math.max(2,Math.min(100,s.T))*1.4;th.setAttribute('y',224-h);th.setAttribute('height',h)}
+    c.text('tval',`${Math.round(s.T)}℃`);c.text('pval',`pH ${s.pH.toFixed(1)}`);
+    const tm=c.$('tmark');if(tm)tm.setAttribute('transform',`translate(${312+Math.min(100,s.T)*1.5} 0)`);
+    const pm=c.$('pmark');if(pm)pm.setAttribute('transform',`translate(${312+(s.pH-1)/9*150} 0)`);
+    const rb=c.$('rate');if(rb)rb.setAttribute('width',Math.round(a*130));
+    const side=c.side;if(side){const ts=side.querySelector('#labT'),ps=side.querySelector('#labP');if(ts&&document.activeElement!==ts)ts.value=s.T;if(ps&&document.activeElement!==ps)ps.value=s.pH;
+      const tl=side.querySelector('#labTv');if(tl)tl.textContent=Math.round(s.T)+'℃';const pl=side.querySelector('#labPv');if(pl)pl.textContent=s.pH.toFixed(1);
+      const st=side.querySelector('#labState');if(st)st.innerHTML=s.dead?'<b style="color:#d6336c">✖ 酵素已永久失去活性</b>':(a<.2?'<b style="color:#b8561a">▼ 活性很低</b>':(a>.75?'<b style="color:#2f9e44">▲ 活性很好</b>':'<b>● 活性普通</b>'));
+      side.querySelectorAll('[data-lab]').forEach(b=>b.classList.toggle('on',b.dataset.lab===s.enz));
+      side.querySelectorAll('input,button').forEach(i=>{if(!i.dataset.always)i.disabled=!c.isFree()})}},
+  tick(c,dt){const s=c.state;if(!s.parts.length)return;const sp=0.25+Math.max(0,Math.min(100,s.T))/45;
+    const mv=o=>{o.x+=o.vx*sp*dt*40;o.y+=o.vy*sp*dt*40;if(o.x<BK.x+16||o.x>BK.x+BK.w-16)o.vx*=-1;if(o.y<BK.y+30||o.y>BK.y+BK.h-14)o.vy*=-1;o.x=Math.max(BK.x+16,Math.min(BK.x+BK.w-16,o.x));o.y=Math.max(BK.y+30,Math.min(BK.y+BK.h-14,o.y))};
+    s.parts.forEach(mv);s.enzs.forEach(mv);
+    if(s.T>62&&!s.dead){s.dead=true;c.msg('溫度過高：酵素構造被破壞，永久失去活性！','no')}
+    const a=this.tAct(s)*this.pAct(s);s.parts.forEach((p,i)=>{if(p.p<1)p.p+=a*dt*(0.16+0.06*(i%4))});
+    this.drawParts(c);this.updUI(c)},
+  setup(c,k){const s=c.state;s.T=37;s.pH=7;s.enz='saliva';
+    const chart=(y0,lab)=>`<path d="M310 ${y0} V${y0+90} H466" fill="none" stroke="${C.k}" stroke-width="2"/>${TT(388,y0+108,lab,12)}${TT(300,y0+45,'活',11)}${TT(300,y0+58,'性',11)}`;
+    c.draw(`<rect x="${BK.x}" y="${BK.y}" width="${BK.w}" height="${BK.h}" fill="#e8f6ff" stroke="${C.k}" stroke-width="3"/>
+      <rect x="${BK.x}" y="${BK.y}" width="${BK.w}" height="22" fill="#fff" stroke="${C.k}" stroke-width="3"/>${TT(BK.x+BK.w/2,BK.y+16,'試管放大：酵素與受質',13)}
+      <g data-k="parts"></g>
+      <rect x="9" y="80" width="14" height="150" fill="#fff" stroke="${C.k}" stroke-width="2"/><rect data-k="thermo" x="11" y="172" width="10" height="52" fill="${C.r}"/><circle cx="16" cy="236" r="9" fill="${C.r}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>
+      <text data-k="tval" x="18" y="72" font-size="12" text-anchor="middle" font-weight="900" class="svt">37℃</text>
+      ${TT(110,262,'反應速率',13)}<rect x="150" y="250" width="130" height="14" fill="#fff" stroke="${C.k}" stroke-width="2"/><rect data-k="rate" x="150" y="250" width="100" height="14" fill="${C.o}"/>
+      ${chart(8,'溫度（0～100℃）')}<path d="M314 96 C340 94 360 80 372 46 C378 28 384 26 390 34 C396 46 400 80 404 98" fill="none" stroke="${C.r}" stroke-width="3" shape-rendering="auto"/>
+      <g data-k="tmark"><line x1="0" y1="10" x2="0" y2="98" stroke="${C.k}" stroke-width="2" stroke-dasharray="3 3"/><polygon points="0,98 -6,106 6,106" fill="${C.k}"/></g>
+      ${chart(140,'酸鹼值：酸性 ← 中性 → 鹼性')}
+      <g shape-rendering="auto" fill="none" stroke-width="3">${Object.values(ENZ_LAB).map(e=>{const x=312+(e.opt-1)/9*150;return `<path d="M${x-26} 228 C${x-12} 228 ${x-8} 160 ${x} 160 C${x+8} 160 ${x+12} 228 ${x+26} 228" stroke="${e.col}"/>`}).join('')}</g>
+      <g data-k="pmark"><line x1="0" y1="142" x2="0" y2="230" stroke="${C.k}" stroke-width="2" stroke-dasharray="3 3"/><polygon points="0,230 -6,238 6,238" fill="${C.k}"/></g>
+      <text data-k="pval" x="388" y="140" font-size="12" text-anchor="middle" font-weight="900" class="svt">pH 7</text>`);
+    c.sideHTML(`<h4 class="px">實驗控制台</h4>
+      <div class="lab-row"><span>酵素</span><div class="seg">${Object.entries(ENZ_LAB).map(([k,e])=>`<button class="mini" data-lab="${k}"><i style="background:${e.col}"></i>${e.name}</button>`).join('')}</div></div>
+      <label class="lab-row"><span>溫度 <b id="labTv">37℃</b></span><input id="labT" type="range" min="0" max="100" step="1" value="37"></label>
+      <label class="lab-row"><span>酸鹼值 <b id="labPv">7.0</b></span><input id="labP" type="range" min="1" max="10" step="0.1" value="7"></label>
+      <div id="labState" class="lab-state"></div>
+      <div class="lab-row"><span>試管檢測</span><div class="seg"><button class="mini" id="labB">滴本氏液並隔水加熱</button><button class="mini" id="labI">滴碘液</button></div></div>
+      <div id="labRes" class="lab-res"></div>
+      <button class="pbtn ghost" id="labNew" style="width:100%;margin-top:6px">↺ 重新裝一批酵素與受質</button>
+      <p class="lab-tip">在「換你試試」步驟可以自由操作。</p>`);
+    const sd=c.side;
+    sd.querySelector('#labT').oninput=e=>{s.T=+e.target.value;this.updUI(c)};
+    sd.querySelector('#labP').oninput=e=>{s.pH=+e.target.value;this.updUI(c)};
+    sd.querySelectorAll('[data-lab]').forEach(b=>b.onclick=()=>{SFX.tap();s.enz=b.dataset.lab;this.fresh(c);this.updUI(c);sd.querySelector('#labRes').innerHTML=''});
+    sd.querySelector('#labNew').onclick=()=>{SFX.tap();this.fresh(c);this.updUI(c);sd.querySelector('#labRes').innerHTML=''};
+    const tube=(col,txt)=>`<svg viewBox="0 0 40 90" width="34" height="76" shape-rendering="crispEdges"><rect x="10" y="4" width="20" height="80" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect x="12" y="40" width="16" height="42" fill="${col}"/></svg><span>${txt}</span>`;
+    sd.querySelector('#labB').onclick=()=>{SFX.tap();const r=sd.querySelector('#labRes');
+      if(ENZ_LAB[s.enz].sub!=='starch'){r.innerHTML=tube('#5aa9e6','這支試管裡是蛋白質，沒有產生醣類，本氏液加熱後仍是藍色。');return}
+      const f=s.parts.filter(p=>p.p>=1).length/s.parts.length;
+      const [col,name]=f<.1?['#5aa9e6','藍色']:f<.35?['#5cbf3a','綠色']:f<.6?['#ffd23f','黃色']:f<.85?['#f08a2c','橙色']:['#d93a2b','紅色'];
+      r.innerHTML=tube(col,`本氏液加熱後呈<b>${name}</b>：${f<.1?'幾乎沒有小分子醣類。':'有小分子醣類產生，顏色越偏紅表示醣類越多。'}`)};
+    sd.querySelector('#labI').onclick=()=>{SFX.tap();const r=sd.querySelector('#labRes');
+      if(ENZ_LAB[s.enz].sub!=='starch'){r.innerHTML=tube('#d9a35a','這支試管裡沒有澱粉，碘液維持黃褐色。');return}
+      const left=s.parts.filter(p=>p.p<1).length/s.parts.length;
+      r.innerHTML=left>.1?tube('#2c2a5a',`碘液呈<b>藍黑色</b>：試管中仍有澱粉。`):tube('#d9a35a',`碘液呈<b>黃褐色</b>：澱粉已幾乎被分解完。`)};
+    this.fresh(c);this.updUI(c)},
+  steps:[
+   {t:'正常狀態',say:'37℃、中性環境中，唾液中的酵素活性很好，澱粉很快被分解成小分子。',run:async c=>{await c.wait(3500)}},
+   {t:'溫度降低',say:'溫度降到 10℃：分子運動變慢，酵素活性降低，但酵素沒有被破壞。',run:async c=>{me.fresh(c);await c.val(c.state,'T',10,1500,()=>me.updUI(c));await c.wait(2500)}},
+   {t:'回到 37℃',say:'溫度回到 37℃，酵素活性恢復，反應又變快了。',run:async c=>{await c.val(c.state,'T',37,1500,()=>me.updUI(c));await c.wait(2500)}},
+   {t:'溫度過高',say:'溫度升到 80℃：溫度過高會破壞酵素構造（變形），酵素失去活性。',run:async c=>{me.fresh(c);await c.val(c.state,'T',80,1800,()=>me.updUI(c));c.state.dead=true;me.drawParts(c);me.updUI(c);await c.wait(2200)}},
+   {t:'再降回 37℃',say:'再把溫度降回 37℃，酵素構造已被破壞，活性不會恢復——永久失去活性。',run:async c=>{c.state.dead=true;await c.val(c.state,'T',37,1600,()=>me.updUI(c));me.drawParts(c);await c.wait(2500)}},
+   {t:'酸鹼值的影響',say:'換一批新的唾液中的酵素，把環境調成酸性（pH 2，像胃裡）：活性大幅降低。',run:async c=>{c.state.T=37;me.fresh(c);await c.val(c.state,'pH',2,1600,()=>me.updUI(c));await c.wait(2500)}},
+   {t:'胃中的酵素',say:'改成胃中的酵素：它在酸性環境中活性較佳。小腸中的酵素則適合在鹼性環境中作用。',run:async c=>{c.state.T=37;c.state.pH=2;c.state.enz='stomach';me.fresh(c);me.updUI(c);await c.wait(3500)}},
+   {t:'換你試試',free:true,fresh:true,say:'右邊控制台可以自由調整溫度、酸鹼值，換酵素，再用本氏液或碘液檢測試管！',run:async c=>{me.updUI(c)}}
+  ]};return me;
+}
+
+/* ---------- 動畫 D：虛擬實驗 2-2 ---------- */
+function defD22(){
+  const tube=(k,lab,x,y)=>G(k,x,y,`<rect x="-11" y="-46" width="22" height="88" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="${k}_l" x="-9" y="6" width="18" height="34" fill="#ffffff" opacity="0"/>`+TT(0,-54,lab,15));
+  const bottle=(k,lab,x,col)=>G(k,x,34,`<rect x="-20" y="-14" width="40" height="34" fill="${col}" stroke="${C.k}" stroke-width="2.5"/><rect x="-6" y="-24" width="12" height="10" fill="${C.E}" stroke="${C.k}" stroke-width="2"/>`+TT(0,36,lab,12));
+  const POS={甲:[300,200],乙:[340,200],A:[390,200],B:[430,200]};
+  const BATH={x:120,y:184};
+  const me={title:'動畫 D：虛擬實驗 2-2 酵素的作用',
+  setup(c){
+    c.draw(`<rect x="0" y="246" width="480" height="24" fill="#c8a06a"/>
+      ${G('bath',BATH.x,BATH.y,`<rect x="-92" y="-56" width="184" height="104" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="water" x="-89" y="-24" width="178" height="69" fill="#bfe6ff"/>`+TT(0,76,'250 mL 燒杯（37℃ 溫水）',13)+`<rect x="-30" y="48" width="60" height="10" fill="${C.E}" stroke="${C.k}" stroke-width="2"/>`)}
+      ${G('bub',BATH.x,BATH.y,[-50,-10,30,60].map((x,i)=>`<rect x="${x}" y="${10+(i%2)*14}" width="6" height="6" fill="#fff" stroke="${C.b}" stroke-width="1.5"/>`).join(''),'data-o="0"')}
+      ${bottle('bS','澱粉液',250,'#f4f4f4')}${bottle('bW','水',310,'#d6f0ff')}${bottle('bV','唾液',370,'#fffbe0')}${bottle('bB','本氏液',430,'#5aa9e6')}
+      ${Object.entries(POS).map(([k,[x,y]])=>tube('t'+k,k,x,y)).join('')}
+      ${G('clock',40,60,`<circle r="24" fill="#fff" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/><rect x="-2" y="-20" width="4" height="20" fill="${C.k}" data-k="hand"/>`)}
+      <text data-k="ctext" x="40" y="104" font-size="13" text-anchor="middle" font-weight="900" class="svt"></text>
+      ${G('drop',250,60,`<rect x="-4" y="-10" width="8" height="20" fill="${C.E}" stroke="${C.k}" stroke-width="2"/><rect x="-3" y="10" width="6" height="6" fill="${C.b}"/>`,'data-o="0"')}`);
+    c.hudHTML('');
+  },
+  async drip(c,from,to,col,label){const [bx]=[c.get(from).x],t=c.get(to);c.set('drop',{x:bx,y:60,o:1});await c.tw('drop',{x:t.x,y:t.y-62},500);
+    const l=c.$(to+'_l');l.setAttribute('opacity','1');await c.color(l,col,300);if(label)c.msg(label);await c.hide('drop',150)},
+  async timelapse(c,txt){c.text('ctext',txt);const h=c.$('clock');let o={a:0};await c.val(o,'a',720,1600,()=>c.$('hand').setAttribute('transform',`rotate(${o.a})`));c.text('ctext','10 分鐘後')},
+  async intoBath(c,ks){await c.all(ks.map((k,i)=>c.tw('t'+k,{x:BATH.x-60+i*40,y:BATH.y-6},700)))},
+  steps:[
+   {t:'準備',say:'燒杯裝約半杯溫水加熱備用，保持 37℃（和人體體溫相近）。另外準備澱粉液、水、唾液和本氏液。點燒杯開始！',run:async c=>{c.hot('bath')}},
+   {t:'加入溶液',say:'試管甲、乙各加 1 mL 澱粉液；試管 A 加 1 mL 水，試管 B 加 1 mL 唾液。',run:async c=>{
+     await me.drip(c,'bS','t甲','#f4f4f4');await me.drip(c,'bS','t乙','#f4f4f4');await me.drip(c,'bW','tA','#d6f0ff','A：加水');await me.drip(c,'bV','tB','#fffbe0','B：加唾液')}},
+   {t:'放入 37℃ 溫水',say:'四支試管一起放入 37℃ 溫水中。',run:async c=>{await me.intoBath(c,['甲','乙','A','B'])}},
+   {t:'倒入澱粉液',say:'把甲、乙中的澱粉液分別倒入 A、B，用玻棒攪拌均勻。',run:async c=>{
+     await c.all([c.tw('t甲',{x:POS.A[0]-28,y:110,r:60},700),c.tw('t乙',{x:POS.B[0]-28,y:110,r:60},700),c.tw('tA',{x:POS.A[0],y:POS.A[1],r:0},700),c.tw('tB',{x:POS.B[0],y:POS.B[1],r:0},700)]);
+     await c.all([c.color('t甲_l','#ffffff',400),c.color('t乙_l','#ffffff',400),c.color('tA_l','#eef6ff',400),c.color('tB_l','#fdfbee',400)]);
+     c.$('t甲_l').setAttribute('opacity','0');c.$('t乙_l').setAttribute('opacity','0');
+     await c.all([c.tw('t甲',{x:POS['甲'][0],y:POS['甲'][1],r:0,o:0},500),c.tw('t乙',{x:POS['乙'][0],y:POS['乙'][1],r:0,o:0},500)])}},
+   {t:'靜置 10 分鐘',say:'A、B 放回 37℃ 溫水中等待 10 分鐘，讓酵素作用。',run:async c=>{await me.intoBath(c,['A','B']);await me.timelapse(c,'等待 10 分鐘')}},
+   {t:'加入本氏液',say:'取出 A、B，各加入 1 mL 本氏液（藍色）。',run:async c=>{await c.all([c.tw('tA',{x:POS.A[0],y:POS.A[1]},500),c.tw('tB',{x:POS.B[0],y:POS.B[1]},500)]);
+     await me.drip(c,'bB','tA','#5aa9e6');await me.drip(c,'bB','tB','#5aa9e6')}},
+   {t:'隔水加熱',say:'把 A、B 放入燒杯中隔水加熱，觀察顏色變化。',run:async c=>{await me.intoBath(c,['A','B']);await c.show('bub',200);
+     await c.all([c.color('tB_l','#5cbf3a',900),c.wait(900)]);await c.color('tB_l','#ffd23f',700);await c.color('tB_l','#e2622b',700);await c.hide('bub',200)}},
+   {t:'比較結果',say:'A（加水）仍是藍色；B（加唾液）出現橙紅色，表示 B 中的澱粉被唾液分解，產生了小分子醣類。',run:async c=>{
+     await c.all([c.tw('tA',{x:300,y:200},600),c.tw('tB',{x:380,y:200},600)]);c.msg('A 藍色　B 橙紅色','ok')},hold:2200},
+   {t:'下結論',free:true,say:'實驗假說：「人體的唾液能讓澱粉產生出具有甜味的小分子醣類。」本實驗結果支持還是不支持這個假說？',run:async c=>{
+     c.set('tA',{x:300,y:200});c.set('tB',{x:380,y:200});c.color('tB_l','#e2622b',0);c.$('tA_l').setAttribute('opacity','1');c.$('tB_l').setAttribute('opacity','1');c.color('tA_l','#5aa9e6',0);
+     c.hudHTML(`<div class="ap-q"><b>本實驗結果______實驗假說？</b><div><button class="pbtn" data-v="1">支持</button><button class="pbtn ghost" data-v="0">不支持</button></div><p class="ap-qr"></p></div>`);
+     c.hud.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const ok=b.dataset.v==='1';ok?SFX.coin():SFX.lock();
+       c.hud.querySelector('.ap-qr').innerHTML=ok?'✔ 答對了！B 管出現顏色變化，表示人體的唾液能讓澱粉產生出小分子醣類，所以<b>支持</b>假說。':'✖ 再想想：加了唾液的 B 管變成橙紅色，代表有小分子醣類產生。'})}}
+  ]};return me;
+}
+
+ANIMS['2-2']=[{id:'A',name:'酵素分解作用',def:mkA22},{id:'B',name:'酵素合成作用',def:defB22},{id:'C',name:'活性實驗室',def:defC22},{id:'D',name:'虛擬實驗 2-2',def:defD22}];
+
+/* =========================================================
+   2-3 植物如何製造養分：動畫 A–D（不涉及光反應、碳反應）
+   ========================================================= */
+const LEAF_PATH='M40 220 C70 120 190 40 440 34 C420 140 300 236 40 220 Z';
+
+/* ---------- 動畫 A：葉片構造探索 ---------- */
+const PARTS={
+  角質層:{rects:[[20,22,160,5],[20,91,160,4]],txt:'位於表皮外側，可避免水分過度散失。'},
+  上表皮:{rects:[[20,27,160,10]],txt:'由透明無色、排列緊密的表皮細胞組成，具保護功能。',hl:'表皮'},
+  下表皮:{rects:[[20,81,160,10]],txt:'由透明無色、排列緊密的表皮細胞組成，具保護功能。下表皮散布著保衛細胞。',hl:'表皮'},
+  葉肉:{rects:[[20,37,160,44]],txt:'由葉肉細胞組成，具有大量的葉綠體，是進行光合作用的主要場所。'},
+  葉脈:{rects:[[84,53,32,24]],txt:'葉內的輸導組織，能運輸水分和養分，以利各種代謝作用的進行。'},
+  保衛細胞:{rects:[[52,81,16,10],[132,81,16,10]],txt:'半月形，內含葉綠體；兩兩成對，中間形成氣孔（氣體進出植物的主要通道）。'}
+};
+const LS=2.4,LY=-30;
+function guardCells(open){
+  const g=open?{o:'M-6 -60 C-46 -50 -46 50 -6 60 C-18 30 -20 -30 -6 -60Z',p:12}:{o:'M-2 -60 C-34 -50 -34 50 -2 60 C-6 30 -6 -30 -2 -60Z',p:2};
+  const cell=s=>`<path d="${g.o}" transform="scale(${s} 1)" fill="${C.g}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`+
+    [[-30,-30],[-34,0],[-28,28],[-20,-44],[-20,44]].map(([x,y])=>`<rect x="${s*(open?x:x*.75)-3}" y="${y-3}" width="7" height="7" fill="${C.G}"/>`).join('');
+  return cell(1)+cell(-1)+`<rect x="${-g.p/2}" y="-40" width="${g.p}" height="80" fill="#2a2a2a" opacity=".55"/>`;
+}
+function defA23(){
+  const me={title:'動畫 A：葉片構造探索',
+  state:()=>({micro:false,wet:true,view:'L2'}),
+  setup(c){const s=c.state;s.micro=false;s.wet=true;
+    c.draw(`<defs><filter id="micf"><feColorMatrix type="matrix" values="0.55 0.35 0.2 0 0.12  0.2 0.7 0.1 0 0.05  0.45 0.3 0.6 0 0.14  0 0 0 1 0"/></filter>
+       <clipPath id="micc"><circle cx="240" cy="118" r="124"/></clipPath></defs>
+      ${G('L1',0,0,`<path d="${LEAF_PATH}" fill="${C.g}" stroke="${C.k}" stroke-width="4" shape-rendering="auto"/><g stroke="${C.G}" stroke-width="4" fill="none" shape-rendering="auto"><path d="M40 220 C180 160 320 90 440 34"/><path d="M120 184 L110 120 M180 152 L170 92 M240 120 L236 66 M150 168 L210 206 M210 136 L280 172 M280 98 L346 120"/></g><rect x="22" y="214" width="26" height="10" fill="${C.n}" stroke="${C.k}" stroke-width="2"/>`+TT(330,212,'山茶花葉',16)+`<rect data-k="cut" x="226" y="70" width="20" height="100" fill="none" stroke="${C.r}" stroke-width="4" stroke-dasharray="8 4"/>`)}
+      <g data-k="L2w" style=""><g data-k="L2" data-x="0" data-y="${LY}" data-s="${LS}" data-o="0">${leafSection([])}</g></g>
+      <path data-k="micmask" d="M0 0 H480 V270 H0Z M240 -6 a124 124 0 1 0 0.1 0Z" fill-rule="evenodd" fill="#1a1a1a" opacity="0"/>
+      <rect data-k="hl" x="0" y="0" width="0" height="0" fill="none" stroke="${C.r}" stroke-width="4" stroke-dasharray="8 5" class="ap-blink"/>
+      <g data-k="hl2"></g>
+      <g data-k="flow"></g>
+      ${G('L3',240,128,`<rect x="-230" y="-120" width="460" height="232" fill="#eefaff" stroke="${C.k}" stroke-width="2"/><g data-k="gc">${guardCells(true)}</g>
+         ${TT(-150,-96,'保衛細胞',15)}${TT(150,-96,'保衛細胞',15)}${TT(0,104,'氣孔',15)}
+         <g data-k="gas">${AR(-200,-40,-30,-10,C.E,4)}${TT(-150,-54,'二氧化碳 進入',14)}${AR(30,10,200,40,C.b,4)}${TT(150,62,'氧氣、水蒸氣 離開',14)}</g>`,'data-o="0"')}
+      <g data-k="hits"></g>`);
+    c.hudHTML('<div class="ap-info" hidden></div>');
+  },
+  info(c,name,txt){const el=c.hud.querySelector('.ap-info');if(!el)return;el.hidden=false;el.innerHTML=`<b>${name}</b><div>${txt}</div>`},
+  hl(c,name){const P=PARTS[name],r=c.$('hl'),g=c.$('hl2');c.$('L2').innerHTML=leafSection(name?[P.hl||name]:[]);
+    if(!name){r.setAttribute('width',0);g.innerHTML='';return}
+    const [x,y,w,h]=P.rects[0];r.setAttribute('x',x*LS-3);r.setAttribute('y',y*LS+LY-3);r.setAttribute('width',w*LS+6);r.setAttribute('height',h*LS+6);
+    g.innerHTML=P.rects.slice(1).map(([x,y,w,h])=>`<rect x="${x*LS-3}" y="${y*LS+LY-3}" width="${w*LS+6}" height="${h*LS+6}" fill="none" stroke="${C.r}" stroke-width="4" stroke-dasharray="8 5" class="ap-blink"/>`).join('');
+    this.info(c,name,P.txt)},
+  async zoomIn(c){await c.all([c.tw('L1',{s:2.2,x:-420,y:-150,o:0},900),c.tw('L2',{o:1},900)])},
+  async flow(c){const f=c.$('flow');f.innerHTML='';const vx=100*LS,vy=65*LS+LY;
+    c.add(G('fw',-10,vy,`<rect x="-7" y="-7" width="14" height="14" fill="${C.b}" stroke="${C.k}" stroke-width="2"/>`)+TT(60,vy-16,'水分（由根部送來）',13),'flow');
+    await c.tw('fw',{x:vx-10},1100);
+    c.add(G('fg',vx+10,vy,hexa(0,0,9,C.y))+TT(vx+130,vy-16,'養分（例如葡萄糖）送出',13),'flow');
+    await c.tw('fg',{x:470},1100)},
+  async stoma(c,open){c.$('gc').innerHTML=guardCells(open);c.set('gas',{o:open?1:0});
+    c.msg(open?'水分充足：保衛細胞膨脹，氣孔張開':'缺水：保衛細胞萎縮，氣孔關閉',open?'ok':'no')},
+  hits(c){const g=c.$('hits');g.innerHTML='';
+    Object.entries(PARTS).forEach(([n,P])=>P.rects.forEach(([x,y,w,h])=>{const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      r.setAttribute('x',x*LS);r.setAttribute('y',y*LS+LY);r.setAttribute('width',w*LS);r.setAttribute('height',Math.max(h*LS,14));r.setAttribute('fill','transparent');r.style.cursor='pointer';
+      r.addEventListener('click',()=>{if(c.state.view!=='L2')return;SFX.tap();this.hl(c,n);if(n==='葉脈')this.flow(c)});
+      if(n==='葉脈'||n==='保衛細胞')g.appendChild(r);else g.insertBefore(r,g.firstChild)}))},
+  setView(c,v){const s=c.state;s.view=v;c.set('L1',{o:v==='L1'?1:0,s:1,x:0,y:0});c.set('L2',{o:v==='L2'?1:0});c.set('L3',{o:v==='L3'?1:0});
+    if(v!=='L2'){this.hl(c,null);c.$('flow').innerHTML=''}
+    c.$('micmask').setAttribute('opacity',v==='L2'&&s.micro?1:0);c.$('L2w').setAttribute('filter',v==='L2'&&s.micro?'url(#micf)':'')},
+  steps:[
+   {t:'整片葉',say:'這是一片山茶花葉。葉是大多數植物製造養分的主要器官。紅框是等一下要切開放大的位置。',run:async c=>{await c.pulse('L1',1.04)}},
+   {t:'放大：橫切面',say:'把葉片切開放大，就能看到葉片橫切面的各種構造。',run:async c=>{await me.zoomIn(c)}},
+   {t:'角質層',say:'角質層位於表皮外側，可避免水分過度散失。',run:async c=>{me.hl(c,'角質層');await c.wait(600)}},
+   {t:'上、下表皮',say:'上、下表皮主要由透明無色、排列緊密的表皮細胞組成，具保護功能。',run:async c=>{me.hl(c,'上表皮');await c.wait(900);me.hl(c,'下表皮')}},
+   {t:'葉肉',say:'上、下表皮之間的葉肉由葉肉細胞組成，具有大量葉綠體，是進行光合作用的主要場所。',run:async c=>{me.hl(c,'葉肉');await c.wait(600)}},
+   {t:'葉脈',say:'葉脈是葉內的輸導組織，能運輸水分和養分。',run:async c=>{me.hl(c,'葉脈');await me.flow(c)}},
+   {t:'保衛細胞與氣孔',say:'半月形的保衛細胞兩兩成對，中間形成氣孔。氣孔是氣體進出植物的主要通道。',run:async c=>{me.hl(c,'保衛細胞');await c.wait(900);me.hl(c,null);c.$('flow').innerHTML='';await c.all([c.tw('L2',{o:0},500),c.tw('L3',{o:1},500)]);await me.stoma(c,true)},hold:2200},
+   {t:'缺水時',say:'缺水時保衛細胞萎縮，氣孔關閉，氣體不容易進出。',run:async c=>{await me.stoma(c,false);await c.wait(800)}},
+   {t:'換你試試',free:true,say:'點選橫切面上的構造看看功能；可以切換顯微鏡模式，或去看氣孔開合。',run:async c=>{
+     const s=c.state;me.setView(c,'L2');me.hits(c);
+     c.hudHTML(`<div class="ap-tools"><button class="mini" data-v="L1">整片葉</button><button class="mini on" data-v="L2">橫切面</button><button class="mini" data-m>顯微鏡模式</button><button class="mini" data-v="L3">看氣孔</button><button class="mini" data-w hidden>水分充足／缺水</button></div><div class="ap-info" hidden></div>`);
+     const tools=c.hud.querySelector('.ap-tools');
+     const sync=()=>{tools.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===s.view));tools.querySelector('[data-m]').classList.toggle('on',s.micro);tools.querySelector('[data-m]').hidden=s.view!=='L2';tools.querySelector('[data-w]').hidden=s.view!=='L3'};
+     tools.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{SFX.tap();me.setView(c,b.dataset.v);if(b.dataset.v==='L3'){s.wet=true;me.stoma(c,true)}c.hud.querySelector('.ap-info').hidden=true;sync()});
+     tools.querySelector('[data-m]').onclick=()=>{SFX.tap();s.micro=!s.micro;me.setView(c,'L2');sync();c.msg(s.micro?'顯微鏡模式：像在顯微鏡下觀察染色的切片':'回到示意圖模式')};
+     tools.querySelector('[data-w]').onclick=()=>{SFX.tap();s.wet=!s.wet;me.stoma(c,s.wet)};
+     sync()}}
+  ]};return me;
+}
+
+/* ---------- 動畫 B：分子的旅程——光合作用 ---------- */
+const CP={x:222,y:122,rx:150,ry:84};
+function rnd(i){const x=Math.sin(i*12.9898+4.1)*43758.5453;return x-Math.floor(x)}
+function defB23(){
+  const R={C:5.2,O:5.6,H:3.6},COL={C:'#3a3a3a',O:'#e83f3f',H:'#ffffff'};
+  // 建立原子：6 個 CO2、12 個 H2O
+  const atoms=[];let id=0;
+  for(let m=0;m<6;m++){const sx=438,sy=46+m*30,ix=300+(m%2)*34,iy=74+Math.floor(m/2)*40;
+    [['O',-10],['C',0],['O',10]].forEach(([t,dx])=>atoms.push({k:'a'+id++,t,mol:'co2',m,src:{x:sx+dx,y:sy},in:{x:ix+dx,y:iy}}))}
+  for(let m=0;m<12;m++){const col=m%3,row=Math.floor(m/3),sx=22+col*24,sy=146+row*22,ix=110+col*30,iy=88+row*28;
+    [['O',0,0],['H',-7,6],['H',7,6]].forEach(([t,dx,dy])=>atoms.push({k:'a'+id++,t,mol:'h2o',m,src:{x:sx+dx,y:sy+dy},in:{x:ix+dx,y:iy+dy}}))}
+  atoms.forEach((a,i)=>{const ang=rnd(i)*Math.PI*2,rr=Math.sqrt(rnd(i+99));a.sc={x:CP.x+Math.cos(ang)*rr*(CP.rx-24),y:CP.y+Math.sin(ang)*rr*(CP.ry-20)}});
+  // 目標：葡萄糖（C6H12O6）、6 O2（氧來自水）、6 H2O
+  const GX=200,GY=118;const tgt={C:[],Og:[],Hg:[],O2:[],Ow:[],Hw:[]};
+  for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/2;tgt.C.push({x:GX+Math.cos(a)*16,y:GY+Math.sin(a)*16});tgt.Og.push({x:GX+Math.cos(a+.3)*30,y:GY+Math.sin(a+.3)*30});
+    tgt.Hg.push({x:GX+Math.cos(a-.35)*36,y:GY+Math.sin(a-.35)*36},{x:GX+Math.cos(a+.75)*38,y:GY+Math.sin(a+.75)*38})}
+  for(let i=0;i<6;i++){const x=300+(i%3)*24,y=70+Math.floor(i/3)*24;tgt.O2.push({x:x-5,y},{x:x+5,y})}
+  for(let i=0;i<6;i++){const x=140+i*30,y=184;tgt.Ow.push({x,y});tgt.Hw.push({x:x-7,y:y+6},{x:x+7,y:y+6})}
+  let co2O=atoms.filter(a=>a.mol==='co2'&&a.t==='O'),h2oO=atoms.filter(a=>a.mol==='h2o'&&a.t==='O'),Cs=atoms.filter(a=>a.t==='C'),Hs=atoms.filter(a=>a.t==='H');
+  Cs.forEach((a,i)=>a.to=tgt.C[i]);h2oO.forEach((a,i)=>{a.to=tgt.O2[i];a.prod='o2'});co2O.forEach((a,i)=>{if(i<6)a.to=tgt.Og[i];else{a.to=tgt.Ow[i-6];a.prod='w'}});
+  Hs.forEach((a,i)=>{if(i<12)a.to=tgt.Hg[i];else{a.to=tgt.Hw[i-12];a.prod='w'}});
+  const EQ=[['eq1','水'],['eqp1','＋'],['eq2','二氧化碳'],['eqa','→（光、葉綠體）→'],['eq3','氧氣'],['eqp2','＋'],['eq4','葡萄糖'],['eqp3','＋'],['eq5','水']];
+  const me={title:'動畫 B：分子的旅程——光合作用',
+  state:()=>({load:{sun:0,w:0,c:0},busy:false}),
+  setup(c){const s=c.state;s.load={sun:0,w:0,c:0};s.busy=false;
+    let ex=14;const eq=EQ.map(([k,t])=>{const w=[...t].length*(t.length>3?11.5:14)+12;const h=`<g data-k="${k}"><rect x="${ex}" y="236" width="${w}" height="26" fill="#f1f1f1" stroke="${C.k}" stroke-width="2"/><text x="${ex+w/2}" y="254" font-size="${t.length>3?12:14}" text-anchor="middle" font-weight="900">${t}</text></g>`;ex+=w+4;return h}).join('');
+    c.draw(`<rect x="0" y="0" width="480" height="230" fill="#f3fbe9"/>
+      ${G('cp',CP.x,CP.y,`<ellipse rx="${CP.rx}" ry="${CP.ry}" fill="#c9eda0" stroke="${C.k}" stroke-width="4" shape-rendering="auto"/><ellipse rx="${CP.rx-12}" ry="${CP.ry-12}" fill="none" stroke="${C.G}" stroke-width="2" shape-rendering="auto"/>`+
+        [[-110,-30],[-70,20],[-20,-40],[30,30],[80,-20],[110,30],[-120,30]].map(([x,y])=>[0,1,2,3].map(j=>`<rect data-k="gr" x="${x-14}" y="${y-12+j*6}" width="28" height="6" fill="${j%2?C.G:C.g}"/>`).join('')).join('')+TT(0,-CP.ry+18,'葉綠體',15))}
+      <text data-k="cap" x="${CP.x}" y="224" font-size="13" text-anchor="middle" font-weight="900" class="svt"></text>
+      ${G('sun',40,34,spr(SP.sun,-22,-22,4))}${TT(40,76,'光',14)}
+      <g data-k="photons"></g>
+      <g data-k="srcl">${TT(48,132,'水（由根部吸收）',12)}${TT(438,14,'二氧化碳',12)}${TT(438,30,'（由氣孔進入）',11)}</g>
+      ${atoms.map(a=>G(a.k,a.src.x,a.src.y,`<circle r="${R[a.t]}" fill="${COL[a.t]}" stroke="${C.k}" stroke-width="1.6" shape-rendering="auto"/>`)).join('')}
+      ${G('lglu',200,170,TT(0,0,'葡萄糖',14),'data-o="0"')}${G('lo2',324,58,TT(0,0,'氧氣',14),'data-o="0"')}${G('lw',318,190,TT(0,0,'水',14),'data-o="0"')}
+      <g data-k="fate" data-x="0" data-y="0" data-o="0">${TAG(420,124,'細胞直接利用',C.y,{s:12})}${TAG(420,154,'轉換成澱粉儲存',C.c,{s:12})}${TAG(420,184,'形成纖維素',C.l,{s:12})}${AR(240,118,366,124,C.O)}${AR(240,122,360,154,C.O)}${AR(240,126,366,182,C.O)}</g>
+      ${G('stoma',440,70,TT(0,-14,'經氣孔釋放',12)+`<rect x="-14" y="-6" width="28" height="10" fill="${C.g}" stroke="${C.k}" stroke-width="2"/>`,'data-o="0"')}
+      ${eq}
+      <g data-k="toks"></g>`);
+    c.hudHTML('');},
+  eq(c,k,col){const g=c.$(k);if(g)g.querySelector('rect').setAttribute('fill',col)},
+  async light(c){const g=c.$('photons');g.innerHTML='';for(let i=0;i<5;i++)c.add(G('ph'+i,40,34,`<rect x="-5" y="-5" width="10" height="10" fill="${C.y}" stroke="${C.k}" stroke-width="1.5"/>`),'photons');
+    await c.all([0,1,2,3,4].map(i=>c.wait(i*120).then(()=>c.tw('ph'+i,{x:120+i*40,y:80+(i%2)*40,o:0},800))));
+    c.$$('[data-k="gr"]').forEach(r=>r.setAttribute('fill',r.getAttribute('fill')===C.G?'#1f8f2f':'#7ee05a'));
+    c.text('cap','葉綠素吸收光能');this.eq(c,'eqa',C.y)},
+  async waterIn(c){await c.all(atoms.filter(a=>a.mol==='h2o').map((a,i)=>c.wait((a.m)*60).then(()=>c.tw(a.k,{x:a.in.x,y:a.in.y},800))));this.eq(c,'eq1',C.c)},
+  async co2In(c){await c.all(atoms.filter(a=>a.mol==='co2').map(a=>c.wait(a.m*80).then(()=>c.tw(a.k,{x:a.in.x,y:a.in.y},800))));this.eq(c,'eq2',C.e)},
+  async scatter(c){c.text('cap','配合酵素的作用，分子拆開……');await c.all(atoms.map((a,i)=>c.wait((i%9)*40).then(()=>c.tw(a.k,{x:a.sc.x,y:a.sc.y},900))))},
+  async regroup(c){c.text('cap','……原子重新組合！');await c.all(atoms.map((a,i)=>c.wait((i%7)*50).then(()=>c.tw(a.k,{x:a.to.x,y:a.to.y},1100))));
+    await c.all([c.show('lglu'),c.show('lo2'),c.show('lw')]);['eq3','eq4','eq5'].forEach((k,i)=>this.eq(c,k,[C.p,C.y,C.c][i]));c.text('cap','產生氧氣、葡萄糖和水')},
+  async fate(c){await c.show('fate',500);await c.show('stoma',300);c.tw('lo2',{x:440,y:112},1100);
+    await c.all(atoms.filter(a=>a.prod==='o2').map((a,i)=>c.wait(Math.floor(i/2)*120).then(()=>c.tw(a.k,{x:a.to.x+120,y:a.to.y-10,o:0},1100))));
+    c.text('cap','葡萄糖是植物的主要養分來源')},
+  steps:[
+   {t:'進入葉綠體',say:'鏡頭從葉肉細胞放大到一個葉綠體。光合作用就在這裡進行。',run:async c=>{c.set('cp',{s:.25});await c.tw('cp',{s:1},1100)}},
+   {t:'光照射',say:'陽光從上方照射，葉綠體中的葉綠素吸收光能。',run:async c=>{await me.light(c)}},
+   {t:'水進入',say:'水（H₂O）由根部吸收，經由葉脈送到葉片，進入葉綠體。',run:async c=>{await me.waterIn(c)}},
+   {t:'二氧化碳進入',say:'二氧化碳（CO₂）經由氣孔進入葉片，再進入葉綠體。',run:async c=>{await me.co2In(c)}},
+   {t:'分子拆開',say:'葉綠素吸收的光能，配合酵素的作用，使水和二氧化碳發生一連串的反應……',run:async c=>{await me.scatter(c)}},
+   {t:'重新組合',say:'原子重新組合，最後產生氧氣、葡萄糖和水。原子的種類和數量都沒有變！',run:async c=>{await me.regroup(c)},hold:2200},
+   {t:'產物的去向',say:'葡萄糖可供細胞直接利用、轉換成澱粉儲存或形成纖維素；氧氣經由氣孔釋放到空氣中。',run:async c=>{await me.fate(c)},hold:2400},
+   {t:'換你試試',free:true,fresh:true,say:'把「光」「水」「二氧化碳」三個圖示都拖進葉綠體，三者齊全才能進行光合作用！',run:async c=>{
+     const s=c.state;s.load={sun:0,w:0,c:0};
+     const tk=(k,x,y,lab,icon)=>G(k,x,y,`<rect x="-30" y="-22" width="60" height="44" fill="#fff" stroke="${C.k}" stroke-width="3"/>${icon}${TT(0,34,lab,12)}`);
+     atoms.forEach(a=>c.set(a.k,{o:0}));c.set('sun',{o:0});
+     c.add(tk('tSun',40,40,'拖我：光',spr(SP.sun,-11,-11,2)),'toks');
+     c.add(tk('tW',46,176,'拖我：水',spr(SP.drop,-7,-9,2)),'toks');
+     c.add(tk('tC',438,110,'拖我：二氧化碳',`<circle cx="-11" r="5" fill="${C.r}" stroke="${C.k}"/><circle r="5" fill="#3a3a3a" stroke="${C.k}"/><circle cx="11" r="5" fill="${C.r}" stroke="${C.k}"/>`),'toks');
+     c.hudHTML(`<div class="ap-tools"><button class="mini" id="goPS">啟動光合作用</button><span class="ap-load"></span></div>`);
+     const showLoad=()=>{c.hud.querySelector('.ap-load').textContent=`已放入：${s.load.sun?'光 ':''}${s.load.w?'水 ':''}${s.load.c?'二氧化碳':''}`};
+     const run=async()=>{s.busy=true;SFX.coin();await me.scatter(c);await me.regroup(c);await me.fate(c);c.msg('成功！產生氧氣、葡萄糖和水','ok');s.busy=false};
+     const tryGo=(manual)=>{const miss=[];if(!s.load.sun)miss.push('光');if(!s.load.w)miss.push('水');if(!s.load.c)miss.push('二氧化碳');
+       if(miss.length){if(manual){SFX.lock();c.msg(`缺少${miss.join('、')}：無法進行光合作用`,'no')}return}run()};
+     const inCP=(x,y)=>Math.pow((x-CP.x)/CP.rx,2)+Math.pow((y-CP.y)/CP.ry,2)<1;
+     [['tSun','sun',()=>{c.set('sun',{o:1});return me.light(c)}],['tW','w',()=>{atoms.filter(a=>a.mol==='h2o').forEach(a=>c.set(a.k,{o:1}));return me.waterIn(c)}],['tC','c',()=>{atoms.filter(a=>a.mol==='co2').forEach(a=>c.set(a.k,{o:1}));return me.co2In(c)}]].forEach(([k,key,fn])=>{const home=c.get(k);const hx=home.x,hy=home.y;
+       c.drag(k,{can:()=>!s.busy,drop:async(x,y)=>{if(inCP(x,y)){c.set(k,{o:0});s.load[key]=1;showLoad();await fn();tryGo(false)}else c.tw(k,{x:hx,y:hy},300)}})});
+     c.hud.querySelector('#goPS').onclick=()=>tryGo(true);showLoad()}}
+  ]};return me;
+}
+
+/* ---------- 動畫 C：光合作用變因小實驗 ---------- */
+function defC23(){
+  const me={title:'動畫 C：光合作用變因小實驗',side:true,
+  state:()=>({L:.9,Cc:.9,W:.9,glu:0,bub:[],acc:0,nb:0}),
+  rate(s){return s.L*s.Cc*s.W},
+  setup(c){const s=c.state;s.L=.9;s.Cc=.9;s.W=.9;s.glu=0;s.bub=[];s.acc=0;
+    c.draw(`<rect data-k="sky" x="0" y="0" width="480" height="270" fill="#bfe6ff"/>
+      ${G('sun',60,46,spr(SP.sun,-22,-22,4))}
+      <g data-k="co2s"></g>
+      <rect x="0" y="236" width="480" height="34" fill="#8a5a2b"/>
+      <rect x="196" y="140" width="8" height="100" fill="${C.G}"/>
+      ${G('leaf',200,140,`<path d="M0 0 C20 -60 90 -96 170 -90 C150 -30 90 10 0 0Z" fill="${C.g}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/><path d="M-4 4 C-30 -50 -90 -76 -150 -70 C-130 -20 -70 12 -4 4Z" fill="${C.g}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`)}
+      <g data-k="drops"></g>
+      <g data-k="bubs"></g>
+      ${TT(410,30,'葡萄糖累積',13)}<rect x="392" y="40" width="36" height="180" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="gbar" x="395" y="217" width="30" height="0" fill="${C.y}"/>
+      ${TT(330,30,'氧氣泡泡',13)}`);
+    c.sideHTML(`<h4 class="px">變因控制台</h4><p class="lab-tip">定性展示，不標示數值。</p>
+      ${[['L','光照強度'],['Cc','二氧化碳濃度'],['W','水分']].map(([k,n])=>`<label class="lab-row"><span>${n} <b data-v="${k}"></b></span><input type="range" min="0" max="1" step="0.05" data-r="${k}"></label>`).join('')}
+      <div id="psState" class="lab-state"></div><button class="pbtn ghost" id="psReset" style="width:100%">↺ 葡萄糖歸零</button>`);
+    c.side.querySelectorAll('[data-r]').forEach(i=>i.oninput=()=>{s[i.dataset.r]=+i.value;this.ui(c)});
+    c.side.querySelector('#psReset').onclick=()=>{s.glu=0;this.ui(c)};
+    this.ui(c)},
+  ui(c){const s=c.state,word=v=>v<.05?'無':v<.4?'少':v<.75?'中':'多';
+    c.side.querySelectorAll('[data-r]').forEach(i=>{if(document.activeElement!==i)i.value=s[i.dataset.r];i.disabled=!c.isFree()});
+    c.side.querySelectorAll('[data-v]').forEach(b=>b.textContent=word(s[b.dataset.v]));
+    const r=this.rate(s);c.side.querySelector('#psState').innerHTML=r<.01?'<b style="color:#d6336c">■ 無法進行光合作用</b>':r<.3?'<b style="color:#b8561a">▼ 光合作用很慢</b>':r<.6?'<b>● 光合作用普通</b>':'<b style="color:#2f9e44">▲ 光合作用旺盛</b>';
+    c.$('sky').setAttribute('fill',mixHex('#2a3550','#bfe6ff',s.L));c.set('sun',{o:.15+.85*s.L,s:.6+.5*s.L});
+    c.$('co2s').innerHTML=Array.from({length:Math.round(s.Cc*10)},(_,i)=>{const x=250+(i%5)*40,y=40+Math.floor(i/5)*34+(i%2)*8;return `<g transform="translate(${x} ${y})"><circle cx="-8" r="4" fill="${C.r}" stroke="${C.k}"/><circle r="4" fill="#3a3a3a" stroke="${C.k}"/><circle cx="8" r="4" fill="${C.r}" stroke="${C.k}"/></g>`}).join('')+(s.Cc>0?TT(330,128,'二氧化碳',12):'');
+    c.$('drops').innerHTML=Array.from({length:Math.round(s.W*6)},(_,i)=>`<g transform="translate(${160+i*16} 246)">${spr(SP.drop,-7,-9,2)}</g>`).join('')+TT(110,256,'水分',12);
+    c.$('leaf').querySelectorAll('path').forEach(p=>p.setAttribute('fill',mixHex('#a39b5a',C.g,Math.min(1,s.W*1.4))));
+    c.$('gbar').setAttribute('height',Math.min(174,s.glu*174));c.$('gbar').setAttribute('y',217-Math.min(174,s.glu*174))},
+  tick(c,dt){const s=c.state,r=this.rate(s);s.acc+=r*dt*3;s.glu=Math.min(1,s.glu+r*dt*.03);
+    while(s.acc>1){s.acc-=1;s.bub.push({x:150+Math.random()*190,y:100+Math.random()*30,v:30+Math.random()*20})}
+    s.bub.forEach(b=>b.y-=b.v*dt);s.bub=s.bub.filter(b=>b.y>-10);
+    const g=c.$('bubs');if(g)g.innerHTML=s.bub.map(b=>`<g transform="translate(${b.x.toFixed(1)} ${b.y.toFixed(1)})"><rect x="-6" y="-6" width="12" height="12" fill="#fff" stroke="${C.b}" stroke-width="2"/><text y="3.5" font-size="8" text-anchor="middle" fill="${C.r}" font-weight="900">O₂</text></g>`).join('');
+    const gb=c.$('gbar');if(gb){gb.setAttribute('height',Math.min(174,s.glu*174));gb.setAttribute('y',217-Math.min(174,s.glu*174))}},
+  steps:[
+   {t:'條件充足',say:'光照、二氧化碳、水分都充足：氧氣泡泡不斷冒出，葡萄糖逐漸累積。',run:async c=>{await c.wait(3000)}},
+   {t:'光照變弱',say:'光照變弱：光合作用變慢，泡泡變少。',run:async c=>{await c.val(c.state,'L',.3,1400,()=>me.ui(c));await c.wait(2500)}},
+   {t:'沒有光照',say:'光照歸零：無法進行光合作用，不再產生氧氣和葡萄糖。照光是光合作用的必要條件之一。',run:async c=>{await c.val(c.state,'L',0,1200,()=>me.ui(c));c.msg('缺少光：無法進行光合作用','no');await c.wait(2500)}},
+   {t:'二氧化碳變少',say:'恢復光照，但二氧化碳濃度降低：光合作用也變慢。',run:async c=>{c.state.L=.9;await c.val(c.state,'Cc',.2,1400,()=>me.ui(c));await c.wait(2500)}},
+   {t:'水分變少',say:'二氧化碳恢復，但水分不足：光合作用同樣變慢。',run:async c=>{c.state.L=.9;c.state.Cc=.9;await c.val(c.state,'W',.2,1400,()=>me.ui(c));await c.wait(2500)}},
+   {t:'換你試試',free:true,fresh:true,say:'用右邊三個滑桿調整光照、二氧化碳、水分，觀察氧氣泡泡和葡萄糖累積的變化。',run:async c=>{me.ui(c)}}
+  ]};return me;
+}
+
+/* ---------- 動畫 D：虛擬實驗 2-3 ---------- */
+const FOILS={
+  長條:'<rect x="-16" y="-48" width="32" height="96"/>',
+  星星:'<polygon points="0,-40 11,-13 40,-12 17,6 25,36 0,19 -25,36 -17,6 -40,-12 -11,-13"/>',
+  愛心:'<path d="M0 32 C-46 2 -40 -36 -14 -34 C-5 -33 0 -26 0 -20 C0 -26 5 -33 14 -34 C40 -36 46 2 0 32Z"/>'
+};
+function defD23(){
+  const LP='M-150 40 C-120 -50 -10 -90 150 -80 C140 0 40 70 -150 40Z';
+  const VAR='<path d="M-110 20 C-90 -10 -60 -20 -40 -6 C-40 18 -80 30 -110 20Z"/><path d="M40 -40 C70 -60 110 -64 130 -60 C110 -30 80 -20 40 -40Z"/><path d="M-20 30 C0 10 40 10 50 30 C30 44 0 44 -20 30Z"/>';
+  const me={title:'動畫 D：虛擬實驗 2-3 光合作用變因之探討',
+  state:()=>({shape:'長條',fx:20,fy:-12,quiz:{},variegated:false}),
+  setup(c,k){const s=c.state;s.variegated=k===this.steps.length-1;
+    c.draw(`<rect data-k="sky" x="0" y="0" width="480" height="270" fill="#cdeeff"/><rect x="0" y="232" width="480" height="38" fill="#c8a06a"/>
+      ${G('sunD',420,40,spr(SP.sun,-22,-22,4),'data-o="0"')}
+      ${G('beakH',110,190,`<rect x="-70" y="-56" width="140" height="96" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect x="-67" y="-30" width="134" height="67" fill="#bfe6ff"/>`+TT(0,-64,'熱水',13)+`<rect x="-24" y="40" width="48" height="8" fill="${C.E}"/>`,'data-o="0"')}
+      ${G('beakA',110,196,`<rect x="-28" y="-48" width="56" height="74" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="alc" x="-25" y="-20" width="50" height="43" fill="#f7f7f7"/>`+TT(52,-30,'酒精',13),'data-o="0"')}
+      ${G('dish',360,192,`<ellipse rx="110" ry="30" fill="#eef8ff" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`+TT(0,46,'培養皿',13),'data-o="0"')}
+      ${G('dropper',360,60,`<rect x="-5" y="-26" width="10" height="34" fill="${C.E}" stroke="${C.k}" stroke-width="2"/><rect x="-4" y="8" width="8" height="10" fill="#c97a1a"/>`+TT(32,-6,'碘液',13),'data-o="0"')}
+      <rect data-k="pot" x="40" y="180" width="70" height="52" fill="${C.O}" stroke="${C.k}" stroke-width="3"/><rect data-k="stem" x="70" y="96" width="8" height="86" fill="${C.G}"/>
+      ${G('leaf',240,120,`<defs><clipPath id="lclip"><path d="${LP}"/></clipPath></defs><path data-k="lf" d="${LP}" fill="${C.g}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>
+         <g clip-path="url(#lclip)"><g data-k="var" fill="#f5f0dc" stroke="${C.k}" stroke-width="1.5" opacity="${s.variegated?1:0}" shape-rendering="auto">${VAR}</g>
+         <g data-k="mark" transform="translate(${s.fx} ${s.fy})" fill="#d9a35a" opacity="0" shape-rendering="auto">${FOILS[s.shape]}</g></g>
+         <path d="M-150 40 C-40 0 60 -40 150 -80" stroke="${C.G}" stroke-width="3" fill="none" shape-rendering="auto"/>`)}
+      ${G('foil',240+s.fx,120+s.fy,`<g fill="#cfd8dc" stroke="${C.k}" stroke-width="2.5" shape-rendering="auto">${FOILS[s.shape]}</g><g fill="#fff" opacity=".5"><rect x="-6" y="-20" width="4" height="20"/></g>`,`data-o="${s.variegated?0:1}"`)}
+      <text data-k="day" x="240" y="30" font-size="18" text-anchor="middle" font-weight="900" class="svt"></text>`);
+    c.hudHTML('');},
+  async leafTo(c,x,y,sc=.42){await c.tw('leaf',{x,y,s:sc},800)},
+  async process(c,quick){
+    const d=quick?.4:1;
+    c.set('foil',{o:0});c.$('pot').setAttribute('opacity','.25');c.$('stem').setAttribute('opacity','.25');
+    await c.show('beakH',300*d);await me.leafTo(c,110,180);c.msg('熱水軟化葉片');await c.wait(700*d);
+    await c.show('beakA',300*d);await c.all([me.leafTo(c,110,190,.22),c.color('alc','#5cbf3a',1400*d),c.color(c.$('lf'),'#dfe8a8',1400*d)]);c.msg('酒精隔水加熱：溶出葉綠素，酒精變綠');await c.wait(600*d);
+    await c.hide('beakA',300*d);await me.leafTo(c,110,180);c.msg('熱水漂洗：洗去葉綠素與酒精');await c.wait(700*d);
+    await c.show('dish',300*d);await me.leafTo(c,360,186,.6);await c.hide('beakH',300*d)},
+  async iodine(c){await c.show('dropper',200);await c.tw('dropper',{y:120},500);await c.tw('dropper',{y:60},300);
+    const v=c.$('var'),m=c.$('mark');await c.color(c.$('lf'),'#2c2a5a',1200);
+    if(c.state.variegated){v.setAttribute('fill','#d9a35a');v.setAttribute('opacity','1')}else m.setAttribute('opacity','1');
+    await c.hide('dropper',200)},
+  steps:[
+   {t:'選擇遮光位置',say:'實驗前 3～5 天，用鋁箔包住葉片的一部分。可以換形狀，也可以拖曳鋁箔到葉子上的其他位置！',run:async c=>{
+     const s=c.state;
+     c.hudHTML(`<div class="ap-tools">${Object.keys(FOILS).map(k=>`<button class="mini ${k===s.shape?'on':''}" data-f="${k}">${k}</button>`).join('')}</div>`);
+     c.hud.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{SFX.tap();s.shape=b.dataset.f;c.P.go(0)});
+     c.drag('foil',{drop:(x,y)=>{const nx=Math.max(-110,Math.min(110,x-240)),ny=Math.max(-50,Math.min(30,y-120));s.fx=nx;s.fy=ny;c.set('foil',{x:240+nx,y:120+ny});c.$('mark').setAttribute('transform',`translate(${nx} ${ny})`)}});
+     await c.pulse('foil',1.1)},hold:2500},
+   {t:'照光 3～5 天',say:'讓植物照光 3～5 天。被鋁箔遮住的部分照不到光。',run:async c=>{await c.show('sunD',200);
+     for(let d=1;d<=4;d++){c.text('day',`第 ${d} 天`);await c.color('sky','#cdeeff',300);await c.wait(500);await c.color('sky','#2a3550',400);await c.wait(250)}
+     await c.color('sky','#cdeeff',300);c.text('day','')}},
+   {t:'摘下、熱水軟化',say:'摘下葉片並除去鋁箔，放入熱水中加熱，以軟化葉片。',run:async c=>{c.set('foil',{o:0});c.$('pot').setAttribute('opacity','.25');c.$('stem').setAttribute('opacity','.25');await c.show('beakH',300);await me.leafTo(c,110,180);await c.wait(600)}},
+   {t:'酒精隔水加熱',say:'用鑷子把葉片放入酒精，再隔水加熱：葉綠素被酒精溶出，酒精變成綠色，葉片顏色變淡。',run:async c=>{await c.show('beakA',300);await c.all([me.leafTo(c,110,190,.22),c.color('alc','#5cbf3a',1600),c.color(c.$('lf'),'#dfe8a8',1600)])}},
+   {t:'熱水漂洗',say:'把葉片放入熱水漂洗，洗去葉綠素與酒精。',run:async c=>{await c.hide('beakA',300);await me.leafTo(c,110,180);await c.wait(700)}},
+   {t:'滴碘液：開獎！',say:'把葉片攤平在培養皿中，滴上碘液。照光的部分呈藍黑色（有澱粉），遮光的部分呈黃褐色（沒有澱粉）。',run:async c=>{
+     await c.show('dish',300);await me.leafTo(c,360,186,.6);await c.hide('beakH',300);await me.iodine(c);c.msg('照光處藍黑色，遮光處黃褐色！','ok')},hold:2500},
+   {t:'分析與討論',free:true,say:'回答下面三個問題，看看你是否理解這個實驗。',run:async c=>{
+     const Q=[['步驟 1 為什麼要在實驗前 3～5 天（而不是 3～5 小時）包鋁箔？',['讓遮光部位有足夠時間，把之前光合作用的產物消耗完','讓鋁箔黏得更牢','讓葉片長得更大'],0,'被鋁箔覆蓋的部位，需要足夠時間把之前光合作用的產物消耗完。'],
+       ['滴加碘液後，包覆鋁箔的部位呈黃褐色，表示該部位不具有何種物質？',['葉綠素','澱粉','水'],1,'碘液遇澱粉呈藍黑色；黃褐色表示沒有澱粉。'],
+       ['葉子某些部位呈藍黑色，表示具有______，是植物充分進行______作用後轉換而儲存的產物。',['蛋白質；分解','澱粉；光合','葡萄糖；合成'],1,'光合作用產生的葡萄糖可轉換成澱粉儲存，碘液遇澱粉呈藍黑色。']];
+     c.hudHTML(`<div class="ap-q wide">${Q.map((q,i)=>`<div class="qq"><b>${i+1}. ${q[0]}</b><div>${q[1].map((o,j)=>`<button class="mini" data-q="${i}" data-o="${j}">${'ABC'[j]}. ${o}</button>`).join('')}</div><p class="ap-qr" data-r="${i}"></p></div>`).join('')}</div>`);
+     c.hud.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const q=Q[+b.dataset.q],ok=+b.dataset.o===q[2];ok?SFX.coin():SFX.lock();
+       c.hud.querySelector(`[data-r="${b.dataset.q}"]`).innerHTML=(ok?'✔ 答對了！':'✖ 再想想：')+q[3]})}},
+   {t:'延伸：彩葉草斑葉',fresh:true,say:'延伸：用有綠色和非綠色部分的彩葉草葉片做同樣的實驗。只有綠色部分（有葉綠體）呈藍黑色——葉綠體也是光合作用的必要條件。',run:async c=>{
+     c.set('foil',{o:0});await c.show('sunD',200);await c.wait(400);await me.process(c,true);await me.iodine(c);c.msg('非綠色部分呈黃褐色：沒有葉綠體就無法進行光合作用','ok')}}
+  ]};return me;
+}
+
+ANIMS['2-3']=[{id:'A',name:'葉片構造探索',def:defA23},{id:'B',name:'分子的旅程',def:defB23},{id:'C',name:'變因小實驗',def:defC23},{id:'D',name:'虛擬實驗 2-3',def:defD23}];
+
+/* =========================================================
+   2-4 人體如何獲得養分：消化之旅模擬器
+   ========================================================= */
+SP.toast=["..kkkkkk..",".knnnnnnk.","knttttttnk","knttttttnk","knttttttnk","knttttttnk","knttttttnk","kkkkkkkkkk"];
+SP.egg=["...kkkk...","..kwwwwk..",".kwwwwwwk.",".kwwwwwwk.","kwwwwwwwwk","kwwwwwwwwk","kwwwwwwwek",".kwwwwwek.","..kkkkkk.."];
+SP.butter=["..........",".kkkkkkkk.","kmmmmmmmmk","kkkkkkkkkk","kyyyyyyyyk","kyyyyyyyYk","kyyyyyyyYk","kkkkkkkkkk"];
+const NUT={
+  carb:{name:'醣類',food:'吐司',spr:'toast',mol:'澱粉'},
+  prot:{name:'蛋白質',food:'蛋',spr:'egg',mol:'蛋白質'},
+  fat:{name:'脂質',food:'奶油',spr:'butter',mol:'脂質'}
+};
+/* 分子模型 */
+const MOL={
+  sq:(x,c=C.y)=>`<rect x="${x-7}" y="-7" width="14" height="14" fill="${c}" stroke="${C.k}" stroke-width="2"/>`,
+  ci:(x,c=C.p)=>`<circle cx="${x}" r="7.5" fill="${c}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>`,
+  bar:(x)=>`<rect x="${x+7}" y="-1.5" width="4" height="3" fill="${C.k}"/>`,
+  chain(n,f,x0,step=18){let o='';for(let i=0;i<n;i++){o+=f(x0+i*step);if(i<n-1)o+=MOL.bar(x0+i*step)}return o},
+  carb:{long:()=>MOL.chain(8,MOL.sq,-63),short:()=>MOL.chain(3,MOL.sq,-80)+MOL.chain(2,MOL.sq,-14)+MOL.chain(3,MOL.sq,40),single:()=>[...Array(8)].map((_,i)=>MOL.sq(-77+i*22)).join('')},
+  prot:{long:()=>MOL.chain(8,x=>MOL.ci(x),-63),short:()=>MOL.chain(3,x=>MOL.ci(x),-80)+MOL.chain(3,x=>MOL.ci(x),-14)+MOL.chain(2,x=>MOL.ci(x),52),single:()=>[...Array(8)].map((_,i)=>MOL.ci(-77+i*22)).join('')},
+  fat:{long:()=>`<rect x="-46" y="-16" width="14" height="32" fill="${C.m}" stroke="${C.k}" stroke-width="2"/>`+[-11,0,11].map(y=>`<path d="M-32 ${y} h10 l8 -4 l8 4 l8 -4 l8 4 l8 -4 l8 4" fill="none" stroke="${C.Y}" stroke-width="4"/>`).join(''),
+       single:()=>`<rect x="-80" y="-16" width="14" height="32" fill="${C.m}" stroke="${C.k}" stroke-width="2"/>`+[-14,0,14].map((y,i)=>`<path d="M${-30+i*40} ${y} l8 -4 l8 4 l8 -4 l8 4 l8 -4" fill="none" stroke="${C.Y}" stroke-width="4"/>`).join('')}
+};
+MOL.fat.short=MOL.fat.long;
+const MOLNAME={carb:{long:'澱粉',short:'較小的醣類',single:'葡萄糖等小分子'},prot:{long:'蛋白質',short:'較小的片段',single:'胺基酸'},fat:{long:'脂質',short:'脂質',single:'甘油＋脂肪酸'}};
+/* 食物塊（體積） */
+const CHUNK={
+  big:(c)=>`<rect x="-34" y="-24" width="68" height="48" fill="${c}" stroke="${C.k}" stroke-width="3"/>`,
+  small:(c)=>[[-44,-14],[-12,-18],[18,-10],[-28,10],[6,12]].map(([x,y])=>`<rect x="${x}" y="${y}" width="24" height="18" fill="${c}" stroke="${C.k}" stroke-width="2.5"/>`).join(''),
+  tiny:(c)=>[...Array(16)].map((_,i)=>`<rect x="${-60+(i%8)*15}" y="${-16+Math.floor(i/8)*16+(i%2)*4}" width="10" height="10" fill="${c}" stroke="${C.k}" stroke-width="1.5"/>`).join(''),
+  drop:()=>`<ellipse rx="40" ry="24" fill="${C.y}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`,
+  drops:()=>[...Array(14)].map((_,i)=>`<circle cx="${-60+(i%7)*20}" cy="${-12+Math.floor(i/7)*24}" r="6" fill="${C.y}" stroke="${C.k}" stroke-width="1.8" shape-rendering="auto"/>`).join('')
+};
+const CHUNKCOL={carb:'#e9c98f',prot:'#fffdf0',fat:C.y,mix:'#f2c79a'};
+/* 各站資料（依企劃書 5.2） */
+const STATIONS=[
+  {key:'start',name:'出發',hl:[],path:[[100,4]]},
+  {key:'mouth',name:'口腔',hl:['口腔','唾腺'],path:[[100,23]],juice:[['唾液（中性）','#fffbe0']],bg:'#ffe3ea',
+    mol:{carb:'short'},chunk:'small',ans:{carb:1,prot:0,fat:0},
+    say:{carb:'牙齒切斷、磨碎，舌頭攪拌：食物體積變小。唾液中的酵素促進澱粉初步分解 → 澱粉分子改變！',prot:'牙齒切斷、磨碎，舌頭攪拌：蛋白質只被磨碎，體積變小，分子沒有改變。',fat:'牙齒切斷、磨碎，舌頭攪拌：脂質只被磨碎，體積變小，分子沒有改變。'}},
+  {key:'eso',name:'咽、食道',hl:['咽','食道'],path:[[100,29],[100.5,42]],bg:'#ffe9ef',ans:{carb:0,prot:0,fat:0},push:true,
+    say:{all:'食物經由咽進入食道。食道不分泌消化液，靠管壁肌肉收縮（蠕動）把食物推送到胃——只有位置移動。'}},
+  {key:'stom',name:'胃',hl:['胃'],path:[[110,54]],juice:[['胃液（酸性）：酵素＋鹽酸','#fff3b0']],bg:'#ffdbe4',
+    mol:{prot:'short'},chunk:'tiny',ans:{carb:0,prot:1,fat:0},
+    say:{carb:'胃的蠕動攪拌食物：體積變小。唾液中的酵素到了胃的酸性環境就失去作用，澱粉分子在這裡沒有繼續分解。',prot:'胃液中的酵素初步分解蛋白質成較小的片段 → 蛋白質分子改變！鹽酸能殺死部分細菌。',fat:'胃的蠕動只把脂質攪拌得更細，分子沒有改變。'}},
+  {key:'si',name:'小腸：消化',hl:['小腸','肝臟','胰臟'],path:[[104,66],[100,80]],juice:[['膽汁（鹼性，不含酵素）','#cdeb8b'],['胰液（鹼性）','#f6e0b8'],['腸液（鹼性）','#e6d4ff']],bg:'#ffd0dc',
+    mol:{carb:'single',prot:'single',fat:'single'},chunk:'tiny',ans:{carb:1,prot:1,fat:1},
+    say:{carb:'胰液、腸液把醣類分解成葡萄糖等小分子 → 分子改變！',prot:'胰液、腸液把蛋白質分解成胺基酸 → 分子改變！',fat:'膽汁先把脂質乳化成小油滴（只有體積改變，分子沒變），胰液再把脂質分解成甘油＋脂肪酸 → 分子改變！'}},
+  {key:'abs',name:'小腸：吸收',hl:['小腸'],path:[[96,90]],bg:'#ffe3ea',
+    say:{all:'小腸內壁皺褶上有許多絨毛，增加吸收表面積。小分子養分穿過絨毛進入微血管，隨血液運送到全身；未被分解的物質無法通過，繼續往前。'}},
+  {key:'li',name:'大腸',hl:['大腸'],path:[[80,100],[80,74],[120,74],[120,100]],bg:'#ffe8d6',ans:{carb:0,prot:0,fat:0},
+    say:{all:'未被消化或吸收的食物殘渣（例如纖維素）進入大腸。大腸能繼續吸收水分與礦物質，剩下的殘渣形成糞便。'}},
+  {key:'anus',name:'肛門',hl:['肛門'],path:[[104,104],[104,116]],bg:'#efe6dc',
+    say:{all:'糞便經由肛門排出體外，這個過程稱為「排遺」。提醒：排遺不是排泄喔！'}},
+  {key:'end',name:'旅程整理',hl:[],path:[[104,122]]}
+];
+const MP=(x,y)=>({x:-114+2.1*x,y:4+2.1*y});
+const ZX=196,ZW=280,ZC=ZX+ZW/2;
+function defSim24(){
+  const me={title:'消化之旅模擬器',
+  state:()=>({nut:'carb',mission:false,asked:{}}),
+  nuts(s){return s.nut==='mix'?['carb','prot','fat']:[s.nut]},
+  molAt(n,i){let m='long';for(let j=1;j<=i&&j<STATIONS.length;j++){const st=STATIONS[j];if(st.mol&&st.mol[n])m=st.mol[n]}return m},
+  chunkAt(i){let ch='big';for(let j=1;j<=i;j++){if(STATIONS[j].chunk)ch=STATIONS[j].chunk}return ch},
+  rows(s){const ns=this.nuts(s);return ns.length===1?[{n:ns[0],y:186,sc:1}]:ns.map((n,i)=>({n,y:150+i*40,sc:.72}))},
+  setup(c,k){const s=c.state;s.asked={};
+    const ns=this.nuts(s);
+    c.draw(`<rect x="0" y="0" width="192" height="270" fill="#fff5f7"/>
+      <g data-k="map">${torso([],[])}</g>
+      <g data-k="mapt" transform="translate(-114 4) scale(2.1)"></g>
+      ${G('ball',MP(100,4).x,MP(100,4).y,ns.length===1?spr(SP[NUT[ns[0]].spr],-10,-9,2):spr(SP.toast,-18,-8,1.6)+spr(SP.egg,-6,-9,1.6)+spr(SP.butter,6,-8,1.6))}
+      <rect x="${ZX}" y="6" width="${ZW}" height="258" fill="#fff" stroke="${C.k}" stroke-width="3" data-k="zbg"/>
+      <rect x="${ZX}" y="6" width="${ZW}" height="30" fill="${C.P}" stroke="${C.k}" stroke-width="3"/>
+      <text data-k="zt" x="${ZX+12}" y="27" font-size="16" font-weight="900" fill="#fff" style="stroke:#2a1a12" class="svt">放大視窗</text>
+      <g data-k="zone"></g>
+      <g data-k="juice"></g>
+      <g data-k="ztag"></g>
+      ${flashHTML}`);
+    // 地圖縮放
+    c.$('map').setAttribute('transform','translate(-114 4) scale(2.1)');
+    c.hudHTML(`<div class="ap-tools">${[['carb','醣類（吐司）'],['prot','蛋白質（蛋）'],['fat','脂質（奶油）'],['mix','三種一起']].map(([k,n])=>`<button class="mini ${s.nut===k?'on':''}" data-n="${k}">${n}</button>`).join('')}
+      <button class="mini ${s.mission?'on':''}" data-m>任務模式 ${s.mission?'ON':'OFF'}</button></div>`);
+    c.hud.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{SFX.tap();s.nut=b.dataset.n;c.P.go(0)});
+    c.hud.querySelector('[data-m]').onclick=()=>{SFX.tap();s.mission=!s.mission;c.P.go(Math.max(0,Math.min(c.P.k,STATIONS.length-2)))};
+  },
+  map(c,i){const st=STATIONS[i];c.$('map').innerHTML=torso(st.hl,[]);c.text('zt',`放大視窗：${st.name}`);c.$('zbg').setAttribute('fill',st.bg||'#fff')},
+  async moveBall(c,i){for(const [x,y] of STATIONS[i].path){const p=MP(x,y);await c.tw('ball',{x:p.x,y:p.y},500)}},
+  tag(c,list){c.$('ztag').innerHTML=list.map((t,i)=>{const col={mol:C.r,vol:C.b,push:C.E,abs:C.G,water:'#3a8fb7',out:C.n}[t[0]];const w=[...t[1]].length*12+14;
+    return `<rect x="${ZX+ZW-8-w}" y="${42+i*24}" width="${w}" height="20" fill="${col}" stroke="${C.k}" stroke-width="2"/><text x="${ZX+ZW-8-w/2}" y="${57+i*24}" font-size="12" text-anchor="middle" fill="#fff" font-weight="900">${t[1]}</text>`}).join('')},
+  drawRows(c,i){const s=c.state,rows=this.rows(s);
+    let h=`${TT(ZX+34,96,'食物塊',12)}${G('chunk',ZC,96,this.chunkHTML(s,this.chunkAt(i)))}${TT(ZX+28,rows[0].y-24,'分子模型',12)}`;
+    rows.forEach(r=>{const m=this.molAt(r.n,i);h+=G('mol_'+r.n,ZC+6,r.y,MOL[r.n][m](),`data-s="${r.sc}"`)+`<text data-k="ml_${r.n}" x="${ZC+6}" y="${r.y+(r.sc<1?17:24)}" font-size="${r.sc<1?10:12}" text-anchor="middle" font-weight="900" class="svt">${MOLNAME[r.n][m]}</text>`});
+    c.$('zone').innerHTML='';c.add(`<g>${h}</g>`,'zone')},
+  chunkHTML(s,ch,emul){if(s.nut==='fat'){return emul?CHUNK.drops():`<ellipse rx="${{big:40,small:30,tiny:22}[ch]}" ry="${{big:24,small:18,tiny:14}[ch]}" fill="${C.y}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`}return CHUNK[ch](CHUNKCOL[s.nut==='mix'?'mix':s.nut])},
+  async juice(c,list){const g=c.$('juice');g.innerHTML='';
+    for(const [i,[n,col]] of list.entries()){const x=ZX+40+i*88;c.add(G('jd'+i,x,40,spr(SP.drop,-7,-9,2.4).replace(/#5aa9e6/g,col).replace(/#a7e6ff/g,'#fff')+`<rect x="-4" y="14" width="0" height="0"/>`)+`<text data-k="jl${i}" x="${x}" y="${list.length>1?70+i*12:70}" font-size="11" text-anchor="${list.length>1?'start':'middle'}" font-weight="900" class="svt" opacity="0">${n}</text>`,'juice');
+      await c.tw('jd'+i,{y:62},450);const l=c.$('jl'+i);l.setAttribute('opacity','1');l.setAttribute('text-anchor','start');l.setAttribute('x',ZX+12);l.setAttribute('y',54+i*15);c.set('jd'+i,{o:0})}},
+  async cut(c,n,to){const k='mol_'+n,el=c.$(k);if(!el)return;const p=c.get(k);
+    c.add(G('sc_'+n,p.x-90,p.y-22,`<path d="M0 0 l10 10 M10 0 l-10 10" stroke="${C.k}" stroke-width="3"/><circle cx="-2" cy="-2" r="3" fill="none" stroke="${C.k}" stroke-width="2"/>`),'zone');
+    await c.tw('sc_'+n,{x:p.x+90},700);c.set('sc_'+n,{o:0});await flash(c,p.x,p.y);
+    el.innerHTML=MOL[n][to]();c.text('ml_'+n,MOLNAME[n][to])},
+  async ask(c,i){const s=c.state,st=STATIONS[i];if(!s.mission||c.fast()||!st.ans||s.asked[i])return;
+    const yes=this.nuts(s).some(n=>st.ans[n]);
+    await new Promise(res=>{c.hudHTML(c.hud.innerHTML+`<div class="ap-q"><b>任務：在「${st.name}」，分子有沒有改變？</b><div><button class="pbtn" data-a="1">有改變</button><button class="pbtn ghost" data-a="0">沒有改變</button></div><p class="ap-qr"></p></div>`);
+      this.rebind(c);
+      c.hud.querySelectorAll('.ap-q [data-a]').forEach(b=>b.onclick=()=>{const ok=(b.dataset.a==='1')===yes;
+        if(ok){SFX.coin();s.asked[i]=1;c.hud.querySelector('.ap-q').remove();res()}
+        else{SFX.lock();c.hud.querySelector('.ap-qr').textContent='✖ 再想想！'+(yes?'這裡有酵素把大分子分解成較小的分子。':'這裡只有體積變小或位置移動，分子沒有被分解。')}})})},
+  rebind(c){const s=c.state;c.hud.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{SFX.tap();s.nut=b.dataset.n;c.P.go(0)});
+    const m=c.hud.querySelector('[data-m]');if(m)m.onclick=()=>{SFX.tap();s.mission=!s.mission;c.P.go(Math.max(0,Math.min(c.P.k,STATIONS.length-2)))}},
+  async station(c,i){const s=c.state,st=STATIONS[i],ns=this.nuts(s);
+    this.map(c,i);this.drawRows(c,i-1);c.$('ztag').innerHTML='';c.$('juice').innerHTML='';
+    await this.moveBall(c,i);
+    await this.ask(c,i);
+    if(st.juice)await this.juice(c,st.juice);
+    if(st.push){await this.peristalsis(c);this.tag(c,[['push','只推送（位置移動）']]);return}
+    // 體積
+    const ch=c.$('chunk');
+    if(st.key==='si'&&ns.includes('fat')){if(s.nut==='fat'){await flash(c,ZC,96);ch.innerHTML=CHUNK.drops();c.msg('膽汁乳化脂質：只有體積改變，分子沒變','ok');await c.wait(900)}}
+    else if(st.chunk&&st.chunk!==this.chunkAt(i-1)){await c.pulse('chunk',1.15,200);ch.innerHTML=this.chunkHTML(s,st.chunk);await c.pulse('chunk',1.1,200)}
+    // 分子
+    const tags=[];
+    for(const n of ns){const before=this.molAt(n,i-1),after=this.molAt(n,i);
+      if(before!==after){await this.cut(c,n,after);tags.push(n)}}
+    const tl=[];
+    if(ns.length===1){tl.push(tags.length?['mol','分子改變']:['vol','只有體積改變']);if(tags.length&&st.chunk)tl.push(['vol','體積也變小'])}
+    else{ns.forEach(n=>tl.push(tags.includes(n)?['mol',`${NUT[n].name}：分子改變`]:['vol',`${NUT[n].name}：體積改變`]))}
+    this.tag(c,tl)},
+  async peristalsis(c){c.$('zone').innerHTML='';
+    c.add(`<g>${TT(ZX+70,60,'食道',13)}<rect x="${ZC-30}" y="44" width="60" height="214" fill="${C.p}" stroke="${C.k}" stroke-width="3"/>
+      ${G('bolus',ZC,70,CHUNK.small(CHUNKCOL[c.state.nut==='mix'?'mix':c.state.nut]),'data-s=".55"')}
+      ${G('sqz',ZC,40,`<rect x="-44" y="-8" width="16" height="16" fill="${C.P}" stroke="${C.k}" stroke-width="2"/><rect x="28" y="-8" width="16" height="16" fill="${C.P}" stroke="${C.k}" stroke-width="2"/>${AR(-60,0,-46,0,C.r,3)}${AR(60,0,46,0,C.r,3)}`)}
+      ${TT(ZC+90,160,'管壁肌肉收縮',12)}${TT(ZC+90,176,'（蠕動）',12)}${TT(ZC-92,160,'不分泌',12)}${TT(ZC-92,176,'消化液',12)}</g>`,'zone');
+    await c.all([c.tw('bolus',{y:236},1800),c.wait(150).then(()=>c.tw('sqz',{y:200},1800))])},
+  async absorb(c,i){const s=c.state,ns=this.nuts(s),t=c.teacher();this.map(c,i);c.$('ztag').innerHTML='';c.$('juice').innerHTML='';await this.moveBall(c,i);
+    let h=`${[0,1,2,3].map(j=>{const x=ZX+40+j*66;return `<path d="M${x-22} 262 V170 C${x-22} 140 ${x+22} 140 ${x+22} 170 V262" fill="${C.p}" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/><path d="M${x-12} 262 V172 C${x-12} 158 ${x+12} 158 ${x+12} 172 V262" fill="none" stroke="${C.r}" stroke-width="3" shape-rendering="auto"/>`+(t?`<rect x="${x-2}" y="166" width="4" height="96" fill="${C.y}"/>`:'')}).join('')}
+      ${TAG(ZX+50,134,'絨毛',C.w,{s:11})}${TAG(ZX+ZW-50,134,'微血管',C.r,{s:11,tf:'#fff'})}${t?TAG(ZC,250,'補充（教師）：甘油、脂肪酸主要進入乳糜管',C.y,{s:10}):''}`;
+    const items=[];let k=0;
+    ns.forEach((n,ri)=>{for(let j=0;j<(ns.length>1?3:5);j++){const id='ab'+(k++);const x=ZX+30+((k*37)%220),y=56+ri*22+(j%2)*8;
+      const html=n==='carb'?MOL.sq(0):n==='prot'?MOL.ci(0):(j===0?`<rect x="-6" y="-9" width="12" height="18" fill="${C.m}" stroke="${C.k}" stroke-width="2"/>`:`<path d="M-12 0 l6 -4 l6 4 l6 -4 l6 4" fill="none" stroke="${C.Y}" stroke-width="4"/>`);
+      h+=G(id,x,y,html,'data-s=".8"');items.push({id,n,vx:ZX+40+(j%4)*66,lac:n==='fat'&&t})}});
+    if(ns.includes('carb'))for(let j=0;j<3;j++){h+=G('fib'+j,ZX+40+j*30,110,`<polygon points="0,-9 9,0 0,9 -9,0" fill="${C.e}" stroke="${C.k}" stroke-width="2"/>`)}
+    c.$('zone').innerHTML='';c.add(`<g>${h}${ns.includes('carb')?TT(ZX+90,96,'纖維素（未被分解）',11):''}</g>`,'zone');
+    await c.wait(400);
+    await c.all(items.map((it,j)=>c.wait(j*120).then(async()=>{await c.tw(it.id,{x:it.vx+(it.lac?0:-12),y:200},900);await c.tw(it.id,{y:262,o:0},700)})));
+    if(ns.includes('carb')){await c.all([0,1,2].map(j=>c.tw('fib'+j,{x:ZX+ZW+20,o:0},1100)));c.msg('纖維素無法被吸收，繼續前往大腸')}
+    this.tag(c,[['abs','吸收：小分子進入血液']])},
+  async large(c,i){const s=c.state;this.map(c,i);c.$('ztag').innerHTML='';c.$('juice').innerHTML='';await this.moveBall(c,i);await this.ask(c,i);
+    c.$('zone').innerHTML='';
+    c.add(`<g><rect x="${ZX+20}" y="70" width="${ZW-40}" height="150" fill="#f6a25b" stroke="${C.k}" stroke-width="3"/><rect x="${ZX+34}" y="84" width="${ZW-68}" height="122" fill="#fff1e2"/>
+      ${G('res',ZC,146,`<rect x="-50" y="-26" width="100" height="52" fill="#b98b5a" stroke="${C.k}" stroke-width="2"/>${s.nut==='carb'||s.nut==='mix'?`<polygon points="-20,-8 -12,0 -20,8 -28,0" fill="${C.e}" stroke="${C.k}"/><polygon points="16,-6 24,2 16,10 8,2" fill="${C.e}" stroke="${C.k}"/>`:''}`)}
+      ${[0,1,2,3,4].map(j=>G('wd'+j,ZC-50+j*25,112+(j%2)*60,spr(SP.drop,-7,-9,2))).join('')}
+      ${TT(ZC,240,'大腸較小腸粗短',12)}</g>`,'zone');
+    await c.wait(300);
+    await c.all([0,1,2,3,4].map(j=>c.wait(j*100).then(()=>c.tw('wd'+j,{y:j%2?230:66,o:0},900))));
+    const r=c.$('res');r.innerHTML=`<path d="M-40 10 C-40 -20 40 -20 40 10 Z" fill="${C.N}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>`+TT(0,26,'糞便',12);
+    this.tag(c,[['water','吸收水分與礦物質'],['vol','不再消化']])},
+  async anus(c,i){this.map(c,i);c.$('ztag').innerHTML='';c.$('juice').innerHTML='';
+    c.$('zone').innerHTML='';
+    c.add(`<g><rect x="${ZC-36}" y="40" width="72" height="170" fill="#f6a25b" stroke="${C.k}" stroke-width="3"/>${G('poop',ZC,90,`<path d="M-26 10 C-26 -16 26 -16 26 10 Z" fill="${C.N}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>`)}${TT(ZC,232,'肛門',13)}</g>`,'zone');
+    await this.moveBall(c,i);await c.tw('poop',{y:258,o:0},1300);c.msg('排遺不是排泄！','ok');this.tag(c,[['out','排遺']])},
+  summary(c){const s=c.state,ns=this.nuts(s);
+    const T={mouth:{carb:['mol','分子改變（較小的醣類）'],prot:['vol','體積改變'],fat:['vol','體積改變']},eso:{carb:['push','只推送'],prot:['push','只推送'],fat:['push','只推送']},
+      stom:{carb:['vol','體積改變'],prot:['mol','分子改變（較小片段）'],fat:['vol','體積改變']},si:{carb:['mol','分子改變（葡萄糖等）'],prot:['mol','分子改變（胺基酸）'],fat:['mol','乳化→分子改變（甘油＋脂肪酸）']},
+      li:{carb:['water','吸收水分與礦物質'],prot:['water','吸收水分與礦物質'],fat:['water','吸收水分與礦物質']}};
+    const names={mouth:'口腔',eso:'咽、食道',stom:'胃',si:'小腸',li:'大腸'};
+    c.hudHTML(c.hud.innerHTML+`<div class="ap-sum"><b>旅程整理</b><table><tr><th>器官</th>${['carb','prot','fat'].map(n=>`<th class="${ns.includes(n)?'':'dim'}">${NUT[n].name}</th>`).join('')}</tr>
+      ${Object.keys(names).map(o=>`<tr><td>${names[o]}</td>${['carb','prot','fat'].map(n=>`<td class="${ns.includes(n)?'':'dim'}"><span class="chip ${T[o][n][0]}">${T[o][n][1]}</span></td>`).join('')}</tr>`).join('')}
+      <tr><td>肛門</td><td colspan="3"><span class="chip out">排遺（不是排泄）</span></td></tr></table></div>`);this.rebind(c)},
+  steps:[]};
+  me.steps=[
+   {t:'出發',say:c=>`選一種養分出發！現在帶的是：${c.state.nut==='mix'?'三種一起（吐司、蛋、奶油）':NUT[c.state.nut].food+'（'+NUT[c.state.nut].name+'）'}。每一站都會標示「分子改變」「體積改變」或「只推送」。`,
+    run:async c=>{me.map(c,0);me.drawRows(c,0);await c.pulse('ball',1.4)}},
+   ...[1,2,3].map(i=>({t:STATIONS[i].name,say:c=>{const st=STATIONS[i];if(st.say.all)return st.say.all;return me.nuts(c.state).map(n=>st.say[n]).join(' ')},run:async c=>{await me.station(c,i)},hold:2200})),
+   {t:STATIONS[4].name,say:c=>{const st=STATIONS[4];return me.nuts(c.state).map(n=>st.say[n]).join(' ')},run:async c=>{await me.station(c,4)},hold:2600},
+   {t:STATIONS[5].name,say:STATIONS[5].say.all,run:async c=>{await me.absorb(c,5)},hold:2200},
+   {t:STATIONS[6].name,say:STATIONS[6].say.all,run:async c=>{await me.large(c,6)},hold:2000},
+   {t:STATIONS[7].name,say:STATIONS[7].say.all,run:async c=>{await me.anus(c,7)},hold:2000},
+   {t:'旅程整理',free:true,say:'這是整條消化道的變化整理。換一種養分（或「三種一起」）再走一次，比較看看！開啟「任務模式」，每站要先回答才能前進。',run:async c=>{me.map(c,7);me.summary(c)}}
+  ];
+  return me;
+}
+
+ANIMS['2-4']=[{id:'A',name:'消化之旅模擬器',def:defSim24}];
+
+/*ANIM-END*/
+</script>
+</body>
+</html>
