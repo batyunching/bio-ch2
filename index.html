@@ -2747,11 +2747,23 @@ function defB23(){
     [['O',0,0],['H',-7,6],['H',7,6]].forEach(([t,dx,dy])=>atoms.push({k:'a'+id++,t,mol:'h2o',m,src:{x:sx+dx,y:sy+dy},in:{x:ix+dx,y:iy+dy}}))}
   atoms.forEach((a,i)=>{const ang=rnd(i)*Math.PI*2,rr=Math.sqrt(rnd(i+99));a.sc={x:CP.x+Math.cos(ang)*rr*(CP.rx-24),y:CP.y+Math.sin(ang)*rr*(CP.ry-20)}});
   // 目標：葡萄糖（C6H12O6）、6 O2（氧來自水）、6 H2O
-  const GX=200,GY=118;const tgt={C:[],Og:[],Hg:[],O2:[],Ow:[],Hw:[]};
-  for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/2;tgt.C.push({x:GX+Math.cos(a)*16,y:GY+Math.sin(a)*16});tgt.Og.push({x:GX+Math.cos(a+.3)*30,y:GY+Math.sin(a+.3)*30});
-    tgt.Hg.push({x:GX+Math.cos(a-.35)*36,y:GY+Math.sin(a-.35)*36},{x:GX+Math.cos(a+.75)*38,y:GY+Math.sin(a+.75)*38})}
-  for(let i=0;i<6;i++){const x=300+(i%3)*24,y=70+Math.floor(i/3)*24;tgt.O2.push({x:x-5,y},{x:x+5,y})}
-  for(let i=0;i<6;i++){const x=140+i*30,y=184;tgt.Ow.push({x,y});tgt.Hw.push({x:x-7,y:y+6},{x:x+7,y:y+6})}
+  // 目標：1 個葡萄糖分子 C6H12O6（球棍模型，原子由鍵連在一起）、6 個 O2（氧來自水）、6 個 H2O
+  const GX=200,GY=106,RR=17,dir=(deg,d)=>({x:Math.cos(deg*Math.PI/180)*d,y:Math.sin(deg*Math.PI/180)*d}),add=(p,q)=>({x:p.x+q.x,y:p.y+q.y});
+  const ring=[-30,30,90,150,210,270].map(a=>add({x:GX,y:GY},dir(a,RR)));      // ring[0]=環上的 O，ring[1..5]=C1..C5
+  const C6=add(ring[5],dir(240,15));
+  const ohO=[1,2,3,4].map(i=>add(ring[i],dir([30,90,150,210][i-1]+20,15))).concat([add(C6,dir(190,14))]);
+  const ohH=ohO.map((o,i)=>add(o,dir(i<4?[30,90,150,210][i]+20:190,9)));
+  const chH=[1,2,3,4,5].map(i=>add(ring[i],dir(i<5?[30,90,150,210][i-1]-35:310,11)));
+  const c6H=[add(C6,dir(270,10)),add(C6,dir(325,10))];
+  const tgt={C:[ring[1],ring[2],ring[3],ring[4],ring[5],C6],Og:[ring[0],...ohO],Hg:[...ohH,...chH,...c6H],O2:[],Ow:[],Hw:[]};
+  const L=(a,b)=>`<line x1="${a.x.toFixed(1)}" y1="${a.y.toFixed(1)}" x2="${b.x.toFixed(1)}" y2="${b.y.toFixed(1)}" stroke="#2a1a12" stroke-width="2.6" shape-rendering="auto"/>`;
+  let bondG=`<circle cx="${GX-3}" cy="${GY-6}" r="47" fill="#fff8d0" fill-opacity=".75" stroke="#d9a400" stroke-width="2.5" stroke-dasharray="6 4" shape-rendering="auto"/>`;
+  for(let i=0;i<6;i++)bondG+=L(ring[i],ring[(i+1)%6]);
+  bondG+=L(ring[5],C6);[1,2,3,4].forEach((r,i)=>bondG+=L(ring[r],ohO[i]));bondG+=L(C6,ohO[4]);ohO.forEach((o,i)=>bondG+=L(o,ohH[i]));
+  [1,2,3,4,5].forEach((r,i)=>bondG+=L(ring[r],chH[i]));c6H.forEach(h=>bondG+=L(C6,h));
+  let bondO='',bondW='';
+  for(let i=0;i<6;i++){const x=300+(i%3)*30,y=72+Math.floor(i/3)*26;tgt.O2.push({x:x-7,y},{x:x+7,y});bondO+=L({x:x-7,y},{x:x+7,y})}
+  for(let i=0;i<6;i++){const x=160+i*25,y=190;tgt.Ow.push({x,y});tgt.Hw.push({x:x-8,y:y+7},{x:x+8,y:y+7});bondW+=L({x,y},{x:x-8,y:y+7})+L({x,y},{x:x+8,y:y+7})}
   let co2O=atoms.filter(a=>a.mol==='co2'&&a.t==='O'),h2oO=atoms.filter(a=>a.mol==='h2o'&&a.t==='O'),Cs=atoms.filter(a=>a.t==='C'),Hs=atoms.filter(a=>a.t==='H');
   Cs.forEach((a,i)=>a.to=tgt.C[i]);h2oO.forEach((a,i)=>{a.to=tgt.O2[i];a.prod='o2'});co2O.forEach((a,i)=>{if(i<6)a.to=tgt.Og[i];else{a.to=tgt.Ow[i-6];a.prod='w'}});
   Hs.forEach((a,i)=>{if(i<12)a.to=tgt.Hg[i];else{a.to=tgt.Hw[i-12];a.prod='w'}});
@@ -2767,8 +2779,9 @@ function defB23(){
       ${G('sun',40,34,spr(SP.sun,-22,-22,4))}${TT(40,76,'光',14)}
       <g data-k="photons"></g>
       <g data-k="srcl">${TT(48,132,'水（由根部吸收）',12)}${TT(438,14,'二氧化碳',12)}${TT(438,30,'（由氣孔進入）',11)}</g>
+      <g data-k="bg" data-x="0" data-y="0" data-o="0">${bondG}</g><g data-k="bo" data-x="0" data-y="0" data-o="0">${bondO}</g><g data-k="bw" data-x="0" data-y="0" data-o="0">${bondW}</g>
       ${atoms.map(a=>G(a.k,a.src.x,a.src.y,`<circle r="${R[a.t]}" fill="${COL[a.t]}" stroke="${C.k}" stroke-width="1.6" shape-rendering="auto"/>`)).join('')}
-      ${G('lglu',200,170,TT(0,0,'葡萄糖',14),'data-o="0"')}${G('lo2',324,58,TT(0,0,'氧氣',14),'data-o="0"')}${G('lw',318,190,TT(0,0,'水',14),'data-o="0"')}
+      ${G('lglu',197,0,TT(0,164,'1 個葡萄糖分子 C₆H₁₂O₆',13)+TT(0,178,'（6 個碳、12 個氫、6 個氧）',11),'data-o="0"')}${G('lo2',324,58,TT(0,0,'氧氣',14),'data-o="0"')}${G('lw',318,196,TT(0,0,'水',14),'data-o="0"')}
       <g data-k="fate" data-x="0" data-y="0" data-o="0">${TAG(420,124,'細胞直接利用',C.y,{s:12})}${TAG(420,154,'轉換成澱粉儲存',C.c,{s:12})}${TAG(420,184,'形成纖維素',C.l,{s:12})}${AR(240,118,366,124,C.O)}${AR(240,122,360,154,C.O)}${AR(240,126,366,182,C.O)}</g>
       ${G('stoma',440,70,TT(0,-14,'經氣孔釋放',12)+`<rect x="-14" y="-6" width="28" height="10" fill="${C.g}" stroke="${C.k}" stroke-width="2"/>`,'data-o="0"')}
       ${eq}
@@ -2781,10 +2794,11 @@ function defB23(){
     c.text('cap','葉綠素吸收光能');this.eq(c,'eqa',C.y)},
   async waterIn(c){await c.all(atoms.filter(a=>a.mol==='h2o').map((a,i)=>c.wait((a.m)*60).then(()=>c.tw(a.k,{x:a.in.x,y:a.in.y},800))));this.eq(c,'eq1',C.c)},
   async co2In(c){await c.all(atoms.filter(a=>a.mol==='co2').map(a=>c.wait(a.m*80).then(()=>c.tw(a.k,{x:a.in.x,y:a.in.y},800))));this.eq(c,'eq2',C.e)},
-  async scatter(c){c.text('cap','配合酵素的作用，分子拆開……');await c.all(atoms.map((a,i)=>c.wait((i%9)*40).then(()=>c.tw(a.k,{x:a.sc.x,y:a.sc.y},900))))},
+  async scatter(c){c.text('cap','配合酵素的作用，分子拆開……');['bg','bo','bw','lglu','lo2','lw'].forEach(k=>c.set(k,{o:0}));await c.all(atoms.map((a,i)=>c.wait((i%9)*40).then(()=>c.tw(a.k,{x:a.sc.x,y:a.sc.y},900))))},
   async regroup(c){c.text('cap','……原子重新組合！');await c.all(atoms.map((a,i)=>c.wait((i%7)*50).then(()=>c.tw(a.k,{x:a.to.x,y:a.to.y},1100))));
-    await c.all([c.show('lglu'),c.show('lo2'),c.show('lw')]);['eq3','eq4','eq5'].forEach((k,i)=>this.eq(c,k,[C.p,C.y,C.c][i]));c.text('cap','產生氧氣、葡萄糖和水')},
-  async fate(c){await c.show('fate',500);await c.show('stoma',300);c.tw('lo2',{x:440,y:112},1100);
+    await c.all([c.show('bg',400),c.show('bo',400),c.show('bw',400)]);
+    await c.all([c.show('lglu'),c.show('lo2'),c.show('lw')]);await c.pulse('bg',1.06,220);['eq3','eq4','eq5'].forEach((k,i)=>this.eq(c,k,[C.p,C.y,C.c][i]));c.text('cap','產生氧氣、葡萄糖和水')},
+  async fate(c){await c.show('fate',500);await c.show('stoma',300);c.hide('bo',200);c.tw('lo2',{x:440,y:112},1100);
     await c.all(atoms.filter(a=>a.prod==='o2').map((a,i)=>c.wait(Math.floor(i/2)*120).then(()=>c.tw(a.k,{x:a.to.x+120,y:a.to.y-10,o:0},1100))));
     c.text('cap','葡萄糖是植物的主要養分來源')},
   steps:[
@@ -2793,7 +2807,7 @@ function defB23(){
    {t:'水進入',say:'水（H₂O）由根部吸收，經由葉脈送到葉片，進入葉綠體。',run:async c=>{await me.waterIn(c)}},
    {t:'二氧化碳進入',say:'二氧化碳（CO₂）經由氣孔進入葉片，再進入葉綠體。',run:async c=>{await me.co2In(c)}},
    {t:'分子拆開',say:'葉綠素吸收的光能，配合酵素的作用，使水和二氧化碳發生一連串的反應……',run:async c=>{await me.scatter(c)}},
-   {t:'重新組合',say:'原子重新組合，最後產生氧氣、葡萄糖和水。原子的種類和數量都沒有變！',run:async c=>{await me.regroup(c)},hold:2200},
+   {t:'重新組合',say:'原子重新組合：6 個碳、12 個氫、6 個氧連成 1 個葡萄糖分子（C₆H₁₂O₆），另外產生氧氣和水。原子的種類和數量都沒有變，只是重新連接！',run:async c=>{await me.regroup(c)},hold:2200},
    {t:'產物的去向',say:'葡萄糖可供細胞直接利用、轉換成澱粉儲存或形成纖維素；氧氣經由氣孔釋放到空氣中。',run:async c=>{await me.fate(c)},hold:2400},
    {t:'換你試試',free:true,fresh:true,say:'把「光」「水」「二氧化碳」三個圖示都拖進葉綠體，三者齊全才能進行光合作用！',run:async c=>{
      const s=c.state;s.load={sun:0,w:0,c:0};
@@ -3300,8 +3314,8 @@ const MMDATA={
 };
 const MM_LINKS=[
  {a:'2-2',b:'2-4:b2',w:'參與',txt:'酵素 ↔ 消化作用',hint:'消化作用需要誰幫忙分解養分？'},
- {a:'2-3:b1:k2',b:'2-4:b2:k0',w:'都有葡萄糖',txt:'光合作用的產物 ↔ 消化的產物（葡萄糖）',hint:'植物製造的、人體消化後得到的，有哪一種相同的小分子？'},
- {a:'2-2:b0:k0',b:'2-4:b2',w:'屬於',txt:'分解作用 ↔ 消化作用',hint:'消化作用是把大分子變成小分子，屬於哪一種代謝作用？'}
+ {a:'txt:產物：葡萄糖、氧氣、水',b:'txt:澱粉→葡萄糖',w:'都有葡萄糖',txt:'光合作用的產物 ↔ 消化的產物（葡萄糖）',hint:'植物製造的、人體消化後得到的，有哪一種相同的小分子？'},
+ {a:'txt:分解作用（大→小）',b:'2-4:b2',w:'屬於',txt:'分解作用 ↔ 消化作用',hint:'消化作用是把大分子變成小分子，屬於哪一種代謝作用？'}
 ];
 const LINK_WORDS=['參與','促進','產生','屬於','都有葡萄糖','在…作用','檢測'];
 const NW={root:150,b:150,k:220},NH=46,GAP=10;
@@ -3322,7 +3336,7 @@ function mmLayout(scope){
   return {N,E,W,H}
 }
 const MMS={scope:'2-2',sel:null,linkMode:false,adv:false,linkA:null};
-function mmState(scope){return store.get('mm_'+scope,{filled:[],hints:{},wrong:0,custom:[],links:[]})}
+function mmState(scope){const s=store.get('mm_'+scope,{filled:{},hints:{},wrong:0,custom:[],links:[]});if(Array.isArray(s.filled))s.filled={};return s}
 function mmSave(scope,s){store.set('mm_'+scope,s)}
 
 function renderMindmap(scope){
@@ -3357,7 +3371,11 @@ function renderMindmap(scope){
   const canvas=app.querySelector('.mm-canvas'),svg=app.querySelector('.mm-lines'),pop=app.querySelector('.mm-pop');
   const nodeEl=id=>canvas.querySelector(`[data-id="${CSS.escape(id)}"]`);
   const nodeBox=id=>{const n=L.N.find(n=>n.id===id)||S.custom.find(c=>c.id===id);if(!n)return null;return {x:n.x,y:n.y,w:n.w||150,h:n.h||NH}};
-  const filledText=id=>{const n=L.N.find(n=>n.id===id);return n?(n.blank?(S.filled.includes(id)?n.t:null):n.t):(S.custom.find(c=>c.id===id)||{}).t};
+  const filledText=id=>{const n=L.N.find(n=>n.id===id);return n?(n.blank?(S.filled[id]||null):n.t):(S.custom.find(c=>c.id===id)||{}).t};
+  const branchOf=id=>id.replace(/:k\d+$/,'');
+  const branchAns=id=>L.N.filter(n=>n.blank&&branchOf(n.id)===branchOf(id));
+  const usedIn=id=>branchAns(id).map(n=>S.filled[n.id]).filter(Boolean);
+  const refOK=(ref,id)=>ref.startsWith('txt:')?filledText(id)===ref.slice(4):ref===id;
   /* ---- 畫線 ---- */
   function drawLines(){let h='';
     L.E.forEach(([a,b])=>{const A=nodeBox(a),B=nodeBox(b);const x1=A.x+A.w,y1=A.y+A.h/2,x2=B.x,y2=B.y+B.h/2,mx=(x1+x2)/2;
@@ -3376,11 +3394,12 @@ function renderMindmap(scope){
       el.addEventListener('pointerup',()=>{if(d){d=null;mmSave(scope,S)}});
       el.addEventListener('click',()=>nodeClick(n.id))})}
   function refresh(){
-    L.N.filter(n=>n.blank).forEach(n=>{const el=nodeEl(n.id),f=S.filled.includes(n.id);el.classList.toggle('done',f);el.querySelector('.mm-t').textContent=f?n.t:'？';el.querySelector('.mm-hint').hidden=f});
-    app.querySelectorAll('.mm-chip').forEach(c=>{const t=c.dataset.t;const used=L.N.filter(n=>n.blank&&n.t===t&&S.filled.includes(n.id)).length,need=L.N.filter(n=>n.blank&&n.t===t).length;c.hidden=need>0&&used>=need});
-    const reqOK=MM_LINKS.map(r=>scope==='all'&&S.links.some(l=>(l.a===r.a&&l.b===r.b)||(l.a===r.b&&l.b===r.a)));
+    L.N.filter(n=>n.blank).forEach(n=>{const el=nodeEl(n.id),f=S.filled[n.id];el.classList.toggle('done',!!f);el.querySelector('.mm-t').textContent=f||'？';el.querySelector('.mm-hint').hidden=!!f});
+    const placed=Object.values(S.filled);
+    app.querySelectorAll('.mm-chip').forEach(c=>{const t=c.dataset.t;const used=placed.filter(x=>x===t).length,need=L.N.filter(n=>n.blank&&n.t===t).length;c.hidden=need>0&&used>=need});
+    const reqOK=MM_LINKS.map(r=>scope==='all'&&S.links.some(l=>(refOK(r.a,l.a)&&refOK(r.b,l.b))||(refOK(r.a,l.b)&&refOK(r.b,l.a))));
     app.querySelectorAll('.mm-req li').forEach((li,i)=>{li.classList.toggle('ok',reqOK[i]);li.querySelector('.ck').textContent=reqOK[i]?'✔':'□'});
-    const total=blanks.length+(scope==='all'?MM_LINKS.length:0),done=S.filled.length+reqOK.filter(Boolean).length,pct=Math.round(done/total*100);
+    const total=blanks.length+(scope==='all'?MM_LINKS.length:0),done=placed.length+reqOK.filter(Boolean).length,pct=Math.round(done/total*100);
     app.querySelector('.mm-prog i').style.width=pct+'%';app.querySelector('.mm-pct').textContent=pct+'%';
     app.querySelector('.mm-h').textContent=Object.values(S.hints).reduce((a,b)=>a+b,0);app.querySelector('.mm-w').textContent=S.wrong||0;
     canvas.querySelectorAll('.mm-node').forEach(el=>el.classList.toggle('pickA',MMS.linkA===el.dataset.id));
@@ -3388,9 +3407,10 @@ function renderMindmap(scope){
     if(pct===100&&!S.cleared){S.cleared=true;mmSave(scope,S);SFX.stage();toast('★ 心智圖完成！可以匯出 PNG 當複習筆記')}
   }
   /* ---- 放詞卡 ---- */
-  function tryPlace(id,text,chip){const n=L.N.find(n=>n.id===id);if(!n||!n.blank||S.filled.includes(id))return;
+  function tryPlace(id,text,chip){const n=L.N.find(n=>n.id===id);if(!n||!n.blank||S.filled[id])return;
     const el=nodeEl(id);
-    if(text===n.t){S.filled.push(id);mmSave(scope,S);SFX.coin();el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),400);MMS.sel=null;refresh()}
+    // 同一分支中的答案可放在任一空格
+    if(branchAns(id).some(b=>b.t===text)&&!usedIn(id).includes(text)){S.filled[id]=text;mmSave(scope,S);SFX.coin();el.classList.add('pop');setTimeout(()=>el.classList.remove('pop'),400);MMS.sel=null;refresh()}
     else{S.wrong=(S.wrong||0)+1;mmSave(scope,S);SFX.lock();el.classList.add('shake');chip&&chip.classList.add('shake');setTimeout(()=>{el.classList.remove('shake');chip&&chip.classList.remove('shake')},450);refresh()}}
   app.querySelectorAll('.mm-chip').forEach(c=>{
     c.addEventListener('click',()=>{MMS.sel=MMS.sel===c?null:c;app.querySelectorAll('.mm-chip').forEach(x=>x.classList.toggle('pick',x===MMS.sel));SFX.tap()});
@@ -3400,9 +3420,9 @@ function renderMindmap(scope){
         const el=document.elementFromPoint(ev.clientX,ev.clientY),nd=el&&el.closest('.mm-node.blank');if(nd)tryPlace(nd.dataset.id,c.dataset.t,c);else{c.classList.add('shake');setTimeout(()=>c.classList.remove('shake'),450)}};
       document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up)})});
   /* ---- 線索 ---- */
-  function showHint(id){const n=L.N.find(n=>n.id===id);const lv=Math.min(3,(S.hints[id]||0)+1);S.hints[id]=lv;mmSave(scope,S);SFX.tap();
+  function showHint(id){const slot=L.N.find(n=>n.id===id);const used=usedIn(id);const n=used.includes(slot.t)?(branchAns(id).find(b=>!used.includes(b.t))||slot):slot;const lv=Math.min(3,(S.hints[id]||0)+1);S.hints[id]=lv;mmSave(scope,S);SFX.tap();
     const [u,i]=n.data.link.split(':').slice(1);const card=UNITS[u].cards[+i-1];
-    pop.hidden=false;pop.style.left=Math.min(n.x,canvas.offsetWidth-260)+'px';pop.style.top=(n.y+NH+6)+'px';
+    pop.hidden=false;pop.style.left=Math.min(slot.x,canvas.offsetWidth-260)+'px';pop.style.top=(slot.y+NH+6)+'px';
     pop.innerHTML=`<b>💡 線索 ${lv}／3</b><div>${esc(n.data.h[0])}</div>${lv>=2?`<div class="h2">提示：${esc(n.data.h[1])}</div>`:''}${lv>=3?`<button class="mini" data-card="${u}:${+i-1}">📖 看概念卡：${esc(card.t)}</button>`:''}
       <div class="pop-btn">${lv<3?'<button class="mini" data-more>再給一個線索</button>':''}<button class="mini" data-close>關閉</button></div>`;
     bindLinks(pop);const m=pop.querySelector('[data-more]');if(m)m.onclick=()=>showHint(id);pop.querySelector('[data-close]').onclick=()=>pop.hidden=true;refresh()}
@@ -3415,7 +3435,7 @@ function renderMindmap(scope){
       pop.hidden=false;pop.style.left=Math.min(bx.x,canvas.offsetWidth-260)+'px';pop.style.top=(bx.y+NH+6)+'px';
       pop.innerHTML=`<b>選一個連結詞</b><div class="lw">${LINK_WORDS.map(w=>`<button class="mini" data-w="${esc(w)}">${esc(w)}</button>`).join('')}</div><div class="pop-btn"><input class="mm-lw" maxlength="8" placeholder="自訂連結詞"><button class="mini" data-ok>確定</button><button class="mini" data-close>取消</button></div>`;
       const mk=w=>{if(!w)return;S.links.push({a,b,w});mmSave(scope,S);pop.hidden=true;SFX.coin();
-        const r=MM_LINKS.find(r=>(r.a===a&&r.b===b)||(r.a===b&&r.b===a));if(scope==='all'&&r)toast(`✔ 完成跨單元連結：${r.txt}`);refresh()};
+        const r=MM_LINKS.find(r=>(refOK(r.a,a)&&refOK(r.b,b))||(refOK(r.a,b)&&refOK(r.b,a)));if(scope==='all'&&r)toast(`✔ 完成跨單元連結：${r.txt}`);refresh()};
       pop.querySelectorAll('[data-w]').forEach(x=>x.onclick=()=>mk(x.dataset.w));pop.querySelector('[data-ok]').onclick=()=>mk(pop.querySelector('.mm-lw').value.trim());pop.querySelector('[data-close]').onclick=()=>{pop.hidden=true;refresh()};
       refresh();return}
     const n=L.N.find(n=>n.id===id);if(n&&n.blank&&MMS.sel)tryPlace(id,MMS.sel.dataset.t,MMS.sel)}
@@ -3428,7 +3448,7 @@ function renderMindmap(scope){
   if(T('add'))T('add').onclick=()=>{const inp=app.querySelector('.mm-in'),t=inp.value.trim();if(!t){toast('請先輸入節點文字');return}
     const sc=app.querySelector('.mm-scroll');S.custom.push({id:'c'+Date.now(),t,x:sc.scrollLeft+40,y:sc.scrollTop+40,w:Math.max(110,[...t].length*17+36)});inp.value='';mmSave(scope,S);SFX.coin();refresh()};
   T('reset').onclick=()=>{if(T('reset').dataset.c!=='1'){T('reset').dataset.c='1';T('reset').textContent='再按一次確定重來';setTimeout(()=>{T('reset').dataset.c='';T('reset').textContent='↺ 重來'},2500);return}
-    mmSave(scope,{filled:[],hints:{},wrong:0,custom:[],links:[]});renderMindmap(scope)};
+    mmSave(scope,{filled:{},hints:{},wrong:0,custom:[],links:[]});renderMindmap(scope)};
   T('png').onclick=()=>mmExport(scope,L,S,nodeBox);
   app.querySelectorAll('[data-lh]').forEach(b=>b.onclick=()=>{const s=b.nextElementSibling;s.hidden=!s.hidden});
   refresh();
@@ -3447,7 +3467,7 @@ function mmExport(scope,L,S,nodeBox){
   const wrap=(t,x,y,w,size)=>{g.font=`900 ${size}px "Noto Sans TC","Microsoft JhengHei",sans-serif`;const ch=[...t];let lines=[''];ch.forEach(c=>{if(g.measureText(lines[lines.length-1]+c).width>w-14)lines.push('');lines[lines.length-1]+=c});
     lines.forEach((l,i)=>g.fillText(l,x+w/2,y+(i-(lines.length-1)/2)*(size+2)))};
   const box=(n,fill,txt)=>{g.fillStyle=fill;g.fillRect(n.x,n.y,n.w,n.h);g.lineWidth=3;g.strokeStyle='#2a1a12';g.strokeRect(n.x,n.y,n.w,n.h);g.fillStyle=fill==='#2a1a12'?'#fff':'#2a1a12';g.textAlign='center';g.textBaseline='middle';wrap(txt,n.x,n.y+n.h/2,n.w,n.lv==='root'||n.lv==='top'?17:14)};
-  L.N.forEach(n=>{if(n.blank){const f=S.filled.includes(n.id);box(n,f?'#c9eda0':'#ffffff',f?n.t:'？')}else box(n,n.lv==='b'?'#fff3d6':n.col,n.t)});
+  L.N.forEach(n=>{if(n.blank){const f=S.filled[n.id];box(n,f?'#c9eda0':'#ffffff',f||'？')}else box(n,n.lv==='b'?'#fff3d6':n.col,n.t)});
   S.custom.forEach(n=>box({...n,w:n.w||150,h:NH},'#e6dcff',n.t));
   g.setLineDash([8,5]);g.strokeStyle='#6b4fbf';
   S.links.forEach(l=>{const A=nodeBox(l.a),B=nodeBox(l.b);if(!A||!B)return;const p1={x:A.x+A.w/2,y:A.y+A.h/2},p2={x:B.x+B.w/2,y:B.y+B.h/2},cx=Math.min(p1.x,p2.x)-60,cy=(p1.y+p2.y)/2;
