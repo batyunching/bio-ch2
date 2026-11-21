@@ -81,7 +81,7 @@
   ],
   "answer": 2,
   "explain": "1 公克的醣類或蛋白質可產生 4 大卡，1 公克的脂質可產生 9 大卡。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
@@ -98,7 +98,7 @@
   ],
   "answer": 1,
   "explain": "1 公克的醣類或蛋白質可產生 4 大卡熱量。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
@@ -115,7 +115,7 @@
   ],
   "answer": 2,
   "explain": "1000 卡熱量等於 1 大卡熱量。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
@@ -132,7 +132,7 @@
   ],
   "answer": 0,
   "explain": "黃褐色的碘液遇澱粉會變成藍黑色或紫紅色。",
-  "link": "card:2-1:8",
+  "link": "card:2-1:7",
   "bingo": true
  },
  {
@@ -166,7 +166,7 @@
   ],
   "answer": 1,
   "explain": "淺藍色的本氏液加入葡萄糖溶液後加熱，會出現綠、黃、橙、紅等顏色變化。",
-  "link": "card:2-1:8",
+  "link": "card:2-1:7",
   "bingo": true
  },
  {
@@ -183,7 +183,7 @@
   ],
   "answer": 1,
   "explain": "鈣質是組成人體骨骼和牙齒的重要成分。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -200,7 +200,7 @@
   ],
   "answer": 1,
   "explain": "鐵質會影響紅血球的製造與功能。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -217,7 +217,7 @@
   ],
   "answer": 0,
   "explain": "維生素 A 和眼睛保健有關；維生素 C 可增加身體的復原力和抵抗力。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -234,7 +234,7 @@
   ],
   "answer": 1,
   "explain": "蛋白質是構成人體肌肉與頭髮的主要成分。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
@@ -251,7 +251,7 @@
   ],
   "answer": 0,
   "explain": "纖維素是醣類的一種，可組成植物細胞的細胞壁。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
@@ -266,7 +266,7 @@
   ],
   "answer": 0,
   "explain": "水在生物體內的含量很多，能協助代謝或其他反應的進行。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -296,7 +296,7 @@
   ],
   "answer": 0,
   "explain": "皮下脂肪能防止熱量散失，達到身體保溫的功能。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
@@ -333,21 +333,6 @@
   "id": "q2121",
   "unit": "2-1",
   "type": "tf",
-  "level": "基礎",
-  "stem": "「醣」是碳水化合物的通稱，嚐起來不一定有甜味。",
-  "options": [
-   "正確",
-   "錯誤"
-  ],
-  "answer": 0,
-  "explain": "「糖」通常吃起來有甜味；「醣」是所有含糖食物的通稱，也就是碳水化合物，不一定有甜味。",
-  "link": "card:2-1:4",
-  "bingo": true
- },
- {
-  "id": "q2122",
-  "unit": "2-1",
-  "type": "tf",
   "level": "進階",
   "stem": "人體可以直接分解纖維素而產生能量。",
   "options": [
@@ -356,11 +341,11 @@
   ],
   "answer": 1,
   "explain": "纖維素雖屬醣類，但人體無法直接分解而產生能量；適當攝取可促進腸胃蠕動、維持腸道健康。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
-  "id": "q2123",
+  "id": "q2122",
   "unit": "2-1",
   "type": "tf",
   "level": "進階",
@@ -375,7 +360,7 @@
   "bingo": true
  },
  {
-  "id": "q2124",
+  "id": "q2123",
   "unit": "2-1",
   "type": "match",
   "level": "基礎",
@@ -401,11 +386,11 @@
    3
   ],
   "explain": "鈣→骨骼牙齒；鐵→紅血球；維生素 A→眼睛；維生素 C→復原力和抵抗力。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": false
  },
  {
-  "id": "q2125",
+  "id": "q2124",
   "unit": "2-1",
   "type": "match",
   "level": "基礎",
@@ -435,7 +420,7 @@
   "bingo": false
  },
  {
-  "id": "q2126",
+  "id": "q2125",
   "unit": "2-1",
   "type": "fill",
   "level": "基礎",
@@ -461,7 +446,7 @@
   "bingo": false
  },
  {
-  "id": "q2127",
+  "id": "q2126",
   "unit": "2-1",
   "type": "fill",
   "level": "基礎",
@@ -487,7 +472,7 @@
   "bingo": false
  },
  {
-  "id": "q2128",
+  "id": "q2127",
   "unit": "2-1",
   "type": "fill",
   "level": "進階",
@@ -513,7 +498,7 @@
   "bingo": false
  },
  {
-  "id": "q2129",
+  "id": "q2128",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -530,7 +515,7 @@
   "bingo": true
  },
  {
-  "id": "q2130",
+  "id": "q2129",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -547,7 +532,7 @@
   "bingo": true
  },
  {
-  "id": "q2131",
+  "id": "q2130",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -560,11 +545,11 @@
   ],
   "answer": 0,
   "explain": "大卡是熱量單位，只表示能產生的能量較高；是否較營養要看所含的養分種類，也不一定是脂質較多，和溫度無關。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
-  "id": "q2132",
+  "id": "q2131",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -581,7 +566,7 @@
   "bingo": true
  },
  {
-  "id": "q2133",
+  "id": "q2132",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -598,7 +583,7 @@
   "bingo": true
  },
  {
-  "id": "q2134",
+  "id": "q2133",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -615,7 +600,7 @@
   "bingo": true
  },
  {
-  "id": "q2135",
+  "id": "q2134",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -632,7 +617,7 @@
   "bingo": true
  },
  {
-  "id": "q2136",
+  "id": "q2135",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -649,7 +634,7 @@
   "bingo": true
  },
  {
-  "id": "q2137",
+  "id": "q2136",
   "unit": "2-1",
   "type": "single",
   "level": "會考",
@@ -666,7 +651,7 @@
   "bingo": true
  },
  {
-  "id": "q2138",
+  "id": "q2137",
   "unit": "2-1",
   "type": "single",
   "level": "會考",

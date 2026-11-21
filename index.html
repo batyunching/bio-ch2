@@ -668,7 +668,7 @@ function leafSection(hl){
    ========================================================= */
 const UNITS={
 '2-1':{name:'食物中的養分',stage:'營養市集',pages:'課本 p.66–69',guide:'riceball',color:'#2f86c9',
- hello:'歡迎來到營養市集！我是飯糰小米。打開 8 張概念卡，看看食物裡藏了哪些養分！',
+ hello:'歡迎來到營養市集！我是飯糰小米。打開 7 張概念卡，看看食物裡藏了哪些養分！',
  cards:[
  {t:'養分的功用',pg:'p.66',cap:'養分是生物體維持生命現象的必需條件之一',
   pts:['養分是生物體維持生命現象的必需條件之一。','有些種類的養分可以產生能量。','有些可以組成生物體內的構造。','有些則與代謝作用的調節有關。'],
@@ -691,13 +691,6 @@ const UNITS={
     BX(102,4,94,56,'#ffe4ea')+S('fish',106,16,3)+S('egg',150,10,3)+S('meat',170,24,2.4)+T(149,56,'蛋白質',{s:8,b:1})+
     BX(4,64,94,57,'#fff8d8')+S('oil',36,68,3.4)+T(51,117,'脂質',{s:8,b:1})+
     BX(102,64,94,57,'#eaf8e0')+S('veg',110,72,3)+S('apple',148,72,3)+T(149,117,'礦物質、維生素',{s:8,b:1}),'食物與它們主要的養分')},
- {t:'醣類的種類',pg:'p.66 補充',cap:'「醣」是所有含糖食物的通稱，也就是碳水化合物',
-  pts:['「糖」通常吃起來有甜味；「醣」是所有含糖食物的通稱，也就是「碳水化合物」，嚐起來不一定有甜味。','多醣類：澱粉、纖維素、肝醣，都是由許多葡萄糖組成。','雙醣類：蔗糖（葡萄糖＋果糖）、乳糖（葡萄糖＋半乳糖）、麥芽糖（葡萄糖＋葡萄糖）。','單醣類：葡萄糖、果糖、半乳糖。','同一類養分會以不同的形式存在食物中。'],
-  q:'澱粉吃起來沒什麼甜味，為什麼也屬於醣類？',a:'「醣」是碳水化合物的通稱，不一定有甜味；澱粉是由許多葡萄糖組成的多醣。',
-  svg:()=>SV(TAG(30,16,'多醣類',C.y)+chain(60,11,9,C.y,10,2)+T(115,36,'澱粉、纖維素、肝醣',{s:7.5})+
-    TAG(30,58,'雙醣類',C.o)+CIR(66,58,6,C.y)+`<rect x="72" y="56" width="6" height="4" fill="${C.k}"/>`+CIR(84,58,6,C.p)+T(150,62,'蔗糖、乳糖、麥芽糖',{s:7.5})+
-    TAG(30,94,'單醣類',C.p)+CIR(66,94,6,C.y)+T(150,98,'葡萄糖、果糖、半乳糖',{s:7.5})+
-    BX(6,108,188,14,'#fff4c2',{sw:1.5})+T(100,118,'○ 代表一個小分子醣類（如葡萄糖）',{s:7.5}),'多醣、雙醣、單醣示意')},
  {t:'組成生物體的構造',pg:'p.67',cap:'醣類、蛋白質與脂質也是組成生物體構造的主要原料',
   pts:['纖維素（醣類的一種）可組成植物細胞的細胞壁。','蛋白質是構成人體肌肉與頭髮的主要成分。','分布於皮膚下層的脂肪，具有防止熱量散失、達到身體保溫的功能。','知識便利貼：人體無法直接分解纖維素而產生能量，但適當攝取纖維素可促進腸胃蠕動，維持腸道健康。'],
   q:'冬天時，皮膚下層的脂肪對身體有什麼幫助？',a:'可以防止熱量散失，達到身體保溫的功能。',
@@ -1293,7 +1286,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 2,
   "explain": "1 公克的醣類或蛋白質可產生 4 大卡，1 公克的脂質可產生 9 大卡。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
@@ -1310,7 +1303,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 1,
   "explain": "1 公克的醣類或蛋白質可產生 4 大卡熱量。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
@@ -1327,7 +1320,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 2,
   "explain": "1000 卡熱量等於 1 大卡熱量。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
@@ -1344,7 +1337,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 0,
   "explain": "黃褐色的碘液遇澱粉會變成藍黑色或紫紅色。",
-  "link": "card:2-1:8",
+  "link": "card:2-1:7",
   "bingo": true
  },
  {
@@ -1378,7 +1371,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 1,
   "explain": "淺藍色的本氏液加入葡萄糖溶液後加熱，會出現綠、黃、橙、紅等顏色變化。",
-  "link": "card:2-1:8",
+  "link": "card:2-1:7",
   "bingo": true
  },
  {
@@ -1395,7 +1388,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 1,
   "explain": "鈣質是組成人體骨骼和牙齒的重要成分。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -1412,7 +1405,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 1,
   "explain": "鐵質會影響紅血球的製造與功能。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -1429,7 +1422,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 0,
   "explain": "維生素 A 和眼睛保健有關；維生素 C 可增加身體的復原力和抵抗力。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -1446,7 +1439,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 1,
   "explain": "蛋白質是構成人體肌肉與頭髮的主要成分。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
@@ -1463,7 +1456,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 0,
   "explain": "纖維素是醣類的一種，可組成植物細胞的細胞壁。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
@@ -1478,7 +1471,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 0,
   "explain": "水在生物體內的含量很多，能協助代謝或其他反應的進行。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": true
  },
  {
@@ -1508,7 +1501,7 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 0,
   "explain": "皮下脂肪能防止熱量散失，達到身體保溫的功能。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
@@ -1545,21 +1538,6 @@ window.addEventListener('DOMContentLoaded',route);
   "id": "q2121",
   "unit": "2-1",
   "type": "tf",
-  "level": "基礎",
-  "stem": "「醣」是碳水化合物的通稱，嚐起來不一定有甜味。",
-  "options": [
-   "正確",
-   "錯誤"
-  ],
-  "answer": 0,
-  "explain": "「糖」通常吃起來有甜味；「醣」是所有含糖食物的通稱，也就是碳水化合物，不一定有甜味。",
-  "link": "card:2-1:4",
-  "bingo": true
- },
- {
-  "id": "q2122",
-  "unit": "2-1",
-  "type": "tf",
   "level": "進階",
   "stem": "人體可以直接分解纖維素而產生能量。",
   "options": [
@@ -1568,11 +1546,11 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 1,
   "explain": "纖維素雖屬醣類，但人體無法直接分解而產生能量；適當攝取可促進腸胃蠕動、維持腸道健康。",
-  "link": "card:2-1:5",
+  "link": "card:2-1:4",
   "bingo": true
  },
  {
-  "id": "q2123",
+  "id": "q2122",
   "unit": "2-1",
   "type": "tf",
   "level": "進階",
@@ -1587,7 +1565,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2124",
+  "id": "q2123",
   "unit": "2-1",
   "type": "match",
   "level": "基礎",
@@ -1613,11 +1591,11 @@ window.addEventListener('DOMContentLoaded',route);
    3
   ],
   "explain": "鈣→骨骼牙齒；鐵→紅血球；維生素 A→眼睛；維生素 C→復原力和抵抗力。",
-  "link": "card:2-1:6",
+  "link": "card:2-1:5",
   "bingo": false
  },
  {
-  "id": "q2125",
+  "id": "q2124",
   "unit": "2-1",
   "type": "match",
   "level": "基礎",
@@ -1647,7 +1625,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": false
  },
  {
-  "id": "q2126",
+  "id": "q2125",
   "unit": "2-1",
   "type": "fill",
   "level": "基礎",
@@ -1673,7 +1651,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": false
  },
  {
-  "id": "q2127",
+  "id": "q2126",
   "unit": "2-1",
   "type": "fill",
   "level": "基礎",
@@ -1699,7 +1677,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": false
  },
  {
-  "id": "q2128",
+  "id": "q2127",
   "unit": "2-1",
   "type": "fill",
   "level": "進階",
@@ -1725,7 +1703,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": false
  },
  {
-  "id": "q2129",
+  "id": "q2128",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1742,7 +1720,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2130",
+  "id": "q2129",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1759,7 +1737,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2131",
+  "id": "q2130",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1772,11 +1750,11 @@ window.addEventListener('DOMContentLoaded',route);
   ],
   "answer": 0,
   "explain": "大卡是熱量單位，只表示能產生的能量較高；是否較營養要看所含的養分種類，也不一定是脂質較多，和溫度無關。",
-  "link": "card:2-1:7",
+  "link": "card:2-1:6",
   "bingo": true
  },
  {
-  "id": "q2132",
+  "id": "q2131",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1793,7 +1771,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2133",
+  "id": "q2132",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1810,7 +1788,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2134",
+  "id": "q2133",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1827,7 +1805,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2135",
+  "id": "q2134",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1844,7 +1822,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2136",
+  "id": "q2135",
   "unit": "2-1",
   "type": "single",
   "level": "進階",
@@ -1861,7 +1839,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2137",
+  "id": "q2136",
   "unit": "2-1",
   "type": "single",
   "level": "會考",
@@ -1878,7 +1856,7 @@ window.addEventListener('DOMContentLoaded',route);
   "bingo": true
  },
  {
-  "id": "q2138",
+  "id": "q2137",
   "unit": "2-1",
   "type": "single",
   "level": "會考",
@@ -5064,9 +5042,9 @@ const B_=(a,h1,h2,link)=>({a,h:[h1,h2],link});
 const MMDATA={
  '2-1':{root:'食物中的養分',col:'#2f86c9',branches:[
    {t:'可產生能量',kids:[B_('醣類（碳水化合物）','米飯、麵粉類食品含有較高比例的哪一類養分？','醣類（碳＿＿＿＿）','card:2-1:2'),B_('蛋白質','海鮮、肉類和蛋類富含哪一類養分？','蛋＿＿','card:2-1:3'),B_('脂質','食用油中含量高的是哪一類養分？','脂＿','card:2-1:3')]},
-   {t:'無法產生能量',kids:[B_('礦物質','鈣質、鐵質屬於哪一類養分？','礦＿＿','card:2-1:6'),B_('維生素','維生素 A、C 屬於哪一類養分？','維＿＿','card:2-1:6'),B_('水','在生物體內含量很多、能協助代謝的是？','＿（能協助代謝）','card:2-1:6')]},
-   {t:'食物中的熱量',kids:[B_('1 公克醣類、蛋白質：4 大卡','1 公克的醣類或蛋白質可產生幾大卡？','1 公克醣類、蛋白質：＿ 大卡','card:2-1:7'),B_('1 公克脂質：9 大卡','1 公克的脂質可產生幾大卡？','1 公克脂質：＿ 大卡','card:2-1:7'),B_('1000 卡＝1 大卡','卡和大卡怎麼換算？','＿＿＿＿ 卡＝1 大卡','card:2-1:7')]},
-   {t:'實驗 2-1 檢測',kids:[B_('碘液：澱粉呈藍黑色或紫紅色','用什麼試劑檢測澱粉？會變成什麼顏色？','碘液：澱粉呈藍＿色或紫＿色','card:2-1:8'),B_('本氏液：糖加熱呈綠黃橙紅','用什麼試劑檢測葡萄糖？要怎麼做？','本氏液：糖加＿呈綠黃橙紅','card:2-1:8')]}],
+   {t:'無法產生能量',kids:[B_('礦物質','鈣質、鐵質屬於哪一類養分？','礦＿＿','card:2-1:5'),B_('維生素','維生素 A、C 屬於哪一類養分？','維＿＿','card:2-1:5'),B_('水','在生物體內含量很多、能協助代謝的是？','＿（能協助代謝）','card:2-1:5')]},
+   {t:'食物中的熱量',kids:[B_('1 公克醣類、蛋白質：4 大卡','1 公克的醣類或蛋白質可產生幾大卡？','1 公克醣類、蛋白質：＿ 大卡','card:2-1:6'),B_('1 公克脂質：9 大卡','1 公克的脂質可產生幾大卡？','1 公克脂質：＿ 大卡','card:2-1:6'),B_('1000 卡＝1 大卡','卡和大卡怎麼換算？','＿＿＿＿ 卡＝1 大卡','card:2-1:6')]},
+   {t:'實驗 2-1 檢測',kids:[B_('碘液：澱粉呈藍黑色或紫紅色','用什麼試劑檢測澱粉？會變成什麼顏色？','碘液：澱粉呈藍＿色或紫＿色','card:2-1:7'),B_('本氏液：糖加熱呈綠黃橙紅','用什麼試劑檢測葡萄糖？要怎麼做？','本氏液：糖加＿呈綠黃橙紅','card:2-1:7')]}],
    distract:['1 公克維生素：4 大卡','碘液：葡萄糖呈藍黑色','水可以產生能量']},
  '2-2':{root:'酵素',col:'#f07f24',branches:[
    {t:'代謝作用',kids:[B_('分解作用（大→小）','大分子轉變成小分子，叫做什麼作用？','分＿＿＿（大→小）','card:2-2:2'),B_('合成作用（小→大）','小分子結合成大分子，叫做什麼作用？','合＿＿＿（小→大）','card:2-2:2')]},
