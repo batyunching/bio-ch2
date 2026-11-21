@@ -248,6 +248,19 @@ body:has(.td-modal) #viewer{z-index:2100}
 .vfoot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:12px 18px 18px;border-top:4px solid var(--ink);background:var(--paper2)}
 .vfoot .mid{display:flex;gap:10px;flex-wrap:wrap}
 .collect.got{background:var(--gold);color:var(--ink);text-shadow:none}
+/* 概念卡自我檢核 */
+.vbody.ck-body{display:block}
+.vfoot[hidden]{display:none}
+.ck{max-width:920px;margin:0 auto}
+.ck-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--px);font-size:22px;margin-bottom:12px}
+.ck-dots{display:flex;gap:6px}.ck-dots i{width:18px;height:18px;border:3px solid var(--ink);background:#fff}.ck-dots i.d{background:var(--accent)}.ck-dots i.c{background:var(--gold)}
+.ck-score{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 18px;border:4px solid var(--ink);font-size:20px;font-weight:700}
+.ck-score b{font-size:36px}.ck-score.ok{background:#e4f7da;color:#1f6f34}.ck-score.no{background:#ffe6ec;color:#b0244f}
+.ck-tip{font-size:16px;color:var(--ink2)}
+.ck-act{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-top:14px}
+body.teacher .ck-head{font-size:clamp(24px,2vw,36px)}
+body.teacher .ck .q-stem{font-size:clamp(24px,2vw,38px)}
+body.teacher .ck .q-opt,body.teacher .ck .q-exp,body.teacher .ck .q-ans{font-size:clamp(20px,1.6vw,30px)}
 @media (max-width:900px){.vbody{grid-template-columns:1fr}.points li{font-size:18px}}
 
 /* ===== 老師模式：大字、逐點顯示、隱藏解答 ===== */
@@ -1030,7 +1043,7 @@ function renderHome(){
     <div>
     <h3>▶ 遊戲說明</h3>
     <ul>
-      <li><b>學生模式</b>：點開概念卡閱讀，回答「想一想」小提問；看懂後按「我看懂了」收集金幣。進度會存在這台平板（或電腦）上。</li>
+      <li><b>學生模式</b>：點開概念卡閱讀，回答「想一想」小提問；看懂後按「我看懂了」，完成 3 題自我檢核，全部答對才拿到金幣。進度會存在這台平板（或電腦）上。</li>
       <li><b>老師模式</b>：大字投影、重點逐點顯示、解答預設隱藏。可用鍵盤 <span class="keys"><kbd>→</kbd>／<kbd>空白鍵</kbd> 下一點、<kbd>←</kbd> 上一點、<kbd>PgDn</kbd>／<kbd>PgUp</kbd> 換卡、<kbd>Esc</kbd> 關閉</span>。</li>
       <li><b>互動動畫</b>：每段都有播放、暫停、上一步、下一步、重播與速度控制，最後一步「換你試試」可以自己動手操作。</li>
       <li><b>即時練習</b>：每單元隨機 10 題、全章綜合挑戰 20 題，答錯的題目會自動收進錯題本。</li>
@@ -1101,17 +1114,51 @@ function renderUnit(u,tab,sub){
 }
 
 /* ---- 概念卡檢視器 ---- */
-const V={u:null,i:0,step:0};
+const V={u:null,i:0,step:0,ck:null};
+/* ---- 概念卡自我檢核：每張卡 3 題，全部答對才拿到金幣 ---- */
+let CHK=[];
+const CKLOG={get:()=>store.get('check',{}),set:v=>store.set('check',v)};
+function ckShuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function ckItems(c){return CHK.filter(q=>q.link==='card:'+c.unit+':'+(c.idx+1))}
+function ckStart(){const c=UNITS[V.u].cards[V.i];
+  const qs=ckShuffle(ckItems(c)).map(q=>{if(q.type==='tf')return {...q,ord:[0,1]};const ord=ckShuffle(q.options.map((_,k)=>k));return {...q,ord}});
+  V.ck={qs,k:0,pick:null,right:0,miss:[]};SFX.open();drawViewer()}
+function ckPick(n){const C=V.ck,q=C.qs[C.k];if(C.pick!=null)return;C.pick=n;
+  if(n===q.answer){C.right++;SFX.next()}else{C.miss.push(q.id);SFX.lock()}
+  drawViewer()}
+function ckNext(){const C=V.ck;C.k++;C.pick=null;
+  if(C.k>=C.qs.length){const c=UNITS[V.u].cards[V.i],pass=C.right===C.qs.length,L=CKLOG.get(),r=L[c.id]||{n:0};
+    r.n++;r.t=Date.now();r.last=C.right+'/'+C.qs.length;if(pass&&!r.pass)r.pass=Date.now();if(!pass)r.miss=C.miss;L[c.id]=r;CKLOG.set(L);
+    C.done=true;C.pass=pass;C.fresh=false;
+    if(pass&&mode!=='teacher'&&!coins[c.id]){coins[c.id]=true;store.set('coins',coins);C.fresh=true;SFX.coin();refreshHud();
+      if(unitCoins(V.u)===UNITS[V.u].cards.length)setTimeout(()=>{SFX.stage();toast(`★ ${UNITS[V.u].stage} 金幣全部收集完成！`)},700)}
+    else if(!pass)SFX.lock()}
+  drawViewer()}
+function ckHtml(c){const C=V.ck,n=C.qs.length,teach=mode==='teacher';
+  if(C.done){return `<div class="ck"><div class="ck-head">✎ 自我檢核結果</div>
+    <div class="ck-score ${C.pass?'ok':'no'}"><b class="px">${C.right} / ${n}</b>${C.pass
+      ?(teach?'全部答對！':(C.fresh?'全部答對！拿到一枚金幣 ★':'全部答對！這張卡的概念你真的懂了 ★'))
+      :'還差一點！回去再讀一次重點，再來挑戰。'}</div>
+    ${C.pass?'':`<p class="ck-tip">要 3 題全部答對才能拿到金幣。答錯的題目已經顯示說明，重新挑戰時題目和選項順序會打亂。</p>`}
+    <div class="ck-act">${C.pass?'':'<button class="pbtn gold" id="ckRead">◀ 回去重讀重點</button><button class="pbtn" id="ckAgain">再挑戰一次</button>'}
+      ${C.pass?`<button class="pbtn ghost" id="ckRead">回到概念卡</button>${V.i<UNITS[V.u].cards.length-1?'<button class="pbtn gold" id="ckGo">下一張卡 ▶</button>':''}`:''}</div></div>`}
+  const q=C.qs[C.k],L='ABCD',lock=C.pick!=null,ok=C.pick===q.answer;
+  return `<div class="ck"><div class="ck-head">✎ 自我檢核　第 ${C.k+1} / ${n} 題<span class="ck-dots">${C.qs.map((_,k)=>`<i class="${k<C.k?'d':''} ${k===C.k?'c':''}"></i>`).join('')}</span></div>
+    <div class="q-card"><div class="q-stem">${q.type==='tf'?'是非題：':''}${esc(q.stem)}</div>
+    <div class="q-opts ${q.type==='tf'?'tf':''}">${q.ord.map((oi,k)=>`<button class="q-opt ${lock?'lock':''} ${lock&&oi===q.answer?'right':''} ${lock&&oi===C.pick&&!ok?'wrong':''}" data-ck="${oi}"><span class="q-l">${q.type==='tf'?(oi?'✕':'○'):L[k]}</span><span>${esc(q.options[oi])}</span></button>`).join('')}</div>
+    ${lock?`<div class="q-fb ${ok?'ok':'no'}"><div class="q-res">${ok?'○ 答對了！':'✕ 答錯了'}</div>${ok?'':`<div class="q-ans">正確答案：${esc(q.options[q.answer])}</div>`}<div class="q-exp">${esc(q.explain)}</div>
+      <div class="q-next"><button class="pbtn gold" id="ckNext">${C.k<n-1?'下一題 ▶':'看結果'}</button></div></div>`:''}</div>
+    <div class="ck-act"><button class="pbtn ghost" id="ckQuit">✕ 先不檢核，回到概念卡</button></div></div>`}
 const viewer=document.getElementById('viewer');
-function openViewer(u,i){V.u=u;V.i=i;V.step=1;V.anim=1;SFX.open();viewer.classList.add('open');document.body.style.overflow='hidden';drawViewer();viewer.focus()}
-function closeViewer(){viewer.classList.remove('open');document.body.style.overflow='';const r=parseRoute();if(r.u&&r.tab==='concept')renderUnit(r.u,r.tab)}
+function openViewer(u,i){V.u=u;V.i=i;V.step=1;V.anim=1;V.ck=null;SFX.open();viewer.classList.add('open');document.body.style.overflow='hidden';drawViewer();viewer.focus()}
+function closeViewer(){V.ck=null;viewer.classList.remove('open');document.body.style.overflow='';const r=parseRoute();if(r.u&&r.tab==='concept')renderUnit(r.u,r.tab)}
 function drawViewer(){
   const U=UNITS[V.u],c=U.cards[V.i],n=U.cards.length,teach=mode==='teacher',total=c.pts.length;
   if(teach)V.step=Math.max(1,Math.min(V.step,total));
   const done=!teach||V.step>=total;
   viewer.innerHTML=`<div class="pbox vpanel ${V.anim?'anim':''}">
     <div class="vhead"><span class="n">${V.i+1}/${n}</span><h2>${esc(c.t)}</h2><button class="pbtn ghost" id="vClose" aria-label="關閉">✕</button></div>
-    <div class="vbody">
+    ${V.ck?`<div class="vbody ck-body">${ckHtml(c)}</div>`:`<div class="vbody">
       <div class="figure">${c.svg()}<div class="cap">${esc(c.cap)}｜課本 ${c.pg}</div></div>
       <div>
         <div class="dialog">
@@ -1124,35 +1171,47 @@ function drawViewer(){
           <div class="ans" id="vAnsBox">✔ ${esc(c.a)}</div>
         </div>
       </div>
-    </div>
-    <div class="vfoot">
+    </div>`}
+    <div class="vfoot" ${V.ck?'hidden':''}>
       <button class="pbtn ghost" id="vPrev" ${V.i===0?'disabled':''}>◀ 上一張</button>
       <div class="mid">
         <button class="pbtn tonly" id="vBack" ${V.step<=1?'disabled':''}>▲ 上一點</button>
         <button class="pbtn tonly" id="vStep" ${done?'disabled':''}>下一點 ▼</button>
         <button class="pbtn ghost tonly" id="vAll" ${done?'disabled':''}>全部顯示</button>
-        <button class="pbtn sonly collect ${coins[c.id]?'got':''}" id="vCoin">${coins[c.id]?'★ 已收集金幣':'我看懂了！收集金幣'}</button>
+        ${ckItems(c).length?`<button class="pbtn sonly collect ${coins[c.id]?'got':''}" id="vCoin">${coins[c.id]?'★ 已收集金幣（再檢核一次）':'我看懂了！檢核 3 題拿金幣'}</button>
+        <button class="pbtn tonly" id="vCk" ${done?'':'disabled'}>✎ 全班檢核 3 題</button>`
+        :`<button class="pbtn sonly collect ${coins[c.id]?'got':''}" id="vCoin0">${coins[c.id]?'★ 已收集金幣':'我看懂了！收集金幣'}</button>`}
       </div>
       <button class="pbtn" id="vNext" ${V.i===n-1?'disabled':''}>下一張 ▶</button>
     </div></div>`;
   V.anim=0;
   const $=id=>document.getElementById(id);
   $('vClose').onclick=()=>{SFX.tap();closeViewer()};
+  if(V.ck){
+    viewer.querySelectorAll('[data-ck]').forEach(b=>b.onclick=()=>ckPick(+b.dataset.ck));
+    const on=(id,f)=>{const b=$(id);if(b)b.onclick=f};
+    on('ckNext',ckNext);on('ckAgain',ckStart);on('ckGo',()=>go(1));
+    on('ckRead',()=>{V.ck=null;V.step=c.pts.length;SFX.tap();drawViewer()});
+    on('ckQuit',()=>{V.ck=null;SFX.tap();drawViewer()});
+    return}
   $('vPrev').onclick=()=>go(-1);$('vNext').onclick=()=>go(1);
   $('vAns').onclick=()=>{SFX.tap();$('vAnsBox').classList.add('show');$('vAns').hidden=true};
   $('vStep').onclick=()=>step(1);$('vBack').onclick=()=>step(-1);
   $('vAll').onclick=()=>{V.step=total;SFX.next();drawViewer()};
-  $('vCoin').onclick=e=>{if(coins[c.id])return;coins[c.id]=true;store.set('coins',coins);SFX.coin();coinFx(e.currentTarget);refreshHud();drawViewer();
+  if($('vCoin'))$('vCoin').onclick=()=>ckStart();
+  if($('vCk'))$('vCk').onclick=()=>ckStart();
+  if($('vCoin0'))$('vCoin0').onclick=e=>{if(coins[c.id])return;coins[c.id]=true;store.set('coins',coins);SFX.coin();coinFx(e.currentTarget);refreshHud();drawViewer();
     if(unitCoins(V.u)===n)setTimeout(()=>{SFX.stage();toast(`★ ${U.stage} 金幣全部收集完成！`)},500)};
 }
-function go(d){const n=UNITS[V.u].cards.length,j=V.i+d;if(j<0||j>=n)return;V.i=j;V.step=1;V.anim=1;SFX.open();drawViewer()}
+function go(d){const n=UNITS[V.u].cards.length,j=V.i+d;if(j<0||j>=n)return;V.i=j;V.ck=null;V.step=1;V.anim=1;SFX.open();drawViewer()}
 function step(d){const total=UNITS[V.u].cards[V.i].pts.length,s=V.step+d;if(s<1||s>total)return;V.step=s;SFX.next();drawViewer()}
 viewer.tabIndex=-1;
-viewer.addEventListener('click',e=>{if(e.target===viewer)closeViewer()});
+viewer.addEventListener('click',e=>{if(e.target===viewer&&!V.ck)closeViewer()});
 document.addEventListener('keydown',e=>{
   if(document.getElementById('intro').classList.contains('show')){hideIntro();return}
   if(!viewer.classList.contains('open'))return;
   const teach=mode==='teacher',total=UNITS[V.u].cards[V.i].pts.length;
+  if(V.ck){if(e.key==='Escape'){V.ck=null;drawViewer()}return}
   if(e.key==='Escape'){closeViewer()}
   else if(e.key==='PageDown'){e.preventDefault();go(1)}
   else if(e.key==='PageUp'){e.preventDefault();go(-1)}
@@ -3725,6 +3784,1844 @@ window.addEventListener('DOMContentLoaded',route);
   "explain": "食道、胃與小腸都有蠕動現象。",
   "link": "card:2-4:2",
   "bingo": true
+ },
+ {
+  "id": "ck2101a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "養分在生物體內的功用，下列敘述何者正確？",
+  "options": [
+   "養分和代謝作用的調節無關",
+   "養分不是維持生命現象的必需條件",
+   "所有養分都只能用來產生能量",
+   "有些養分可以組成生物體內的構造"
+  ],
+  "answer": 3,
+  "explain": "養分的功用有三：有些可以產生能量、有些可以組成生物體內的構造、有些與代謝作用的調節有關。",
+  "link": "card:2-1:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2101b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列何者「不是」課本提到的養分功用？",
+  "options": [
+   "讓生物體不需要喝水",
+   "與代謝作用的調節有關",
+   "組成生物體內的構造",
+   "產生能量"
+  ],
+  "answer": 0,
+  "explain": "養分的三種功用：產生能量、組成生物體內的構造、與代謝作用的調節有關。",
+  "link": "card:2-1:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2101c",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "養分是生物體維持生命現象的必需條件之一。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "養分是生物體維持生命現象的必需條件之一。",
+  "link": "card:2-1:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2102a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一組養分「都可以」產生能量？",
+  "options": [
+   "醣類、蛋白質、脂質",
+   "醣類、維生素、水",
+   "蛋白質、礦物質、脂質",
+   "維生素、礦物質、水"
+  ],
+  "answer": 0,
+  "explain": "可以產生能量的是醣類（碳水化合物）、蛋白質和脂質。",
+  "link": "card:2-1:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2102b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一類養分「無法」產生能量？",
+  "options": [
+   "蛋白質",
+   "脂質",
+   "礦物質",
+   "醣類"
+  ],
+  "answer": 2,
+  "explain": "無法產生能量的有：礦物質、維生素和水。",
+  "link": "card:2-1:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2102c",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "礦物質、維生素和水無法產生能量，所以對生物體並不重要。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "雖然無法產生能量，但六類養分對生物體都很重要，缺一不可。",
+  "link": "card:2-1:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2103a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "米飯、麵粉類食品含有較高比例的哪一種養分？",
+  "options": [
+   "脂質",
+   "礦物質",
+   "蛋白質",
+   "澱粉（醣類的一種）"
+  ],
+  "answer": 3,
+  "explain": "米飯、麵粉類食品含有較高比例的澱粉，澱粉是醣類的一種。",
+  "link": "card:2-1:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2103b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "小明午餐吃了清蒸魚和水煮蛋，這兩樣食物主要富含哪一類養分？",
+  "options": [
+   "澱粉",
+   "脂質",
+   "蛋白質",
+   "水"
+  ],
+  "answer": 2,
+  "explain": "海鮮、肉類和蛋類富含蛋白質。",
+  "link": "card:2-1:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2103c",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "大多數食物都只含有單一種養分。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "不同食物的養分組成種類與比例通常不同，只含單一養分的食物相當少見。",
+  "link": "card:2-1:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2104a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "植物細胞的細胞壁，主要由哪一種物質組成？",
+  "options": [
+   "脂肪",
+   "澱粉",
+   "纖維素",
+   "蛋白質"
+  ],
+  "answer": 2,
+  "explain": "纖維素（醣類的一種）可組成植物細胞的細胞壁。",
+  "link": "card:2-1:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2104b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "構成人體肌肉與頭髮的主要成分是什麼？",
+  "options": [
+   "蛋白質",
+   "水",
+   "醣類",
+   "脂質"
+  ],
+  "answer": 0,
+  "explain": "蛋白質是構成人體肌肉與頭髮的主要成分。",
+  "link": "card:2-1:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2104c",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "人體無法直接分解纖維素產生能量，但適當攝取纖維素可促進腸胃蠕動。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "人體無法直接分解纖維素而產生能量，但適當攝取可促進腸胃蠕動，維持腸道健康。",
+  "link": "card:2-1:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2105a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "組成人體骨骼和牙齒的重要成分是什麼？",
+  "options": [
+   "鐵質",
+   "鈣質",
+   "維生素 A",
+   "維生素 C"
+  ],
+  "answer": 1,
+  "explain": "鈣質是組成人體骨骼和牙齒的重要成分。",
+  "link": "card:2-1:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2105b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列配對何者正確？",
+  "options": [
+   "維生素 C－組成肌肉和頭髮",
+   "鈣質－和眼睛保健有關",
+   "鐵質－影響紅血球的製造與功能",
+   "維生素 A－組成骨骼和牙齒"
+  ],
+  "answer": 2,
+  "explain": "鐵質會影響紅血球的製造與功能；鈣質組成骨骼和牙齒；維生素 A 和眼睛保健有關；維生素 C 可增加復原力和抵抗力。",
+  "link": "card:2-1:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2105c",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "維生素 C 可增加身體的復原力和抵抗力。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "維生素 C 可增加身體的復原力和抵抗力；維生素 A 和眼睛保健有關。",
+  "link": "card:2-1:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2106a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "1000 卡等於多少大卡？",
+  "options": [
+   "0.1 大卡",
+   "1 大卡",
+   "10 大卡",
+   "100 大卡"
+  ],
+  "answer": 1,
+  "explain": "常用的熱量單位是「卡」或「大卡」，1000 卡＝1 大卡。",
+  "link": "card:2-1:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2106b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "1 公克的脂質可產生多少大卡熱量？",
+  "options": [
+   "1000 大卡",
+   "4 大卡",
+   "9 大卡",
+   "1 大卡"
+  ],
+  "answer": 2,
+  "explain": "1 公克的脂質可產生 9 大卡；1 公克的醣類或蛋白質可產生 4 大卡。",
+  "link": "card:2-1:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2106c",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "5 公克的醣類完全燃燒，約可產生多少大卡熱量？",
+  "options": [
+   "20 大卡",
+   "5 大卡",
+   "45 大卡",
+   "9 大卡"
+  ],
+  "answer": 0,
+  "explain": "1 公克醣類可產生 4 大卡，5×4＝20 大卡。",
+  "link": "card:2-1:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2107a",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "黃褐色的碘液遇到澱粉，會變成什麼顏色？",
+  "options": [
+   "無色",
+   "淺藍色",
+   "綠、黃、橙、紅色",
+   "藍黑色或紫紅色"
+  ],
+  "answer": 3,
+  "explain": "黃褐色的碘液遇澱粉，會變成藍黑色或紫紅色。",
+  "link": "card:2-1:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2107b",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "要檢驗溶液中是否含有葡萄糖或麥芽糖，應加入哪一種試劑並加熱？",
+  "options": [
+   "清水",
+   "酒精",
+   "碘液",
+   "本氏液"
+  ],
+  "answer": 3,
+  "explain": "淺藍色的本氏液加入葡萄糖（或麥芽糖）溶液後加熱，會出現綠、黃、橙、紅等顏色變化。",
+  "link": "card:2-1:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2107c",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "實驗 2-1 中，梅花盤中間滴水、A 試管只加水，都是用來比較的對照組。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "梅花盤中間滴水、A 試管只加水，都是用來比較的對照組。",
+  "link": "card:2-1:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2201a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "養分在生物體內經過不同的化學反應，產生能量或其他物質，這些反應統稱為什麼？",
+  "options": [
+   "代謝作用",
+   "消化作用",
+   "光合作用",
+   "排遺"
+  ],
+  "answer": 0,
+  "explain": "這些反應統稱為「代謝作用」。",
+  "link": "card:2-2:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2201b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "代謝作用包含哪兩種類型？",
+  "options": [
+   "分解作用與合成作用",
+   "消化作用與吸收作用",
+   "光合作用與消化作用",
+   "分解作用與吸收作用"
+  ],
+  "answer": 0,
+  "explain": "代謝作用中，有「分解作用」與「合成作用」兩種類型。",
+  "link": "card:2-2:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2201c",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "養分在生物體內經過化學反應，只能產生能量，不能產生其他物質。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "養分在生物體內經過不同的化學反應，可產生能量或其他物質。",
+  "link": "card:2-2:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2202a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "將小分子結合成大分子的作用稱為什麼？",
+  "options": [
+   "分解作用",
+   "專一性",
+   "消化作用",
+   "合成作用"
+  ],
+  "answer": 3,
+  "explain": "小 → 大＝合成作用；大 → 小＝分解作用。",
+  "link": "card:2-2:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2202b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列何者屬於「分解作用」？",
+  "options": [
+   "小分子結合成大分子",
+   "許多胺基酸結合成蛋白質",
+   "澱粉轉變成小分子醣類",
+   "許多葡萄糖結合成澱粉"
+  ],
+  "answer": 2,
+  "explain": "能將大分子轉變成小分子的作用稱為分解作用，例如澱粉轉變成小分子醣類。",
+  "link": "card:2-2:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2202c",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "「大分子 → 小分子」是合成作用。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "大分子 → 小分子是分解作用；小分子 → 大分子才是合成作用。",
+  "link": "card:2-2:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2203a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "酵素又稱為什麼？",
+  "options": [
+   "葉綠素",
+   "酶",
+   "受質",
+   "膽汁"
+  ],
+  "answer": 1,
+  "explain": "酵素，又稱為「酶」。",
+  "link": "card:2-2:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2203b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "大部分種類的酵素，主要成分是什麼？",
+  "options": [
+   "醣類",
+   "脂質",
+   "蛋白質",
+   "礦物質"
+  ],
+  "answer": 2,
+  "explain": "大部分種類的酵素，主要成分是蛋白質。",
+  "link": "card:2-2:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2203c",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "酵素能促進代謝反應的進行。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素能促進代謝反應的進行。",
+  "link": "card:2-2:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2204a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "在代謝反應過程中，和酵素結合而作用的物質稱為什麼？",
+  "options": [
+   "受質",
+   "產物",
+   "胞器",
+   "消化腺"
+  ],
+  "answer": 0,
+  "explain": "和酵素結合而作用的物質，稱為「受質」。",
+  "link": "card:2-2:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2204b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "唾液中的澱粉酶能分解澱粉，卻不能分解纖維素，這是因為酵素具有什麼特性？",
+  "options": [
+   "專一性",
+   "可以重複使用",
+   "會被高溫破壞",
+   "主要成分是蛋白質"
+  ],
+  "answer": 0,
+  "explain": "酵素和受質的結合具有「專一性」，澱粉酶不能和纖維素結合。",
+  "link": "card:2-2:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2204c",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "澱粉酶可以和纖維素結合，所以也能分解纖維素。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "澱粉酶不能和纖維素結合，所以無法分解纖維素（專一性）。",
+  "link": "card:2-2:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2205a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "反應環境沒有溫度、酸鹼性或其他特殊條件的改變時，酵素在反應結束後會怎樣？",
+  "options": [
+   "仍可與新的受質作用",
+   "變成反應的產物",
+   "被分解而消失",
+   "立刻失去活性"
+  ],
+  "answer": 0,
+  "explain": "環境條件不變時，酵素在反應結束後仍可與新的受質作用，也就是可以重複使用。",
+  "link": "card:2-2:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2205b",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "酵素在反應中用過一次就會消失，必須重新製造。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "一般而言，環境條件不變時，酵素在反應結束後仍可與新的受質作用，可以重複使用。",
+  "link": "card:2-2:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2205c",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一種情況，酵素最「可能無法」再和新的受質作用？",
+  "options": [
+   "換上同一種新的受質",
+   "反應環境的溫度過高",
+   "反應環境的溫度、酸鹼性都沒有改變",
+   "反應剛結束"
+  ],
+  "answer": 1,
+  "explain": "酵素能重複使用的前提是環境沒有溫度、酸鹼性等條件的改變；溫度過高會破壞酵素構造。",
+  "link": "card:2-2:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2206a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "在一定溫度範圍內，溫度升高時，酵素的活性會如何？",
+  "options": [
+   "永久消失",
+   "增加",
+   "降低",
+   "不變"
+  ],
+  "answer": 1,
+  "explain": "在一定溫度範圍內，酵素的活性會隨溫度升高而增加，促進代謝反應的速率。",
+  "link": "card:2-2:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2206b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "溫度過高時，酵素為什麼會永久失去活性？",
+  "options": [
+   "因為酵素被稀釋",
+   "因為受質用完了",
+   "因為環境變成酸性",
+   "因為酵素的構造被破壞"
+  ],
+  "answer": 3,
+  "explain": "溫度過高會破壞酵素構造，酵素會永久失去活性。",
+  "link": "card:2-2:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2206c",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "酵素的活性會影響代謝反應速率的快慢。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素的活性，會影響代謝反應速率的快慢。",
+  "link": "card:2-2:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2207a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "胃內的酵素在哪一種環境中活性較佳？",
+  "options": [
+   "中性",
+   "酸性",
+   "鹼性",
+   "任何環境都一樣"
+  ],
+  "answer": 1,
+  "explain": "胃內的酵素在酸性環境中的活性較佳。",
+  "link": "card:2-2:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2207b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "小腸內的酵素適合在哪一種環境中作用？",
+  "options": [
+   "鹼性",
+   "酸性",
+   "沒有水",
+   "高溫"
+  ],
+  "answer": 0,
+  "explain": "小腸內的酵素適合在鹼性環境中作用。",
+  "link": "card:2-2:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2207c",
+  "unit": "2-2",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "酸鹼值超過酵素能忍受的範圍，酵素可能會活性降低或失去活性。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "酵素的活性受環境酸鹼值影響，超過能忍受的範圍可能活性降低或失去活性。",
+  "link": "card:2-2:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2208a",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-2 中，裝澱粉液和唾液的試管放在幾 ℃ 的溫水中？",
+  "options": [
+   "37℃",
+   "0℃",
+   "60℃",
+   "100℃"
+  ],
+  "answer": 0,
+  "explain": "試管放入 37℃ 溫水中。",
+  "link": "card:2-2:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2208b",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-2 中，加入唾液的 B 試管，加本氏液隔水加熱後出現綠（或黃、橙、紅）色，表示什麼？",
+  "options": [
+   "唾液中含有澱粉",
+   "澱粉被唾液分解，產生小分子醣類",
+   "本氏液失效了",
+   "試管中沒有任何醣類"
+  ],
+  "answer": 1,
+  "explain": "B 管出現綠（或黃、橙、紅）色，表示澱粉被唾液分解而產生小分子醣類。",
+  "link": "card:2-2:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2208c",
+  "unit": "2-2",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-2 中，只加水的 A 試管加本氏液隔水加熱後，顏色為何？",
+  "options": [
+   "仍為藍色",
+   "橙色",
+   "紅色",
+   "藍黑色"
+  ],
+  "answer": 0,
+  "explain": "A 管沒有唾液，澱粉沒有被分解成小分子醣類，所以仍為藍色；A 管是對照組。",
+  "link": "card:2-2:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2301a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "大多數植物製造養分的主要器官是什麼？",
+  "options": [
+   "花",
+   "莖",
+   "根",
+   "葉"
+  ],
+  "answer": 3,
+  "explain": "葉是大多數植物製造養分的主要器官。",
+  "link": "card:2-3:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2301b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉片中製造養分的主要部位是哪裡？",
+  "options": [
+   "葉脈",
+   "角質層",
+   "葉肉",
+   "表皮"
+  ],
+  "answer": 2,
+  "explain": "其中「葉肉」是製造養分的主要部位。",
+  "link": "card:2-3:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2301c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葉的其他構造（例如表皮、葉脈）和養分的製造或葉子的生長沒有關係。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "葉的其他構造，也和養分的製造或葉子的生長息息相關。",
+  "link": "card:2-3:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2302a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉的角質層位於哪裡？",
+  "options": [
+   "葉脈中間",
+   "葉肉細胞內",
+   "葉的表皮外側",
+   "兩個保衛細胞之間"
+  ],
+  "answer": 2,
+  "explain": "葉的表皮外側，多具有角質層。",
+  "link": "card:2-3:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2302b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "角質層的主要功能是什麼？",
+  "options": [
+   "運輸水分和養分",
+   "避免水分過度散失",
+   "製造養分",
+   "讓氣體進出"
+  ],
+  "answer": 1,
+  "explain": "角質層可避免水分過度散失。",
+  "link": "card:2-3:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2302c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "角質層是氣體進出植物的主要通道。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "氣體進出植物的主要通道是氣孔；角質層可避免水分過度散失。",
+  "link": "card:2-3:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2303a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉的上、下表皮主要由什麼樣的細胞組成？",
+  "options": [
+   "透明無色、排列緊密的表皮細胞",
+   "能運輸水分的葉脈",
+   "半月形的保衛細胞",
+   "具有大量葉綠體的葉肉細胞"
+  ],
+  "answer": 0,
+  "explain": "葉的上、下表皮，主要由透明無色、排列緊密的表皮細胞組成。",
+  "link": "card:2-3:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2303b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉的表皮主要具有什麼功能？",
+  "options": [
+   "運輸養分",
+   "保護",
+   "吸收光能",
+   "製造養分"
+  ],
+  "answer": 1,
+  "explain": "表皮具有保護功能。",
+  "link": "card:2-3:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2303c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葉的表皮細胞透明無色、排列緊密。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "葉的上、下表皮，主要由透明無色、排列緊密的表皮細胞組成。",
+  "link": "card:2-3:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2304a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "氣孔是由哪一種細胞兩兩成對所形成的？",
+  "options": [
+   "葉肉細胞",
+   "表皮細胞",
+   "葉脈",
+   "保衛細胞"
+  ],
+  "answer": 3,
+  "explain": "保衛細胞兩兩成對，中間會形成氣孔。",
+  "link": "card:2-3:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2304b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "氣孔的主要功能是什麼？",
+  "options": [
+   "避免水分過度散失",
+   "保護葉片",
+   "運輸水分和養分",
+   "氣體進出植物的主要通道"
+  ],
+  "answer": 3,
+  "explain": "氣孔是氣體進出植物的主要通道。",
+  "link": "card:2-3:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2304c",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "陸生雙子葉植物的氣孔，大多是哪裡比較多？",
+  "options": [
+   "角質層",
+   "葉脈",
+   "下表皮",
+   "上表皮"
+  ],
+  "answer": 2,
+  "explain": "陸生雙子葉植物，大多是下表皮的氣孔比較多。",
+  "link": "card:2-3:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2305a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉肉細胞位於葉片的哪裡？",
+  "options": [
+   "上、下表皮之間",
+   "角質層外側",
+   "氣孔中間",
+   "葉脈內部"
+  ],
+  "answer": 0,
+  "explain": "上、下表皮之間的葉肉，由葉肉細胞組成。",
+  "link": "card:2-3:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2305b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉片中進行光合作用的主要場所是什麼？",
+  "options": [
+   "葉脈",
+   "角質層",
+   "葉肉細胞",
+   "表皮細胞"
+  ],
+  "answer": 2,
+  "explain": "葉肉細胞具有大量的葉綠體，是進行光合作用的主要場所。",
+  "link": "card:2-3:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2305c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葉肉細胞具有大量的葉綠體。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "葉肉細胞具有大量的葉綠體，所以是光合作用的主要場所。",
+  "link": "card:2-3:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2306a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉內的輸導組織是哪一個構造？",
+  "options": [
+   "葉肉",
+   "葉脈",
+   "氣孔",
+   "角質層"
+  ],
+  "answer": 1,
+  "explain": "「葉脈」是葉內的輸導組織。",
+  "link": "card:2-3:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2306b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "葉脈的功能是什麼？",
+  "options": [
+   "讓氣體進出",
+   "運輸水分和養分",
+   "吸收光能",
+   "避免水分過度散失"
+  ],
+  "answer": 1,
+  "explain": "葉脈能運輸水分和養分，以利各種代謝作用的進行。",
+  "link": "card:2-3:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2306c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葉脈是葉片製造養分的主要部位。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "製造養分的主要部位是葉肉；葉脈是輸導組織，負責運輸水分和養分。",
+  "link": "card:2-3:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2307a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "光合作用的原料是什麼？",
+  "options": [
+   "氧氣和水",
+   "氧氣和葡萄糖",
+   "水和二氧化碳",
+   "葡萄糖和水"
+  ],
+  "answer": 2,
+  "explain": "葉綠素吸收光能，配合酵素的作用，使水和二氧化碳發生一連串的反應。",
+  "link": "card:2-3:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2307b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "光合作用最後產生哪些物質？",
+  "options": [
+   "只有氧氣",
+   "澱粉和二氧化碳",
+   "氧氣、葡萄糖和水",
+   "二氧化碳和水"
+  ],
+  "answer": 2,
+  "explain": "光合作用最後產生氧氣、葡萄糖和水。",
+  "link": "card:2-3:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2307c",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "透過光合作用，植物將光能儲存在哪一種物質中？",
+  "options": [
+   "二氧化碳",
+   "葡萄糖",
+   "氧氣",
+   "葉綠素"
+  ],
+  "answer": 1,
+  "explain": "透過光合作用，植物將光能儲存在葡萄糖中。",
+  "link": "card:2-3:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2308a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "光合作用產生的葡萄糖，可以有哪些去向？",
+  "options": [
+   "只能被動物吃掉",
+   "供細胞直接利用、形成纖維素，或轉換成澱粉",
+   "只能儲存在葉綠素中",
+   "只能全部變成氧氣"
+  ],
+  "answer": 1,
+  "explain": "葡萄糖可供細胞直接利用、形成纖維素，或轉換成澱粉及其他形式的養分。",
+  "link": "card:2-3:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2308b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "植物行光合作用的主要目的是什麼？",
+  "options": [
+   "成為動物的食物來源",
+   "讓葉子變成綠色",
+   "提供動物氧氣",
+   "維持自身的生存"
+  ],
+  "answer": 3,
+  "explain": "植物行光合作用是為了維持自身的生存；釋出氧氣、成為動物的食物來源是「附加價值」。",
+  "link": "card:2-3:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2308c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "葡萄糖是植物維持生命現象的主要養分來源。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "葡萄糖是植物維持生命現象的主要養分來源。",
+  "link": "card:2-3:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2309a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "植物細胞中進行光合作用的胞器是什麼？",
+  "options": [
+   "氣孔",
+   "細胞壁",
+   "葉綠素",
+   "葉綠體"
+  ],
+  "answer": 3,
+  "explain": "「葉綠體」是植物細胞中的一種胞器，是進行光合作用的場所。",
+  "link": "card:2-3:9",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2309b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "存在於葉綠體中、能吸收光能的綠色色素是什麼？",
+  "options": [
+   "澱粉",
+   "碘液",
+   "本氏液",
+   "葉綠素"
+  ],
+  "answer": 3,
+  "explain": "「葉綠素」是存在葉綠體中的綠色色素，能吸收光能。",
+  "link": "card:2-3:9",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2309c",
+  "unit": "2-3",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "「葉綠素」是植物細胞中的一種胞器。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "葉綠體才是胞器；葉綠素是存在葉綠體中的綠色色素。",
+  "link": "card:2-3:9",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2310a",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-3 中，用鋁箔包住葉片，操作變因是什麼？",
+  "options": [
+   "有、無光照",
+   "有、無二氧化碳",
+   "溫度的高低",
+   "有、無水分"
+  ],
+  "answer": 0,
+  "explain": "實驗前 3～5 天用鋁箔包住葉片，操作變因是有、無光照。",
+  "link": "card:2-3:10",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2310b",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-3 中，把葉片放入酒精隔水加熱，目的是什麼？",
+  "options": [
+   "檢驗澱粉",
+   "溶出葉綠素",
+   "軟化葉片",
+   "洗去碘液"
+  ],
+  "answer": 1,
+  "explain": "把葉片放入酒精，隔水加熱，是為了溶出葉綠素；放入熱水加熱才是軟化葉片。",
+  "link": "card:2-3:10",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2310c",
+  "unit": "2-3",
+  "type": "single",
+  "level": "基礎",
+  "stem": "滴加碘液後，照光部位呈藍黑色、遮光部位呈黃褐色，可以得到什麼結論？",
+  "options": [
+   "碘液會被光破壞",
+   "照光是光合作用的必要條件之一",
+   "遮光部位含有較多澱粉",
+   "鋁箔會使葉片產生澱粉"
+  ],
+  "answer": 1,
+  "explain": "照光部位有澱粉、遮光部位沒有澱粉 → 照光是光合作用的必要條件之一。",
+  "link": "card:2-3:10",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2401a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "食物中大分子養分在人體內分解為小分子養分的過程，稱為什麼？",
+  "options": [
+   "排遺",
+   "消化作用",
+   "光合作用",
+   "合成作用"
+  ],
+  "answer": 1,
+  "explain": "食物中大分子養分在人體內分解為小分子養分的過程，稱為「消化作用」。",
+  "link": "card:2-4:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2401b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "澱粉經過消化作用，最後分解成什麼？",
+  "options": [
+   "葡萄糖",
+   "胺基酸",
+   "甘油與脂肪酸",
+   "纖維素"
+  ],
+  "answer": 0,
+  "explain": "澱粉分解為葡萄糖，蛋白質分解為胺基酸，部分脂質分解為甘油與脂肪酸。",
+  "link": "card:2-4:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2401c",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "部分脂質經過消化作用後，會分解成什麼？",
+  "options": [
+   "胺基酸",
+   "甘油與脂肪酸",
+   "葡萄糖",
+   "澱粉"
+  ],
+  "answer": 1,
+  "explain": "部分脂質分解為甘油與脂肪酸。",
+  "link": "card:2-4:1",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2402a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列何者「不屬於」消化道？",
+  "options": [
+   "咽",
+   "食道",
+   "小腸",
+   "肝臟"
+  ],
+  "answer": 3,
+  "explain": "消化道包括口腔、咽、食道、胃、小腸、大腸與肛門；肝臟是消化腺。",
+  "link": "card:2-4:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2402b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "食物通過消化道的正確順序是？",
+  "options": [
+   "口腔→食道→咽→胃→大腸→小腸→肛門",
+   "口腔→咽→胃→食道→小腸→大腸→肛門",
+   "口腔→咽→食道→小腸→胃→大腸→肛門",
+   "口腔→咽→食道→胃→小腸→大腸→肛門"
+  ],
+  "answer": 3,
+  "explain": "消化道依序為口腔、咽、食道、胃、小腸、大腸與肛門。",
+  "link": "card:2-4:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2402c",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "消化道器官的管壁具有肌肉，能協助食物的推送與消化。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "消化道器官的管壁具有肌肉，例如食道、胃與小腸的蠕動現象。",
+  "link": "card:2-4:2",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2403a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列何者「不是」消化腺？",
+  "options": [
+   "唾腺",
+   "肝臟",
+   "胰臟",
+   "食道"
+  ],
+  "answer": 3,
+  "explain": "消化腺包括唾腺、胃腺、腸腺，以及肝臟、胰臟等；食道無法分泌消化液。",
+  "link": "card:2-4:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2403b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "消化腺的功能是什麼？",
+  "options": [
+   "吸收養分",
+   "分泌消化液",
+   "推送食物",
+   "形成糞便"
+  ],
+  "answer": 1,
+  "explain": "消化腺是能分泌消化液的構造。",
+  "link": "card:2-4:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2403c",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "多數的消化液中含有酵素，可協助養分的分解。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "多數的消化液中含有酵素，可協助養分的分解。",
+  "link": "card:2-4:3",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2404a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "口腔中，能切斷與磨碎食物的是什麼？",
+  "options": [
+   "舌頭",
+   "牙齒",
+   "唾腺",
+   "咽"
+  ],
+  "answer": 1,
+  "explain": "口腔內的牙齒能切斷與磨碎食物。",
+  "link": "card:2-4:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2404b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "唾液中的酵素能促進哪一種養分的初步分解？",
+  "options": [
+   "纖維素",
+   "澱粉",
+   "脂質",
+   "蛋白質"
+  ],
+  "answer": 1,
+  "explain": "唾液中的酵素能促進澱粉的初步分解。",
+  "link": "card:2-4:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2404c",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "舌頭在口腔中的功能是什麼？",
+  "options": [
+   "吸收養分",
+   "分解蛋白質",
+   "攪拌食物，讓食物和唾液混合",
+   "分泌唾液"
+  ],
+  "answer": 2,
+  "explain": "舌頭能攪拌食物，讓食物和唾腺分泌的唾液混合。",
+  "link": "card:2-4:4",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2405a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "人體吞嚥食物時，食物會經由哪裡進入食道？",
+  "options": [
+   "咽",
+   "小腸",
+   "胃",
+   "大腸"
+  ],
+  "answer": 0,
+  "explain": "人體吞嚥食物時，食物會經由咽進入食道。",
+  "link": "card:2-4:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2405b",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "食道能分泌消化液，分解食物中的養分。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "食道無法分泌消化液，只藉由管壁肌肉的收縮推送食物。",
+  "link": "card:2-4:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2405c",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "食道如何把食物推送到胃中？",
+  "options": [
+   "利用絨毛吸收",
+   "分泌消化液",
+   "藉由管壁肌肉的收縮",
+   "利用膽汁乳化"
+  ],
+  "answer": 2,
+  "explain": "食道藉由管壁肌肉的收縮，將食物推送至胃中。",
+  "link": "card:2-4:5",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2406a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "胃液中的酵素能初步分解哪一種養分？",
+  "options": [
+   "纖維素",
+   "澱粉",
+   "蛋白質",
+   "脂質"
+  ],
+  "answer": 2,
+  "explain": "胃液中的酵素能初步分解蛋白質。",
+  "link": "card:2-4:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2406b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "胃液中鹽酸的功能是什麼？",
+  "options": [
+   "殺死部分細菌，並促進胃中酵素的分解作用",
+   "吸收水分與礦物質",
+   "分解纖維素",
+   "乳化脂質"
+  ],
+  "answer": 0,
+  "explain": "鹽酸能殺死部分細菌，並可促進胃中酵素的分解作用。",
+  "link": "card:2-4:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2406c",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "胃呈囊袋狀，可暫時貯存食物。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "胃呈囊袋狀，可暫時貯存食物。",
+  "link": "card:2-4:6",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2407a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "膽汁是由哪一個器官分泌的？",
+  "options": [
+   "肝臟",
+   "胰臟",
+   "膽囊",
+   "胃"
+  ],
+  "answer": 0,
+  "explain": "膽汁由肝臟分泌，儲存於膽囊。",
+  "link": "card:2-4:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2407b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "關於膽汁的敘述，何者正確？",
+  "options": [
+   "是酸性的消化液",
+   "含有分解蛋白質的酵素",
+   "不含酵素，但能乳化脂質",
+   "由胰臟分泌"
+  ],
+  "answer": 2,
+  "explain": "膽汁雖然不含酵素，但能乳化脂質，促進脂質分解的速率。",
+  "link": "card:2-4:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2407c",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "哪一種消化液能分解醣類、蛋白質和脂質？",
+  "options": [
+   "唾液",
+   "胰液",
+   "膽汁",
+   "胃液"
+  ],
+  "answer": 1,
+  "explain": "胰液能分解醣類、蛋白質和脂質；腸液和醣類與蛋白質的分解有關。",
+  "link": "card:2-4:7",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2408a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "人體吸收水分和養分的主要部位是哪裡？",
+  "options": [
+   "胃",
+   "口腔",
+   "小腸",
+   "食道"
+  ],
+  "answer": 2,
+  "explain": "小腸是吸收水分和養分的主要部位。",
+  "link": "card:2-4:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2408b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "小腸內壁的絨毛有什麼功能？",
+  "options": [
+   "殺死細菌",
+   "磨碎食物",
+   "增加吸收的表面積",
+   "分泌膽汁"
+  ],
+  "answer": 2,
+  "explain": "絨毛是小腸內壁皺褶上的指狀小突起，能增加吸收的表面積。",
+  "link": "card:2-4:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2408c",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "被吸收的小分子養分，能藉由血液運送至全身細胞利用或儲存。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "被吸收的小分子養分，能藉由血液運送至全身細胞利用或儲存。",
+  "link": "card:2-4:8",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2409a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "大腸能繼續吸收什麼？",
+  "options": [
+   "水分與礦物質",
+   "蛋白質與脂質",
+   "澱粉",
+   "胺基酸與葡萄糖"
+  ],
+  "answer": 0,
+  "explain": "大腸能繼續吸收水分與礦物質。",
+  "link": "card:2-4:9",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2409b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "和小腸相比，大腸的外形如何？",
+  "options": [
+   "較細長",
+   "較粗短",
+   "一樣粗也一樣長",
+   "呈囊袋狀"
+  ],
+  "answer": 1,
+  "explain": "大腸較小腸粗短。",
+  "link": "card:2-4:9",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2409c",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "糞便經由肛門排出體外的過程稱為什麼？",
+  "options": [
+   "吸收",
+   "合成作用",
+   "消化作用",
+   "排遺"
+  ],
+  "answer": 3,
+  "explain": "糞便經由肛門排出體外，此過程稱為「排遺」。",
+  "link": "card:2-4:9",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2410a",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "膳食纖維對腸道有什麼幫助？",
+  "options": [
+   "被消化酵素分解，產生大量能量",
+   "促進糞便形成與腸道蠕動，避免便祕",
+   "殺死所有腸內細菌",
+   "中和胃液的酸性"
+  ],
+  "answer": 1,
+  "explain": "膳食纖維不易被人體消化酵素分解，能促進糞便的形成與腸道蠕動，避免便祕。",
+  "link": "card:2-4:10",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2410b",
+  "unit": "2-4",
+  "type": "single",
+  "level": "基礎",
+  "stem": "腸道中和人體共生互利、能協助合成部分維生素的菌，稱為什麼？",
+  "options": [
+   "受質",
+   "壞菌",
+   "酵素",
+   "益生菌"
+  ],
+  "answer": 3,
+  "explain": "腸道中有些菌和人體共生互利，稱為「益生菌」。",
+  "link": "card:2-4:10",
+  "bingo": false,
+  "check": true
+ },
+ {
+  "id": "ck2410c",
+  "unit": "2-4",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "胃會分泌黏液與鹼性物質，組成胃黏膜層保護胃壁。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "胃會分泌黏液與鹼性物質組成胃黏膜層，所以胃不會被自己分泌的鹽酸腐蝕。",
+  "link": "card:2-4:10",
+  "bingo": false,
+  "check": true
  }
 ]
 </script>
@@ -4870,9 +6767,11 @@ ANIMS['2-1']=[{id:'A',name:'營養分類市集',def:defA21},{id:'B',name:'熱量
    第 3 期：即時練習（題庫 questions.json）＋ 小結
    ========================================================= */
 let QB=[];
-try{QB=JSON.parse(document.getElementById('qbank').textContent)}catch(e){QB=[]}
+/* check:true 的題目是「概念卡自我檢核題」（每張卡 3 題），另外放在 CHK，不進入練習、賓果與統計 */
+function splitBank(arr){CHK=arr.filter(q=>q.check);return arr.filter(q=>!q.check)}
+try{QB=splitBank(JSON.parse(document.getElementById('qbank').textContent))}catch(e){QB=[]}
 // 線上（GitHub Pages）時優先讀取獨立的 questions.json，老師修改題庫後即可生效
-if(location.protocol.startsWith('http')){fetch('questions.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(Array.isArray(d)&&d.length)QB=d}).catch(()=>{})}
+if(location.protocol.startsWith('http')){fetch('questions.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{if(Array.isArray(d)&&d.length)QB=splitBank(d)}).catch(()=>{})}
 
 const QS={get:()=>store.get('qstats',{}),set:v=>store.set('qstats',v)};
 const WRONG={get:()=>store.get('wrong',[]),set:v=>store.set('wrong',v)};
