@@ -123,6 +123,64 @@ svg.ill{width:100%;height:auto;display:block;background:#fffdf5}
 .tut p{margin:8px 0 0;font-size:15px}
 .tut-btn{display:inline-block;margin-top:12px;background:#d6336c;color:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:6px 16px;font-weight:900;text-decoration:none;cursor:pointer;font-size:16px}
 .tut-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.home-btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}.home-btns .tut-btn{margin-top:0}
+.wb-btn{background:#7a4ad6}.td-btn{background:#2f6fd6}.t-only{display:none}body.teacher .t-only{display:inline-block}
+/* ---- 我的錯題本／全班學習統計 ---- */
+.wb-head,.td-head,.td-sec,.wb-list,.wb-weak,.td-lock{padding:18px 22px;margin-bottom:22px}
+.td-lock{text-align:center}.td-lock p{font-size:18px}
+.wb-head .ptitle,.td-head .ptitle{font-size:clamp(26px,4vw,40px);margin:0 0 8px}
+.wb-stats,.td-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.wb-stats>div,.td-stats>div{background:#fff;border:3px solid var(--ink);padding:10px;text-align:center;font-weight:700}
+.wb-stats b,.td-stats b{display:block;font-size:24px;color:var(--accent-d,#8e1d48);font-weight:400;margin-bottom:4px}
+.td-stats.sm b{font-size:18px}
+.wb-go,.td-go,.td-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.td-bar select,.td-go select{min-height:46px;font:inherit;font-size:18px;border:3px solid var(--ink);padding:2px 8px;background:#fff}
+.td-bar label,.td-go label{font-weight:900;display:flex;gap:6px;align-items:center}
+.td-note,.td-sub,.wb-note,.dim{color:#7a5a3a;font-size:15px}.td-demo{background:#ffd65a;padding:2px 8px;margin-left:6px;color:var(--ink)}
+.td-nav{display:flex;gap:8px;flex-wrap:wrap}.td-nav a{background:var(--paper2);border:3px solid var(--ink);padding:4px 12px;font-weight:900;color:var(--ink);text-decoration:none}
+.wb-list h2,.wb-weak h2,.td-sec h2{font-size:20px;margin:0 0 10px}.wb-list summary.px{font-size:20px;cursor:pointer}
+.wb-list ol,.td-top{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.wb-q,.td-tq{background:#fff;border:3px solid var(--ink);padding:12px 14px}.wb-q.fixed{opacity:.75;border-style:dashed}
+.wb-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:6px}.wb-cnt{font-size:14px;color:#8e1d48;font-weight:700}
+.wb-stem{font-size:18px;font-weight:700;line-height:1.6}
+.wb-ans{margin-top:8px}.wb-ans summary{cursor:pointer;font-weight:900;color:#2f6fd6;min-height:36px;display:flex;align-items:center}.wb-ans>div{margin-top:6px}
+.wb-empty{font-size:17px;text-align:center;padding:10px}
+.wb-weak ol{margin:0;padding-left:1.4em}.wb-weak li{margin:6px 0;font-size:17px}.wb-weak li span{margin-left:10px;color:#8e1d48;font-weight:700}
+button.lk,a.lk{all:unset;cursor:pointer;color:#2f6fd6;font-weight:900;text-decoration:underline;text-underline-offset:3px}
+.td-tq{display:grid;grid-template-columns:52px 1fr 170px;gap:12px;align-items:start}
+.td-tq .rk{font-size:20px;color:#d6336c;padding-top:4px}.td-ans{margin-top:6px;color:#2f7a2f;font-weight:700}.td-ans .no{color:#c0392b}
+.td-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.td-btns .pbtn,.td-btns .q-link{font-size:15px;padding:6px 12px;min-height:40px}
+.td-cnt{text-align:center;font-weight:700;font-size:14px}.td-cnt b{font-size:28px;color:#d6336c;font-weight:400}
+.td-barl{height:10px;border:2px solid var(--ink);background:#fff;margin:6px 0}.td-barl i{display:block;height:100%;background:#d6336c}
+@media (max-width:700px){.td-tq{grid-template-columns:1fr}.td-tq .rk{padding:0}}
+.td-scroll{overflow:auto;max-height:75vh;border:3px solid var(--ink);background:#fff}
+table.td-prog{width:100%;border-collapse:collapse;font-size:15px}
+table.td-prog th,table.td-prog td{border-bottom:2px solid #e8dcc0;padding:7px 9px;text-align:center;white-space:nowrap}
+table.td-prog th{position:sticky;top:0;background:var(--ink);color:#ffd65a;cursor:pointer;user-select:none;z-index:2}
+table.td-prog td:first-child,table.td-prog th:first-child{text-align:left}
+table.td-prog tr.idle td{color:#aa9a88}table.td-prog small{color:#7a5a3a;margin-left:4px}table.td-prog .star{font-size:14px}
+table.td-prog .g{color:#2f7a2f;font-weight:900}table.td-prog .m{color:#b07b00;font-weight:900}table.td-prog .b,table.td-prog .no,.td-ql .no{color:#c0392b;font-weight:900}
+.td-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;margin-bottom:10px}.td-legend i{display:inline-block;width:16px;height:16px;vertical-align:-3px;margin-right:4px;border:2px solid var(--ink)}
+.td-legend i.g,table.td-hm td.g{background:#58c858}.td-legend i.m,table.td-hm td.m{background:#f8d030}.td-legend i.b,table.td-hm td.b{background:#e87070}.td-legend i.none,table.td-hm td.none{background:#ece3cf}
+table.td-hm{border-collapse:separate;border-spacing:2px;font-size:13px}
+table.td-hm th{position:sticky;top:0;background:#fff;z-index:2;padding:4px;vertical-align:bottom;font-weight:700}
+table.td-hm th.c{writing-mode:vertical-rl;text-orientation:mixed;height:13em;white-space:nowrap}
+table.td-hm th.u2{color:#c25c0a}table.td-hm th.u3{color:#2f7a2f}table.td-hm th.u4{color:#b0285e}
+table.td-hm th.c .lk{color:inherit}
+table.td-hm .n{position:sticky;left:0;background:#fff;z-index:3;white-space:nowrap;padding:4px 8px;font-weight:700}
+table.td-hm td.x{width:32px;min-width:32px;height:28px;text-align:center;font-size:12px;color:#000}
+table.td-hm td.few{opacity:.45}table.td-hm tr.avg td{border-top:3px solid var(--ink);font-weight:900}
+.td-modal{position:fixed;inset:0;z-index:2000;background:rgba(26,16,54,.72);display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto}
+.td-mbox{position:relative;width:min(900px,100%);padding:20px 22px;max-height:calc(100vh - 48px);overflow:auto}
+.td-mbox.big{width:min(1400px,100%)}.td-mbox h2{font-size:22px;margin:0 50px 10px 0}.td-mbox h3{margin:14px 0 6px}
+.td-x{position:absolute;top:12px;right:12px}.td-class .td-x{position:static}
+.td-ql{padding-left:1.4em;margin:0}.td-ql li{margin:6px 0;line-height:1.6}.td-ql small{color:#8e1d48;margin-left:6px}
+.td-weak{margin:0;padding-left:1.3em}
+.td-cstat{background:#fff3c4;border:3px solid var(--ink);padding:8px 14px;margin:10px 0;font-weight:900;font-size:clamp(16px,1.4vw,24px)}
+.td-class .q-stem{font-size:clamp(22px,2vw,36px)}.td-class .q-opt{font-size:clamp(20px,1.7vw,30px)}.td-class .q-fb{font-size:clamp(17px,1.4vw,24px)}
+.pr-wb{margin-top:8px;font-size:14px;padding:6px 10px;min-height:38px}
+.wb-head a.lv{text-decoration:none;color:inherit;display:inline-flex;align-items:center}
+body:has(.td-modal) #viewer{z-index:2100}
 .howto h3{font-family:var(--px);font-weight:400;margin:0 0 8px;font-size:20px}
 .howto ul{margin:0;padding-left:1.3em}
 @media (max-width:980px){.map{grid-template-columns:repeat(2,1fr)}.portal:nth-child(even){margin-bottom:0}.map::before{display:none}}
@@ -877,7 +935,7 @@ function renderHome(){
     <p>選一個關卡進入，打開概念卡、收集金幣！</p>
     <div class="squad">${spriteSvg('enzyme',5)}${spriteSvg('leafkid',5)}${spriteSvg('foodball',5)}</div>
     <p class="px blink" style="margin-top:10px;color:var(--gold-d)">▶ SELECT STAGE</p>
-    <button class="tut-btn" id="toTut">🎬 第一次來？先看使用教學（2 分半）</button>
+    <div class="home-btns"><button class="tut-btn" id="toTut">🎬 第一次來？先看使用教學（2 分半）</button><a class="tut-btn wb-btn" href="#/wrongbook">📕 我的錯題本${(()=>{const n=store.get('wrong',[]).length;return n?`（${n}）`:''})()}</a><a class="tut-btn td-btn t-only" href="#/teacher">📊 全班學習統計（老師）</a></div>
   </section>
   <nav class="map" aria-label="關卡地圖">
     ${portal('2-2')}${portal('2-3')}${portal('2-4')}
@@ -898,6 +956,7 @@ function renderHome(){
       <li><b>互動動畫</b>：每段都有播放、暫停、上一步、下一步、重播與速度控制，最後一步「換你試試」可以自己動手操作。</li>
       <li><b>即時練習</b>：每單元隨機 10 題、三單元綜合挑戰 20 題，答錯的題目會自動收進錯題本。</li>
       <li><b>心智圖神殿</b>：把詞卡拖到正確的空格，卡住時可打開三層線索；完成後可匯出 PNG。</li>
+      <li><b>我的錯題本</b>：即時練習答錯的題目會收進錯題本，可以依單元重練、看答案與解說；答對就移到「已訂正」。</li>
       <li><b>賓果競技場</b>：老師在大屏開房，學生用平板掃 QR Code 加入；抽到號碼球要答對題目才能畫 X，連成一條線就得一顆糖果！</li>
     </ul>
     </div>
@@ -1045,7 +1104,7 @@ document.getElementById('hudCoin2').innerHTML=spriteSvg('coin',3,'style="width:2
 /* ---- 路由（#/、#/unit/2-2/concept；GitHub Pages 可直接使用） ---- */
 function parseRoute(){const m=location.hash.match(/^#\/unit\/(2-[234])(?:\/(\w+))?(?:\/(\w+))?/);return m?{u:m[1],tab:m[2]||'concept',sub:m[3]}:{}}
 let lastUnit=null;
-function rerender(){if(viewer.classList.contains('open'))drawViewer();if(/^#\/(mindmap|bingo)/.test(location.hash))return;const r=parseRoute();if(r.u){if(r.tab==='concept')renderUnit(r.u,r.tab)}else renderHome()}
+function rerender(){if(viewer.classList.contains('open'))drawViewer();if(/^#\/(mindmap|bingo|teacher|wrongbook)/.test(location.hash))return;const r=parseRoute();if(r.u){if(r.tab==='concept')renderUnit(r.u,r.tab)}else renderHome()}
 function route(){if(viewer.classList.contains('open')){viewer.classList.remove('open');document.body.style.overflow=''}
   const r=parseRoute();
   if(typeof bgClear==='function')bgClear();
@@ -1053,6 +1112,10 @@ function route(){if(viewer.classList.contains('open')){viewer.classList.remove('
   if(bm){lastUnit=null;renderBingo(bm[1],bm[2],bm[3]);window.scrollTo(0,0);return}
   const mm=location.hash.match(/^#\/mindmap(?:\/([\w-]+))?/);
   if(mm){lastUnit=null;renderMindmap(mm[1]);window.scrollTo(0,0);return}
+  const tm=location.hash.match(/^#\/teacher(?:\/(demo))?/);
+  if(tm){lastUnit=null;renderTeacher(tm[1]);window.scrollTo(0,0);return}
+  const wb=location.hash.match(/^#\/wrongbook(?:\/(2-[234]))?/);
+  if(wb){lastUnit=null;renderWrongbook(wb[1]);window.scrollTo(0,0);return}
   if(r.u){if(r.u!==lastUnit)showIntro(r.u);lastUnit=r.u;renderUnit(r.u,r.tab,r.sub)}else{lastUnit=null;renderHome()}
   window.scrollTo(0,0)}
 window.addEventListener('hashchange',route);
@@ -3848,6 +3911,10 @@ if(location.protocol.startsWith('http')){fetch('questions.json',{cache:'no-store
 
 const QS={get:()=>store.get('qstats',{}),set:v=>store.set('qstats',v)};
 const WRONG={get:()=>store.get('wrong',[]),set:v=>store.set('wrong',v)};
+/* 每一題的作答紀錄（給錯題本與老師的學習統計用）：{題號:{n:作答次數,ok:答對次數,t:最後作答時間,lw:最後答錯時間,w:{選項:次數}}} */
+const QLOG={get:()=>store.get('qlog',{}),set:v=>store.set('qlog',v)};
+function logAnswer(q,ok,pick){const L=QLOG.get(),r=L[q.id]||{n:0,ok:0};r.n++;if(ok)r.ok++;r.t=Date.now();
+  if(!ok){r.lw=r.t;if(pick!=null&&pick!==''){r.w=r.w||{};r.w[pick]=(r.w[pick]||0)+1}}L[q.id]=r;QLOG.set(L)}
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function stars(acc){return acc>=.9?3:acc>=.7?2:acc>=.5?1:0}
 function starHTML(n){return [0,1,2].map(i=>`<span class="star ${i<n?'on':''}">★</span>`).join('')}
@@ -3874,22 +3941,22 @@ function renderQ(q,host,done){
     <div class="q-body"></div><div class="q-act"></div><div class="q-fb" hidden></div></div>`;
   const B=host.querySelector('.q-body'),A=host.querySelector('.q-act'),FB=host.querySelector('.q-fb');
   let answered=false;
-  const finish=(ok,ansText)=>{if(answered)return;answered=true;ok?SFX.coin():SFX.lock();
+  const finish=(ok,ansText,pick)=>{if(answered)return;answered=true;ok?SFX.coin():SFX.lock();
     host.querySelectorAll('button.q-opt,select,.m-chip,.m-slot').forEach(e=>{e.disabled=true;e.classList.add('lock')});
     A.innerHTML='';FB.hidden=false;FB.className='q-fb '+(ok?'ok':'no');
     FB.innerHTML=`<div class="q-res">${ok?'✔ 答對了！':'✖ 答錯了'}</div>${ok?'':`<div class="q-ans"><b>正確答案：</b>${ansText}</div>`}<div class="q-exp">${esc(q.explain)}</div><div class="q-links">${linkBtn(q.link)}</div><div class="q-next"></div>`;
-    bindLinks(FB);done&&done(ok,FB.querySelector('.q-next'))};
+    bindLinks(FB);done&&done(ok,FB.querySelector('.q-next'),pick)};
   if(q.type==='single'||q.type==='tf'){
     B.innerHTML=`<div class="q-opts ${q.type}">${q.options.map((o,i)=>`<button class="q-opt" data-i="${i}"><span class="q-l">${q.type==='tf'?(i?'✕':'○'):'ABCD'[i]}</span>${esc(o)}</button>`).join('')}</div>`;
     B.querySelectorAll('.q-opt').forEach(b=>b.onclick=()=>{if(answered)return;const i=+b.dataset.i,ok=i===q.answer;
       b.classList.add(ok?'right':'wrong');B.querySelector(`[data-i="${q.answer}"]`).classList.add('right');
-      finish(ok,`${q.type==='tf'?'':'ABCD'[q.answer]+'. '}${esc(q.options[q.answer])}`)});
+      finish(ok,`${q.type==='tf'?'':'ABCD'[q.answer]+'. '}${esc(q.options[q.answer])}`,String(i))});
   }else if(q.type==='fill'){
     A.innerHTML=`<button class="pbtn" data-go>確定答案</button>`;
     A.querySelector('[data-go]').onclick=()=>{const sel=[...host.querySelectorAll('select[data-b]')];
       if(sel.some(s=>s.value==='')){toast('還有空格沒有選喔！');return}
       let ok=true;sel.forEach(s=>{const b=+s.dataset.b,r=+s.value===q.answer[b];s.classList.add(r?'right':'wrong');if(!r)ok=false});
-      finish(ok,esc(q.stem).replace(/\{(\d)\}/g,(m,i)=>`<u>${esc(q.options[+i][q.answer[+i]])}</u>`))};
+      finish(ok,esc(q.stem).replace(/\{(\d)\}/g,(m,i)=>`<u>${esc(q.options[+i][q.answer[+i]])}</u>`),sel.map(s=>s.value).join('-'))};
   }else if(q.type==='match'){
     const L=q.options.left,R=q.options.right,order=shuffle(R.map((_,i)=>i)),put={};let pick=null;
     B.innerHTML=`<p class="q-tip">把右邊的說明拖到左邊對應的格子（也可以先點說明、再點格子）。</p><div class="m-wrap"><div class="m-left">${L.map((l,i)=>`<div class="m-row"><span class="m-key">${esc(l)}</span><button class="m-slot" data-s="${i}">放這裡</button></div>`).join('')}</div>
@@ -3908,7 +3975,7 @@ function renderQ(q,host,done){
     A.innerHTML=`<button class="pbtn" data-go>確定答案</button>`;
     A.querySelector('[data-go]').onclick=()=>{if(Object.keys(put).length<L.length){toast('還有格子沒有放喔！');return}
       let ok=true;B.querySelectorAll('.m-slot').forEach(s=>{const r=put[s.dataset.s]===q.answer[+s.dataset.s];s.classList.add(r?'right':'wrong');if(!r)ok=false});
-      finish(ok,L.map((l,i)=>`${esc(l)} → ${esc(R[q.answer[i]])}`).join('；'))};
+      finish(ok,L.map((l,i)=>`${esc(l)} → ${esc(R[q.answer[i]])}`).join('；'),L.map((_,i)=>put[i]).join('-'))};
   }else if(q.type==='hotspot'){
     const H=HOT[q.options.figure],regs=H.regions();
     B.innerHTML=`<p class="q-tip">直接在圖上點一下。</p><svg class="hs" viewBox="${H.vb}" shape-rendering="crispEdges">${H.svg()}<g class="hs-mark"></g></svg>`;
@@ -3918,7 +3985,7 @@ function renderQ(q,host,done){
       const hit=H.order.find(n=>regs[n].some(([x,y,w,h])=>p.x>=x-1.5&&p.x<=x+w+1.5&&p.y>=y-1.5&&p.y<=y+h+1.5));
       if(!hit){toast('請點在圖中的構造上');return}
       const ok=hit===q.answer;mark.innerHTML=(ok?'':hl(hit,'#d6336c'))+hl(q.answer,'#2f9e44')+`<circle cx="${p.x}" cy="${p.y}" r="2.2" fill="#2a1a12"/>`;
-      finish(ok,`${esc(q.answer)}（綠框處）${ok?'':`；你點的是「${esc(hit)}」`}`)});
+      finish(ok,`${esc(q.answer)}（綠框處）${ok?'':`；你點的是「${esc(hit)}」`}`,hit)});
   }
 }
 
@@ -3929,7 +3996,7 @@ function renderPractice(u,box){
   box.innerHTML=`<section class="pbox pr-home">
     <div class="pr-stat"><div><b class="px">本單元最佳</b><div class="stars">${starHTML(best?best.stars:0)}</div><div>${best?`正確率 ${Math.round(best.acc*100)}%`:'還沒有紀錄'}</div></div>
       <div><b class="px">累計作答</b><div class="big px">${st.answered||0}</div><div>答對 ${st.correct||0} 題</div></div>
-      <div><b class="px">錯題本</b><div class="big px">${wrongAll.length}</div><div>本單元 ${wrongU.length} 題</div></div></div>
+      <div><b class="px">錯題本</b><div class="big px">${wrongAll.length}</div><div>本單元 ${wrongU.length} 題</div><a class="pbtn ghost pr-wb" href="#/wrongbook">📕 打開我的錯題本</a></div></div>
     <div class="pr-modes">
       <button class="pbox pr-mode" data-m="unit"><span class="px">單元練習</span><small>${esc(UNITS[u].name)}：隨機 10 題（題庫 ${n} 題）</small></button>
       <button class="pbox pr-mode" data-m="mix"><span class="px">綜合挑戰</span><small>2-2、2-3、2-4 混合 20 題</small></button>
@@ -3937,17 +4004,19 @@ function renderPractice(u,box){
     </div></section><div class="pr-play"></div>`;
   box.querySelectorAll('.pr-mode').forEach(b=>b.onclick=()=>{SFX.open();startPractice(u,b.dataset.m,box)});
 }
-function startPractice(u,mode,box){
+function startPractice(u,mode,box,opts){
+  opts=opts||{};const home=()=>opts.home?opts.home():renderPractice(u,box);
   let list;
   if(mode==='unit')list=shuffle(QB.filter(q=>q.unit===u)).slice(0,10);
   else if(mode==='mix'){const per=[7,7,6];list=shuffle(ORDER.flatMap((x,i)=>shuffle(QB.filter(q=>q.unit===x)).slice(0,per[i])))}
+  else if(opts.ids){list=shuffle(QB.filter(q=>opts.ids.includes(q.id))).slice(0,opts.max||10)}
   else{const w=WRONG.get();list=shuffle(QB.filter(q=>w.includes(q.id))).slice(0,10)}
   if(!list.length){toast('沒有題目可以練習');return}
   const S={u,mode,list,i:0,ok:0,wrong:[]};
   box.innerHTML=`<section class="pbox pr-run"><div class="pr-bar"><span class="px pr-no"></span><div class="pr-prog"><i></i></div><span class="px pr-coin">${spriteSvg('coin',2,'style="width:16px;height:16px;vertical-align:-2px"')} × <b>0</b></span><button class="pbtn ghost pr-quit">結束</button></div><div class="pr-q"></div></section>`;
-  box.querySelector('.pr-quit').onclick=()=>{SFX.tap();renderPractice(u,box)};
+  box.querySelector('.pr-quit').onclick=()=>{SFX.tap();home()};
   const show=()=>{const q=S.list[S.i];box.querySelector('.pr-no').textContent=`第 ${S.i+1}／${S.list.length} 題`;box.querySelector('.pr-prog i').style.width=(S.i/S.list.length*100)+'%';
-    renderQ(q,box.querySelector('.pr-q'),(ok,next)=>{
+    renderQ(q,box.querySelector('.pr-q'),(ok,next,pick)=>{logAnswer(q,ok,pick);
       const st=QS.get();st.answered=(st.answered||0)+1;if(ok)st.correct=(st.correct||0)+1;QS.set(st);
       let w=WRONG.get();if(ok){if(S.mode==='wrong')w=w.filter(x=>x!==q.id)}else{if(!w.includes(q.id))w.push(q.id);S.wrong.push(q)}WRONG.set(w);
       if(ok){S.ok++;box.querySelector('.pr-coin b').textContent=S.ok}
@@ -3961,10 +4030,10 @@ function startPractice(u,mode,box){
     box.innerHTML=`<section class="pbox pr-result"><div class="px pr-clear">${s===3?'PERFECT!':s?'STAGE CLEAR!':'再接再厲！'}</div><div class="stars big">${starHTML(s)}</div>
       <p>答對 <b>${S.ok}</b> ／ ${S.list.length} 題，正確率 <b>${Math.round(acc*100)}%</b></p>
       ${S.wrong.length?`<div class="pr-wl"><b>這次答錯的題目（已收進錯題本）：</b><ol>${S.wrong.map(q=>`<li>${esc(q.stem.replace(/\{\d\}/g,'＿＿'))}</li>`).join('')}</ol></div>`:''}
-      <div class="pr-btns"><button class="pbtn" data-a="again">再玩一次</button>${WRONG.get().length?'<button class="pbtn gold" data-a="wrong">錯題重練</button>':''}<button class="pbtn ghost" data-a="home">回練習首頁</button></div></section>`;
-    box.querySelector('[data-a="again"]').onclick=()=>startPractice(u,S.mode,box);
-    const wb=box.querySelector('[data-a="wrong"]');if(wb)wb.onclick=()=>startPractice(u,'wrong',box);
-    box.querySelector('[data-a="home"]').onclick=()=>renderPractice(u,box);
+      <div class="pr-btns"><button class="pbtn" data-a="again">再玩一次</button>${WRONG.get().length?'<button class="pbtn gold" data-a="wrong">錯題重練</button>':''}<button class="pbtn ghost" data-a="home">${opts.home?'回錯題本':'回練習首頁'}</button></div></section>`;
+    box.querySelector('[data-a="again"]').onclick=()=>startPractice(u,S.mode,box,opts.ids?{...opts,ids:opts.refresh?opts.refresh():opts.ids}:opts);
+    const wb=box.querySelector('[data-a="wrong"]');if(wb)wb.onclick=()=>startPractice(u,'wrong',box,opts.home?{home:opts.home}:{});
+    box.querySelector('[data-a="home"]').onclick=()=>home();
     box.scrollIntoView({block:'start'})};
   show();
 }
@@ -3993,7 +4062,7 @@ function renderSummary(u,box){
   const pool=shuffle(QB.filter(q=>q.unit===u&&q.level==='基礎'&&(q.type==='single'||q.type==='tf'))).slice(0,3);
   let i=0,ok=0;const host=box.querySelector('.sq');
   const go=()=>{if(i>=pool.length){host.innerHTML=`<div class="px pr-clear">答對 ${ok}／${pool.length}</div><button class="pbtn" id="sqAgain">再來 3 題</button>`;host.querySelector('#sqAgain').onclick=()=>renderSummary(u,box);return}
-    renderQ(pool[i],host,(r,next)=>{if(r)ok++;next.innerHTML=`<button class="pbtn">${i<pool.length-1?'下一題 ▶':'看結果 ▶'}</button>`;next.querySelector('button').onclick=()=>{i++;go()}})};
+    renderQ(pool[i],host,(r,next,pick)=>{logAnswer(pool[i],r,pick);if(!r){const w=WRONG.get();if(!w.includes(pool[i].id)){w.push(pool[i].id);WRONG.set(w)}}if(r)ok++;next.innerHTML=`<button class="pbtn">${i<pool.length-1?'下一題 ▶':'看結果 ▶'}</button>`;next.querySelector('button').onclick=()=>{i++;go()}})};
   go();
 }
 
@@ -4533,6 +4602,270 @@ SCENES.bingo=()=>bands(['#1a1036','#221446','#2b1a56','#352066','#3f2676','#4a2c
   Array.from({length:40},(_,i)=>`<rect x="${(i*53)%320}" y="${(i*37)%120}" width="${i%3?2:3}" height="${i%3?2:3}" fill="#fff" opacity="${.4+(i%5)*.12}"/>`).join('')+
   `<g class="drift">${spr(SP.coin,40,30,3)}</g><g class="drift2">${spr(SP.coin,200,50,2)}</g>`+
   `<rect x="0" y="150" width="320" height="30" fill="#2a1a12"/>`+Array.from({length:20},(_,i)=>`<rect x="${i*16}" y="150" width="15" height="6" fill="${['#ff5f8f','#ffd23f','#5cbf3a','#5aa9e6'][i%4]}"/>`).join('');
+
+/* =========================================================
+   學習紀錄：學生「我的錯題本」＋ 老師「全班學習統計」
+   資料來源：共用帳號（account.js）把 bio2_ 開頭的進度同步到
+   students/{班級-座號}/data/ch2，老師只讀得到自己負責班級的學生。
+   ========================================================= */
+
+/* ---- 共用小工具 ---- */
+const UNIT_NAME={'2-2':'酵素','2-3':'植物如何製造養分','2-4':'人體如何獲得養分'};
+function stemText(q){return String(q.stem).replace(/\{\d\}/g,'＿＿')}
+function ansText(q){
+  if(q.type==='single')return 'ABCD'[q.answer]+'. '+q.options[q.answer];
+  if(q.type==='tf')return q.options[q.answer];
+  if(q.type==='fill')return q.answer.map((a,i)=>q.options[i][a]).join('、');
+  if(q.type==='match')return q.options.left.map((l,i)=>l+' → '+q.options.right[q.answer[i]]).join('；');
+  if(q.type==='hotspot')return q.answer;
+  return '';
+}
+function pickText(q,p){
+  if(p==null||p==='')return '';
+  if(q.type==='single')return 'ABCD'[+p]+'. '+(q.options[+p]||'');
+  if(q.type==='tf')return q.options[+p]||'';
+  if(q.type==='hotspot')return '點了「'+p+'」';
+  if(q.type==='fill'){const v=String(p).split('-');return v.map((x,i)=>(q.options[i]||[])[+x]||'？').join('、')}
+  return '';
+}
+/* 概念（題目連到的概念卡或動畫），依單元排序 */
+function conceptList(){
+  const keys=[...new Set(QB.map(q=>q.link).filter(Boolean))];
+  const ord=k=>{const [t,u,x]=k.split(':');return ORDER.indexOf(u)*1000+(t==='card'?+x:100+x.charCodeAt(0))};
+  return keys.sort((a,b)=>ord(a)-ord(b)).map(k=>{const [t,u,x]=k.split(':');
+    const name=t==='card'?((UNITS[u].cards[+x-1]||{}).t||k):'動畫 '+x+'：'+(((ANIMS[u]||[]).find(a=>a.id===x)||{}).name||'');
+    return {k,u,t,x,name}});
+}
+function conceptLink(c){return c.t==='card'?`<button class="lk" data-card="${c.u}:${+c.x-1}">${esc(c.name)}</button>`:`<a class="lk" href="#/unit/${c.u}/anim/${c.x}" target="_blank" rel="noopener">${esc(c.name)}</a>`}
+function fmtTime(t){return t?new Date(t).toLocaleString('zh-TW',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'—'}
+
+/* =========================================================
+   學生：我的錯題本  #/wrongbook[/2-2]
+   ========================================================= */
+function renderWrongbook(scope){
+  document.body.dataset.theme='home';setScene('home');
+  scope=ORDER.includes(scope)?scope:'all';
+  const wrong=WRONG.get(),log=QLOG.get(),st=QS.get();
+  const inScope=q=>scope==='all'||q.unit===scope;
+  const now=QB.filter(q=>wrong.includes(q.id)&&inScope(q)).sort((a,b)=>((log[b.id]||{}).lw||0)-((log[a.id]||{}).lw||0));
+  const fixed=QB.filter(q=>!wrong.includes(q.id)&&log[q.id]&&log[q.id].lw&&inScope(q)).sort((a,b)=>(log[b.id].t||0)-(log[a.id].t||0));
+  // 我的弱點概念：答錯比例最高的概念（至少作答 2 次）
+  const weak=conceptList().map(c=>{let n=0,ok=0;QB.forEach(q=>{if(q.link===c.k&&log[q.id]){n+=log[q.id].n;ok+=log[q.id].ok}});return {...c,n,ok}})
+    .filter(c=>c.n>=2&&c.ok/c.n<.8&&(scope==='all'||c.u===scope)).sort((a,b)=>a.ok/a.n-b.ok/b.n).slice(0,3);
+  const item=(q,isFixed)=>{const r=log[q.id]||{},miss=(r.n||0)-(r.ok||0);
+    return `<li class="wb-q ${isFixed?'fixed':''}"><div class="wb-tags"><span class="q-tag">${q.unit}</span><span class="q-tag t-${q.type}">${TYPE_NAME[q.type]}</span>
+      <span class="wb-cnt">${r.n?`答錯 ${Math.max(miss,1)} 次／作答 ${r.n} 次`:'答錯過'}${r.lw?'｜最近答錯 '+fmtTime(r.lw):''}</span></div>
+      <div class="wb-stem">${esc(stemText(q))}</div>
+      <details class="wb-ans"><summary>看答案與解說</summary><div><b>正確答案：</b>${esc(ansText(q))}</div><div class="q-exp">${esc(q.explain)}</div><div class="q-links">${linkBtn(q.link)}</div></details></li>`};
+  app.innerHTML=`<section class="pbox wb-head">
+    <h1 class="ptitle">📕 我的錯題本</h1>
+    <div class="wb-stats"><div><b class="px">${wrong.length}</b>待訂正</div><div><b class="px">${QB.filter(q=>!wrong.includes(q.id)&&log[q.id]&&log[q.id].lw).length}</b>已訂正</div>
+      <div><b class="px">${Math.max(st.answered||0,Object.values(log).reduce((s,r)=>s+r.n,0))}</b>累計作答</div></div>
+    <div class="levels" role="tablist">${[['all','全部'],...ORDER.map(u=>[u,u+' '+UNIT_NAME[u]])].map(([k,n])=>`<a class="lv" role="tab" aria-selected="${k===scope}" href="#/wrongbook${k==='all'?'':'/'+k}">${esc(n)}</a>`).join('')}</div>
+    <div class="wb-go"><button class="pbtn gold" id="wbGo" ${now.length?'':'disabled'}>▶ 錯題重練（${now.length?Math.min(10,now.length)+' 題，答對就移到已訂正':'目前沒有待訂正的題目'}）</button><a class="pbtn ghost" href="#/">回世界地圖</a></div>
+  </section>
+  <div class="wb-play"></div>
+  <div class="wb-body">
+  ${weak.length?`<section class="pbox wb-weak"><h2 class="px">我的弱點概念</h2><ol>${weak.map(c=>`<li>${conceptLink(c)}<span>答對率 ${Math.round(c.ok/c.n*100)}%（${c.ok}/${c.n}）</span></li>`).join('')}</ol><p class="wb-note">點概念名稱可以回去複習。</p></section>`:''}
+  <section class="pbox wb-list"><h2 class="px">待訂正（${now.length}）</h2>${now.length?`<ol>${now.map(q=>item(q,false)).join('')}</ol>`:'<p class="wb-empty">太棒了！這個範圍沒有待訂正的題目。到各單元的「即時練習」再挑戰看看吧！</p>'}</section>
+  ${fixed.length?`<section class="pbox wb-list"><details><summary class="px">已訂正（${fixed.length}）</summary><ol>${fixed.map(q=>item(q,true)).join('')}</ol></details></section>`:''}
+  </div>`;
+  bindLinks(app);
+  const go=document.getElementById('wbGo');
+  go.onclick=()=>{SFX.open();const box=app.querySelector('.wb-play');app.querySelector('.wb-body').hidden=true;
+    const ids=()=>WRONG.get().filter(id=>{const q=QB.find(x=>x.id===id);return q&&inScope(q)});
+    startPractice(scope==='all'?'2-2':scope,'wrong',box,{ids:ids(),refresh:ids,home:()=>renderWrongbook(scope)});box.scrollIntoView({block:'start'})};
+}
+
+/* =========================================================
+   老師：全班學習統計  #/teacher   （#/teacher/demo＝示範資料）
+   ========================================================= */
+const TD={rows:[],cls:'',sortKey:'seat',sortDir:1,demo:false,classes:{},db:null};
+function tLock(html){app.innerHTML=`<section class="pbox td-lock">${html}</section>`}
+async function renderTeacher(sub){
+  document.body.dataset.theme='home';setScene('home');
+  TD.demo=sub==='demo';
+  app.innerHTML=`<section class="pbox td-lock"><p class="px">LOADING…</p><p>正在確認老師帳號……</p></section>`;
+  if(!TD.demo){
+    const A=window.BIO_ACCOUNT;
+    if(A&&A.ready){try{await A.ready}catch(e){}}
+    if(!A||!A.online){tLock(`<h1 class="ptitle">📊 全班學習統計</h1><p>這一頁要在學校網址上，用老師帳號登入後使用：</p><p><b>https://batyunching.github.io/bio-ch2/teacher.html</b></p><p><a class="pbtn gold" href="#/teacher/demo">先看示範資料</a> <a class="pbtn ghost" href="#/">回世界地圖</a></p>`);return}
+    if(!A.isTeacher){tLock(`<h1 class="ptitle">🔒 這一頁只有老師可以使用</h1><p>學生可以打開「我的錯題本」複習自己的錯題。</p><p><a class="pbtn gold" href="#/wrongbook">📕 我的錯題本</a> <a class="pbtn ghost" href="#/">回世界地圖</a></p>`);return}
+    TD.db=firebase.database();const uid=A.user.uid;let isAdmin=false;
+    try{isAdmin=(await TD.db.ref('admins/'+uid).get()).val()===true}catch(e){}
+    try{const all=(await TD.db.ref('classes').get()).val()||{};TD.classes={};Object.keys(all).forEach(c=>{if(isAdmin||all[c].owner===uid)TD.classes[c]=all[c]})}
+    catch(e){tLock(`<h1 class="ptitle">讀取班級失敗</h1><p>${esc(e.message)}</p>`);return}
+  }else TD.classes={'701':{seats:Object.fromEntries(Array.from({length:28},(_,i)=>[i+1,true]))},'702':{seats:Object.fromEntries(Array.from({length:26},(_,i)=>[i+1,true]))}};
+  const keys=Object.keys(TD.classes).sort();
+  app.innerHTML=`<section class="pbox td-head">
+    <h1 class="ptitle">📊 全班學習統計</h1>
+    <p class="td-sub">讀取學生帳號同步到雲端的第 2 章紀錄（概念卡金幣、即時練習、錯題本、心智圖）。只有這個班的老師（和管理人）看得到。${TD.demo?'<b class="td-demo">目前顯示的是示範資料</b>':''}</p>
+    <div class="td-bar"><label>班級 <select id="tdCls">${keys.map(c=>`<option value="${esc(c)}">${esc(c)} 班</option>`).join('')||'<option value="">（還沒有班級，請到總入口的老師工具建立）</option>'}</select></label>
+      <button class="pbtn" id="tdReload">↻ 重新讀取</button><button class="pbtn ghost" id="tdCsv">匯出 CSV</button><span class="td-note" id="tdNote"></span></div>
+    <div class="td-stats" id="tdStats"></div>
+    <nav class="td-nav"><a href="#tdTop">最常錯的題目</a><a href="#tdProg">學習進度</a><a href="#tdHm">概念熱圖</a></nav>
+  </section>
+  <section class="pbox td-sec" id="tdTop"><h2 class="px">全班最常錯的題目</h2>
+    <p class="td-sub">依「答錯過的人數」排序。可以投影單題講解，或直接開始「全班錯題練習」。</p>
+    <div class="td-go"><label>單元 <select id="tdU"><option value="all">全部</option>${ORDER.map(u=>`<option value="${u}">${u} ${UNIT_NAME[u]}</option>`).join('')}</select></label>
+      <label>題數 <select id="tdN"><option>5</option><option selected>10</option><option>15</option></select></label><button class="pbtn gold" id="tdPractice">▶ 全班錯題練習（投影）</button></div>
+    <ol class="td-top" id="tdTopList"></ol><button class="pbtn ghost" id="tdMore" hidden>顯示更多</button></section>
+  <section class="pbox td-sec" id="tdProg"><h2 class="px">學習進度總覽</h2><p class="td-sub">點欄位名稱可以排序；點學生可以看他的錯題紀錄。</p><div class="td-scroll"><table class="td-prog" id="tdProgT"></table></div></section>
+  <section class="pbox td-sec" id="tdHm"><h2 class="px">全班錯題概念熱圖</h2>
+    <div class="td-legend"><span><i class="g"></i>答對率 80% 以上</span><span><i class="m"></i>50～79%</span><span><i class="b"></i>未滿 50%</span><span><i class="none"></i>還沒作答</span><span>（淡色＝作答不到 3 題，僅供參考；點概念名稱可投影概念卡）</span></div>
+    <div class="td-scroll td-hmw" id="tdHmT"></div></section>`;
+  const sel=document.getElementById('tdCls');const last=store.get('teacherCls','');if(TD.classes[last])sel.value=last;
+  sel.onchange=()=>{SFX.tap();tLoad()};document.getElementById('tdReload').onclick=()=>{SFX.tap();tLoad()};
+  document.getElementById('tdCsv').onclick=tCsv;
+  document.getElementById('tdU').onchange=()=>tRenderTop();
+  document.getElementById('tdPractice').onclick=()=>{const list=tTopList().slice(0,+document.getElementById('tdN').value).map(x=>x.q);if(!list.length){toast('還沒有學生的錯題紀錄');return}classPractice(list)};
+  app.querySelectorAll('.td-nav a').forEach(a=>a.onclick=e=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'})});
+  if(keys.length)tLoad();
+}
+function jp(v,d){try{return v==null?d:JSON.parse(v)}catch(e){return d}}
+function tRow(sid,seat,v){
+  const d=(v.data&&v.data.ch2)||{},g=(k,def)=>jp(d[encodeURIComponent('bio2_'+k).replace(/\./g,'%2E')],def);
+  const coins=g('coins',{}),qs=g('qstats',{}),wrong=g('wrong',[]).filter(id=>QB.some(q=>q.id===id)),log=g('qlog',{});
+  const cu={};ORDER.forEach(u=>cu[u]=UNITS[u].cards.filter(c=>coins[c.id]).length);
+  let ln=0,lok=0;Object.values(log).forEach(r=>{ln+=r.n||0;lok+=r.ok||0});
+  const n=Math.max(qs.answered||0,ln),ok=n===ln?lok:(qs.correct||0);
+  const mm=['2-2','2-3','2-4','all'].filter(k=>(g('mm_'+k,{})||{}).cleared).length;
+  const fixed=Object.keys(log).filter(id=>log[id].lw&&!wrong.includes(id));
+  const conc={};QB.forEach(q=>{const r=log[q.id];if(r&&r.n&&q.link){const c=conc[q.link]=conc[q.link]||{n:0,ok:0};c.n+=r.n;c.ok+=r.ok}});
+  return {sid,seat,name:(v.profile&&v.profile.name)||'',cu,coins:cu['2-2']+cu['2-3']+cu['2-4'],best:qs.best||{},mix:qs.mix||null,n,ok,acc:n?ok/n:null,
+    wrong,fixed,log,conc,mm,seen:(v.lastSeen&&v.lastSeen.ch2)||0,active:n>0||cu['2-2']+cu['2-3']+cu['2-4']>0};
+}
+/* 示範資料：同一個班每次都產生一樣的結果 */
+function demoStudent(cls,seat){
+  let s=(+cls*97+seat*131)%2147483647;const rnd=()=>(s=s*16807%2147483647)/2147483647;
+  const skill=.45+rnd()*.5,act=rnd();const data={};
+  if(act<.08)return {};
+  const coins={};ORDER.forEach(u=>UNITS[u].cards.forEach(c=>{if(rnd()<act+.15)coins[c.id]=true}));
+  const log={},wrong=[];let n=0,ok=0;
+  QB.forEach(q=>{if(rnd()>act*.9)return;const hard=(q.level==='會考'?.25:q.level==='進階'?.12:0)+(/2-4:7|2-2:C|2-3:D/.test(q.link)?.15:0);
+    const r={n:0,ok:0,t:Date.now()-Math.floor(rnd()*6e8)};const k=1+Math.floor(rnd()*3);
+    for(let i=0;i<k;i++){r.n++;if(rnd()<skill-hard)r.ok++;else{r.lw=r.t;if(q.type==='single'||q.type==='tf'){const opts=q.options.length;let p=(q.answer+1+Math.floor(rnd()*(opts-1)*.6))%opts;r.w=r.w||{};r.w[p]=(r.w[p]||0)+1}}}
+    log[q.id]=r;n+=r.n;ok+=r.ok;if(r.lw&&rnd()<.6)wrong.push(q.id)});
+  const best={};ORDER.forEach(u=>{if(rnd()<act){const a=Math.min(1,skill+rnd()*.2);best[u]={acc:a,stars:stars(a)}}});
+  const e=v=>JSON.stringify(v);
+  data.bio2_coins=e(coins);data.bio2_qstats=e({answered:n,correct:ok,best});data.bio2_wrong=e(wrong);data.bio2_qlog=e(log);
+  ['2-2','2-3','2-4','all'].forEach(k=>{if(rnd()<act-.2)data['bio2_mm_'+k]=e({cleared:true})});
+  return {data:{ch2:data},lastSeen:{ch2:Date.now()-Math.floor(rnd()*9e8)}};
+}
+async function tLoad(){
+  const c=document.getElementById('tdCls').value;if(!c)return;TD.cls=c;store.set('teacherCls',c);
+  const note=document.getElementById('tdNote');note.textContent='讀取中…';
+  const seats=Object.keys(TD.classes[c].seats||{}).map(Number).filter(n=>n>0).sort((a,b)=>a-b);
+  const list=await Promise.all(seats.map(async n=>{const sid=c+'-'+String(n).padStart(2,'0');
+    if(TD.demo)return tRow(sid,n,demoStudent(c,n));
+    try{return tRow(sid,n,(await TD.db.ref('students/'+sid).get()).val()||{})}catch(e){return tRow(sid,n,{})}}));
+  TD.rows=list;note.textContent=`已讀取 ${list.length} 位學生　${new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'})}`;
+  tRender();
+}
+function tRender(){
+  const R=TD.rows,act=R.filter(r=>r.active),tn=R.reduce((s,r)=>s+r.n,0),tok=R.reduce((s,r)=>s+r.ok,0),nc=ORDER.reduce((s,u)=>s+UNITS[u].cards.length,0);
+  document.getElementById('tdStats').innerHTML=[
+    [`${act.length} / ${R.length}`,'已開始學習'],[tn,'全班作答題數'],[tn?Math.round(tok/tn*100)+'%':'—','全班答對率'],
+    [act.length?(act.reduce((s,r)=>s+r.coins,0)/act.length).toFixed(1)+' / '+nc:'—','平均概念卡金幣'],
+    [R.reduce((s,r)=>s+r.wrong.length,0),'全班待訂正錯題'],[R.filter(r=>r.mm>=4).length,'完成全部心智圖']]
+    .map(([b,t])=>`<div><b class="px">${b}</b>${t}</div>`).join('');
+  tRenderTop();tRenderProg();tRenderHm();
+}
+/* 每一題的全班統計 */
+function tTopList(){
+  const u=(document.getElementById('tdU')||{}).value||'all';
+  return QB.filter(q=>u==='all'||q.unit===u).map(q=>{let who=0,tried=0,miss=0,now=0;const picks={};
+    TD.rows.forEach(r=>{const l=r.log[q.id],inW=r.wrong.includes(q.id);
+      if((l&&l.n)||inW)tried++;const m=l?(l.n-l.ok):0;if(m>0||inW){who++;miss+=Math.max(m,1)}if(inW)now++;
+      if(l&&l.w)Object.entries(l.w).forEach(([p,c])=>picks[p]=(picks[p]||0)+c)});
+    const top=Object.entries(picks).sort((a,b)=>b[1]-a[1])[0];
+    return {q,who,tried,miss,now,pick:top?{t:pickText(q,top[0]),c:top[1]}:null}})
+   .filter(x=>x.who>0).sort((a,b)=>b.who-a.who||b.who/b.tried-a.who/a.tried||b.miss-a.miss);
+}
+function tRenderTop(){
+  const all=tTopList(),box=document.getElementById('tdTopList'),more=document.getElementById('tdMore');let lim=10;
+  const draw=()=>{box.innerHTML=all.length?all.slice(0,lim).map((x,i)=>{const pct=x.tried?Math.round(x.who/x.tried*100):0;
+    return `<li class="td-tq"><span class="rk px">#${i+1}</span><div class="td-tqm"><div class="wb-tags"><span class="q-tag">${x.q.unit}</span><span class="q-tag t-${x.q.type}">${TYPE_NAME[x.q.type]}</span><span class="q-tag lv-${x.q.level}">${esc(x.q.level)}</span></div>
+      <div class="wb-stem">${esc(stemText(x.q))}</div>
+      <div class="td-ans">○ 正確：${esc(ansText(x.q))}${x.pick&&x.pick.t?`<br><span class="no">✕ 最常選錯：${esc(x.pick.t)}（${x.pick.c} 次）</span>`:''}</div>
+      <div class="td-btns"><button class="pbtn" data-show="${x.q.id}">👁 投影這題</button>${linkBtn(x.q.link)}</div></div>
+      <div class="td-cnt"><b class="px">${x.who}</b> 人答錯過<br><span>作答 ${x.tried} 人｜錯誤率 ${pct}%</span><div class="td-barl"><i style="width:${pct}%"></i></div><span>還沒訂正 ${x.now} 人</span></div></li>`}).join('')
+      :'<p class="wb-empty">目前還沒有錯題紀錄（學生在「即時練習」作答後就會出現）。</p>';
+    more.hidden=all.length<=lim;bindLinks(box);
+    box.querySelectorAll('[data-show]').forEach(b=>b.onclick=()=>{const q=QB.find(q=>q.id===b.dataset.show);classPractice([q])})};
+  more.onclick=()=>{lim+=10;draw()};draw();
+}
+const TCOLS=[['seat','座號'],['coins','概念卡金幣'],['s22','2-2 最佳'],['s23','2-3 最佳'],['s24','2-4 最佳'],['n','作答題數'],['acc','答對率'],['wn','待訂正'],['fn','已訂正'],['mm','心智圖'],['seen','最後上線']];
+function tVal(r,k){return k==='s22'?(r.best['2-2']||{}).acc:k==='s23'?(r.best['2-3']||{}).acc:k==='s24'?(r.best['2-4']||{}).acc:k==='wn'?r.wrong.length:k==='fn'?r.fixed.length:r[k]}
+function tCell(r,k){const v=tVal(r,k);
+  if(k==='seat')return `<button class="lk" data-sid="${r.sid}">${r.seat} 號${r.name?' '+esc(r.name):''}</button>`;
+  if(k==='coins')return `${r.coins}<small>（${ORDER.map(u=>r.cu[u]).join('／')}）</small>`;
+  if(/^s2/.test(k))return v==null?'—':starHTML(stars(v))+`<small>${Math.round(v*100)}%</small>`;
+  if(k==='acc')return v==null?'—':`<span class="${v>=.8?'g':v>=.5?'m':'b'}">${Math.round(v*100)}%</span>`;
+  if(k==='wn')return v?`<b class="no">${v}</b>`:'0';
+  if(k==='mm')return v+' / 4';
+  if(k==='seen')return v?fmtTime(v):'<span class="dim">還沒進來過</span>';
+  return v}
+function tRenderProg(){
+  const k=TD.sortKey,list=TD.rows.slice().sort((a,b)=>{let x=tVal(a,k),y=tVal(b,k);x=x==null?-1:x;y=y==null?-1:y;return (x>y?1:x<y?-1:0)*TD.sortDir});
+  const T=document.getElementById('tdProgT');
+  T.innerHTML=`<thead><tr>${TCOLS.map(([c,n])=>`<th data-k="${c}">${n}${k===c?(TD.sortDir>0?' ▲':' ▼'):''}</th>`).join('')}</tr></thead><tbody>${list.map(r=>`<tr class="${r.active?'':'idle'}">${TCOLS.map(([c])=>`<td>${tCell(r,c)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  T.querySelectorAll('th').forEach(th=>th.onclick=()=>{const c=th.dataset.k;if(TD.sortKey===c)TD.sortDir=-TD.sortDir;else{TD.sortKey=c;TD.sortDir=c==='seat'?1:-1}tRenderProg()});
+  T.querySelectorAll('[data-sid]').forEach(b=>b.onclick=()=>tStudent(TD.rows.find(r=>r.sid===b.dataset.sid)));
+}
+function hmClass(m){if(!m||!m.n)return 'none';const p=m.ok/m.n;return (p>=.8?'g':p>=.5?'m':'b')+(m.n<3?' few':'')}
+function tRenderHm(){
+  const C=conceptList();
+  let h=`<table class="td-hm"><thead><tr><th class="n">座號</th>${C.map(c=>`<th class="c u${c.u.slice(2)}">${conceptLink({...c,name:c.u+' '+c.name})}</th>`).join('')}</tr></thead><tbody>`;
+  TD.rows.forEach(r=>{h+=`<tr><td class="n">${r.seat} 號</td>${C.map(c=>{const m=r.conc[c.k];return `<td class="x ${hmClass(m)}" title="${r.seat} 號｜${esc(c.name)}：${m&&m.n?m.ok+'/'+m.n+' 次答對':'還沒作答'}">${m&&m.n?Math.round(m.ok/m.n*100):''}</td>`}).join('')}</tr>`});
+  h+=`<tr class="avg"><td class="n">全班</td>${C.map(c=>{let n=0,ok=0;TD.rows.forEach(r=>{const m=r.conc[c.k];if(m){n+=m.n;ok+=m.ok}});return `<td class="x ${hmClass(n?{n,ok}:null)}" title="全班｜${esc(c.name)}：${n?ok+'/'+n:'還沒作答'}">${n?Math.round(ok/n*100):''}</td>`}).join('')}</tr></tbody></table>`;
+  const box=document.getElementById('tdHmT');box.innerHTML=h;bindLinks(box);
+}
+/* 單一學生的紀錄 */
+function tStudent(r){
+  if(!r)return;SFX.open();
+  const qs=ids=>ids.map(id=>QB.find(q=>q.id===id)).filter(Boolean);
+  const weak=conceptList().map(c=>({...c,...(r.conc[c.k]||{n:0,ok:0})})).filter(c=>c.n>=2&&c.ok/c.n<.8).sort((a,b)=>a.ok/a.n-b.ok/b.n).slice(0,5);
+  const li=q=>{const l=r.log[q.id]||{};return `<li><span class="q-tag">${q.unit}</span> ${esc(stemText(q))}<small>${l.n?`（錯 ${l.n-l.ok}／${l.n} 次${l.w?'，選了：'+Object.keys(l.w).map(p=>pickText(q,p)).filter(Boolean).map(esc).join('、'):''}）`:''}</small></li>`};
+  const d=document.createElement('div');d.className='td-modal';
+  d.innerHTML=`<div class="pbox td-mbox" role="dialog" aria-modal="true" aria-label="學生學習紀錄"><button class="pbtn ghost td-x" aria-label="關閉">✕</button>
+    <h2 class="px">${r.seat} 號${r.name?' '+esc(r.name):''}｜學習紀錄</h2>
+    <div class="td-stats sm">${ORDER.map(u=>`<div><b class="px">${r.cu[u]} / ${UNITS[u].cards.length}</b>${u} 金幣${r.best[u]?'<br>'+starHTML(r.best[u].stars):''}</div>`).join('')}
+      <div><b class="px">${r.acc==null?'—':Math.round(r.acc*100)+'%'}</b>答對率（${r.n} 題）</div><div><b class="px">${r.mm} / 4</b>心智圖</div></div>
+    ${weak.length?`<h3>弱點概念</h3><ul class="td-weak">${weak.map(c=>`<li>${esc(c.u+' '+c.name)}：答對 ${c.ok}/${c.n}</li>`).join('')}</ul>`:''}
+    <h3>待訂正（${r.wrong.length}）</h3>${r.wrong.length?`<ol class="td-ql">${qs(r.wrong).map(li).join('')}</ol>`:'<p class="dim">沒有待訂正的錯題。</p>'}
+    ${r.fixed.length?`<details><summary><b>已訂正（${r.fixed.length}）</b></summary><ol class="td-ql">${qs(r.fixed).map(li).join('')}</ol></details>`:''}
+    <p class="dim">最後上線：${r.seen?fmtTime(r.seen):'還沒進來過'}</p></div>`;
+  document.body.appendChild(d);document.body.style.overflow='hidden';
+  const close=()=>{d.remove();document.body.style.overflow=''};
+  d.querySelector('.td-x').onclick=close;d.onclick=e=>{if(e.target===d)close()};
+  d.addEventListener('keydown',e=>{if(e.key==='Escape')close()});d.querySelector('.td-x').focus();
+}
+/* 全班錯題練習（投影用）：老師帶全班一起作答 */
+function classPractice(list){
+  SFX.open();let i=0;const d=document.createElement('div');d.className='td-modal td-class';
+  d.innerHTML=`<div class="pbox td-mbox big"><div class="pr-bar"><span class="px pr-no"></span><div class="pr-prog"><i></i></div><button class="pbtn ghost td-x">✕ 結束</button></div><div class="td-cstat"></div><div class="pr-q"></div></div>`;
+  document.body.appendChild(d);document.body.style.overflow='hidden';
+  const close=()=>{d.remove();document.body.style.overflow=''};d.querySelector('.td-x').onclick=close;
+  const show=()=>{const q=list[i];d.querySelector('.pr-no').textContent=list.length>1?`全班錯題練習　第 ${i+1}／${list.length} 題`:'投影講解';
+    d.querySelector('.pr-prog i').style.width=(i/list.length*100)+'%';
+    const x=TD.rows.length?tTopList().find(t=>t.q.id===q.id):null;
+    const cs=d.querySelector('.td-cstat');cs.hidden=true;
+    cs.innerHTML=x?`📊 全班：${x.who} 人答錯過（作答 ${x.tried} 人）${x.pick&&x.pick.t?`；最常選錯「${esc(x.pick.t)}」`:''}`:'';
+    renderQ(q,d.querySelector('.pr-q'),(ok,next)=>{cs.hidden=!cs.innerHTML;
+      next.innerHTML=i<list.length-1?'<button class="pbtn">下一題 ▶</button>':'<button class="pbtn">完成 ✔</button>';
+      next.querySelector('button').onclick=()=>{SFX.next();i++;if(i<list.length){show();d.querySelector('.td-mbox').scrollTop=0}else close()}})};
+  show();
+}
+function tCsv(){
+  if(!TD.rows.length)return;const C=conceptList();
+  const head=['座號','姓名','2-2 金幣','2-3 金幣','2-4 金幣','2-2 最佳答對率','2-3 最佳答對率','2-4 最佳答對率','作答題數','答對率','待訂正','已訂正','心智圖完成','最後上線','待訂正題號'].concat(C.map(c=>c.u+' '+c.name+' 答對率'));
+  const pc=v=>v==null?'':Math.round(v*100)+'%';
+  const lines=[head].concat(TD.rows.map(r=>[r.seat,r.name,r.cu['2-2'],r.cu['2-3'],r.cu['2-4'],pc((r.best['2-2']||{}).acc),pc((r.best['2-3']||{}).acc),pc((r.best['2-4']||{}).acc),r.n,pc(r.acc),r.wrong.length,r.fixed.length,r.mm,r.seen?new Date(r.seen).toLocaleString('zh-TW'):'',r.wrong.join(' ')]
+    .concat(C.map(c=>{const m=r.conc[c.k];return m&&m.n?pc(m.ok/m.n):''}))));
+  const csv='﻿'+lines.map(l=>l.map(x=>{x=String(x==null?'':x);return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x}).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`第2章_${TD.cls}班_學習統計.csv`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
+}
 
 /*ANIM-END*/
 </script>
