@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>生物體的營養大冒險｜第2章互動學習</title>
-<meta name="description" content="國中自然第2章 生物體的營養：2-2 酵素、2-3 植物如何製造養分、2-4 人體如何獲得養分 互動學習網站">
+<meta name="description" content="國中自然第2章 生物體的營養：2-1 食物中的養分、2-2 酵素、2-3 植物如何製造養分、2-4 人體如何獲得養分 互動學習網站">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -21,6 +21,7 @@
 :root{
   --ink:#2a1a12; --ink2:#5a3b28; --paper:#fff8e6; --paper2:#ffefc7;
   --gold:#e0a91f; --gold-d:#9c6f08; --gold-l:#ffd65a;
+  --u21:#2f86c9; --u21d:#1b5a8e; --u21l:#cfe8fb;
   --u22:#f07f24; --u22d:#a4480f; --u22l:#ffd2a6;
   --u23:#3f9f45; --u23d:#1f5f27; --u23l:#c9eda0;
   --u24:#e45f84; --u24d:#9a2648; --u24l:#ffd0dc;
@@ -29,6 +30,7 @@
   --px:"Cubic11","Press Start 2P","Noto Sans TC","Microsoft JhengHei",monospace;
   --tx:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
 }
+body[data-theme="2-1"]{--accent:var(--u21);--accent-d:var(--u21d);--accent-l:var(--u21l)}
 body[data-theme="2-2"]{--accent:var(--u22);--accent-d:var(--u22d);--accent-l:var(--u22l)}
 body[data-theme="2-3"]{--accent:var(--u23);--accent-d:var(--u23d);--accent-l:var(--u23l)}
 body[data-theme="2-4"]{--accent:var(--u24);--accent-d:var(--u24d);--accent-l:var(--u24l)}
@@ -96,7 +98,9 @@ svg.ill{width:100%;height:auto;display:block;background:#fffdf5}
 .squad svg{width:64px;height:64px}
 .blink{animation:blink 1s steps(2) infinite}
 @keyframes blink{50%{opacity:0}}
-.map{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;align-items:end}
+.map{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;align-items:end}
+.map .portal h2{font-size:18px}.map .portal .sub{font-size:14px}
+@media (max-width:1250px) and (min-width:981px){.map{grid-template-columns:repeat(3,1fr)}.map::before{display:none}.portal:nth-child(even){margin-bottom:0}}
 .map::before{content:"";position:absolute;left:8%;right:8%;top:58%;border-top:8px dashed rgba(42,26,18,.55);z-index:0}
 .portal{position:relative;z-index:1;display:flex;flex-direction:column;text-decoration:none;color:var(--ink);cursor:pointer;transition:transform .1s}
 .portal:nth-child(even){margin-bottom:46px}
@@ -178,6 +182,7 @@ table.td-hm td.few{opacity:.45}table.td-hm tr.avg td{border-top:3px solid var(--
 .td-weak{margin:0;padding-left:1.3em}
 .td-cstat{background:#fff3c4;border:3px solid var(--ink);padding:8px 14px;margin:10px 0;font-weight:900;font-size:clamp(16px,1.4vw,24px)}
 .td-class .q-stem{font-size:clamp(22px,2vw,36px)}.td-class .q-opt{font-size:clamp(20px,1.7vw,30px)}.td-class .q-fb{font-size:clamp(17px,1.4vw,24px)}
+.lab-list{margin:0;padding-left:1.2em;font-size:16px;line-height:1.7}
 .pr-wb{margin-top:8px;font-size:14px;padding:6px 10px;min-height:38px}
 .wb-head a.lv{text-decoration:none;color:inherit;display:inline-flex;align-items:center}
 body:has(.td-modal) #viewer{z-index:2100}
@@ -553,7 +558,7 @@ body[data-theme="bingo"] main{max-width:1880px}
   </div>
 </header>
 <main id="app"></main>
-<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.70–91｜第 4 期：賓果競技場</footer>
+<footer class="foot">國中自然 第2章 生物體的營養｜內容依據課本 p.66–91｜2-1 食物中的養分～2-4 人體如何獲得養分</footer>
 <div id="viewer" role="dialog" aria-modal="true" aria-label="概念卡"></div>
 <div id="intro" aria-live="polite"></div>
 
@@ -588,6 +593,17 @@ const SP={
  coin:["..kkkk..",".kyyyyk.","kyymyyYk","kyymyyYk","kyymyyYk","kyyyyyYk",".kYYYYk.","..kkkk.."],
  enzyme:["....kkkkk....","..kkpppppkk..",".kpppppppppk.","kpppppppppppk","kkkkpppkppkpk","...kpppkppkpk","...kppppppppk","...kppPPPPppk","kkkkppppppppk","kppppppppppk.",".kppppppppk..","..kkppppkk...","....kkkk....."],
  leafkid:[".......kkkk.",".....kkggGk.","...kkgglgGk.","..kgggglgGk.",".kgkwgkwgGk.",".kgkkgkkgGk.","kgggglggGGk.","kggPPPgGGk..","kgggggGGk...",".kggGGGk....","..kkkkk.....","..nn........","..nn........"],
+ riceball:["....kkkk....","...kwwwwk...","..kwwwwwwk..","..kwkwwkwk..",".kwwkwwkwwk.",".kpwwPPwwpk.","kwwwwwwwwwwk","kwwkGGGGkwwk","kwwkGGGGkwwk","kwwkGGGGkwwk",".kkkkkkkkkk."],
+ rice:["...kkkk...",".kkwwwwkk.","kwwwWwwwwk","kkkkkkkkkk","kbbbbbbbbk",".kbBbbBbk.","..kbbbbk..","...kkkk..."],
+ bread:[".kkkkkkkk.","kttttttttk","ktSttttStk","kttttttttk","kttStttttk","ktttttSttk","kkkkkkkkkk"],
+ fish:["....kkk.....","..kkbbbkk.k.",".kbwkbbbbkbk","kbbbbbbbbbbk",".kbbbbbbbkbk","..kkbbbkk.k.","....kkk....."],
+ meat:["...kkkk..","..kaaaak.",".kaaNaaak","kaaaaaaak","kaNaaaaak",".kaaaaak.","..kkwk...","...kwk...","..kwkwk.."],
+ egg:["..kkk..",".kwwwk.","kwwwwwk","kwwWwwk","kwwwwwk",".kwwwk.","..kkk.."],
+ oil:["..kk..","..kk..",".kyyk.","kyyyyk","kyYyyk","kyyyyk","kyYyyk","kkkkkk"],
+ veg:[".kkkkk..","kgggggk.","kgGggGgk","kggggggk",".kkgGkk.","..kgk...","..kgk...","..kkk..."],
+ apple:["....kk..","...kGk..",".kkkkkk.","krrrrrRk","krWrrrRk","krrrrrRk",".krrrRk.","..kkkk.."],
+ banana:["......kk",".....kyk","....kyyk","...kyyYk","..kyyYk.","kkyyYk..","kyYYk...",".kkk...."],
+ milk:["..kkk..",".kWWWk.","kkkkkkk","kWWWWWk","kWbbbWk","kWWWWWk","kWWWWWk","kkkkkkk"],
  foodball:["...kkkkk...","..ksssssk..",".kssttsssk.","kssssssstsk","kskwsskwssk","kskksskkssk","kssssssssSk","ksssPPPssSk",".kssssssSk.","..kSSSSSk..","...kkkkk..."],
  sun:["....y.y....",".y.......y.","...yyyyy...","y.yyyyyyy.y","..yyymyyy..","..yymyyyy..","..yyyyyyy..","y.yyyyyyy.y","...yyyyy...",".y.......y.","....y.y...."],
  drop:["...k...","..kbk..","..kbk..",".kbcbk.","kbcbbbk","kbbbbbk","kbbbbBk",".kbbBk.","..kkk.."],
@@ -648,9 +664,73 @@ function leafSection(hl){
   return o}
 
 /* =========================================================
-   單元與概念卡資料（內容依課本 p.70–91 與企劃書 3.1、4.1、5.1）
+   單元與概念卡資料（內容依課本 p.66–91 與企劃書 3.1、4.1、5.1）
    ========================================================= */
 const UNITS={
+'2-1':{name:'食物中的養分',stage:'營養市集',pages:'課本 p.66–69',guide:'riceball',color:'#2f86c9',
+ hello:'歡迎來到營養市集！我是飯糰小米。打開 8 張概念卡，看看食物裡藏了哪些養分！',
+ cards:[
+ {t:'養分的功用',pg:'p.66',cap:'養分是生物體維持生命現象的必需條件之一',
+  pts:['養分是生物體維持生命現象的必需條件之一。','有些種類的養分可以產生能量。','有些可以組成生物體內的構造。','有些則與代謝作用的調節有關。'],
+  q:'養分在生物體內有哪三種功用？',a:'產生能量、組成生物體內的構造，以及與代謝作用的調節有關。',
+  svg:()=>SV(S('riceball',82,6,3)+TAG(100,52,'養分',C.y,{s:11,w:52})+AR(78,60,46,80,C.B)+AR(100,62,100,82,C.B)+AR(122,60,154,80,C.B)+
+    BX(8,84,62,34,'#fff4c2')+`<path d="M36 88 l-8 14 h8 l-4 12 l12 -16 h-8 l6 -10 z" fill="${C.y}" stroke="${C.k}" stroke-width="1.5"/>`+T(56,104,'能量',{s:8.5,b:1})+
+    BX(72,84,56,34,'#ffe2c4')+[0,1,2].map(i=>BX(78+i*14,94,12,8,C.S,{sw:1.2})).join('')+[0,1].map(i=>BX(85+i*14,102,12,8,C.S,{sw:1.2})).join('')+T(100,117,'組成構造',{s:8,b:1})+
+    BX(130,84,62,34,'#e3f2ff')+`<circle cx="148" cy="100" r="8" fill="none" stroke="${C.B}" stroke-width="4" stroke-dasharray="4 3" shape-rendering="auto"/>`+T(172,98,'調節',{s:8.5,b:1})+T(172,108,'代謝',{s:8.5,b:1}),'養分的三種功用')},
+ {t:'人體需要的六類養分',pg:'p.66 圖2-1',cap:'可以產生能量：醣類、蛋白質、脂質',
+  pts:['人們透過攝食獲得的養分中，可以產生能量的有：醣類（碳水化合物）、蛋白質和脂質。','無法產生能量的有：礦物質、維生素和水。','六類養分對生物體都很重要，缺一不可。'],
+  q:'哪三類養分可以產生能量？哪三類不行？',a:'醣類（碳水化合物）、蛋白質、脂質可以產生能量；礦物質、維生素、水無法產生能量。',
+  svg:()=>SV(BX(6,6,92,113,'#fff4c2')+TAG(52,18,'可以產生能量',C.y,{s:8.5})+
+    [['醣類（碳水化合物）',C.y,7.6],['蛋白質',C.p,10],['脂質','#ffe9a8',10]].map(([n,f,z],i)=>BX(12,32+i*28,80,22,f)+T(52,46+i*28,n,{s:z,b:1})).join('')+
+    BX(102,6,92,113,'#e3f2ff')+TAG(148,18,'無法產生能量',C.c,{s:8.5})+
+    [['礦物質',C.e],['維生素',C.l],['水',C.c]].map(([n,f],i)=>BX(112,32+i*28,72,22,f)+T(148,47+i*28,n,{s:10,b:1})).join(''),'六類養分分成兩組')},
+ {t:'各類食物所含的養分',pg:'p.66 圖2-1',cap:'圖 2-1 各類食物所含的養分',
+  pts:['不同食物的養分組成種類與比例通常不同，只含單一養分的食物相當少見。','米飯、麵粉類食品：含有較高比例的澱粉（醣類的一種）。','海鮮、肉類和蛋類：富含蛋白質。','食用油：脂質含量高。','礦物質和維生素：存在於各式各樣的食物中，例如蔬菜與水果。'],
+  q:'早餐吃荷包蛋和吐司，分別主要提供哪一類養分？',a:'荷包蛋富含蛋白質；吐司（麵粉類食品）含有較高比例的澱粉（醣類）。',
+  svg:()=>SV(BX(4,4,94,56,'#fff4c2')+S('rice',10,14,3)+S('bread',46,16,3)+T(51,56,'澱粉（醣類）',{s:8,b:1})+
+    BX(102,4,94,56,'#ffe4ea')+S('fish',106,16,3)+S('egg',150,10,3)+S('meat',170,24,2.4)+T(149,56,'蛋白質',{s:8,b:1})+
+    BX(4,64,94,57,'#fff8d8')+S('oil',36,68,3.4)+T(51,117,'脂質',{s:8,b:1})+
+    BX(102,64,94,57,'#eaf8e0')+S('veg',110,72,3)+S('apple',148,72,3)+T(149,117,'礦物質、維生素',{s:8,b:1}),'食物與它們主要的養分')},
+ {t:'醣類的種類',pg:'p.66 補充',cap:'「醣」是所有含糖食物的通稱，也就是碳水化合物',
+  pts:['「糖」通常吃起來有甜味；「醣」是所有含糖食物的通稱，也就是「碳水化合物」，嚐起來不一定有甜味。','多醣類：澱粉、纖維素、肝醣，都是由許多葡萄糖組成。','雙醣類：蔗糖（葡萄糖＋果糖）、乳糖（葡萄糖＋半乳糖）、麥芽糖（葡萄糖＋葡萄糖）。','單醣類：葡萄糖、果糖、半乳糖。','同一類養分會以不同的形式存在食物中。'],
+  q:'澱粉吃起來沒什麼甜味，為什麼也屬於醣類？',a:'「醣」是碳水化合物的通稱，不一定有甜味；澱粉是由許多葡萄糖組成的多醣。',
+  svg:()=>SV(TAG(30,16,'多醣類',C.y)+chain(60,11,9,C.y,10,2)+T(115,36,'澱粉、纖維素、肝醣',{s:7.5})+
+    TAG(30,58,'雙醣類',C.o)+CIR(66,58,6,C.y)+`<rect x="72" y="56" width="6" height="4" fill="${C.k}"/>`+CIR(84,58,6,C.p)+T(150,62,'蔗糖、乳糖、麥芽糖',{s:7.5})+
+    TAG(30,94,'單醣類',C.p)+CIR(66,94,6,C.y)+T(150,98,'葡萄糖、果糖、半乳糖',{s:7.5})+
+    BX(6,108,188,14,'#fff4c2',{sw:1.5})+T(100,118,'○ 代表一個小分子醣類（如葡萄糖）',{s:7.5}),'多醣、雙醣、單醣示意')},
+ {t:'組成生物體的構造',pg:'p.67',cap:'醣類、蛋白質與脂質也是組成生物體構造的主要原料',
+  pts:['纖維素（醣類的一種）可組成植物細胞的細胞壁。','蛋白質是構成人體肌肉與頭髮的主要成分。','分布於皮膚下層的脂肪，具有防止熱量散失、達到身體保溫的功能。','知識便利貼：人體無法直接分解纖維素而產生能量，但適當攝取纖維素可促進腸胃蠕動，維持腸道健康。'],
+  q:'冬天時，皮膚下層的脂肪對身體有什麼幫助？',a:'可以防止熱量散失，達到身體保溫的功能。',
+  svg:()=>SV(BX(4,4,62,117,'#eaf8e0')+[0,1].map(r=>[0,1].map(i=>BX(10+i*26,16+r*30,24,28,'#c9eda0',{sw:2.5})+`<rect x="${18+i*26}" y="${26+r*30}" width="8" height="8" fill="${C.g}"/>`).join('')).join('')+T(35,92,'纖維素',{s:8.5,b:1})+T(35,104,'→細胞壁',{s:8,b:1})+
+    BX(70,4,62,117,'#ffe4ea')+`<path d="M86 20 C80 40 82 58 92 70 C102 58 106 40 98 20 z" fill="${C.p}" stroke="${C.k}" stroke-width="2"/><path d="M110 18 c4 14 -4 30 2 48 M116 18 c4 14 -4 30 2 48" stroke="${C.N}" stroke-width="3" fill="none"/>`+T(101,92,'蛋白質',{s:8.5,b:1})+T(101,104,'→肌肉、頭髮',{s:7.5,b:1})+
+    BX(136,4,60,117,'#fff4c2')+BX(142,18,48,10,C.s,{sw:1.5})+BX(142,28,48,18,'#ffe9a8',{sw:1.5})+BX(142,46,48,20,'#f4a3a3',{sw:1.5})+T(166,40,'皮下脂肪',{s:7})+
+    `<path d="M150 66 v8 M166 66 v8 M182 66 v8" stroke="${C.r}" stroke-width="2"/>`+T(166,92,'脂肪',{s:8.5,b:1})+T(166,104,'→保溫',{s:8,b:1}),'醣類、蛋白質、脂質組成的構造')},
+ {t:'礦物質、維生素與水',pg:'p.67',cap:'對維持正常生命機能相當重要',
+  pts:['礦物質、維生素與水對維持正常生命機能相當重要；礦物質與維生素又可分成很多種類。','鈣質：組成人體骨骼和牙齒的重要成分。','鐵質：會影響紅血球的製造與功能。','維生素 A：和眼睛保健有關；維生素 C：可增加身體的復原力和抵抗力。','水：在生物體內的含量很多，能協助代謝或其他反應的進行。'],
+  q:'維生素 C 和維生素 A，各和身體的哪些功能有關？',a:'維生素 C 可增加身體的復原力和抵抗力；維生素 A 和眼睛保健有關。',
+  svg:()=>SV([['鈣',C.e,'骨骼、牙齒',S('tooth',23,10,2.2)],['鐵',C.R,'紅血球',`<circle cx="34" cy="22" r="9" fill="${C.r}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/><circle cx="34" cy="22" r="3.5" fill="#c22"/>`],
+     ['維生素A',C.o,'眼睛保健',`<ellipse cx="34" cy="22" rx="13" ry="7" fill="#fff" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/><circle cx="34" cy="22" r="4.5" fill="${C.B}"/>`],
+     ['維生素C',C.y,'復原力、抵抗力',`<path d="M24 12 h20 v8 c0 8 -10 12 -10 12 s-10 -4 -10 -12 z" fill="${C.l}" stroke="${C.k}" stroke-width="2"/>`],
+     ['水',C.c,'協助代謝反應',S('drop',27,10,2.4)]].map(([n,f,d,ic],i)=>{const x=(i%3)*66,y=i<3?2:64;return `<g transform="translate(${x+(i<3?0:33)} ${y})">`+BX(2,2,62,58,'#fffdf5',{sw:1.6})+ic+TAG(33,46,n,f,{s:7.5,tf:n==='鐵'?'#fff':C.k})+T(33,57,d,{s:6.8})+`</g>`}).join(''),'礦物質、維生素與水的功能')},
+ {t:'食物中的熱量',pg:'p.67 圖2-2',cap:'圖 2-2 測量食物所含熱量的方法',
+  pts:['測試食物所含熱量的方法：燃燒食物加熱容器中的水，觀察水溫的變化，來推估食物所含的熱量。','常用的熱量單位是「卡」或「大卡」，1000 卡＝1 大卡。','1 公克的醣類或蛋白質可產生 4 大卡熱量。','1 公克的脂質可產生 9 大卡熱量。'],
+  q:'2 公克脂質和 3 公克蛋白質，哪一個完全燃燒後產生的熱量較多？',a:'2 公克脂質：2×9＝18 大卡，比 3 公克蛋白質的 3×4＝12 大卡多。',
+  svg:()=>SV(`<rect x="44" y="8" width="4" height="40" fill="#fff" stroke="${C.k}" stroke-width="1.5"/><rect x="45" y="30" width="2" height="18" fill="${C.r}"/>`+
+    `<path d="M30 40 h32 l8 20 h-48 z" fill="#d6f0ff" stroke="${C.k}" stroke-width="2"/>`+`<rect x="22" y="60" width="48" height="4" fill="${C.E}"/><path d="M28 64 v24 M64 64 v24" stroke="${C.k}" stroke-width="2"/>`+
+    `<path d="M42 88 c-6 -6 0 -14 4 -18 c4 6 8 10 2 18 z" fill="${C.o}" stroke="${C.k}" stroke-width="1.5"/>`+BX(38,88,16,8,C.t,{sw:1.5})+T(46,110,'燃燒食物加熱水',{s:8,b:1})+T(46,121,'觀察水溫變化',{s:8})+
+    BX(96,6,98,26,'#fff4c2')+T(145,23,'1000 卡＝1 大卡',{s:9.5,b:1})+
+    BX(96,38,98,38,'#ffe4ea')+T(145,53,'醣類、蛋白質',{s:8.5,b:1})+T(145,68,'1 公克 → 4 大卡',{s:9,b:1,f:C.P})+
+    BX(96,82,98,38,'#fff8d8')+T(145,97,'脂質',{s:8.5,b:1})+T(145,112,'1 公克 → 9 大卡',{s:9,b:1,f:C.O}),'測量食物熱量與熱量換算')},
+ {t:'實驗 2-1 澱粉與糖的測定',pg:'p.68–69',cap:'碘液檢測澱粉、本氏液檢測葡萄糖（糖）',
+  pts:['黃褐色的碘液遇澱粉，會變成藍黑色或紫紅色。','淺藍色的本氏液加入葡萄糖溶液（或麥芽糖溶液）後加熱，會依糖分含量和作用時間，出現綠、黃、橙、紅等顏色變化。','梅花盤中間滴水、A 試管只加水，都是用來比較的對照組。','結果：米飯遇碘液呈藍黑色（含澱粉）；香蕉、奇異果等水果使本氏液變色（含糖），米飯則沒有。'],
+  q:'碘液滴入水中沒有變色，滴入澱粉液卻變成藍黑色，代表什麼？',a:'讓碘液變成藍黑色或紫紅色的物質是澱粉，不是水。',
+  svg:()=>SV(TAG(48,12,'碘液：澱粉',C.y,{s:8.5})+
+    [[22,'#d9a35a','水'],[48,'#2c2a5a','澱粉液'],[74,'#2c2a5a','米飯']].map(([x,col,n])=>`<circle cx="${x}" cy="44" r="11" fill="#fff" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/><circle cx="${x}" cy="44" r="6.5" fill="${col}" shape-rendering="auto"/>`+T(x,66,n,{s:7.5,b:1})).join('')+
+    T(48,84,'黃褐 → 藍黑色',{s:8,b:1})+T(48,96,'或紫紅色',{s:8,b:1})+
+    TAG(146,12,'本氏液：糖（加熱）',C.c,{s:8,w:96})+
+    [['#5aa9e6','A 水'],['#d93a2b','B 葡萄糖'],['#5aa9e6','C 米飯'],['#f08a2c','D 果肉']].map(([col,n],i)=>{const x=110+i*24;return `<rect x="${x}" y="24" width="14" height="54" fill="#fff" stroke="${C.k}" stroke-width="2"/><rect x="${x+2}" y="50" width="10" height="26" fill="${col}"/>`+T(x+7,90,n.split(' ')[0],{s:9,b:1})+T(x+7,101,n.split(' ')[1],{s:6.5})}).join('')+
+    T(146,118,'淺藍 → 綠黃橙紅',{s:8,b:1}),'碘液與本氏液的檢測結果')}
+ ]},
 '2-2':{name:'酵素',stage:'酵素工廠',pages:'課本 p.70–75',guide:'enzyme',color:'#f07f24',
  hello:'歡迎來到酵素工廠！我是酵素小酶。打開 8 張概念卡，看懂就能收集金幣！',
  cards:[
@@ -853,7 +933,7 @@ const UNITS={
     T(100,114,'讓腸胃保持健康',{s:10,b:1}),'膳食纖維、益生菌與胃黏膜')}
  ]}
 };
-const ORDER=['2-2','2-3','2-4'];
+const ORDER=['2-1','2-2','2-3','2-4'];
 ORDER.forEach(u=>UNITS[u].cards.forEach((c,i)=>{c.id=u+'-'+(i+1);c.unit=u;c.idx=i}));
 
 /* =========================================================
@@ -880,6 +960,12 @@ const SCENES={
    `<path d="M0 132 h30 v-12 h30 v-10 h40 v12 h30 v-18 h40 v14 h40 v-8 h40 v10 h40 v12 h30 V180 H0 Z" fill="#e8b93a"/>`+
    `<path d="M0 148 h50 v-8 h60 v6 h70 v-10 h60 v8 h80 V180 H0 Z" fill="#c9951b"/>`+
    `<rect x="0" y="164" width="320" height="16" fill="#8a5a2b"/>`+Array.from({length:20},(_,i)=>`<rect x="${i*16}" y="164" width="15" height="7" fill="#a8723a"/><rect x="${i*16+8}" y="172" width="15" height="7" fill="#a8723a"/>`).join(''),
+ '2-1':()=>bands(['#6ec6f5','#7fcdf6','#93d6f7','#a8def8','#bfe7fa','#d6f0fb'])+cloud(24,16,3,'drift')+cloud(200,30,2,'drift2')+
+   [[8,'#e83f3f'],[112,'#2f86c9'],[216,'#ffd23f']].map(([x,c])=>`<rect x="${x+8}" y="84" width="6" height="70" fill="#8a5a2b"/><rect x="${x+82}" y="84" width="6" height="70" fill="#8a5a2b"/>`+
+     Array.from({length:6},(_,i)=>`<path d="M${x+i*16} 70 h16 v14 l-8 6 l-8 -6 z" fill="${i%2?'#fffdf5':c}" stroke="#2a1a12" stroke-width="2"/>`).join('')+
+     `<rect x="${x+4}" y="118" width="88" height="34" fill="#c98a4a" stroke="#2a1a12" stroke-width="2"/><rect x="${x+4}" y="118" width="88" height="6" fill="#a8723a"/>`).join('')+
+   `<g>${spr(SP.apple,22,104,2)}${spr(SP.banana,42,104,2)}${spr(SP.veg,64,102,2)}${spr(SP.fish,124,106,2)}${spr(SP.egg,154,106,2)}${spr(SP.meat,172,102,2)}${spr(SP.bread,226,106,2)}${spr(SP.rice,252,104,2)}${spr(SP.oil,284,100,2)}</g>`+
+   `<rect x="0" y="152" width="320" height="28" fill="#d9b98a"/>`+Array.from({length:20},(_,i)=>`<rect x="${i*16}" y="152" width="15" height="7" fill="#e8cfa4"/><rect x="${i*16+8}" y="162" width="15" height="7" fill="#c9a676"/>`).join(''),
  '2-2':()=>bands(['#3a1f2b','#5a2a2c','#83392a','#ad5226','#d47024','#f09a3a'])+
    `<g fill="#2a1418"><rect x="10" y="90" width="60" height="74"/><rect x="22" y="56" width="12" height="40"/><rect x="46" y="66" width="10" height="30"/><path d="M80 110 l20 -14 v14 l20 -14 v14 l20 -14 v68 h-60 z"/><rect x="190" y="80" width="80" height="84"/><rect x="206" y="44" width="14" height="40"/><rect x="240" y="58" width="12" height="26"/><rect x="280" y="104" width="40" height="60"/></g>`+
    `<g fill="#ffcf6a">${[[18,100],[36,100],[54,100],[18,116],[54,116],[200,92],[220,92],[240,92],[200,110],[240,110],[290,114]].map(([x,y])=>`<rect x="${x}" y="${y}" width="8" height="6"/>`).join('')}</g>`+
@@ -917,7 +1003,7 @@ function lockedThumb(kind,open){const bg=kind==='mind'?['#3b3b6b','#4a4a80','#5a
   :Array.from({length:25},(_,i)=>`<rect x="${85+(i%5)*30}" y="${8+Math.floor(i/5)*27}" width="26" height="23" fill="${[3,7,12,18,21].includes(i)?'#e45f84':'#fff8e6'}" stroke="#2a1a12" stroke-width="2"/>`).join('')}
   ${open?'':spr(SP.lock,140,48,5)}</svg>`}
 
-function mmPct(){try{const sc=['2-2','2-3','2-4','all'];const n=sc.filter(k=>{const v=localStorage.getItem('bio2_mm_'+k);return v&&JSON.parse(v).cleared}).length;return `完成 ${n} / 4 張`}catch(e){return ''}}
+function mmPct(){try{const sc=[...ORDER,'all'];const n=sc.filter(k=>{const v=localStorage.getItem('bio2_mm_'+k);return v&&JSON.parse(v).cleared}).length;return `完成 ${n} / ${sc.length} 張`}catch(e){return ''}}
 const TUT_ID='yiggDlS9Ho0';
 function renderHome(){
   document.body.dataset.theme='home';setScene('home');
@@ -933,12 +1019,12 @@ function renderHome(){
     <div class="world">WORLD 2 ‧ CHAPTER 2</div>
     <h1 class="ptitle">生物體的營養 大冒險</h1>
     <p>選一個關卡進入，打開概念卡、收集金幣！</p>
-    <div class="squad">${spriteSvg('enzyme',5)}${spriteSvg('leafkid',5)}${spriteSvg('foodball',5)}</div>
+    <div class="squad">${spriteSvg('riceball',5)}${spriteSvg('enzyme',5)}${spriteSvg('leafkid',5)}${spriteSvg('foodball',5)}</div>
     <p class="px blink" style="margin-top:10px;color:var(--gold-d)">▶ SELECT STAGE</p>
     <div class="home-btns"><button class="tut-btn" id="toTut">🎬 第一次來？先看使用教學（2 分半）</button><a class="tut-btn wb-btn" href="#/wrongbook">📕 我的錯題本${(()=>{const n=store.get('wrong',[]).length;return n?`（${n}）`:''})()}</a><a class="tut-btn td-btn t-only" href="#/teacher">📊 全班學習統計（老師）</a></div>
   </section>
   <nav class="map" aria-label="關卡地圖">
-    ${portal('2-2')}${portal('2-3')}${portal('2-4')}
+    ${portal('2-1')}${portal('2-2')}${portal('2-3')}${portal('2-4')}
     <a class="portal" href="#/mindmap" style="--c:#6b4fbf"><div class="pbox plate">${lockedThumb('mind',true)}<div class="info"><span class="num" style="background:#6b4fbf">MAP</span><h2>心智圖神殿</h2><div class="sub">用線索拼出完整概念</div><div class="sub px" style="margin-top:4px">${mmPct()}</div></div></div></a>
     <a class="portal" href="#/bingo" style="--c:#d6336c"><div class="pbox plate">${lockedThumb('bingo',true)}<div class="info"><span class="num" style="background:#d6336c">BINGO</span><h2>賓果競技場</h2><div class="sub">全班大屏賓果對戰</div><div class="sub px" style="margin-top:4px">老師開房／學生加入</div></div></div></a>
   </nav>
@@ -954,7 +1040,7 @@ function renderHome(){
       <li><b>學生模式</b>：點開概念卡閱讀，回答「想一想」小提問；看懂後按「我看懂了」收集金幣。進度會存在這台平板（或電腦）上。</li>
       <li><b>老師模式</b>：大字投影、重點逐點顯示、解答預設隱藏。可用鍵盤 <span class="keys"><kbd>→</kbd>／<kbd>空白鍵</kbd> 下一點、<kbd>←</kbd> 上一點、<kbd>PgDn</kbd>／<kbd>PgUp</kbd> 換卡、<kbd>Esc</kbd> 關閉</span>。</li>
       <li><b>互動動畫</b>：每段都有播放、暫停、上一步、下一步、重播與速度控制，最後一步「換你試試」可以自己動手操作。</li>
-      <li><b>即時練習</b>：每單元隨機 10 題、三單元綜合挑戰 20 題，答錯的題目會自動收進錯題本。</li>
+      <li><b>即時練習</b>：每單元隨機 10 題、全章綜合挑戰 20 題，答錯的題目會自動收進錯題本。</li>
       <li><b>心智圖神殿</b>：把詞卡拖到正確的空格，卡住時可打開三層線索；完成後可匯出 PNG。</li>
       <li><b>我的錯題本</b>：即時練習答錯的題目會收進錯題本，可以依單元重練、看答案與解說；答對就移到「已訂正」。</li>
       <li><b>賓果競技場</b>：老師在大屏開房，學生用平板掃 QR Code 加入；抽到號碼球要答對題目才能畫 X，連成一條線就得一顆糖果！</li>
@@ -969,6 +1055,7 @@ function renderHome(){
 
 const LEVELS=[['concept','重點概念',''],['anim','互動動畫',''],['practice','即時練習',''],['summary','小結','']];
 const COMING={
+ '2-1':{anim:[],summary:[]},
  '2-2':{anim:['動畫 A：酵素分解作用——拖曳澱粉、纖維素、蛋白質到澱粉酶上，體驗專一性與可重複使用','動畫 B：酵素合成作用——把小分子拖到酵素上結合成大分子','動畫 C：活性實驗室——溫度與酸鹼值滑桿，觀察酵素活性變化','動畫 D：虛擬實驗 2-2——依課本步驟操作，判斷是否支持假說'],
         summary:['可收合的整理表：代謝類型、酵素特性、溫度、酸鹼','三題快問快答']},
  '2-3':{anim:['動畫 A：葉片構造探索——從整片葉放大到橫切面，點選各構造看功能；氣孔可開合','動畫 B：分子的旅程——依序把光、水、二氧化碳拖進葉綠體，觀察產生葡萄糖、氧氣與水','動畫 C：光合作用變因小實驗——調整光照、二氧化碳、水分','動畫 D：虛擬實驗 2-3——自選包鋁箔的位置，最後滴碘液「開獎」'],
@@ -1102,7 +1189,7 @@ document.getElementById('hudCoinIcon').innerHTML=spriteSvg('coin',3,'style="widt
 document.getElementById('hudCoin2').innerHTML=spriteSvg('coin',3,'style="width:24px;height:24px;display:block"');
 
 /* ---- 路由（#/、#/unit/2-2/concept；GitHub Pages 可直接使用） ---- */
-function parseRoute(){const m=location.hash.match(/^#\/unit\/(2-[234])(?:\/(\w+))?(?:\/(\w+))?/);return m?{u:m[1],tab:m[2]||'concept',sub:m[3]}:{}}
+function parseRoute(){const m=location.hash.match(/^#\/unit\/(2-[1234])(?:\/(\w+))?(?:\/(\w+))?/);return m?{u:m[1],tab:m[2]||'concept',sub:m[3]}:{}}
 let lastUnit=null;
 function rerender(){if(viewer.classList.contains('open'))drawViewer();if(/^#\/(mindmap|bingo|teacher|wrongbook)/.test(location.hash))return;const r=parseRoute();if(r.u){if(r.tab==='concept')renderUnit(r.u,r.tab)}else renderHome()}
 function route(){if(viewer.classList.contains('open')){viewer.classList.remove('open');document.body.style.overflow=''}
@@ -1114,7 +1201,7 @@ function route(){if(viewer.classList.contains('open')){viewer.classList.remove('
   if(mm){lastUnit=null;renderMindmap(mm[1]);window.scrollTo(0,0);return}
   const tm=location.hash.match(/^#\/teacher(?:\/(demo))?/);
   if(tm){lastUnit=null;renderTeacher(tm[1]);window.scrollTo(0,0);return}
-  const wb=location.hash.match(/^#\/wrongbook(?:\/(2-[234]))?/);
+  const wb=location.hash.match(/^#\/wrongbook(?:\/(2-[1234]))?/);
   if(wb){lastUnit=null;renderWrongbook(wb[1]);window.scrollTo(0,0);return}
   if(r.u){if(r.u!==lastUnit)showIntro(r.u);lastUnit=r.u;renderUnit(r.u,r.tab,r.sub)}else{lastUnit=null;renderHome()}
   window.scrollTo(0,0)}
@@ -1124,6 +1211,689 @@ window.addEventListener('DOMContentLoaded',route);
 </script>
 <script type="application/json" id="qbank">
 [
+ {
+  "id": "q2101",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一類養分「無法」產生能量？",
+  "options": [
+   "醣類",
+   "蛋白質",
+   "脂質",
+   "維生素"
+  ],
+  "answer": 3,
+  "explain": "可以產生能量的是醣類、蛋白質和脂質；礦物質、維生素和水無法產生能量。",
+  "link": "card:2-1:2",
+  "bingo": true
+ },
+ {
+  "id": "q2102",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "米飯、麵粉類食品中含有較高比例的哪一種養分？",
+  "options": [
+   "澱粉",
+   "蛋白質",
+   "脂質",
+   "礦物質"
+  ],
+  "answer": 0,
+  "explain": "米飯、麵粉類食品含有較高比例的澱粉（醣類的一種）。",
+  "link": "card:2-1:3",
+  "bingo": true
+ },
+ {
+  "id": "q2103",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "海鮮、肉類和蛋類等食物富含哪一類養分？",
+  "options": [
+   "醣類",
+   "蛋白質",
+   "脂質",
+   "水"
+  ],
+  "answer": 1,
+  "explain": "海鮮、肉類和蛋類等食物富含蛋白質。",
+  "link": "card:2-1:3",
+  "bingo": true
+ },
+ {
+  "id": "q2104",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "食用油中含量最高的養分是哪一類？",
+  "options": [
+   "醣類",
+   "蛋白質",
+   "脂質",
+   "維生素"
+  ],
+  "answer": 2,
+  "explain": "食用油中的脂質含量高。",
+  "link": "card:2-1:3",
+  "bingo": true
+ },
+ {
+  "id": "q2105",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "1 公克的脂質可產生多少大卡熱量？",
+  "options": [
+   "1 大卡",
+   "4 大卡",
+   "9 大卡",
+   "1000 大卡"
+  ],
+  "answer": 2,
+  "explain": "1 公克的醣類或蛋白質可產生 4 大卡，1 公克的脂質可產生 9 大卡。",
+  "link": "card:2-1:7",
+  "bingo": true
+ },
+ {
+  "id": "q2106",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "1 公克的蛋白質可產生多少大卡熱量？",
+  "options": [
+   "0 大卡",
+   "4 大卡",
+   "9 大卡",
+   "1000 大卡"
+  ],
+  "answer": 1,
+  "explain": "1 公克的醣類或蛋白質可產生 4 大卡熱量。",
+  "link": "card:2-1:7",
+  "bingo": true
+ },
+ {
+  "id": "q2107",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "1 大卡等於多少卡？",
+  "options": [
+   "10 卡",
+   "100 卡",
+   "1000 卡",
+   "4 卡"
+  ],
+  "answer": 2,
+  "explain": "1000 卡熱量等於 1 大卡熱量。",
+  "link": "card:2-1:7",
+  "bingo": true
+ },
+ {
+  "id": "q2108",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "實驗 2-1 中，用來檢測食物中是否含有澱粉的試劑是哪一種？",
+  "options": [
+   "碘液",
+   "本氏液",
+   "酒精",
+   "清水"
+  ],
+  "answer": 0,
+  "explain": "黃褐色的碘液遇澱粉會變成藍黑色或紫紅色。",
+  "link": "card:2-1:8",
+  "bingo": true
+ },
+ {
+  "id": "q2109",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "碘液遇到澱粉後，會變成什麼顏色？",
+  "options": [
+   "淺藍色",
+   "藍黑色或紫紅色",
+   "綠色",
+   "黃褐色"
+  ],
+  "answer": 1,
+  "explain": "黃褐色的碘液遇澱粉會變成藍黑色或紫紅色。",
+  "link": "anim:2-1:C",
+  "bingo": true
+ },
+ {
+  "id": "q2110",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "本氏液原本是什麼顏色？",
+  "options": [
+   "黃褐色",
+   "淺藍色",
+   "紅色",
+   "無色"
+  ],
+  "answer": 1,
+  "explain": "淺藍色的本氏液加入葡萄糖溶液後加熱，會出現綠、黃、橙、紅等顏色變化。",
+  "link": "card:2-1:8",
+  "bingo": true
+ },
+ {
+  "id": "q2111",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一種成分是組成人體骨骼和牙齒的重要成分？",
+  "options": [
+   "鐵質",
+   "鈣質",
+   "維生素 C",
+   "脂質"
+  ],
+  "answer": 1,
+  "explain": "鈣質是組成人體骨骼和牙齒的重要成分。",
+  "link": "card:2-1:6",
+  "bingo": true
+ },
+ {
+  "id": "q2112",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "下列哪一種成分會影響紅血球的製造與功能？",
+  "options": [
+   "鈣質",
+   "鐵質",
+   "維生素 A",
+   "纖維素"
+  ],
+  "answer": 1,
+  "explain": "鐵質會影響紅血球的製造與功能。",
+  "link": "card:2-1:6",
+  "bingo": true
+ },
+ {
+  "id": "q2113",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "和眼睛保健有關的是哪一種維生素？",
+  "options": [
+   "維生素 A",
+   "維生素 C",
+   "鈣質",
+   "鐵質"
+  ],
+  "answer": 0,
+  "explain": "維生素 A 和眼睛保健有關；維生素 C 可增加身體的復原力和抵抗力。",
+  "link": "card:2-1:6",
+  "bingo": true
+ },
+ {
+  "id": "q2114",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "構成人體肌肉與頭髮的主要成分是哪一類養分？",
+  "options": [
+   "醣類",
+   "蛋白質",
+   "脂質",
+   "礦物質"
+  ],
+  "answer": 1,
+  "explain": "蛋白質是構成人體肌肉與頭髮的主要成分。",
+  "link": "card:2-1:5",
+  "bingo": true
+ },
+ {
+  "id": "q2115",
+  "unit": "2-1",
+  "type": "single",
+  "level": "基礎",
+  "stem": "組成植物細胞細胞壁的纖維素，屬於哪一類養分？",
+  "options": [
+   "醣類",
+   "蛋白質",
+   "脂質",
+   "維生素"
+  ],
+  "answer": 0,
+  "explain": "纖維素是醣類的一種，可組成植物細胞的細胞壁。",
+  "link": "card:2-1:5",
+  "bingo": true
+ },
+ {
+  "id": "q2116",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "水無法產生能量，但能協助代謝或其他反應的進行。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "水在生物體內的含量很多，能協助代謝或其他反應的進行。",
+  "link": "card:2-1:6",
+  "bingo": true
+ },
+ {
+  "id": "q2117",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "大多數食物都只含有單一種養分。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "不同食物的養分組成種類與比例通常不同，只含單一養分的食物相當少見。",
+  "link": "card:2-1:3",
+  "bingo": true
+ },
+ {
+  "id": "q2118",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "分布於皮膚下層的脂肪，具有防止熱量散失、達到身體保溫的功能。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "皮下脂肪能防止熱量散失，達到身體保溫的功能。",
+  "link": "card:2-1:5",
+  "bingo": true
+ },
+ {
+  "id": "q2119",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "礦物質和維生素可以產生能量。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "礦物質、維生素和水無法產生能量，但對維持正常生命機能相當重要。",
+  "link": "anim:2-1:A",
+  "bingo": true
+ },
+ {
+  "id": "q2120",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "淺藍色的本氏液加入葡萄糖溶液後，不需加熱就會立刻變成紅色。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "本氏液加入葡萄糖溶液後要「加熱」，才會依糖分含量和作用時間出現綠、黃、橙、紅等顏色。",
+  "link": "anim:2-1:C",
+  "bingo": true
+ },
+ {
+  "id": "q2121",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "基礎",
+  "stem": "「醣」是碳水化合物的通稱，嚐起來不一定有甜味。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "「糖」通常吃起來有甜味；「醣」是所有含糖食物的通稱，也就是碳水化合物，不一定有甜味。",
+  "link": "card:2-1:4",
+  "bingo": true
+ },
+ {
+  "id": "q2122",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "進階",
+  "stem": "人體可以直接分解纖維素而產生能量。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 1,
+  "explain": "纖維素雖屬醣類，但人體無法直接分解而產生能量；適當攝取可促進腸胃蠕動、維持腸道健康。",
+  "link": "card:2-1:5",
+  "bingo": true
+ },
+ {
+  "id": "q2123",
+  "unit": "2-1",
+  "type": "tf",
+  "level": "進階",
+  "stem": "測量食物所含熱量時，可以燃燒食物加熱容器中的水，觀察水溫的變化來推估。",
+  "options": [
+   "正確",
+   "錯誤"
+  ],
+  "answer": 0,
+  "explain": "燃燒食物加熱水，由水溫的變化推估食物所含的熱量。",
+  "link": "anim:2-1:B",
+  "bingo": true
+ },
+ {
+  "id": "q2124",
+  "unit": "2-1",
+  "type": "match",
+  "level": "基礎",
+  "stem": "請把左邊的成分和右邊正確的功能配對。",
+  "options": {
+   "left": [
+    "鈣質",
+    "鐵質",
+    "維生素 A",
+    "維生素 C"
+   ],
+   "right": [
+    "組成骨骼和牙齒的重要成分",
+    "影響紅血球的製造與功能",
+    "和眼睛保健有關",
+    "增加身體的復原力和抵抗力"
+   ]
+  },
+  "answer": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "explain": "鈣→骨骼牙齒；鐵→紅血球；維生素 A→眼睛；維生素 C→復原力和抵抗力。",
+  "link": "card:2-1:6",
+  "bingo": false
+ },
+ {
+  "id": "q2125",
+  "unit": "2-1",
+  "type": "match",
+  "level": "基礎",
+  "stem": "請把左邊的食物和它主要含有的養分配對。",
+  "options": {
+   "left": [
+    "米飯",
+    "蛋",
+    "食用油",
+    "蔬菜"
+   ],
+   "right": [
+    "澱粉（醣類）",
+    "蛋白質",
+    "脂質",
+    "礦物質、維生素"
+   ]
+  },
+  "answer": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "explain": "米飯含較多澱粉、蛋富含蛋白質、食用油脂質含量高、蔬果含礦物質和維生素。",
+  "link": "anim:2-1:A",
+  "bingo": false
+ },
+ {
+  "id": "q2126",
+  "unit": "2-1",
+  "type": "fill",
+  "level": "基礎",
+  "stem": "可以產生能量的養分有醣類、{0}和{1}。",
+  "options": [
+   [
+    "蛋白質",
+    "維生素",
+    "水"
+   ],
+   [
+    "礦物質",
+    "脂質",
+    "水"
+   ]
+  ],
+  "answer": [
+   0,
+   1
+  ],
+  "explain": "可以產生能量的是醣類、蛋白質和脂質。",
+  "link": "card:2-1:2",
+  "bingo": false
+ },
+ {
+  "id": "q2127",
+  "unit": "2-1",
+  "type": "fill",
+  "level": "基礎",
+  "stem": "黃褐色的{0}遇澱粉會變成藍黑色；淺藍色的{1}加入葡萄糖溶液後加熱，會出現綠、黃、橙、紅等顏色。",
+  "options": [
+   [
+    "碘液",
+    "本氏液",
+    "酒精"
+   ],
+   [
+    "碘液",
+    "本氏液",
+    "酒精"
+   ]
+  ],
+  "answer": [
+   0,
+   1
+  ],
+  "explain": "碘液檢測澱粉；本氏液加熱檢測葡萄糖（糖）。",
+  "link": "anim:2-1:C",
+  "bingo": false
+ },
+ {
+  "id": "q2128",
+  "unit": "2-1",
+  "type": "fill",
+  "level": "進階",
+  "stem": "5 公克的醣類可產生{0}大卡；2 公克的脂質可產生{1}大卡。",
+  "options": [
+   [
+    "5",
+    "20",
+    "45"
+   ],
+   [
+    "8",
+    "18",
+    "2000"
+   ]
+  ],
+  "answer": [
+   1,
+   1
+  ],
+  "explain": "醣類 5×4＝20 大卡；脂質 2×9＝18 大卡。",
+  "link": "anim:2-1:B",
+  "bingo": false
+ },
+ {
+  "id": "q2129",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "下列何項中的養分，完全燃燒後產生的能量最高？",
+  "options": [
+   "蛋白質 3 g",
+   "水 100 g",
+   "脂質 2 g",
+   "礦物質 50 mg"
+  ],
+  "answer": 2,
+  "explain": "蛋白質 3×4＝12 大卡；脂質 2×9＝18 大卡；水和礦物質無法產生能量。",
+  "link": "anim:2-1:B",
+  "bingo": true
+ },
+ {
+  "id": "q2130",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "建偉患有腎臟疾病，醫生建議減少蛋白質的攝取。下列哪一種食物他應該少吃？",
+  "options": [
+   "牛排",
+   "果汁",
+   "生菜",
+   "白飯"
+  ],
+  "answer": 0,
+  "explain": "肉類主要成分為蛋白質。",
+  "link": "card:2-1:3",
+  "bingo": true
+ },
+ {
+  "id": "q2131",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "假設攝取「甲套餐」所產生的大卡數比「乙套餐」高，這句話表示什麼意義？",
+  "options": [
+   "攝取甲套餐一定產生較高的能量",
+   "攝取甲套餐一定產生較多的營養",
+   "甲套餐所含的脂質一定比乙套餐多",
+   "甲套餐的溫度一定比乙套餐高"
+  ],
+  "answer": 0,
+  "explain": "大卡是熱量單位，只表示能產生的能量較高；是否較營養要看所含的養分種類，也不一定是脂質較多，和溫度無關。",
+  "link": "card:2-1:7",
+  "bingo": true
+ },
+ {
+  "id": "q2132",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-1 中，在梅花盤中間凹槽滴一滴水再滴碘液，主要目的是什麼？",
+  "options": [
+   "讓碘液變稀",
+   "作為對照組，方便比較",
+   "讓澱粉溶解",
+   "加快反應速率"
+  ],
+  "answer": 1,
+  "explain": "中間滴水的凹槽是對照組：碘液加在水中沒有變成藍黑色，可知讓碘液變色的是澱粉。",
+  "link": "anim:2-1:C",
+  "bingo": true
+ },
+ {
+  "id": "q2133",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "實驗 2-1 的糖分測定中，A 試管（水＋本氏液）的意義是什麼？",
+  "options": [
+   "證明水含有葡萄糖",
+   "對照 B 試管，說明 B 加熱後變色是因為其中的葡萄糖",
+   "讓本氏液變成紅色",
+   "檢測澱粉"
+  ],
+  "answer": 1,
+  "explain": "A 試管是對照組，用來說明 B 試管加熱後會變色，是其中的葡萄糖讓本氏液變色。",
+  "link": "anim:2-1:C",
+  "bingo": true
+ },
+ {
+  "id": "q2134",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "將米飯泥與香蕉果肉泥分別加入本氏液隔水加熱，只有香蕉的試管變色。由此可知什麼？",
+  "options": [
+   "米飯含有糖，香蕉沒有",
+   "香蕉含有糖分",
+   "香蕉含有澱粉",
+   "米飯含有脂質"
+  ],
+  "answer": 1,
+  "explain": "本氏液加熱後變色表示含有糖；米飯的試管沒有變色。",
+  "link": "anim:2-1:C",
+  "bingo": true
+ },
+ {
+  "id": "q2135",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "小西將葡萄糖溶液加入本氏液隔水加熱，經過一段時間後，該溶液「不會」出現哪一種顏色？",
+  "options": [
+   "紅色",
+   "橙色",
+   "綠色",
+   "淺藍色"
+  ],
+  "answer": 3,
+  "explain": "本氏液本身為淺藍色，加入葡萄糖並加熱後，會出現綠、黃、橙、紅等顏色變化。",
+  "link": "anim:2-1:C",
+  "bingo": true
+ },
+ {
+  "id": "q2136",
+  "unit": "2-1",
+  "type": "single",
+  "level": "進階",
+  "stem": "蜜棗每 100 g 含維生素 C 約 70 mg。小森吃了 50 g 蜜棗，可獲得多少維生素 C？這些維生素 C 可產生多少熱量？",
+  "options": [
+   "35 mg；0 大卡",
+   "35 mg；200 大卡",
+   "70 mg；200 大卡",
+   "70 mg；450 大卡"
+  ],
+  "answer": 0,
+  "explain": "50 g 蜜棗含 35 mg 維生素 C；維生素無法產生熱量。",
+  "link": "card:2-1:2",
+  "bingo": true
+ },
+ {
+  "id": "q2137",
+  "unit": "2-1",
+  "type": "single",
+  "level": "會考",
+  "stem": "某食品營養標示（每 100 公克）：蛋白質 64 公克、脂質 8 公克、醣類 18 公克、鈉 927 毫克。此食品含量最多的是哪一類養分？",
+  "options": [
+   "蛋白質",
+   "脂質",
+   "醣類",
+   "鈉"
+  ],
+  "answer": 0,
+  "explain": "含量最多的是蛋白質（64 公克）。鈉屬於礦物質，含量以毫克計。",
+  "link": "anim:2-1:B",
+  "bingo": true
+ },
+ {
+  "id": "q2138",
+  "unit": "2-1",
+  "type": "single",
+  "level": "會考",
+  "stem": "某食品營養標示（每 100 公克）：蛋白質 64 公克、脂質 8 公克、醣類 18 公克。每 100 公克此食品約可產生多少大卡熱量？",
+  "options": [
+   "90 大卡",
+   "360 大卡",
+   "400 大卡",
+   "810 大卡"
+  ],
+  "answer": 2,
+  "explain": "64×4＋8×9＋18×4＝256＋72＋72＝400 大卡。",
+  "link": "anim:2-1:B",
+  "bingo": true
+ },
  {
   "id": "q2201",
   "unit": "2-2",
@@ -3902,6 +4672,223 @@ function defSim24(){
 ANIMS['2-4']=[{id:'A',name:'消化之旅模擬器',def:defSim24}];
 
 /* =========================================================
+   2-1 食物中的養分：動畫 A–C（內容依課本 p.66–69）
+   ========================================================= */
+/* 食物像素圖示（置中） */
+function foodPic(name,s=3,dy=-6){const r=SP[name],w=r[0].length*s,h=r.length*s;return spr(r,-w/2,-h/2+dy,s)}
+function foodG(k,name,label,x,y,s=3){return G(k,x,y,`<rect x="-30" y="-30" width="60" height="64" fill="#fff" fill-opacity="0.01"/>`+foodPic(name,s)+T(0,26,label,{s:12,b:1}))}
+const NUT21=[['醣類',C.y,1],['蛋白質',C.p,1],['脂質','#ffe9a8',1],['礦物質',C.e,0],['維生素',C.l,0],['水',C.c,0]];
+const nutTag=(n,col)=>`<rect x="-31" y="-17" width="62" height="34" fill="${col}" stroke="${C.k}" stroke-width="3"/>`+T(0,6,n,{s:15,b:1});
+
+/* ---------- 動畫 A：營養分類市集 ---------- */
+function defA21(){
+  const TOP=i=>[48+i*77,62];
+  const SLOT=(e,j)=>[e?[62,127,192][j]:[290,355,420][j],196];
+  const FOODS=[['rice','米飯',0],['bread','麵包',0],['fish','魚',1],['meat','肉',1],['egg','蛋',1],['oil','食用油',2],['veg','蔬菜',3],['apple','蘋果',3]];
+  const STALL=['醣類（澱粉）','蛋白質','脂質','礦物質、維生素'],SCOL=[C.y,C.p,'#ffe9a8',C.l];
+  const FTOP=i=>[36+i*58,64];
+  const FSLOT=(st,j)=>{const sx=62+st*118;return [[sx-26,184],[sx+26,184],[sx,232]][j]};
+  const me={title:'動畫 A：營養分類市集',
+  state:()=>({done:{},cnt:[0,0,0,0],busy:false}),
+  setup(c,k){const s=c.state;s.done={};s.cnt=[0,0,0,0];s.busy=false;
+    if(k<4){
+      c.draw(`${TT(240,24,'人體需要的養分',16)}
+        <rect x="14" y="116" width="222" height="146" fill="#fff4c2" stroke="${C.k}" stroke-width="3" stroke-dasharray="8 5"/>${TT(125,140,'可以產生能量',15)}
+        <rect x="244" y="116" width="222" height="146" fill="#e3f2ff" stroke="${C.k}" stroke-width="3" stroke-dasharray="8 5"/>${TT(355,140,'無法產生能量',15)}
+        <text data-k="note" x="240" y="104" font-size="13" text-anchor="middle" font-weight="900" class="svt" fill="${C.B}"></text>
+        ${NUT21.map(([n,col],i)=>{const [x,y]=TOP(i);return G('n'+i,x,y,nutTag(n,col))}).join('')}
+        ${flashHTML}`);
+    }else{
+      c.draw(`${TT(240,22,'營養市集：這些食物主要含有哪一類養分？',15)}
+        ${STALL.map((n,i)=>{const x=8+i*118;return `<rect x="${x}" y="130" width="108" height="132" fill="#fffdf5" stroke="${C.k}" stroke-width="3"/>`+
+          Array.from({length:6},(_,j)=>`<path d="M${x+j*18} 118 h18 v14 l-9 6 l-9 -6 z" fill="${j%2?'#fffdf5':SCOL[i]}" stroke="${C.k}" stroke-width="2"/>`).join('')+
+          `<rect x="${x+6}" y="140" width="96" height="22" fill="${SCOL[i]}" stroke="${C.k}" stroke-width="2"/>`+T(x+54,156,n,{s:n.length>4?10.5:13,b:1})}).join('')}
+        ${FOODS.map(([f,n],i)=>{const [x,y]=FTOP(i);return foodG('f'+i,f,n,x,y)}).join('')}
+        ${flashHTML}`);
+    }
+  },
+  async putNut(c,i){const e=NUT21[i][2],j=[0,1,2,3,4,5].filter(x=>NUT21[x][2]===e).indexOf(i);const [x,y]=SLOT(e,j);await c.tw('n'+i,{x,y},700);c.state.done[i]=1},
+  async putFood(c,i){const st=FOODS[i][2],j=c.state.cnt[st]++;const [x,y]=FSLOT(st,j);await c.tw('f'+i,{x,y,s:.9},700);c.state.done[i]=1},
+  steps:[
+   {t:'六類養分',say:'人們透過攝食獲得的養分，可分成六類：醣類（碳水化合物）、蛋白質、脂質、礦物質、維生素和水。',run:async c=>{for(let i=0;i<6;i++){await c.pulse('n'+i,1.15,180)}}},
+   {t:'可以產生能量',say:'醣類（碳水化合物）、蛋白質和脂質，可以產生能量。',run:async c=>{c.text('note','醣類、蛋白質、脂質 → 可以產生能量');for(const i of [0,1,2])await me.putNut(c,i)}},
+   {t:'無法產生能量',say:'礦物質、維生素和水無法產生能量，但它們對維持正常生命機能相當重要。',run:async c=>{c.text('note','礦物質、維生素、水 → 無法產生能量');for(const i of [3,4,5])await me.putNut(c,i)}},
+   {t:'換你試試：養分分類',free:true,fresh:true,say:'把上面六類養分，拖到正確的籃子裡！',run:async c=>{
+     NUT21.forEach((_,i)=>c.drag('n'+i,{can:()=>!c.state.busy&&!c.state.done[i],drop:async(x,y)=>{
+       const s=c.state;s.busy=true;const e=NUT21[i][2],inL=x>14&&x<236&&y>100,inR=x>244&&x<466&&y>100;
+       if((inL&&e)||(inR&&!e)){SFX.coin();await me.putNut(c,i);c.msg(`${NUT21[i][0]}：${e?'可以':'無法'}產生能量`,'ok');
+         if(Object.keys(s.done).length===6){await flash(c,240,180);c.msg('全部分對了！','ok')}}
+       else if(inL||inR){SFX.lock();c.msg(`再想想：${NUT21[i][0]}${e?'可以':'無法'}產生能量`,'no');await c.shake('n'+i);await c.tw('n'+i,{x:TOP(i)[0],y:TOP(i)[1]},400)}
+       else await c.tw('n'+i,{x:TOP(i)[0],y:TOP(i)[1]},300);
+       s.busy=false}}))}},
+   {t:'食物裡的養分',fresh:true,say:'不同食物的養分組成種類與比例通常不同，只含單一養分的食物相當少見。米飯、麵粉類食品含有較高比例的澱粉（醣類的一種）；海鮮、肉類和蛋類富含蛋白質；食用油中的脂質含量高；礦物質和維生素存在於各式各樣的食物中，例如蔬菜與水果。',
+     run:async c=>{for(let i=0;i<FOODS.length;i++){await me.putFood(c,i);c.msg(`${FOODS[i][1]} → ${STALL[FOODS[i][2]]}`,'ok')}},hold:2400},
+   {t:'換你試試：食物分類',free:true,fresh:true,say:'把食物拖到它「主要」含有的養分攤位！',run:async c=>{
+     FOODS.forEach(([f,n,st],i)=>c.drag('f'+i,{can:()=>!c.state.busy&&!c.state.done[i],drop:async(x,y)=>{
+       const s=c.state;s.busy=true;const hit=y>110?Math.floor((x-8)/118):-1;
+       if(hit===st){SFX.coin();await me.putFood(c,i);c.msg(`${n}：主要含有${STALL[st]}`,'ok');
+         if(Object.keys(s.done).length===FOODS.length){await flash(c,240,190);c.msg('全部放對了！記得：只含單一養分的食物相當少見喔。','ok')}}
+       else if(hit>=0&&hit<4){SFX.lock();c.msg(`再想想：${n}主要含有哪一類養分？`,'no');await c.shake('f'+i);await c.tw('f'+i,{x:FTOP(i)[0],y:FTOP(i)[1]},400)}
+       else await c.tw('f'+i,{x:FTOP(i)[0],y:FTOP(i)[1]},300);
+       s.busy=false}}))}}
+  ]};return me;
+}
+
+/* ---------- 動画 B：熱量實驗室 ---------- */
+function defB21(){
+  const BAR={x:250,w:9};
+  const row=(k,y,lab,col)=>`<g data-k="${k}" data-x="0" data-y="0" data-o="0">${T(BAR.x,y-12,lab,{s:12,b:1,a:'start'})}<rect data-k="${k}_b" x="${BAR.x}" y="${y-6}" width="0" height="16" fill="${col}" stroke="${C.k}" stroke-width="2"/><text data-k="${k}_v" x="${BAR.x+6}" y="${y+7}" font-size="12" font-weight="900" class="svt"></text></g>`;
+  const ROWS={r1:[84,'醣類 1 g',C.y,4],r2:[134,'蛋白質 1 g',C.p,4],r3:[184,'脂質 1 g','#ffb84d',9]};
+  const CMP={c1:[76,'蛋白質 3 g',C.p,12],c2:[122,'水 100 g',C.c,0],c3:[168,'脂質 2 g','#ffb84d',18],c4:[214,'礦物質 50 mg',C.e,0]};
+  const me={title:'動畫 B：熱量實驗室',side:true,
+  state:()=>({temp:20,g:{c:10,p:10,f:10}}),
+  setup(c){const s=c.state;s.temp=20;
+    c.draw(`<rect x="0" y="248" width="230" height="22" fill="#c8a06a"/>
+      <path d="M40 120 v128 M150 120 v128" stroke="${C.k}" stroke-width="4"/><rect x="30" y="116" width="130" height="8" fill="${C.E}" stroke="${C.k}" stroke-width="2"/>
+      <path d="M70 116 V70 h-6 V58 h62 V70 h-6 V116 z" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="water" x="74" y="84" width="42" height="30" fill="#bfe6ff"/>
+      <rect x="92" y="10" width="10" height="100" fill="#fff" stroke="${C.k}" stroke-width="2.5"/><rect data-k="merc" x="94" y="90" width="6" height="16" fill="${C.r}"/><circle cx="97" cy="112" r="7" fill="${C.r}" stroke="${C.k}" stroke-width="2" shape-rendering="auto"/>
+      <text data-k="tval" x="140" y="38" font-size="18" text-anchor="middle" font-weight="900" class="svt" fill="${C.R}">20℃</text>${TT(140,58,'水溫',12)}
+      <rect x="84" y="196" width="22" height="8" fill="${C.E}" stroke="${C.k}" stroke-width="2"/><rect x="93" y="204" width="4" height="44" fill="${C.E}"/>
+      <rect x="86" y="184" width="18" height="12" fill="${C.t}" stroke="${C.k}" stroke-width="2"/>${TT(64,196,'食物',12)}
+      ${G('flame',95,170,`<path d="M0 14 c-14 -8 -8 -26 0 -34 c4 10 14 14 8 26 c-2 4 -4 6 -8 8 z" fill="${C.o}" stroke="${C.k}" stroke-width="2"/><path d="M0 12 c-6 -4 -4 -12 0 -16 c3 6 6 8 3 12 z" fill="${C.y}"/>`,'data-o="0"')}
+      ${TT(115,268,'燃燒食物加熱水，觀察水溫變化',12)}
+      <rect x="238" y="8" width="236" height="254" fill="#fffdf5" stroke="${C.k}" stroke-width="2" stroke-dasharray="6 4"/>
+      <text data-k="ttl" x="356" y="32" font-size="15" text-anchor="middle" font-weight="900" class="svt"></text>
+      ${G('unit',356,140,`<rect x="-104" y="-50" width="208" height="100" fill="#fff4c2" stroke="${C.k}" stroke-width="3"/>`+TT(0,-16,'熱量單位：卡、大卡',15)+TT(0,24,'1000 卡 ＝ 1 大卡',22,{f:C.O}),'data-o="0"')}
+      ${Object.entries(ROWS).map(([k,[y,l,col]])=>row(k,y,l,col)).join('')}
+      ${Object.entries(CMP).map(([k,[y,l,col]])=>row(k,y,l,col)).join('')}
+      <g data-k="calc" data-x="0" data-y="0" data-o="0">
+        <rect data-k="k_c" x="${BAR.x}" y="96" width="0" height="26" fill="${C.y}" stroke="${C.k}" stroke-width="2"/><rect data-k="k_p" x="${BAR.x}" y="96" width="0" height="26" fill="${C.p}" stroke="${C.k}" stroke-width="2"/><rect data-k="k_f" x="${BAR.x}" y="96" width="0" height="26" fill="#ffb84d" stroke="${C.k}" stroke-width="2"/>
+        <text data-k="k_eq1" x="356" y="156" font-size="13" text-anchor="middle" font-weight="900" class="svt"></text>
+        <text data-k="k_eq2" x="356" y="178" font-size="13" text-anchor="middle" font-weight="900" class="svt"></text>
+        <text data-k="k_eq3" x="356" y="200" font-size="13" text-anchor="middle" font-weight="900" class="svt"></text>
+        <text data-k="k_tot" x="356" y="236" font-size="20" text-anchor="middle" font-weight="900" class="svt" fill="${C.R}"></text></g>`);
+    c.sideHTML(`<h4 class="px">重點</h4><ul class="lab-list"><li>熱量單位：「卡」或「大卡」</li><li><b>1000 卡＝1 大卡</b></li><li>1 公克醣類或蛋白質 → <b>4 大卡</b></li><li>1 公克脂質 → <b>9 大卡</b></li><li>礦物質、維生素、水無法產生能量</li></ul>`);
+  },
+  temp(c){const s=c.state;c.text('tval',Math.round(s.temp)+'℃');const h=16+(s.temp-20)*1.6;const m=c.$('merc');m.setAttribute('y',106-h);m.setAttribute('height',h)},
+  async bar(c,k,v,scale=BAR.w,unit=' 大卡'){const b=c.$(k+'_b'),o={w:0};await c.val(o,'w',v*scale,v?700:1,()=>b.setAttribute('width',o.w));c.text(k+'_v','');
+    const t=c.$(k+'_v');t.setAttribute('x',BAR.x+v*scale+6);t.textContent=v+unit},
+  calc(c){const g=c.state.g,K={c:g.c*4,p:g.p*4,f:g.f*9},tot=K.c+K.p+K.f,sc=Math.min(1.3,200/Math.max(tot,1));let x=BAR.x;
+    ['c','p','f'].forEach(k=>{const r=c.$('k_'+k);r.setAttribute('x',x);r.setAttribute('width',K[k]*sc);x+=K[k]*sc});
+    c.text('k_eq1',`醣類 ${g.c} g × 4 ＝ ${K.c} 大卡`);c.text('k_eq2',`蛋白質 ${g.p} g × 4 ＝ ${K.p} 大卡`);c.text('k_eq3',`脂質 ${g.f} g × 9 ＝ ${K.f} 大卡`);c.text('k_tot',`合計 ${tot} 大卡`)},
+  steps:[
+   {t:'測量食物的熱量',say:'測試食物所含熱量的方法：燃燒食物加熱容器中的水，觀察水溫的變化，來推估食物所含的熱量。',run:async c=>{await c.show('flame',300);await c.val(c.state,'temp',46,2600,()=>me.temp(c));c.msg('水溫上升：食物燃燒放出的熱量被水吸收','ok')}},
+   {t:'熱量單位',say:'常用的熱量單位是「卡」或「大卡」，1000 卡熱量等於 1 大卡熱量。',run:async c=>{c.set('flame',{o:1});c.state.temp=46;me.temp(c);await c.show('unit',400);await c.pulse('unit',1.08)}},
+   {t:'每公克的熱量',say:'1 公克的醣類或蛋白質可產生 4 大卡熱量，1 公克的脂質則可產生 9 大卡熱量。',run:async c=>{c.set('flame',{o:1});c.state.temp=46;me.temp(c);await c.hide('unit',200);c.text('ttl','1 公克可以產生多少熱量？');
+     for(const [k,[y,l,col,v]] of Object.entries(ROWS)){await c.show(k,200);await me.bar(c,k,v,18)}}},
+   {t:'比一比',say:'哪一個完全燃燒後產生的能量最高？蛋白質 3 g＝3×4＝12 大卡；脂質 2 g＝2×9＝18 大卡；水和礦物質無法產生能量。',run:async c=>{c.set('flame',{o:1});c.state.temp=46;me.temp(c);
+     Object.keys(ROWS).forEach(k=>c.set(k,{o:0}));c.text('ttl','哪一個產生的熱量最多？');
+     for(const [k,[y,l,col,v]] of Object.entries(CMP)){await c.show(k,200);await me.bar(c,k,v,9)}
+     await c.pulse('c3',1.06);c.msg('脂質 2 g＝18 大卡最多！','ok')},hold:2600},
+   {t:'換你試試：熱量計算機',free:true,fresh:true,say:'用右邊的滑桿調整醣類、蛋白質、脂質的公克數，算算看總共可以產生多少大卡！也可以按「營養標示範例」。',run:async c=>{
+     c.set('flame',{o:1});c.state.temp=46;me.temp(c);c.text('ttl','熱量計算機');c.set('calc',{o:1});
+     const g=c.state.g;
+     c.sideHTML(`<h4 class="px">熱量計算機</h4>
+       ${[['c','醣類'],['p','蛋白質'],['f','脂質']].map(([k,n])=>`<label class="lab-row"><span>${n} <b id="kv_${k}">${g[k]} g</b></span><input type="range" min="0" max="60" step="1" value="${g[k]}" data-g="${k}"></label>`).join('')}
+       <button class="pbtn ghost" id="kPre" style="width:100%">營養標示範例（每 100 公克）</button>
+       <p class="lab-tip" id="kTip">礦物質、維生素、水無法產生能量，所以不用算進熱量。</p>`);
+     const upd=()=>{['c','p','f'].forEach(k=>{c.side.querySelector('#kv_'+k).textContent=g[k]+' g';c.side.querySelector(`[data-g="${k}"]`).value=g[k]});me.calc(c)};
+     c.side.querySelectorAll('[data-g]').forEach(r=>r.oninput=()=>{g[r.dataset.g]=+r.value;upd()});
+     c.side.querySelector('#kPre').onclick=()=>{SFX.tap();g.c=18;g.p=64;g.f=8;upd();c.side.querySelector('#kTip').innerHTML='範例營養標示（每 100 公克）：蛋白質 64 公克、脂質 8 公克、醣類 18 公克、鈉 927 毫克（鈉屬於礦物質，不產生熱量）。'};
+     upd()}}
+  ]};return me;
+}
+
+/* ---------- 動畫 C：虛擬實驗 2-1 ---------- */
+const IOD='#c8862e',IOD_BLUE='#2c2a5a',BEN='#7fc4ef';
+const BEN_STEPS=['#5cbf3a','#ffd23f','#f08a2c','#d93a2b'];
+function defC21(){
+  const PC={x:120,y:150},WR=21,WELL=i=>i===0?[PC.x,PC.y]:[PC.x+Math.cos((i-1)*Math.PI/3-Math.PI/2)*58,PC.y+Math.sin((i-1)*Math.PI/3-Math.PI/2)*58];
+  const BATH={x:150,y:176},TX={A:300,B:340,C:380,D:420},TY=196;
+  const bottle=(k,lab,x,col)=>G(k,x,36,`<rect x="-18" y="-12" width="36" height="30" fill="${col}" stroke="${C.k}" stroke-width="2.5"/><rect x="-6" y="-22" width="12" height="10" fill="${C.E}" stroke="${C.k}" stroke-width="2"/>`+T(0,32,lab,{s:11,b:1}));
+  const tube=(k,x)=>G('t'+k,x,TY,`<rect x="-11" y="-46" width="22" height="88" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="t${k}_l" x="-9" y="6" width="18" height="34" fill="#ffffff" opacity="0"/><text data-k="t${k}_t" x="0" y="-34" font-size="8" text-anchor="middle" font-weight="900" class="svt"></text>`+TT(0,-54,k,15));
+  const FREE={rice:['米飯',IOD_BLUE,'藍黑色','有澱粉',BEN,'淺藍色（沒有變色）','沒有葡萄糖（糖）'],starch:['澱粉液',IOD_BLUE,'藍黑色','有澱粉',BEN,'淺藍色（沒有變色）','沒有葡萄糖（糖）'],
+    glu:['葡萄糖液',IOD,'黃褐色（沒有變色）','沒有澱粉','#d93a2b','綠→黃→橙→紅','有葡萄糖（糖）'],water:['清水',IOD,'黃褐色（沒有變色）','沒有澱粉',BEN,'淺藍色（沒有變色）','沒有葡萄糖（糖）'],
+    kiwi:['奇異果泥',IOD,'黃褐色（沒有明顯變色）','沒有明顯的澱粉反應','#f08a2c','綠→黃→橙','含有糖'],drink:['運動飲料',IOD,'黃褐色（沒有變色）','沒有澱粉','#e2622b','很快變成橘紅色','含有糖']};
+  const me={title:'動畫 C：虛擬實驗 2-1 食物中澱粉與糖的測定',side:true,
+  setup(c){
+    c.draw(`<rect x="0" y="250" width="480" height="20" fill="#c8a06a"/>
+      ${G('P1',0,0,`<g>${[0,1,2,3,4,5,6].map(i=>{const [x,y]=WELL(i);return `<circle cx="${x}" cy="${y}" r="${i?34:30}" fill="#fff" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/>`}).join('')}
+        ${[0,1,2,3,4,5,6].map(i=>{const [x,y]=WELL(i);return `<circle cx="${x}" cy="${y}" r="${i?26:22}" fill="#f2f2f2" stroke="#bbb" stroke-width="2" shape-rendering="auto"/><circle data-k="w${i}" cx="${x}" cy="${y}" r="${WR-6}" fill="#ffffff" opacity="0" shape-rendering="auto"/>`}).join('')}
+        ${[0,1,2,3,4,5,6].map(i=>{const [x,y]=WELL(i);return `<g data-k="wf${i}" data-x="${x}" data-y="${y}" data-o="0"></g><text data-k="wl${i}" x="${x+(i===0?0:(x<PC.x?-42:x>PC.x?42:0))}" y="${y+(i===0?44:(x===PC.x?(y<PC.y?-38:50):4))}" font-size="11" text-anchor="middle" font-weight="900" class="svt"></text>`}).join('')}</g>`+
+        TT(120,250,'梅花盤',13)+bottle('bW','水',270,'#d6f0ff')+bottle('bS','澱粉液',330,'#f4f4f4')+bottle('bI','碘液',390,IOD)+
+        foodG('fR','rice','米飯',280,150,3)+foodG('fA','apple','蘋果',360,150,3)+
+        `<rect x="250" y="210" width="210" height="34" fill="#fff4c2" stroke="${C.k}" stroke-width="2"/><text data-k="res1" x="355" y="232" font-size="12" text-anchor="middle" font-weight="900" class="svt">碘液原色：黃褐色</text>`,'data-o="1"')}
+      ${G('P2',0,0,`${G('bath',BATH.x,BATH.y,`<rect x="-100" y="-60" width="200" height="110" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="water" x="-97" y="-26" width="194" height="73" fill="#bfe6ff"/>`+TT(0,68,'500 mL 燒杯（溫水，隔水加熱）',12))}
+        ${G('bub',BATH.x,BATH.y,[-60,-20,20,60].map((x,i)=>`<rect x="${x}" y="${8+(i%2)*14}" width="6" height="6" fill="#fff" stroke="${C.b}" stroke-width="1.5"/>`).join(''),'data-o="0"')}
+        ${bottle('b2W','水',250,'#d6f0ff')}${bottle('b2G','葡萄糖液',305,'#fff8e0')}${bottle('b2B','本氏液',360,BEN)}${G('fR2',412,36,foodPic('rice',2,-4)+T(0,32,'米飯泥',{s:11,b:1}))}${G('fB2',458,36,foodPic('banana',2.4,-4)+T(0,32,'果肉泥',{s:11,b:1}))}
+        ${Object.entries(TX).map(([k,x])=>tube(k,x)).join('')}`,'data-o="0"')}
+      ${G('drop',270,60,`<rect x="-4" y="-10" width="8" height="20" fill="${C.E}" stroke="${C.k}" stroke-width="2"/><rect data-k="dropc" x="-3" y="10" width="6" height="6" fill="${C.b}"/>`,'data-o="0"')}`);
+    c.sideHTML(`<h4 class="px">實驗設計</h4>
+      <p class="lab-tip">目的：學習測定澱粉與糖的簡易方法，進一步測定食物中是否具有澱粉與糖。</p>
+      <table class="dsg"><tr><th>位置</th><th>放入的物質</th><th>說明</th></tr>
+      <tr data-r="w0"><td>梅花盤中間</td><td>水＋碘液</td><td>對照組</td></tr>
+      <tr data-r="w1"><td>梅花盤外圍</td><td>澱粉液＋碘液</td><td>實驗組</td></tr>
+      <tr data-r="w2"><td>梅花盤外圍</td><td>米飯、果肉＋碘液</td><td>檢測食物</td></tr>
+      <tr data-r="A"><td>A 試管</td><td>水 2 mL＋本氏液 2 mL</td><td>對照組</td></tr>
+      <tr data-r="B"><td>B 試管</td><td>葡萄糖液 2 mL＋本氏液 2 mL</td><td>實驗組</td></tr>
+      <tr data-r="C"><td>C 試管</td><td>米飯泥＋本氏液 2 mL</td><td>檢測食物</td></tr>
+      <tr data-r="D"><td>D 試管</td><td>果肉泥＋本氏液 2 mL</td><td>檢測食物</td></tr></table>
+      <div class="dsg-v"><b>碘液</b>（黃褐色）遇澱粉 → 藍黑色或紫紅色</div>
+      <div class="dsg-v"><b>本氏液</b>（淺藍色）＋葡萄糖，加熱 → 綠、黃、橙、紅</div>`);
+  },
+  hl(c,rows){if(c.side)c.side.querySelectorAll('[data-r]').forEach(r=>r.classList.toggle('on',rows.includes(r.dataset.r)))},
+  wl(c,i,t){c.text('wl'+i,t)},
+  async dripW(c,from,i,col,lab){const b=c.get(from),[x,y]=WELL(i);c.$('dropc').setAttribute('fill',col);c.set('drop',{x:b.x,y:60,o:1});await c.tw('drop',{x,y:y-30},500);
+    const w=c.$('w'+i);if(w.getAttribute('opacity')==='0'){w.setAttribute('fill',col);w.setAttribute('opacity','1')}else await c.color(w,col,500);if(lab)me.wl(c,i,lab);await c.hide('drop',150)},
+  async dripT(c,from,k,col,label){const b=c.get(from),t=c.get('t'+k);c.$('dropc').setAttribute('fill',col);c.set('drop',{x:b.x,y:60,o:1});await c.tw('drop',{x:t.x,y:t.y-62},450);
+    const l=c.$('t'+k+'_l');if(l.getAttribute('opacity')==='0'){l.setAttribute('fill',col);l.setAttribute('opacity','1')}else await c.color(l,col,300);if(label)me.lab(c,k,label);await c.hide('drop',150)},
+  lab(c,k,txt){const el=c.$('t'+k+'_t');if(el)el.innerHTML=[...txt].map((ch,i)=>`<tspan x="0" dy="${i?8.4:0}">${ch}</tspan>`).join('')},
+  async toP2(c){await c.hide('P1',300);await c.show('P2',300)},
+  async heat(c,ks){await c.all(ks.map((k,i)=>c.tw('t'+k,{x:BATH.x-30+i*60,y:BATH.y-4},600)));await c.show('bub',200)},
+  steps:[
+   {t:'準備',say:'實驗 2-1 分成兩部分：一、用碘液測定食物中的澱粉；二、用本氏液測定食物中的糖分。先來看梅花盤！',run:async c=>{me.hl(c,[]);await c.pulse('P1',1.02)}},
+   {t:'滴水與澱粉液',say:'在梅花盤中間凹槽滴一滴水，並任選外圍一個凹槽滴一滴澱粉液。',run:async c=>{me.hl(c,['w0','w1']);await me.dripW(c,'bW',0,'#d6f0ff','水');await me.dripW(c,'bS',1,'#f4f4f4','澱粉液')}},
+   {t:'滴碘液',say:'在水和澱粉液的凹槽中各滴一滴碘液。水仍是黃褐色；澱粉液變成藍黑色（或紫紅色）。',run:async c=>{me.hl(c,['w0','w1']);await me.dripW(c,'bI',0,IOD);await me.dripW(c,'bI',1,IOD);await c.color('w1',IOD_BLUE,900);
+     c.text('res1','水：黃褐色｜澱粉液：藍黑色');c.msg('碘液遇澱粉 → 藍黑色','ok')},hold:2000},
+   {t:'檢測米飯與果肉',say:'在外圍空的凹槽放入米飯與果肉，再各滴一滴碘液。米飯變成藍黑色，表示米飯含有澱粉；蘋果果肉沒有明顯變色。',run:async c=>{me.hl(c,['w2']);
+     await c.tw('fR',{x:WELL(3)[0],y:WELL(3)[1]+6,s:.7},600);me.wl(c,3,'米飯');await c.tw('fA',{x:WELL(5)[0],y:WELL(5)[1]+6,s:.7},600);me.wl(c,5,'蘋果');
+     c.set('fR',{o:0});c.set('fA',{o:0});const w3=c.$('w3'),w5=c.$('w5');w3.setAttribute('fill','#fbfbf2');w3.setAttribute('opacity','1');w5.setAttribute('fill','#fff1c2');w5.setAttribute('opacity','1');
+     await me.dripW(c,'bI',3,IOD);await me.dripW(c,'bI',5,IOD);await c.color('w3',IOD_BLUE,900);
+     c.text('res1','米飯：藍黑色｜蘋果：黃褐色');c.msg('米飯含有澱粉','ok')},hold:2400},
+   {t:'本氏液：A、B 試管',say:'燒杯裝溫水加熱備用。取試管 A、B，分別放入 2 mL 水及葡萄糖液，再各加入 2 mL 本氏液（淺藍色）。',run:async c=>{me.hl(c,['A','B']);await me.toP2(c);
+     await me.dripT(c,'b2W','A','#d6f0ff','水');await me.dripT(c,'b2G','B','#fff8e0','葡萄糖液');await me.dripT(c,'b2B','A',BEN,'水＋本氏液');await me.dripT(c,'b2B','B',BEN,'葡萄糖液＋本氏液')}},
+   {t:'隔水加熱 A、B',say:'輕輕搖動試管使溶液混合均勻，放入燒杯中隔水加熱。B 試管依序出現綠、黃、橙、紅等顏色；A 試管仍是淺藍色。',run:async c=>{me.hl(c,['A','B']);await me.heat(c,['A','B']);
+     for(const col of BEN_STEPS)await c.color('tB_l',col,600);await c.hide('bub',200);await c.all([c.tw('tA',{x:TX.A,y:TY},500),c.tw('tB',{x:TX.B,y:TY},500)]);c.msg('A 淺藍色　B 紅色：B 中的葡萄糖讓本氏液變色','ok')},hold:2200},
+   {t:'本氏液：C、D 試管',say:'米飯與果肉用研缽磨成泥狀，分別放入試管 C、D，各加入 2 mL 本氏液，隔水加熱。C（米飯）仍是淺藍色；D（香蕉果肉）變成橙色，表示果肉含有糖。',run:async c=>{me.hl(c,['C','D']);
+     c.set('P1',{o:0});c.set('P2',{o:1});await me.dripT(c,'fR2','C','#f6f3e6','米飯泥');await me.dripT(c,'fB2','D','#fff1b0','果肉泥');await me.dripT(c,'b2B','C',BEN,'米飯＋本氏液');await me.dripT(c,'b2B','D',BEN,'果肉＋本氏液');
+     await me.heat(c,['C','D']);for(const col of BEN_STEPS.slice(0,3))await c.color('tD_l',col,650);await c.hide('bub',200);await c.all([c.tw('tC',{x:TX.C,y:TY},500),c.tw('tD',{x:TX.D,y:TY},500)]);
+     c.msg('C 淺藍色（米飯）　D 橙色（果肉含糖）','ok')},hold:2400},
+   {t:'問題與討論',free:true,say:'碘液滴入澱粉液變成藍黑色，代表碘液是和誰作用？',run:async c=>{
+     c.hudHTML(`<div class="ap-q"><b>碘液滴入水中沒有變色，滴入澱粉液卻變成藍黑色，代表碘液是和誰作用？</b><div><button class="pbtn" data-v="1">澱粉</button><button class="pbtn ghost" data-v="0">水</button></div><p class="ap-qr"></p></div>`);
+     c.hud.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const ok=b.dataset.v==='1';ok?SFX.coin():SFX.lock();
+       c.hud.querySelector('.ap-qr').innerHTML=ok?'✔ 答對了！碘液加在水中沒有變成藍黑色，可知讓碘液變色的物質是<b>澱粉</b>。梅花盤中間的水就是對照組。':'✖ 再想想：碘液滴在水中仍是黃褐色，所以讓它變色的不是水。'})}},
+   {t:'換你試試：自由檢測',free:true,fresh:true,say:'在右邊選一種樣品，再選擇「滴碘液」或「加本氏液隔水加熱」，看看結果！',run:async c=>{
+     c.set('P1',{o:0});c.set('P2',{o:0});
+     const st={f:'rice'};
+     c.sideHTML(`<h4 class="px">自由檢測</h4>
+       <div class="lab-row"><span>樣品</span><div class="seg">${Object.entries(FREE).map(([k,v])=>`<button class="mini ${k==='rice'?'on':''}" data-f="${k}">${v[0]}</button>`).join('')}</div></div>
+       <div class="lab-row"><span>檢測方法</span><div class="seg"><button class="mini" id="fI">滴碘液</button><button class="mini" id="fB">加本氏液隔水加熱</button></div></div>
+       <div id="fRes" class="lab-res"></div><p class="lab-tip">運動飲料等接近透明的含糖飲料，加本氏液加熱後很快就會變成橘紅色。</p>`);
+     c.draw(`<rect x="0" y="250" width="480" height="20" fill="#c8a06a"/>${TT(240,34,'自由檢測台',16)}
+       <circle cx="140" cy="140" r="56" fill="#fff" stroke="${C.k}" stroke-width="3" shape-rendering="auto"/><circle data-k="fw" cx="140" cy="140" r="40" fill="#f2f2f2" stroke="#bbb" stroke-width="2" shape-rendering="auto"/>${TT(140,222,'碘液檢測',13)}
+       <rect x="318" y="70" width="40" height="150" fill="#fff" stroke="${C.k}" stroke-width="3"/><rect data-k="ft" x="322" y="140" width="32" height="76" fill="#f2f2f2"/>${TT(338,240,'本氏液檢測',13)}
+       <text data-k="fn" x="240" y="62" font-size="15" text-anchor="middle" font-weight="900" class="svt" fill="${C.B}">樣品：米飯</text>`);
+     const sd=c.side,res=sd.querySelector('#fRes');
+     sd.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{SFX.tap();st.f=b.dataset.f;sd.querySelectorAll('[data-f]').forEach(x=>x.classList.toggle('on',x===b));c.text('fn','樣品：'+FREE[st.f][0]);
+       c.$('fw').setAttribute('fill','#f2f2f2');c.$('ft').setAttribute('fill','#f2f2f2');res.innerHTML=''});
+     sd.querySelector('#fI').onclick=async()=>{SFX.tap();const v=FREE[st.f];c.$('fw').setAttribute('fill',IOD);await c.wait(400);await c.color('fw',v[1],700);
+       res.innerHTML=`碘液：<b>${v[2]}</b> → ${v[3]}`};
+     sd.querySelector('#fB').onclick=async()=>{SFX.tap();const v=FREE[st.f];c.$('ft').setAttribute('fill',BEN);await c.wait(300);
+       if(v[4]!==BEN){for(const col of BEN_STEPS){await c.color('ft',col,450);if(col===v[4])break}if(v[4]==='#e2622b')await c.color('ft','#e2622b',300)}
+       res.innerHTML=`本氏液加熱：<b>${v[5]}</b> → ${v[6]}`};
+   }}
+  ]};return me;
+}
+
+ANIMS['2-1']=[{id:'A',name:'營養分類市集',def:defA21},{id:'B',name:'熱量實驗室',def:defB21},{id:'C',name:'虛擬實驗 2-1',def:defC21}];
+
+/* =========================================================
    第 3 期：即時練習（題庫 questions.json）＋ 小結
    ========================================================= */
 let QB=[];
@@ -3999,7 +4986,7 @@ function renderPractice(u,box){
       <div><b class="px">錯題本</b><div class="big px">${wrongAll.length}</div><div>本單元 ${wrongU.length} 題</div><a class="pbtn ghost pr-wb" href="#/wrongbook">📕 打開我的錯題本</a></div></div>
     <div class="pr-modes">
       <button class="pbox pr-mode" data-m="unit"><span class="px">單元練習</span><small>${esc(UNITS[u].name)}：隨機 10 題（題庫 ${n} 題）</small></button>
-      <button class="pbox pr-mode" data-m="mix"><span class="px">綜合挑戰</span><small>2-2、2-3、2-4 混合 20 題</small></button>
+      <button class="pbox pr-mode" data-m="mix"><span class="px">綜合挑戰</span><small>2-1～2-4 混合 20 題</small></button>
       <button class="pbox pr-mode" data-m="wrong" ${wrongAll.length?'':'disabled'}><span class="px">錯題重練</span><small>${wrongAll.length?`重練錯題本中的 ${Math.min(10,wrongAll.length)} 題，答對就移出`:'目前沒有錯題'}</small></button>
     </div></section><div class="pr-play"></div>`;
   box.querySelectorAll('.pr-mode').forEach(b=>b.onclick=()=>{SFX.open();startPractice(u,b.dataset.m,box)});
@@ -4008,7 +4995,7 @@ function startPractice(u,mode,box,opts){
   opts=opts||{};const home=()=>opts.home?opts.home():renderPractice(u,box);
   let list;
   if(mode==='unit')list=shuffle(QB.filter(q=>q.unit===u)).slice(0,10);
-  else if(mode==='mix'){const per=[7,7,6];list=shuffle(ORDER.flatMap((x,i)=>shuffle(QB.filter(q=>q.unit===x)).slice(0,per[i])))}
+  else if(mode==='mix'){const per=[5,5,5,5];list=shuffle(ORDER.flatMap((x,i)=>shuffle(QB.filter(q=>q.unit===x)).slice(0,per[i])))}
   else if(opts.ids){list=shuffle(QB.filter(q=>opts.ids.includes(q.id))).slice(0,opts.max||10)}
   else{const w=WRONG.get();list=shuffle(QB.filter(q=>w.includes(q.id))).slice(0,10)}
   if(!list.length){toast('沒有題目可以練習');return}
@@ -4040,6 +5027,10 @@ function startPractice(u,mode,box,opts){
 
 /* ---- 小結分頁（企劃書 3.3） ---- */
 const SUMMARY={
+ '2-1':[['人體需要的養分',`<table class="sum"><tr><th>類別</th><th>養分</th><th>常見食物</th></tr><tr><td rowspan="3">可以產生能量</td><td>醣類（碳水化合物）</td><td>米飯、麵粉類食品（澱粉）</td></tr><tr><td>蛋白質</td><td>海鮮、肉類、蛋類</td></tr><tr><td>脂質</td><td>食用油</td></tr><tr><td rowspan="3">無法產生能量</td><td>礦物質</td><td rowspan="2">各式各樣的食物，例如蔬菜與水果</td></tr><tr><td>維生素</td></tr><tr><td>水</td><td>—</td></tr></table><p>只含單一養分的食物相當少見。</p>`],
+   ['養分的功用',`<ul><li>產生能量：醣類、蛋白質、脂質。</li><li>組成構造：纖維素→植物細胞壁；蛋白質→肌肉、頭髮；皮下脂肪→保溫。</li><li>維持生命機能：鈣→骨骼、牙齒；鐵→紅血球；維生素 A→眼睛保健；維生素 C→復原力、抵抗力；水→協助代謝。</li></ul>`],
+   ['食物中的熱量',`<table class="sum"><tr><th>養分</th><th>每 1 公克可產生</th></tr><tr><td>醣類</td><td>4 大卡</td></tr><tr><td>蛋白質</td><td>4 大卡</td></tr><tr><td>脂質</td><td>9 大卡</td></tr><tr><td>礦物質、維生素、水</td><td>無法產生能量</td></tr></table><p class="eq">1000 卡＝1 大卡</p>`],
+   ['實驗 2-1 澱粉與糖的測定',`<table class="sum"><tr><th>檢測物</th><th>試劑（原色）</th><th>條件</th><th>有反應</th><th>無反應</th></tr><tr><td>澱粉</td><td>碘液（黃褐色）</td><td>直接滴加</td><td>藍黑色、紫紅色</td><td>黃褐色</td></tr><tr><td>葡萄糖</td><td>本氏液（淺藍色）</td><td>隔水加熱</td><td>綠、黃、橙、紅色</td><td>淺藍色</td></tr></table><p>梅花盤中間滴水、A 試管只加水，都是對照組。</p>`]],
  '2-2':[['代謝作用的類型',`<table class="sum"><tr><th>類型</th><th>說明</th></tr><tr><td>分解作用</td><td>大分子轉變成小分子</td></tr><tr><td>合成作用</td><td>小分子結合成大分子</td></tr></table>`],
    ['酵素的特性',`<ul><li>酵素又稱為<b>酶</b>，能促進代謝反應的進行。</li><li>大部分種類的酵素，主要成分是<b>蛋白質</b>。</li><li>和酵素結合而作用的物質稱為<b>受質</b>；結合具有<b>專一性</b>（澱粉酶能分解澱粉，不能分解纖維素）。</li><li>環境條件不變時，反應結束後仍可與新的受質作用（<b>可重複使用</b>）。</li></ul>`],
    ['溫度的影響',`<ul><li>一定溫度範圍內，活性隨溫度升高而增加。</li><li>溫度過高，破壞酵素構造，酵素會<b>永久失去活性</b>。</li></ul>`],
@@ -4071,6 +5062,12 @@ function renderSummary(u,box){
    ========================================================= */
 const B_=(a,h1,h2,link)=>({a,h:[h1,h2],link});
 const MMDATA={
+ '2-1':{root:'食物中的養分',col:'#2f86c9',branches:[
+   {t:'可產生能量',kids:[B_('醣類（碳水化合物）','米飯、麵粉類食品含有較高比例的哪一類養分？','醣類（碳＿＿＿＿）','card:2-1:2'),B_('蛋白質','海鮮、肉類和蛋類富含哪一類養分？','蛋＿＿','card:2-1:3'),B_('脂質','食用油中含量高的是哪一類養分？','脂＿','card:2-1:3')]},
+   {t:'無法產生能量',kids:[B_('礦物質','鈣質、鐵質屬於哪一類養分？','礦＿＿','card:2-1:6'),B_('維生素','維生素 A、C 屬於哪一類養分？','維＿＿','card:2-1:6'),B_('水','在生物體內含量很多、能協助代謝的是？','＿（能協助代謝）','card:2-1:6')]},
+   {t:'食物中的熱量',kids:[B_('1 公克醣類、蛋白質：4 大卡','1 公克的醣類或蛋白質可產生幾大卡？','1 公克醣類、蛋白質：＿ 大卡','card:2-1:7'),B_('1 公克脂質：9 大卡','1 公克的脂質可產生幾大卡？','1 公克脂質：＿ 大卡','card:2-1:7'),B_('1000 卡＝1 大卡','卡和大卡怎麼換算？','＿＿＿＿ 卡＝1 大卡','card:2-1:7')]},
+   {t:'實驗 2-1 檢測',kids:[B_('碘液：澱粉呈藍黑色或紫紅色','用什麼試劑檢測澱粉？會變成什麼顏色？','碘液：澱粉呈藍＿色或紫＿色','card:2-1:8'),B_('本氏液：糖加熱呈綠黃橙紅','用什麼試劑檢測葡萄糖？要怎麼做？','本氏液：糖加＿呈綠黃橙紅','card:2-1:8')]}],
+   distract:['1 公克維生素：4 大卡','碘液：葡萄糖呈藍黑色','水可以產生能量']},
  '2-2':{root:'酵素',col:'#f07f24',branches:[
    {t:'代謝作用',kids:[B_('分解作用（大→小）','大分子轉變成小分子，叫做什麼作用？','分＿＿＿（大→小）','card:2-2:2'),B_('合成作用（小→大）','小分子結合成大分子，叫做什麼作用？','合＿＿＿（小→大）','card:2-2:2')]},
    {t:'酵素特性',kids:[B_('主要成分是蛋白質','大部分種類的酵素，主要成分是什麼？','主要成分是蛋＿＿','card:2-2:3'),B_('受質','和酵素結合而作用的物質叫什麼？','受＿','card:2-2:4'),
@@ -4095,6 +5092,7 @@ const MMDATA={
    distract:['胰臟分解脂質','膽汁含有酵素','食道分泌消化液']}
 };
 const MM_LINKS=[
+ {a:'txt:碘液：澱粉呈藍黑色或紫紅色',b:'txt:照光處碘液呈藍黑色',w:'檢測',txt:'實驗 2-1 的碘液 ↔ 實驗 2-3 的碘液',hint:'實驗 2-3 用哪一種試劑證明葉片中有澱粉？'},
  {a:'2-2',b:'2-4:b2',w:'參與',txt:'酵素 ↔ 消化作用',hint:'消化作用需要誰幫忙分解養分？'},
  {a:'txt:產物：葡萄糖、氧氣、水',b:'txt:澱粉→葡萄糖',w:'都有葡萄糖',txt:'光合作用的產物 ↔ 消化的產物（葡萄糖）',hint:'植物製造的、人體消化後得到的，有哪一種相同的小分子？'},
  {a:'txt:分解作用（大→小）',b:'2-4:b2',w:'屬於',txt:'分解作用 ↔ 消化作用',hint:'消化作用是把大分子變成小分子，屬於哪一種代謝作用？'}
@@ -4113,16 +5111,16 @@ function mmLayout(scope){
       br.kids.forEach((k,ki)=>E.push([`${u}:b${bi}`,`${u}:b${bi}:k${ki}`]));y+=GAP*1.6});
     const ry=(bys[0]+bys[bys.length-1])/2;N.push({id:u,u,lv:'root',t:D.root,x:X.root,y:ry-4,w:NW.root,h:NH+8,col:D.col});
     D.branches.forEach((_,bi)=>E.push([u,`${u}:b${bi}`]));y+=GAP*2});
-  if(scope==='all'){const rs=N.filter(n=>n.lv==='root');N.push({id:'all',lv:'top',t:'生物體的營養',x:X.top,y:(rs[0].y+rs[2].y)/2-6,w:150,h:NH+20,col:'#e0a91f'});rs.forEach(r=>E.push(['all',r.id]))}
+  if(scope==='all'){const rs=N.filter(n=>n.lv==='root');N.push({id:'all',lv:'top',t:'生物體的營養',x:X.top,y:(rs[0].y+rs[rs.length-1].y)/2-6,w:150,h:NH+20,col:'#e0a91f'});rs.forEach(r=>E.push(['all',r.id]))}
   const W=Math.max(...N.map(n=>n.x+n.w))+24,H=y+10;
   return {N,E,W,H}
 }
-const MMS={scope:'2-2',sel:null,linkMode:false,adv:false,linkA:null};
+const MMS={scope:'2-1',sel:null,linkMode:false,adv:false,linkA:null};
 function mmState(scope){const s=store.get('mm_'+scope,{filled:{},hints:{},wrong:0,custom:[],links:[]});if(Array.isArray(s.filled))s.filled={};return s}
 function mmSave(scope,s){store.set('mm_'+scope,s)}
 
 function renderMindmap(scope){
-  scope=['2-2','2-3','2-4','all'].includes(scope)?scope:'2-2';MMS.scope=scope;MMS.sel=null;MMS.linkA=null;
+  scope=[...ORDER,'all'].includes(scope)?scope:ORDER[0];MMS.scope=scope;MMS.sel=null;MMS.linkA=null;
   document.body.dataset.theme='home';setScene('home');
   const L=mmLayout(scope),S=mmState(scope);
   const blanks=L.N.filter(n=>n.blank);
@@ -4131,8 +5129,8 @@ function renderMindmap(scope){
   app.innerHTML=`
   <section class="pbox stagebar mm-head">${spriteSvg('chest',6,'class="guide bob"')}
     <div><span class="wtag" style="background:#6b4fbf">MIND MAP</span><h1 class="ptitle" style="color:#5a3fa8">心智圖神殿</h1><div class="pg">骨架已給、節點待填：把詞卡拖到正確的空格，卡住時打開 💡 線索。</div></div>
-    <div class="talk">放對會變綠並固定；放錯會彈回。${scope==='all'?'全章整合還要用「連線」完成 3 條跨單元連結！':'完成後可以匯出 PNG 當複習筆記。'}</div></section>
-  <div class="levels" role="tablist">${[['2-2','2-2 酵素'],['2-3','2-3 植物製造養分'],['2-4','2-4 人體獲得養分'],['all','全章整合']].map(([k,n])=>`<button class="lv" role="tab" aria-selected="${k===scope}" data-s="${k}">${n}</button>`).join('')}
+    <div class="talk">放對會變綠並固定；放錯會彈回。${scope==='all'?'全章整合還要用「連線」完成 '+MM_LINKS.length+' 條跨單元連結！':'完成後可以匯出 PNG 當複習筆記。'}</div></section>
+  <div class="levels" role="tablist">${[['2-1','2-1 食物中的養分'],['2-2','2-2 酵素'],['2-3','2-3 植物製造養分'],['2-4','2-4 人體獲得養分'],['all','全章整合']].map(([k,n])=>`<button class="lv" role="tab" aria-selected="${k===scope}" data-s="${k}">${n}</button>`).join('')}
     <a class="pbtn ghost" href="#/" style="margin-left:auto">⬅ 世界地圖</a></div>
   <section class="pbox mm-bar">
     <div class="mm-prog"><b class="px">完成度</b><div class="meter"><i></i></div><span class="mm-pct px"></span></div>
@@ -4348,9 +5346,9 @@ function bgClear(){BG.unsub.forEach(f=>f());BG.unsub=[];clearInterval(BG.timer);
 function qById(id){return QB.find(q=>q.id===id)}
 function linesOf(card,marks){return BL.filter(l=>l.every(i=>marks&&marks[card[i]])).length}
 function lineIdx(card,marks){return BL.map((l,i)=>l.every(j=>marks&&marks[card[j]])?i:-1).filter(i=>i>=0)}
-const BG_UNITS=[['2-2','2-2 酵素'],['2-3','2-3 植物如何製造養分'],['2-4','2-4 人體如何獲得養分']];
+const BG_UNITS=[['2-1','2-1 食物中的養分'],['2-2','2-2 酵素'],['2-3','2-3 植物如何製造養分'],['2-4','2-4 人體如何獲得養分']];
 function scopeUnits(scope){return !scope||scope==='all'?BG_UNITS.map(u=>u[0]):String(scope).split('+')}
-function scopeName(scope){const u=scopeUnits(scope);return u.length===3?'全章（2-2、2-3、2-4）':u.join('＋')}
+function scopeName(scope){const u=scopeUnits(scope);return u.length===BG_UNITS.length?'全章（'+u.join('、')+'）':u.join('＋')}
 function bPool(scope,level){const us=scopeUnits(scope);let p=QB.filter(q=>q.bingo&&us.includes(q.unit));const f=level==='all'?p:p.filter(q=>q.level===level);p=f.length>=25?f:p;
   // 各單元輪流排列，讓 25 格的題目平均分配到勾選的單元
   const g=us.map(u=>shuffle(p.filter(q=>q.unit===u))),out=[];for(let i=0;g.some(a=>a.length);i++){const a=g[i%g.length];if(a.length)out.push(a.shift())}return out}
@@ -4388,7 +5386,7 @@ async function bingoHost(){
   const msg=t=>document.getElementById('bgMsg').textContent=t;
   const cnt=()=>{const us=[...document.querySelectorAll('input[name=bgU]:checked')].map(i=>i.value);const lv=val('bgLevel');document.getElementById('bgScnt').textContent=us.length?`題庫 ${bPool(us.join('+'),lv).length} 題`:'⚠ 請至少勾選一個單元'};
   document.querySelectorAll('input[name=bgU],#bgLevel').forEach(e=>e.addEventListener('change',()=>{SFX.tap();cnt()}));cnt();
-  document.getElementById('bgCreate').onclick=async()=>{SFX.tap();const demo=document.getElementById('bgDemo').checked;const us=[...document.querySelectorAll('input[name=bgU]:checked')].map(i=>i.value);if(!us.length){msg('請至少勾選一個單元');return}const scope=us.length===3?'all':us.join('+');msg('連線中……');
+  document.getElementById('bgCreate').onclick=async()=>{SFX.tap();const demo=document.getElementById('bgDemo').checked;const us=[...document.querySelectorAll('input[name=bgU]:checked')].map(i=>i.value);if(!us.length){msg('請至少勾選一個單元');return}const scope=us.length===BG_UNITS.length?'all':us.join('+');msg('連線中……');
     try{await DB.init(demo)}catch(e){msg('無法連上 Firebase：'+e.message+'（可改用單機示範模式）');return}
     let code;for(let i=0;i<20;i++){code=String(1000+Math.floor(Math.random()*9000));if(!(await DB.get(`bingo/rooms/${code}/info`)))break}
     const info={created:DB.ts(),status:'lobby',scope,level:val('bgLevel'),timer:+val('bgTime'),order:val('bgOrder'),autoX:document.getElementById('bgAuto').checked};
@@ -4610,7 +5608,7 @@ SCENES.bingo=()=>bands(['#1a1036','#221446','#2b1a56','#352066','#3f2676','#4a2c
    ========================================================= */
 
 /* ---- 共用小工具 ---- */
-const UNIT_NAME={'2-2':'酵素','2-3':'植物如何製造養分','2-4':'人體如何獲得養分'};
+const UNIT_NAME={'2-1':'食物中的養分','2-2':'酵素','2-3':'植物如何製造養分','2-4':'人體如何獲得養分'};
 function stemText(q){return String(q.stem).replace(/\{\d\}/g,'＿＿')}
 function ansText(q){
   if(q.type==='single')return 'ABCD'[q.answer]+'. '+q.options[q.answer];
@@ -4674,7 +5672,7 @@ function renderWrongbook(scope){
   const go=document.getElementById('wbGo');
   go.onclick=()=>{SFX.open();const box=app.querySelector('.wb-play');app.querySelector('.wb-body').hidden=true;
     const ids=()=>WRONG.get().filter(id=>{const q=QB.find(x=>x.id===id);return q&&inScope(q)});
-    startPractice(scope==='all'?'2-2':scope,'wrong',box,{ids:ids(),refresh:ids,home:()=>renderWrongbook(scope)});box.scrollIntoView({block:'start'})};
+    startPractice(scope==='all'?ORDER[0]:scope,'wrong',box,{ids:ids(),refresh:ids,home:()=>renderWrongbook(scope)});box.scrollIntoView({block:'start'})};
 }
 
 /* =========================================================
@@ -4729,11 +5727,11 @@ function tRow(sid,seat,v){
   const cu={};ORDER.forEach(u=>cu[u]=UNITS[u].cards.filter(c=>coins[c.id]).length);
   let ln=0,lok=0;Object.values(log).forEach(r=>{ln+=r.n||0;lok+=r.ok||0});
   const n=Math.max(qs.answered||0,ln),ok=n===ln?lok:(qs.correct||0);
-  const mm=['2-2','2-3','2-4','all'].filter(k=>(g('mm_'+k,{})||{}).cleared).length;
+  const mm=[...ORDER,'all'].filter(k=>(g('mm_'+k,{})||{}).cleared).length;
   const fixed=Object.keys(log).filter(id=>log[id].lw&&!wrong.includes(id));
   const conc={};QB.forEach(q=>{const r=log[q.id];if(r&&r.n&&q.link){const c=conc[q.link]=conc[q.link]||{n:0,ok:0};c.n+=r.n;c.ok+=r.ok}});
-  return {sid,seat,name:(v.profile&&v.profile.name)||'',cu,coins:cu['2-2']+cu['2-3']+cu['2-4'],best:qs.best||{},mix:qs.mix||null,n,ok,acc:n?ok/n:null,
-    wrong,fixed,log,conc,mm,seen:(v.lastSeen&&v.lastSeen.ch2)||0,active:n>0||cu['2-2']+cu['2-3']+cu['2-4']>0};
+  return {sid,seat,name:(v.profile&&v.profile.name)||'',cu,coins:ORDER.reduce((a,u)=>a+cu[u],0),best:qs.best||{},mix:qs.mix||null,n,ok,acc:n?ok/n:null,
+    wrong,fixed,log,conc,mm,seen:(v.lastSeen&&v.lastSeen.ch2)||0,active:n>0||ORDER.some(u=>cu[u]>0)};
 }
 /* 示範資料：同一個班每次都產生一樣的結果 */
 function demoStudent(cls,seat){
@@ -4749,7 +5747,7 @@ function demoStudent(cls,seat){
   const best={};ORDER.forEach(u=>{if(rnd()<act){const a=Math.min(1,skill+rnd()*.2);best[u]={acc:a,stars:stars(a)}}});
   const e=v=>JSON.stringify(v);
   data.bio2_coins=e(coins);data.bio2_qstats=e({answered:n,correct:ok,best});data.bio2_wrong=e(wrong);data.bio2_qlog=e(log);
-  ['2-2','2-3','2-4','all'].forEach(k=>{if(rnd()<act-.2)data['bio2_mm_'+k]=e({cleared:true})});
+  [...ORDER,'all'].forEach(k=>{if(rnd()<act-.2)data['bio2_mm_'+k]=e({cleared:true})});
   return {data:{ch2:data},lastSeen:{ch2:Date.now()-Math.floor(rnd()*9e8)}};
 }
 async function tLoad(){
@@ -4767,7 +5765,7 @@ function tRender(){
   document.getElementById('tdStats').innerHTML=[
     [`${act.length} / ${R.length}`,'已開始學習'],[tn,'全班作答題數'],[tn?Math.round(tok/tn*100)+'%':'—','全班答對率'],
     [act.length?(act.reduce((s,r)=>s+r.coins,0)/act.length).toFixed(1)+' / '+nc:'—','平均概念卡金幣'],
-    [R.reduce((s,r)=>s+r.wrong.length,0),'全班待訂正錯題'],[R.filter(r=>r.mm>=4).length,'完成全部心智圖']]
+    [R.reduce((s,r)=>s+r.wrong.length,0),'全班待訂正錯題'],[R.filter(r=>r.mm>=ORDER.length+1).length,'完成全部心智圖']]
     .map(([b,t])=>`<div><b class="px">${b}</b>${t}</div>`).join('');
   tRenderTop();tRenderProg();tRenderHm();
 }
@@ -4795,15 +5793,15 @@ function tRenderTop(){
     box.querySelectorAll('[data-show]').forEach(b=>b.onclick=()=>{const q=QB.find(q=>q.id===b.dataset.show);classPractice([q])})};
   more.onclick=()=>{lim+=10;draw()};draw();
 }
-const TCOLS=[['seat','座號'],['coins','概念卡金幣'],['s22','2-2 最佳'],['s23','2-3 最佳'],['s24','2-4 最佳'],['n','作答題數'],['acc','答對率'],['wn','待訂正'],['fn','已訂正'],['mm','心智圖'],['seen','最後上線']];
-function tVal(r,k){return k==='s22'?(r.best['2-2']||{}).acc:k==='s23'?(r.best['2-3']||{}).acc:k==='s24'?(r.best['2-4']||{}).acc:k==='wn'?r.wrong.length:k==='fn'?r.fixed.length:r[k]}
+const TCOLS=[['seat','座號'],['coins','概念卡金幣'],...ORDER.map(u=>['s'+u.replace('-',''),u+' 最佳']),['n','作答題數'],['acc','答對率'],['wn','待訂正'],['fn','已訂正'],['mm','心智圖'],['seen','最後上線']];
+function tVal(r,k){return /^s2\d$/.test(k)?(r.best['2-'+k[2]]||{}).acc:k==='wn'?r.wrong.length:k==='fn'?r.fixed.length:r[k]}
 function tCell(r,k){const v=tVal(r,k);
   if(k==='seat')return `<button class="lk" data-sid="${r.sid}">${r.seat} 號${r.name?' '+esc(r.name):''}</button>`;
   if(k==='coins')return `${r.coins}<small>（${ORDER.map(u=>r.cu[u]).join('／')}）</small>`;
   if(/^s2/.test(k))return v==null?'—':starHTML(stars(v))+`<small>${Math.round(v*100)}%</small>`;
   if(k==='acc')return v==null?'—':`<span class="${v>=.8?'g':v>=.5?'m':'b'}">${Math.round(v*100)}%</span>`;
   if(k==='wn')return v?`<b class="no">${v}</b>`:'0';
-  if(k==='mm')return v+' / 4';
+  if(k==='mm')return v+' / '+(ORDER.length+1);
   if(k==='seen')return v?fmtTime(v):'<span class="dim">還沒進來過</span>';
   return v}
 function tRenderProg(){
@@ -4831,7 +5829,7 @@ function tStudent(r){
   d.innerHTML=`<div class="pbox td-mbox" role="dialog" aria-modal="true" aria-label="學生學習紀錄"><button class="pbtn ghost td-x" aria-label="關閉">✕</button>
     <h2 class="px">${r.seat} 號${r.name?' '+esc(r.name):''}｜學習紀錄</h2>
     <div class="td-stats sm">${ORDER.map(u=>`<div><b class="px">${r.cu[u]} / ${UNITS[u].cards.length}</b>${u} 金幣${r.best[u]?'<br>'+starHTML(r.best[u].stars):''}</div>`).join('')}
-      <div><b class="px">${r.acc==null?'—':Math.round(r.acc*100)+'%'}</b>答對率（${r.n} 題）</div><div><b class="px">${r.mm} / 4</b>心智圖</div></div>
+      <div><b class="px">${r.acc==null?'—':Math.round(r.acc*100)+'%'}</b>答對率（${r.n} 題）</div><div><b class="px">${r.mm} / ${ORDER.length+1}</b>心智圖</div></div>
     ${weak.length?`<h3>弱點概念</h3><ul class="td-weak">${weak.map(c=>`<li>${esc(c.u+' '+c.name)}：答對 ${c.ok}/${c.n}</li>`).join('')}</ul>`:''}
     <h3>待訂正（${r.wrong.length}）</h3>${r.wrong.length?`<ol class="td-ql">${qs(r.wrong).map(li).join('')}</ol>`:'<p class="dim">沒有待訂正的錯題。</p>'}
     ${r.fixed.length?`<details><summary><b>已訂正（${r.fixed.length}）</b></summary><ol class="td-ql">${qs(r.fixed).map(li).join('')}</ol></details>`:''}
@@ -4859,9 +5857,9 @@ function classPractice(list){
 }
 function tCsv(){
   if(!TD.rows.length)return;const C=conceptList();
-  const head=['座號','姓名','2-2 金幣','2-3 金幣','2-4 金幣','2-2 最佳答對率','2-3 最佳答對率','2-4 最佳答對率','作答題數','答對率','待訂正','已訂正','心智圖完成','最後上線','待訂正題號'].concat(C.map(c=>c.u+' '+c.name+' 答對率'));
+  const head=['座號','姓名',...ORDER.map(u=>u+' 金幣'),...ORDER.map(u=>u+' 最佳答對率'),'作答題數','答對率','待訂正','已訂正','心智圖完成','最後上線','待訂正題號'].concat(C.map(c=>c.u+' '+c.name+' 答對率'));
   const pc=v=>v==null?'':Math.round(v*100)+'%';
-  const lines=[head].concat(TD.rows.map(r=>[r.seat,r.name,r.cu['2-2'],r.cu['2-3'],r.cu['2-4'],pc((r.best['2-2']||{}).acc),pc((r.best['2-3']||{}).acc),pc((r.best['2-4']||{}).acc),r.n,pc(r.acc),r.wrong.length,r.fixed.length,r.mm,r.seen?new Date(r.seen).toLocaleString('zh-TW'):'',r.wrong.join(' ')]
+  const lines=[head].concat(TD.rows.map(r=>[r.seat,r.name,...ORDER.map(u=>r.cu[u]),...ORDER.map(u=>pc((r.best[u]||{}).acc)),r.n,pc(r.acc),r.wrong.length,r.fixed.length,r.mm,r.seen?new Date(r.seen).toLocaleString('zh-TW'):'',r.wrong.join(' ')]
     .concat(C.map(c=>{const m=r.conc[c.k];return m&&m.n?pc(m.ok/m.n):''}))));
   const csv='﻿'+lines.map(l=>l.map(x=>{x=String(x==null?'':x);return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x}).join(',')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`第2章_${TD.cls}班_學習統計.csv`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000);
